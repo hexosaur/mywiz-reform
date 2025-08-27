@@ -1,0 +1,151 @@
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #b3b3b3;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	position: relative;
+}
+.logo{
+	width: 16em;
+	display: block;
+	margin: auto;
+}
+.login-container {
+	display: flex;
+	width: 76em;
+	height: 34em;
+	background-color: white;
+	border-radius: 10px;
+	overflow: hidden;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.login-form {
+	padding: 40px;
+	width: 30%;
+	box-sizing: border-box;
+}
+
+.login-form h3 {
+	text-align: center;
+	margin-top: 30px;
+	margin-bottom: 20px;
+	color: #333;
+}
+
+.login-form input {
+	width: 100%;
+	padding: 10px;
+	margin: 10px 0;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	font-size: 16px;
+}
+
+.login-form .submit {
+	width: 100%;
+	padding: 10px;
+	background-color: #007bff;
+	border: none;
+	color: white;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+	text-align: center;
+}
+
+.login-form .submit:hover {
+	background-color: #0056b3;
+}
+
+.login-form .display_view {
+	display: block;
+	margin-top: 10px;
+	text-align: right;
+	font-size: 14px;
+}
+
+.login-form .display_view a{
+	color: #007bff;
+	text-decoration: none;
+}
+
+.login-form .display_view a:hover {
+	text-decoration: underline;
+}
+
+.login-image {
+	width: 100%;
+	background-image: url('../../pkg/assets/media/img/default.jpg');
+	background-size: cover;
+	background-position: center;
+}
+
+.login-video {
+  width: 100%;
+  height: 100%; /* make sure it fills your login area */
+  position: relative;
+  overflow: hidden;
+}
+
+.login-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* acts like background-size: cover */
+  object-position: center; /* like background-position: center */
+  pointer-events: none; /* makes sure user can't pause/interact */
+}
+
+
+/* Copyright styling */
+.copyright {
+	text-align: center;
+	font-size: 14px;
+	color: #666;
+	padding: 10px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background-color: #b3b3b3;
+}
+.copyright a{
+	text-decoration: none;
+}
+
+/* Responsive design for mobile devices */
+@media screen and (max-width: 768px) {
+	.login-container {
+		flex-direction: column;
+		width: 100%;
+		max-width: 400px;
+		height: auto;
+		border-radius: 10px;
+	}
+
+	.login-form {
+		width: 100%;
+		padding: 20px;
+	}
+
+	.login-image {
+		width: 100%;
+		height: 200px;
+	}
+}
+
+/* Additional media query for smaller phones */
+@media screen and (max-width: 480px) {
+	.login-form input,
+	.login-form button {
+		font-size: 14px;
+	}
+
+	.login-form {
+		padding: 15px;
+	}
+}
