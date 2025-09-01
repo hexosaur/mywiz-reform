@@ -21,7 +21,14 @@
 			<div id="layoutSidenav_content">
 				<main>
 					<div class="container-fluid px-4">
-						<h1 class="mt-4">Branch Management</h1>
+						<div class="row justify-content-between mt-4 mb-1">
+							<h1 class="mb-0 col-md-6 col-sm-7">Branch Management </h1>
+							<button type="button" class="btn btn-primary col-auto">Add Branch</button>
+						</div>
+						<div>
+							
+						</div>
+						
 						<!-- <ol class="breadcrumb mb-4">
 							<li class="breadcrumb-item active">Dashboard</li>
 						</ol> -->

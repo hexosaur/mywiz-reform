@@ -1,25 +1,135 @@
-<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-	<!-- Navbar Brand-->
-	<a class="navbar-brand ps-3" href="">My Wiz</a>
-	<!-- Sidebar Toggle-->
-	<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-	<!-- Navbar Search-->
-	<form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-		<div class="input-group">
-			<input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-			<button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+<!-- [ Header ] start -->
+	<header class="navbar pcoded-header navbar-expand-lg navbar-light headerpos-fixed">
+		<div class="m-header">
+			<a class="mobile-menu" id="mobile-collapse1" href="#!"><span></span></a>
+			<a href="index.html" class="b-brand">
+				<img src="../pkg/assets/media/logo.svg" alt="" class="logo images">
+				<img src="../pkg/assets/media/logo-icon.svg" alt="" class="logo-thumb images">
+			</a>
 		</div>
-	</form>
-	<!-- Navbar-->
-	<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-		<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-			<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-				<li><a class="dropdown-item" href="#!">Settings</a></li>
-				<li><a class="dropdown-item" href="#!">Activity Log</a></li>
-				<li><hr class="dropdown-divider" /></li>
-				<li><a class="dropdown-item" href="#!">Logout</a></li>
+		<a class="mobile-menu" id="mobile-header" href="#!">
+			<i class="feather icon-more-horizontal"></i>
+		</a>
+		<div class="collapse navbar-collapse">
+			<a href="#!" class="mob-toggler"></a>
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<div class="main-search open">
+						<div class="input-group">
+							<input type="text" id="m-search" class="form-control" placeholder="Search . . .">
+							<a href="#!" class="input-group-append search-close">
+								<i class="feather icon-x input-group-text"></i>
+							</a>
+							<span class="input-group-append search-btn btn btn-primary">
+								<i class="feather icon-search input-group-text"></i>
+							</span>
+						</div>
+					</div>
+				</li>
 			</ul>
-		</li>
-	</ul>
-</nav>
+			<ul class="navbar-nav ml-auto">
+				<li>
+					<div class="dropdown">
+						<a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="icon feather icon-bell"></i></a>
+						<div class="dropdown-menu dropdown-menu-right notification">
+							<div class="noti-head">
+								<h6 class="d-inline-block m-b-0">Notifications</h6>
+								<div class="float-right">
+									<a href="#!" class="m-r-10">mark as read</a>
+									<a href="#!">clear all</a>
+								</div>
+							</div>
+							<ul class="noti-body">
+								<li class="n-title">
+									<p class="m-b-0">NEW</p>
+								</li>
+								<li class="notification">
+									<div class="media">
+										<img class="img-radius" src="../pkg/assets/media/user/avatar-1.jpg" alt="Generic placeholder image">
+										<div class="media-body">
+											<p><strong>John Doe</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>5 min</span></p>
+											<p>New ticket Added</p>
+										</div>
+									</div>
+								</li>
+								<li class="n-title">
+									<p class="m-b-0">EARLIER</p>
+								</li>
+								<li class="notification">
+									<div class="media">
+										<img class="img-radius" src="../pkg/assets/media/user/avatar-2.jpg" alt="Generic placeholder image">
+										<div class="media-body">
+											<p><strong>Joseph William</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>10 min</span></p>
+											<p>Prchace New Theme and make payment</p>
+										</div>
+									</div>
+								</li>
+								<li class="notification">
+									<div class="media">
+										<img class="img-radius" src="../pkg/assets/media/user/avatar-3.jpg" alt="Generic placeholder image">
+										<div class="media-body">
+											<p><strong>Sara Soudein</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>12 min</span></p>
+											<p>currently login</p>
+										</div>
+									</div>
+								</li>
+								<li class="notification">
+									<div class="media">
+										<img class="img-radius" src="../pkg/assets/media/user/avatar-1.jpg" alt="Generic placeholder image">
+										<div class="media-body">
+											<p><strong>Joseph William</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>30 min</span></p>
+											<p>Prchace New Theme and make payment</p>
+										</div>
+									</div>
+								</li>
+								<li class="notification">
+									<div class="media">
+										<img class="img-radius" src="../pkg/assets/media/user/avatar-3.jpg" alt="Generic placeholder image">
+										<div class="media-body">
+											<p><strong>Sara Soudein</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>1 hour</span></p>
+											<p>currently login</p>
+										</div>
+									</div>
+								</li>
+								<li class="notification">
+									<div class="media">
+										<img class="img-radius" src="../pkg/assets/media/user/avatar-1.jpg" alt="Generic placeholder image">
+										<div class="media-body">
+											<p><strong>Joseph William</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>2 hour</span></p>
+											<p>Prchace New Theme and make payment</p>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<div class="noti-footer">
+								<a href="#!">show all</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="dropdown drp-user">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<i class="icon feather icon-settings"></i>
+						</a>
+						<div class="dropdown-menu dropdown-menu-right profile-notification">
+							<div class="pro-head">
+								<img src="../pkg/assets/media/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
+								<span>John Doe</span>
+								<a href="auth-signin.html" class="dud-logout" title="Logout">
+									<i class="feather icon-log-out"></i>
+								</a>
+							</div>
+							<ul class="pro-body">
+								<li><a href="#!" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a></li>
+								<li><a href="#!" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
+								<li><a href="message.html" class="dropdown-item"><i class="feather icon-mail"></i> My Messages</a></li>
+								<li><a href="auth-signin.html" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</header>
+	<!-- [ Header ] end -->

@@ -1,126 +1,85 @@
-<div id="layoutSidenav_nav">
-	<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-		<div class="sb-sidenav-menu">
-			<div class="nav">
-				<div class="sb-sidenav-menu-heading">Home</div>
-				<!-- DASHBOARD -->
-				<a class="nav-link" href="../home/dashboard">
-					<div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>Dashboard
-				</a>
-				<!-- LEAVE -->
-				<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLeave" aria-expanded="false" aria-controls="collapseLeave">
-					<div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>Leave Portal<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-				</a>
-				<div class="collapse" id="collapseLeave" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-					<nav class="sb-sidenav-menu-nested nav">
-						<a class="nav-link" href="layout-static.html">Leave Requests</a>
-						<a class="nav-link" href="layout-static.html">File a Leave</a>
-						<a class="nav-link" href="layout-sidenav-light.html">Leave Logs</a>
-					</nav>
-				</div>
-				<!-- EVALUATION -->
-				<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseEvaluate" aria-expanded="false" aria-controls="collapseEvaluate">
-					<div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>Evaluation<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-				</a>
-				<div class="collapse" id="collapseEvaluate" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-					<nav class="sb-sidenav-menu-nested nav">
-						<a class="nav-link" href="layout-static.html">Evaluate</a>
-						<a class="nav-link" href="layout-sidenav-light.html">Peer Eval</a>
-					</nav>
-				</div>
-				<!-- PAYSLIP -->
-				<a class="nav-link" href="index.php">
-					<div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>Payslip
-				</a>
-				
+<!-- [ Pre-loader ] start -->
+	<div class="loader-bg">
+		<div class="loader-track">
+			<div class="loader-fill"></div>
+		</div>
+	</div>
+	<!-- [ Pre-loader ] End -->
 
-
-				<!-- ADMIN AREA -->
-				<div class="sb-sidenav-menu-heading">Administrator</div>
-				<!-- Organizational Setup -->
-				<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseOrgSetup" aria-expanded="false" aria-controls="collapseOrgSetup">
-					<div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>Organization<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+	<!-- [ navigation menu ] start -->
+	<nav class="pcoded-navbar menupos-fixed menu-light brand-blue ">
+		<div class="navbar-wrapper ">
+			<div class="navbar-brand header-logo">
+				<a href="index.html" class="b-brand">
+					<img src="../pkg/assets/media/logo.svg" alt="" class="logo images">
+					<img src="../pkg/assets/media/logo-icon.svg" alt="" class="logo-thumb images">
 				</a>
-				<div class="collapse" id="collapseOrgSetup" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-					<nav class="sb-sidenav-menu-nested nav">
-						<a class="nav-link" href="../management/branch">Branch Management</a>
-						<a class="nav-link" href="../management/department">Dept. Management</a>
-						<a class="nav-link" href="../management/job">Job Management</a>
-						<a class="nav-link" href="../management/employee">Employee Management</a>
-					</nav>
-				</div>
-				<!-- Leave Management -->
-				<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLeaveMgmt" aria-expanded="false" aria-controls="collapseLeaveMgmt">
-					<div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>Leave Management<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-				</a>
-				<div class="collapse" id="collapseLeaveMgmt" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-					<nav class="sb-sidenav-menu-nested nav">
-						<a class="nav-link" href="layout-static.html">Leave Categories</a>
-						<a class="nav-link" href="layout-static.html">Leave Archives</a>
-					</nav>
-				</div>
-				<!-- ACCOUNTING -->
-				<!-- OPERATIONS -->
-
-
-
-
-				<!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-					<div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-					Layouts
-					<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-				</a>
-				<div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-					<nav class="sb-sidenav-menu-nested nav">
-						<a class="nav-link" href="layout-static.html">Static Navigation</a>
-						<a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
-					</nav>
-				</div>
-				<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-					<div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-					Pages
-					<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-				</a>
-				<div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-					<nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-							Authentication
-							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-						</a>
-						<div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="login.html">Login</a>
-								<a class="nav-link" href="register.html">Register</a>
-								<a class="nav-link" href="password.html">Forgot Password</a>
-							</nav>
-						</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-							Error
-							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-						</a>
-						<div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="401.html">401 Page</a>
-								<a class="nav-link" href="404.html">404 Page</a>
-								<a class="nav-link" href="500.html">500 Page</a>
-							</nav>
-						</div>
-					</nav>
-				</div>
-				<div class="sb-sidenav-menu-heading">Addons</div>
-				<a class="nav-link" href="charts.html">
-					<div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-					Charts
-				</a>
-				<a class="nav-link" href="tables.html">
-					<div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-					Tables
-				</a> -->
+				<a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
+			</div>
+			<div class="navbar-content scroll-div">
+				<ul class="nav pcoded-inner-navbar">
+					<li class="nav-item pcoded-menu-caption">
+						<label>Navigation</label>
+					</li>
+					<li class="nav-item">
+						<a href="index.html" class="nav-link"><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
+					</li>
+					<li class="nav-item pcoded-menu-caption">
+						<label>UI Element</label>
+					</li>
+					<li class="nav-item pcoded-hasmenu">
+						<a href="#!" class="nav-link"><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Componant</span></a>
+						<ul class="pcoded-submenu">
+							<li class=""><a href="bc_button.html" class="">Button</a></li>
+							<li class=""><a href="bc_badges.html" class="">Badges</a></li>
+							<li class=""><a href="bc_breadcrumb-pagination.html" class="">Breadcrumb & paggination</a></li>
+							<li class=""><a href="bc_collapse.html" class="">Collapse</a></li>
+							<li class=""><a href="bc_progress.html" class="">Progress</a></li>
+							<li class=""><a href="bc_tabs.html" class="">Tabs & pills</a></li>
+							<li class=""><a href="bc_typography.html" class="">Typography</a></li>
+						</ul>
+					</li>
+					<li class="nav-item pcoded-menu-caption">
+						<label>Forms &amp; table</label>
+					</li>
+					<li class="nav-item">
+						<a href="form_elements.html" class="nav-link"><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Form elements</span></a>
+					</li>
+					<li class="nav-item">
+						<a href="tbl_bootstrap.html" class="nav-link"><span class="pcoded-micon"><i class="feather icon-align-justify"></i></span><span class="pcoded-mtext">Bootstrap table</span></a>
+					</li>
+					<li class="nav-item pcoded-menu-caption">
+						<label>Chart & Maps</label>
+					</li>
+					<li class="nav-item">
+						<a href="chart-morris.html" class="nav-link"><span class="pcoded-micon"><i class="feather icon-pie-chart"></i></span><span class="pcoded-mtext">Chart</span></a>
+					</li>
+					<li class="nav-item">
+						<a href="map-google.html" class="nav-link"><span class="pcoded-micon"><i class="feather icon-map"></i></span><span class="pcoded-mtext">Maps</span></a>
+					</li>
+					<li class="nav-item pcoded-menu-caption">
+						<label>Pages</label>
+					</li>
+					<li class="nav-item pcoded-hasmenu">
+						<a href="#!" class="nav-link"><span class="pcoded-micon"><i class="feather icon-lock"></i></span><span class="pcoded-mtext">Authentication</span></a>
+						<ul class="pcoded-submenu">
+							<li class=""><a href="auth-signup.html" class="" target="_blank">Sign up</a></li>
+							<li class=""><a href="auth-signin.html" class="" target="_blank">Sign in</a></li>
+						</ul>
+					</li>
+					<li class="nav-item"><a href="sample-page.html" class="nav-link"><span class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span class="pcoded-mtext">Sample page</span></a></li>
+					<li class="nav-item disabled"><a href="#!" class="nav-link"><span class="pcoded-micon"><i class="feather icon-power"></i></span><span class="pcoded-mtext">Disabled menu</span></a></li>
+				</ul>
+				<!-- <div class="card text-center">
+					<div class="card-block">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						<i class="feather icon-sunset f-40"></i>
+						<h6 class="mt-3">Upgrade to pro</h6>
+						<p>upgrade for get full themes and 30min support</p>
+						<a href="https://codedthemes.com/item/flash-able-bootstrap-admin-template/" target="_blank" class="btn btn-gradient-primary btn-sm text-white m-0">Upgrade</a>
+					</div>
+				</div> -->
 			</div>
 		</div>
-		<div class="sb-sidenav-footer">
-			<div class="small">Logged in as:</div>
-			Full Name here
-		</div>
 	</nav>
-</div>
+	<!-- [ navigation menu ] end -->
