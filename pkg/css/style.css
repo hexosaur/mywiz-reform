@@ -2907,7 +2907,9 @@ pre[class*=language-]:before {
         background: linear-gradient(45deg, #3949AB, #2962FF);
         color: #fff;
     }
-
+	.b-brand img{
+		height: 1rem;
+	}
     .pcoded-header .input-group-text,
     .pcoded-header a,
     .pcoded-header dropdown-toggle {

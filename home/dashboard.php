@@ -1,38 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-
-	<title>Flash Able - Most Trusted Admin Template</title>
-	<!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 11]>
-		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
-	<!-- Meta -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="description" content="Flash Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
-	<meta name="keywords"
-		content="admin templates, bootstrap admin templates, bootstrap 4, dashboard, dashboard templets, sass admin templets, html admin templates, responsive, bootstrap admin templates free download,premium bootstrap admin templates, Flash Able, Flash Able bootstrap admin template">
-	<meta name="author" content="Codedthemes" />
-
-	<!-- Favicon icon -->
-	<link rel="icon" href="../pkg/assets/media/favicon.ico" type="image/x-icon">
-	<!-- fontawesome icon -->
-	<link rel="stylesheet" href="../pkg/assets/fonts/fontawesome/css/fontawesome-all.min.css">
-	<!-- animation css -->
-	<link rel="stylesheet" href="../pkg/assets/plugins/animation/css/animate.min.css">
-	
-
-	<!-- vendor css -->
-	<link rel="stylesheet" href="../pkg/css/style.css">
-</head>
+	<?php include('../pkg/assets/page/head.php')?>
 
 <body class="">
 	<?php include('../pkg/assets/page/sidebar.php')?>
-
 	<?php include('../pkg/assets/page/navbar.php')?>
 
 	<!-- [ Main Content ] start -->
@@ -48,10 +19,10 @@
 									<div class="row align-items-center">
 										<div class="col-md-12">
 											<div class="page-header-title">
-												<h5>Home</h5>
+												<h5>Dashboard</h5>
 											</div>
 											<ul class="breadcrumb">
-												<li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+												<li class="breadcrumb-item"><a href="../home/dashboard"><i class="feather icon-home"></i></a></li>
 												<li class="breadcrumb-item"><a href="#!">Analytics Dashboard</a></li>
 											</ul>
 										</div>
@@ -670,10 +641,7 @@
     <![endif]-->
 	<!-- Warning Section Ends -->
 
-	<!-- Required Js -->
-	<script src="../pkg/js/vendor-all.min.js"></script>
-	<script src="../pkg/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-	<script src="../pkg/js/pcoded.min.js"></script>
+	<?php include('../pkg/assets/page/footer.php')?>
 
 </body>
 
