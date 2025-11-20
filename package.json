@@ -1,0 +1,23 @@
+{
+  "name": "mywiz-reform",
+  "version": "1.0.0",
+  "description": "TO be edited here",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hexosaur/mywiz-reform.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hexosaur/mywiz-reform/issues"
+  },
+  "homepage": "https://github.com/hexosaur/mywiz-reform#readme",
+  "devDependencies": {
+    "browser-sync": "^3.0.4"
+  }
+}

@@ -31,25 +31,27 @@
 							<li class=""><a href="../home/leave-record" class="">Leave Record</a></li>
 						</ul>
 					</li>
-					<li class="nav-item pcoded-hasmenu">
+					<!-- WILL BE ACTIVATED SOON -->
+					<!-- <li class="nav-item pcoded-hasmenu">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-bookmark"></i></span><span class="pcoded-mtext">Evaluation</span></a>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="bc_button.html" class="">Evaluate</a></li>
 							<li class=""><a href="bc_badges.html" class="">My Rating</a></li>
 						</ul>
-					</li>
+					</li> -->
 					<li class="nav-item pcoded-menu-caption">
 						<label>Administrator</label>
 					</li>
 					<li class="nav-item pcoded-hasmenu">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-codepen"></i></span><span class="pcoded-mtext">Organization</span></a>
 						<ul class="pcoded-submenu">
-							<li class=""><a href="bc_button.html" class="">Branch</a></li>
-							<li class=""><a href="bc_badges.html" class="">Department</a></li>
-							<li class=""><a href="bc_breadcrumb-pagination.html" class="">Designation</a></li>
-							<li class=""><a href="bc_collapse.html" class="">Employee</a></li>
+							<li class=""><a href="../management/branch" class="">Branch</a></li>
+							<li class=""><a href="../management/department" class="">Department</a></li>
+							<li class=""><a href="../management/job" class="">Designation</a></li>
+							<li class=""><a href="../management/employee" class="">Employee</a></li>
 						</ul>
 					</li>
+					
 					<li class="nav-item pcoded-hasmenu">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-tablet"></i></span><span class="pcoded-mtext">Leave Management</span></a>
 						<ul class="pcoded-submenu">
@@ -57,7 +59,8 @@
 							<li class=""><a href="bc_badges.html" class="">Leave Archive</a></li>
 						</ul>
 					</li>
-					<li class="nav-item pcoded-hasmenu">
+					<!-- WILL BE ACTIVATED SOON -->
+					<!-- <li class="nav-item pcoded-hasmenu">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-book"></i></span><span class="pcoded-mtext">Evaluation Management</span></a>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="bc_button.html" class="">Evaluation Categories</a></li>
@@ -70,7 +73,7 @@
 							<li class=""><a href="bc_button.html" class="">Overtime Categories</a></li>
 							<li class=""><a href="bc_badges.html" class="">Overtime Archive</a></li>
 						</ul>
-					</li>
+					</li> -->
 					<li class="nav-item pcoded-menu-caption">
 						<label>Human Resource</label>
 					</li>

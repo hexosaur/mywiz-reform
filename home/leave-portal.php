@@ -18,7 +18,7 @@
 							<div class="page-header">
 								<div class="page-block">
 									<div class="row align-items-center">
-										<div class="col-md-12">
+										<div class="col-md-8">
 											<div class="page-header-title">
 												<h5 class="m-b-10">Leave Portal</h5>
 											</div>
@@ -41,41 +41,71 @@
 								<div class="col-xl-12">
 									<div class="card">
 										<div class="card-body">
-											<div class="col-md-12">
-													<select class="mb-3 form-control">
-														<option disabled selected>Default select</option>
-														<option>Voluntary</option>
-														<option>Resignation</option>
-													</select>
+											<h3>File a Leave</h3>
+											<hr>
+											<form>
+												<div class="row">
+													<div class="form-group col-md-6">
+														<select class="mb-3 form-control">
+															<option disabled selected>Select Leave Type</option>
+															<option>Voluntary</option>
+															<option>Resignation</option>
+															<hr>
+															<option>Resignation</option>
+														</select>
+													</div>
+													<div class="form-group col-md-6">
+														<select class="mb-3 form-control">
+															<option disabled selected>Select Proxy</option>
+															<option>Voluntary</option>
+															<option>Resignation</option>
+														</select>
+													</div>
+													<hr>
+													<div class="form-group col-md-8">
+														<label for="">Date From</label>
+														<input id="" class="singleDatePicker form-control form-control-sm" readonly placeholder="Select a starting date" />
+													</div>
+													<div class="form-group col-md-4">
+														<label for="">Time From</label>
+														<select class="mb-3 form-control">
+															<option disabled selected>Select Starting</option>
+															<option>Morning</option>
+															<option>Afternoon</option>
+														</select>
+													</div>
+													<div class="form-group col-md-8">
+														<label for="">Date To</label>
+														<input id="" class="singleDatePicker form-control form-control-sm" readonly placeholder="Select a ending date" />
+													</div>
+													<div class="form-group col-md-4">
+														<label for="">Time To</label>
+														<select class=" form-control">
+															<option disabled selected>Select Ending</option>
+															<option>Morning</option>
+															<option>Afternoon</option>
+														</select>
+													</div>
+													<div class="form-group col-xl-12">
+														<label for="">Reason</label>
+														<textarea class="form-control" id="" rows="3"></textarea>
+													</div>
+													<div class="form-group col-xl-12">
+														<label for="">Attach Image</label>
+														<input type="file" class="form-control" id="" />
+													</div>
 												</div>
-											<div>TEST</div>
+											</form>
+											<hr>
+											<div class="text-center">
+												<button class="btn btn-primary">Apply</button>
+												<button class="btn btn-danger" onclick="location.href='../home/dashboard'">Cancel</button>
+											</div>
 										</div>
-										<div class="container" style="max-width: 980px;">
-											<h3 class="mb-4">Date pickers with Year/Month selection</h3>
-
-											<div class="picker-row">
-											<!-- A) Single date (with month & year dropdowns) -->
-											<div class="form-group">
-												<label for="singleDate">Single date (MM/DD/YY)</label>
-												<input id="singleDate" class="form-control form-control-sm" placeholder="Select a date" />
-											</div>
-
-											<!-- B) Date range (with month & year dropdowns) -->
-											<div class="form-group">
-												<label for="dateRange">Date range (MM/DD/YY - MM/DD/YY)</label>
-												<input id="dateRange" class="form-control form-control-sm" placeholder="Select a date range" />
-											</div>
-
-										
-											</div>
-
-											<pre id="log" class="mt-3 p-3 bg-light border rounded" style="min-height: 96px;"></pre>
-										</div>
-
 									</div>
 								</div>
                                 <!-- [ basic-table ] end -->
-								<hr>
+								
 								
 							</div>
 							<!-- [ Main Content ] end -->
@@ -88,45 +118,7 @@
 
 
 	<?php include('../pkg/assets/page/footer.php')?>
-	<script>
-		$(function () {
-			const log = (msg) => $('#log').text(msg);
-
-			// A) Single date with month & year dropdowns
-			$('#singleDate')
-				.daterangepicker({
-				singleDatePicker: true,
-				showDropdowns: true,           // 👈 adds month/year selects
-				autoUpdateInput: false,
-				locale: { format: 'MM/DD/YY', cancelLabel: 'Clear' }
-				})
-				.on('apply.daterangepicker', function (e, picker) {
-				$(this).val(picker.startDate.format('MM/DD/YY'));
-				log('Single date: ' + $(this).val());
-				})
-				.on('cancel.daterangepicker', function () {
-				$(this).val('');
-				log('Single date cleared');
-				});
-
-			// B) Date range with month & year dropdowns
-			$('#dateRange')
-				.daterangepicker({
-				showDropdowns: true,           // 👈 adds month/year selects
-				autoUpdateInput: false,
-				locale: { format: 'MM/DD/YY', cancelLabel: 'Clear' }
-				})
-				.on('apply.daterangepicker', function (e, picker) {
-				const val = picker.startDate.format('MM/DD/YY') + ' - ' + picker.endDate.format('MM/DD/YY');
-				$(this).val(val);
-				log('Range: ' + val);
-				})
-				.on('cancel.daterangepicker', function () {
-				$(this).val('');
-				log('Range cleared');
-				});
-			});
-	</script>
+	
 </body>
 
 </html>

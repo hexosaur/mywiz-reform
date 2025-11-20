@@ -55,7 +55,7 @@
 										<div class="card-body">
 											<div class="row align-items-center m-b-25">
 												<div class="col">
-													<h6 class="m-b-5 text-white">Total Orders</h6>
+													<h6 class="m-b-5 text-white">Total Ordersssss</h6>
 													<h3 class="m-b-0 text-white">15,830</h3>
 												</div>
 												<div class="col-auto">

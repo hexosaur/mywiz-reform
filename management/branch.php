@@ -1,107 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-		<meta name="description" content="" />
-		<meta name="author" content="" />
-		<link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+<?php include('../pkg/assets/page/head.php')?>
+<body class="">
+	<!-- [ navigation menu ] start -->
+	<?php include('../pkg/assets/page/sidebar.php')?>
+	<?php include('../pkg/assets/page/navbar.php')?>
+	<!-- [ navigation menu ] end -->
 
-
-		<title>Dashboard - SB Admin</title>
-		
-		<link href="../pkg/css/styles.css" rel="stylesheet" />
-	</head>
-	<body class="sb-nav-fixed">
-		
-		<?php include('../pkg/assets/page/navbar.php')?>
-		<div id="layoutSidenav">
-			<?php include('../pkg/assets/page/sidebar.php')?>
-			<div id="layoutSidenav_content">
-				<main>
-					<div class="container-fluid px-4">
-						<div class="row justify-content-between mt-4 mb-1">
-							<h1 class="mb-0 col-md-6 col-sm-7">Branch Management </h1>
-							<button type="button" class="btn btn-primary col-auto">Add Branch</button>
-						</div>
-						<div>
-							
-						</div>
-						
-						<!-- <ol class="breadcrumb mb-4">
-							<li class="breadcrumb-item active">Dashboard</li>
-						</ol> -->
-						<div class="card mb-4">
-							<div class="card-header">
-								<i class="fas fa-table me-1"></i>
-								DataTable Example
+	<!-- [ Main Content ] start -->
+	<div class="pcoded-main-container">
+		<div class="pcoded-wrapper">
+			<div class="pcoded-content">
+				<div class="pcoded-inner-content">
+					<div class="main-body">
+						<div class="page-wrapper">
+							<!-- [ breadcrumb ] start -->
+							<div class="page-header">
+								<div class="page-block">
+									<div class="row align-items-center">
+										<div class="col-md-8">
+											<div class="page-header-title">
+												<h5 class="m-b-10">Branch</h5>
+											</div>
+											<ul class="breadcrumb">
+												<li class="breadcrumb-item"><a href="../home/dashboard"><i class="feather icon-home"></i></a></li>
+												<li class="breadcrumb-item"><a href="#">Organization</a></li>
+												<li class="breadcrumb-item"><a href="#">Branch</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
 							</div>
-							<div class="card-body">
-								<table id="datatablesSimple">
-									<thead>
-										<tr>
-											<th>Name</th>
-											<th>Position</th>
-											<th>Office</th>
+							<!-- [ breadcrumb ] end -->
 
-											<th>Start date</th>
-											<th>Salary</th>
-										</tr>
-									</thead>
-									<tfoot>
-										<tr>
-											<th>Name</th>
-											<th>Position</th>
-											<th>Office</th>
-											<th>Start date</th>
-											<th>Salary</th>
-										</tr>
-									</tfoot>
-									<tbody>
-										<tr>
-											<td>Tiger Nixon</td>
-											<td>System Architect</td>
-											<td>Edinburgh</td>
-											<td>2011/04/25</td>
-											<td>$320,800</td>
-										</tr>
-										<tr>
-											<td>Garrett Winters</td>
-											<td>Accountant</td>
-											<td>Tokyo</td>
-											<td>2011/07/25</td>
-											<td>$170,750</td>
-										</tr>
-										<tr>
-											<td>Ashton Cox</td>
-											<td>Junior Technical Author</td>
-											<td>San Francisco</td>
-											<td>2009/01/12</td>
-											<td>$86,000</td>
-										</tr>
-										
-									</tbody>
-								</table>
+							<!-- [ Main Content ] start -->
+							<div class="container-fluid">
+								<!-- [ Default View ] start -->
+								<div class="row view-default" >
+									<div class="col-xl-12">
+										<div class="card">
+											<div class="card-body table-border-style">
+												<div class="row align-items-center">
+														<div class="col-6 col-md-10">
+															<h3 class="mb-0">Branch List</h3>
+														</div>
+														<div class="col-6 col-md-2 d-flex justify-content-end">
+															<button class="btn btn-primary btn-add">Add <span class="page-title"></span></button>
+														</div>
+													</div>
+												<hr>
+												<div class="table-responsive">
+													<table class="table  table-hover">
+														<thead>
+															<tr>
+																<th class="text-center">#</th>
+																<th class="text-center">Branch</th>
+																<th class="text-center">Location</th>
+																<th class="text-center">Action</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td class="text-center">2</td>
+																<td class="text-center">Test</td>
+																<td class="text-center">Iligan</td>
+																<td class="text-center">
+																	<div class="btn btn-outline-info btn-sm btn-edit"><span class="feather icon-edit"></span></div>
+																	<div class="btn btn-outline-danger btn-sm btn-del"><span class="feather icon-trash-2"></div>
+																</td>
+															</tr>
+															
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- [ Default View ] end -->
+
+								<!-- [ Modify View ] start -->
+								<div class="row view-modify d-none">
+									<div class="col-xl-12">
+										<div class="card">
+											<div class="card-body">
+												<h3 class="text-center"><span class="text-btn"></span> <span class="page-title"></span></h3>
+												<hr>
+												<form>
+													<div class="row">
+														<div class="form-group col-md-6">
+															<label for="">Branch Name</label>
+															<input id="" class=" form-control form-control-sm" placeholder="Branch Name" />
+														</div>
+														<div class="form-group col-md-6">
+															<label for="">Street/Building</label>
+															<input id="" class=" form-control form-control-sm" placeholder="Street/Building" />
+														</div>
+														<div class="form-group col-md-6">
+															<label>Province</label>
+															<select class=" form-control">
+																<option disabled selected>Select Province</option>
+																<option>Voluntary</option>
+															</select>
+														</div>
+														<div class="form-group col-md-6">
+															<label>City</label>
+															<select class=" form-control">
+																<option disabled selected>Select City</option>
+																<option>Voluntary</option>
+															</select>
+														</div>
+														<div class="form-group col-md-6">
+															<label>Barangay</label>
+															<select class=" form-control">
+																<option disabled selected>Select Barangay</option>
+																<option>Voluntary</option>
+																<option>Voluntary1</option>
+																<option>Voluntary2</option>
+																<option>Voluntary3</option>
+															</select>
+														</div>
+													</div>
+												</form>
+												<hr>
+												<div class="text-center">
+													<button class="btn btn-primary">Apply</button>
+													<button class="btn btn-danger cnl-btn">Cancel</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- [ Modify View ] end -->
+                               
+								
 							</div>
+							<!-- [ Main Content ] end -->
 						</div>
 					</div>
-				</main>
-				<?php include('../pkg/assets/page/footer.php')?>
+				</div>
 			</div>
 		</div>
-		<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script> -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.bundle.min.js" integrity="sha512-HvOjJrdwNpDbkGJIG2ZNqDlVqMo77qbs4Me4cah0HoDrfhrbA+8SBlZn1KrvAQw7cILLPFJvdwIgphzQmMm+Pw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/js/all.min.js" integrity="sha512-gBYquPLlR76UWqCwD06/xwal4so02RjIR0oyG1TIhSGwmBTRrIkQbaPehPF8iwuY9jFikDHMGEelt0DtY7jtvQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-		<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.min.js" integrity="sha512-n/G+dROKbKL3GVngGWmWfwK0yPctjZQM752diVYnXZtD/48agpUKLIn0xDQL9ydZ91x6BiOmTIFwWjjFi2kEFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+	</div>
 
-		
-		<script src="../pkg/js/scripts.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-		<script src="../pkg/assets/demo/chart-area-demo.js"></script>
-		<script src="../pkg/assets/demo/chart-bar-demo.js"></script>
-		<script src="../pkg/js/datatables-simple-demo.js"></script>
-		
-	</body>
+
+	<?php include('../pkg/assets/page/footer.php')?>
+</body>
+
 </html>
