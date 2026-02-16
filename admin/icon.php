@@ -19,7 +19,7 @@
 									<div class="row align-items-center">
 										<div class="col-md-8">
 											<div class="page-header-title">
-												<h5 class="m-b-10">Branch</h5>
+												<h5 class="m-b-10">Permissions</h5>
 											</div>
 											<ul class="breadcrumb">
 												<li class="breadcrumb-item"><a href="../home/dashboard"><i class="feather icon-home"></i></a></li>
@@ -41,7 +41,7 @@
 											<div class="card-body table-border-style">
 												<div class="row align-items-center">
 														<div class="col-6 col-md-10">
-															<h3 class="mb-0">Branch List</h3>
+															<h3 class="mb-0"><span class="page-title"></span> List</h3>
 														</div>
 														<div class="col-6 col-md-2 d-flex justify-content-end">
 															<button class="btn btn-primary btn-add">Add <span class="page-title"></span></button>
@@ -49,17 +49,29 @@
 													</div>
 												<hr>
 												<div class="table-responsive">
-													<table id="table_branch" class="table table-hover">
+													<table id="table_perms" class="table table-hover">
 														<thead>
 															<tr>
 																<th class="text-center">#</th>
-																<th class="text-center">Branch</th>
-																<th class="text-center">Code</th>
-																<th class="text-center">Location</th>
+																<th class="text-center">Name</th>
+																<th class="text-center">Title</th>
+																<th class="text-center">Description</th>
+																<th class="text-center">Class</th>
 																<th class="text-center">Action</th>
 															</tr>
 														</thead>
-														<tbody>														
+														<tbody>
+															<tr>
+																<td class="text-center">1</td>
+																<td class="text-center">view_inventory</td>
+																<td class="text-center">View Inventory</td>
+																<td class="text-center">To View the Inventory Page</td>
+																<td class="text-center">perms_view-inventory</td>
+																<td class="text-center">
+																	<div class="btn btn-outline-info btn-sm btn-edit" data-id="2"><span class="feather icon-edit"></span></div>
+																	<div class="btn btn-outline-danger btn-sm btn-del" data-id="2"><span class="feather icon-trash-2"></span></div>
+																</td>
+															</tr>												
 														</tbody>
 													</table>
 												</div>
@@ -79,34 +91,20 @@
 												<form>
 													<div class="row">
 														<div class="form-group col-md-6">
-															<label for="branch_name"><span class="page-title"></span> Name <span class="text-danger">*</span></label>
-															<input id="branch_name" class="form-control form-control-sm" placeholder="Branch Name"  required/>
+															<label for="perms_name"><span class="page-title"></span> Name <span class="text-danger">*</span></label>
+															<input id="perms_name" class="form-control form-control-sm" placeholder="i.e view_inventory"  required/>
 														</div>
 														<div class="form-group col-md-6">
-															<label for="branch_code"><span class="page-title"></span> Code <span class="text-danger">*</span></label>
-															<input id="branch_code" class=" form-control form-control-sm" placeholder="Branch Code i.e. ILGN"  required/>
+															<label for="perms_title"><span class="page-title"></span> Title <span class="text-danger">*</span></label>
+															<input id="perms_title" class="form-control form-control-sm" placeholder=" i.e View Inventory "  required/>
 														</div>
 														<div class="form-group col-md-6">
-															<label>Province <span class="text-danger">*</span></label>
-															<select id="branch_prov" class="dd_prov form-control" required>
-																<option disabled selected>Select Province</option>
-															</select>
+															<label for="perms_class"><span class="page-title"></span> Class <span class="text-danger">*</span></label>
+															<input id="perms_class" class="form-control form-control-sm" placeholder="i.e. view-perms-inventory"  required/>
 														</div>
 														<div class="form-group col-md-6">
-															<label>City <span class="text-danger">*</span></label>
-															<select id="branch_city" class="dd_city form-control" required disabled>
-																<option disabled selected>Select City</option>
-															</select>
-														</div>
-														<div class="form-group col-md-6">
-															<label>Barangay <span class="text-danger">*</span></label>
-															<select id="branch_brgy" class="dd_brgy form-control" disabled required>
-																<option disabled selected>Select Barangay</option>
-															</select>
-														</div>
-														<div class="form-group col-md-6">
-															<label for="addr">Address Line <span class="text-danger">*</span></label>
-															<input id="addr" class=" form-control form-control-sm" placeholder="Address Line" required/>
+															<label for="perms_desc"><span class="page-title"></span> Description <span class="text-danger">*</span></label>
+															<input id="perms_desc" class="form-control form-control-sm" placeholder="Permission Description"  required/>
 														</div>
 													</div>
 												</form>
@@ -135,61 +133,33 @@
 	<?php include('../pkg/assets/page/footer.php')?>
 </body>
 <script>
+	var perms_id;
+	const pagetitle = $('.page-title').html();
 	// script for body functions default
 	// Initialize
-	var prov_id, city_id, brgy_id, pkid;
-	const pagetitle = $('.page-title').html();
-	var userPermissions = ['view_branch']; 
-	
-
-
-	function hideAction(tableSelector, userPermissions) {
-		// Check if the user has 'view_branch' permission
-		if (userPermissions.includes('view_branch')) {
-			// Get the DataTable instance
-			var table = $(tableSelector).DataTable();
-
-			// Get the total number of columns
-			var totalColumns = table.columns().count();
-
-			// Hide the last column (Action column)
-			table.column(totalColumns - 1).visible(false);  // -1 refers to the last column
-			console.log("Action column hidden because user has 'view_branch' permission");
-		}
-	}
-
-
-
-
-	tableload_Branch();
-	function tableload_Branch(){
+	tableload_Perms();
+	function tableload_Perms() {
 		resetDataTable();
-		$.get("../backend/get_list_branch.php?security=123465", function(data,status){
-			$("#table_branch tbody").html(data);
-			wrapTable();
-			
+		$.get("../backend/get_list_perms.php?security=123465", function (data) {
+			data = (data || "").trim();
+			$("#table_perms tbody").html(data);
+			 wrapTable();
 			// EDIT
 			$('.btn-edit').click(function() {
 				$('.text-btn').text("Edit");
 				$('.view-modify').fadeIn().removeClass('d-none');
 				$('.view-default').hide();
 				pkid = $(this).data('id');
-				$.get("../backend/get_det_branch.php?security=123465&id=" + pkid, function(data, status) {
+				$.get("../backend/get_det_perms.php?security=123465&id=" + pkid, function(data, status) {
 					var array = jQuery.parseJSON(data);
+					// console.log(array);
 					$('.btn_save').attr('data-id', pkid);
-					$('#branch_name').val(array.branch_name);
-					$('#branch_code').val(array.branch_code);
-					$('#addr').val(array.branch_address);
-					$('#branch_prov').html(array.prov_name); 
-					$('#branch_city').val(array.city_name);
-					$('#branch_brgy').val(array.brgy_name); 
-					dd_prov(true, array.prov_id);
-					dd_city(true,array.prov_id, array.city_id);
-					dd_brgy(true,array.city_id, array.brgy_id);
-					
+					$('#perms_name').val(array.perms_name);
+					$('#perms_title').val(array.perms_title);
+					$('#perms_class').val(array.perms_class);
+					$('#perms_desc').val(array.perms_desc);				
 				});
 			});
-
 			// DELETE
 			$('.btn-del').click(function(){
 				Swal.fire({ title: 'Confirm delete', icon: 'warning', html: `<div style="text-align:left">Deleting this could affect other settings in this<span style="font-weight:bold;"> Proceed with caution!</span><br><br>Type <b>DELETE</b> to enable deletion:</div>`, input: 'text', inputPlaceholder: 'Type DELETE', inputAttributes: { autocapitalize: 'off', autocomplete: 'off'}, showCancelButton: true, ConfirmButtonText: 'Yes, delete it!', confirmButtonColor: '#d33',cancelButtonColor: '#20a661',
@@ -213,11 +183,11 @@
 				}).then((result) => {
 					if (result.isConfirmed) {
 						var id = $(this).data('id');
-						$.post("../backend/del_branch.php?security=123465&id=" + id, function (data, status) {
+						$.post("../backend/del_perms.php?security=123465&id=" + id, function (data, status) {
 						data = (data || '').trim();
 						if (data === 'true') {
 							Swal.fire({ showConfirmButton: false, title: 'Deleted!', text: pagetitle+' deleted.', icon: 'success', timer: 700 });
-							tableload_Branch();
+							tableload_Perms();
 							showMainPage();
 						} else {
 							Swal.fire({ icon: 'error', title: 'Error deleting '+pagetitle,  showConfirmButton: false, timer: 1200 });
@@ -228,37 +198,48 @@
 			});
 		});
 	}
-	function wrapTable() {
+
+	function  wrapTable() {
 		const $tbl = $('.table');
-		const rowHide = 3;
-		$tbl.DataTable({
-			autoWidth: false,
+		const rowHide = 4;
+		const dt = $tbl.DataTable({ autoWidth: false, destroy: true, retrieve: false,
 			columnDefs: [
 				{ targets: rowHide, visible: false, searchable: true },
-				{ targets: rowHide+1, orderable: false, searchable: false } 
+				{ targets: rowHide + 1, orderable: false, searchable: false }
 			],
 			createdRow: function (row, data) {
-				const location = (data[rowHide] || '').toString().trim();
-				if (location) {
-					$(row).addClass('dt-row-tip').attr('data-location', location);
+				const perms = (data[rowHide] || '').toString().trim();
+				if (perms) {
+					$(row)
+						.addClass('dt-row-tip')
+						.attr('data-perms', perms);
 				}
-			},
-			drawCallback: function () {
+			}, drawCallback: function () {
 				const $rows = $tbl.find('tbody tr.dt-row-tip');
 				$rows.each(function () {
-					$(this).attr('title', $(this).attr('data-location') || '');
+					const perms = $(this).attr('data-perms') || '';
+					$(this).attr('title', perms);
 				});
-				$rows.tooltip({
+				$rows.tooltip('dispose').tooltip({
 					container: 'body',
 					trigger: 'hover focus',
 					placement: 'top'
 				});
 			}
-			// ,pageLength: 13, lengthChange: false, 
 		});
-		
+		dt.columns.adjust().draw(false);
 	}
 
+	
+
+
+	$('#perms_name, #perms_class').on('keydown', function(e) {
+		if (e.key === " ") {
+			e.preventDefault();
+		} 
+	}).on('input', function() {
+        $(this).val($(this).val().toLowerCase());
+    });;
 
 
 	// script for interactions
@@ -270,16 +251,21 @@
 			// Convert id to a number (if needed)
 			var notif = parseInt(id, 10);
 			let message = notif === 0 ?  'New '+pagetitle+' Saved!' : pagetitle+' Details Updated!';
-			var data = { branch_name: $('#branch_name').val(), branch_code : $('#branch_code').val(), prov_id : prov_id, city_id : city_id, brgy_id : brgy_id, addr : $('#addr').val(), pkid : id}
-			var json = JSON.stringify(data)
-			$.post("../backend/post_branch.php", {branch: json}, function (data, a) {
+			var data = { perms_name: $('#perms_name').val(), perms_title : $('#perms_title').val(), perms_class : $('#perms_class').val(), perms_desc :  $('#perms_desc').val(), pkid : id}
+			var json = JSON.stringify(data);
+			$.post("../backend/post_perms.php", {permission: json}, function (data, a) {
 				data = data.trim();
-				if(data == 'exist'){
-					Swal.fire({icon: 'error', title: pagetitle+' already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
-				}else if(data == 'exist_code'){
-					Swal.fire({icon: 'error', title: pagetitle+' Code already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
+				// console.log(data)
+				if(data == 'exist_name'){
+					Swal.fire({icon: 'error', title: pagetitle+'Name already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
+				}else if(data == 'exist_title'){
+					Swal.fire({icon: 'error', title: pagetitle+'Title already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
+				}else if(data == 'exist_class'){
+					Swal.fire({icon: 'error', title: pagetitle+'Class already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
+				}else if(data == 'exist'){
+					Swal.fire({icon: 'error', title: 'No changes made! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
 				}else if(data == 'true'){
-					tableload_Branch();
+					tableload_Perms();
 					Swal.fire({icon: 'success',title: message,showConfirmButton: false,timer:950});
 					showMainPage();
 				}else if(data.trim() == ''){
@@ -289,18 +275,9 @@
 		}
 	});
 	$('.cnl-btn').click(function(){	
-		pkid = 0;
-		resetDependentSelect($('.dd_city'), 'Select City');
-		resetDependentSelect($('.dd_brgy'), 'Select Barangay');
+		
 	});
 	
-
-
-	// MODIFY SOON
-	// tableload_Branch();
-	// hideAction('#table_branch', userPermissions);
-
 </script>
-
 
 </html>

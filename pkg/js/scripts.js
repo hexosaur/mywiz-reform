@@ -5,8 +5,40 @@
     */
     // 
 // Scripts
-// 
+/**  =====================
+      Custom js start
+==========================  **/
 
+
+
+/**  =====================		NOT A NEGATIVE		=====================  **/
+document.querySelectorAll(".notnega").forEach((el) => {
+    // Optional: ensure HTML constraints are set
+    if (!el.hasAttribute("min")) el.setAttribute("min", "0");
+
+    // Prevent typing "-" and "e" (e allows scientific notation like 1e5)
+    el.addEventListener("keydown", (e) => {
+      if (["-", "Minus", "e", "E"].includes(e.key)) {
+        e.preventDefault();
+      }
+	   
+    });
+
+    // Sanitize on input (covers paste)
+    el.addEventListener("input", () => {
+      if (el.value === "") return;
+
+      const n = Number(el.value);
+      if (Number.isNaN(n)) return;
+
+      if (n < 0) el.value = "0"; // or Math.abs(n) if you prefer3
+	 
+    });
+});
+
+/**  =====================
+      Default js start
+==========================  **/
 window.addEventListener('DOMContentLoaded', event => {
 
     // Toggle the side navigation
@@ -24,77 +56,54 @@ window.addEventListener('DOMContentLoaded', event => {
     }
 
 });
+
+
 $(function () {
+	/**  =====================
+		 INITIALIZATION
+	==========================  **/
 	const log = (msg) => $('#log').text(msg);
-	// A) Single date with month & year dropdowns
-	$('.singleDatePicker')
-		.daterangepicker({ singleDatePicker: true, showDropdowns: true,	autoUpdateInput: false,
-		locale: { format: 'MM/DD/YY', cancelLabel: 'Clear' }
-		}).on('apply.daterangepicker', function (e, picker) {
-		$(this).val(picker.startDate.format('MMMM DD,YYYY'));
-		console.log('Single date: ' + $(this).val());
-		}).on('cancel.daterangepicker', function () {
-		$(this).val('');
-		
-	});
-
-	// B) Date range with month & year dropdowns
-	$('#dateRange')
-		.daterangepicker({
-		showDropdowns: true,           // 👈 adds month/year selects
-		autoUpdateInput: false,
-		locale: { format: 'MM/DD/YY', cancelLabel: 'Clear' }
-		})
-		.on('apply.daterangepicker', function (e, picker) {
-		const val = picker.startDate.format('MM/DD/YY') + ' - ' + picker.endDate.format('MM/DD/YY');
-		$(this).val(val);
-		log('Range: ' + val);
-		})
-		.on('cancel.daterangepicker', function () {
-		$(this).val('');
-		log('Range cleared');
-	});
-	// BASIC BUTTON LISTENERS
-	$('.btn-add').click(function(){
-		$('.text-btn').text("Add");
-		$('.view-modify').fadeIn().removeClass('d-none');
-		$('.view-default').hide();
-	});
-	$('.btn-edit').click(function(){
-		$('.text-btn').text("Edit");
-		$('.view-modify').fadeIn().removeClass('d-none');
-		$('.view-default').hide();
-	});
-	$('.cnl-btn').click(function(){	
-		$('.view-default').fadeIn().removeClass('d-none');
-		$('.view-modify').hide();		
-	});
+	
+	// SWEET ALERT 2
+	// CHECKING VALIDITY
+	
 
 
 
-	// MULTI-SELECT
-	$('#applyBarangay').on('click', function () {
-	var selected = $('.brgy:checked').map(function(){ return this.value; }).get();
+	// DATA TABLES INITIALIZE
+	// const $tbl = $('.datatable');
+	// // prevent double init if you revisit/re-render
+	// if ($.fn.DataTable.isDataTable($tbl)) {
+	// 	$tbl.DataTable().destroy();
+	// }
 
-	// Show as comma-separated list in the readonly input
-	$('#barangayInput').val(selected.join(', '));
+	// $tbl.DataTable({
+	// 	pageLength: 10,
+	// 	lengthChange: true,
+	// 	ordering: true,
+	// 	searching: true,
+	// 	autoWidth: false,
+	// 	order: [[0, 'desc']],
+	// 	columnDefs: [
+	// 	{ targets: [4], orderable: false, searchable: false }, 
+	// 	{ targets: [3], className: 'dt-location' }            
+	// 	]
+	// });
+	
+	
 
-	// Replace hidden inputs (so form submits as barangay[])
-	var hiddenWrap = $('#barangayHidden').empty();
-	selected.forEach(function (v, i) {
-		hiddenWrap.append('<input type="hidden" name="barangay[]" value="' + $('<div>').text(v).html() + '">');
-	});
 
-	$('#barangayPicker').modal('hide');
-	});
+	
+	
 
-	// Clicking the input also opens the modal (already wired via data-toggle)
-	$('#barangayInput').on('keydown', function(e){ e.preventDefault(); }); // prevent typing
+	// FORM REQUIREMENT CHECKER
 
 
 
 
+	
 
+	
 
-	console.log("scriptjs loaded");
+	console.log("script loaded");
 });

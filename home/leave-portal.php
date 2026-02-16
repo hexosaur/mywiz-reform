@@ -64,7 +64,7 @@
 													<hr>
 													<div class="form-group col-md-8">
 														<label for="">Date From</label>
-														<input id="" class="singleDatePicker form-control form-control-sm" readonly placeholder="Select a starting date" />
+														<input id="" class="startDatePicker noWeekend form-control form-control-sm" readonly placeholder="Select a starting date" />
 													</div>
 													<div class="form-group col-md-4">
 														<label for="">Time From</label>
@@ -76,7 +76,7 @@
 													</div>
 													<div class="form-group col-md-8">
 														<label for="">Date To</label>
-														<input id="" class="singleDatePicker form-control form-control-sm" readonly placeholder="Select a ending date" />
+														<input id="" class="endDatePicker noWeekend form-control form-control-sm" readonly placeholder="Select a ending date" />
 													</div>
 													<div class="form-group col-md-4">
 														<label for="">Time To</label>

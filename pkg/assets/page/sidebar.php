@@ -47,18 +47,18 @@
 						<ul class="pcoded-submenu">
 							<li class=""><a href="../management/branch" class="">Branch</a></li>
 							<li class=""><a href="../management/department" class="">Department</a></li>
-							<li class=""><a href="../management/job" class="">Designation</a></li>
+							<li class=""><a href="../management/designation" class="">Designation</a></li>
 							<li class=""><a href="../management/employee" class="">Employee</a></li>
 						</ul>
 					</li>
-					
 					<li class="nav-item pcoded-hasmenu">
-						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-tablet"></i></span><span class="pcoded-mtext">Leave Management</span></a>
+						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-tablet"></i></span><span class="pcoded-mtext">File Archives</span></a>
 						<ul class="pcoded-submenu">
-							<li class=""><a href="bc_button.html" class="">Leave Categories</a></li>
+							<li class=""><a href="bc_button.html" class="">Forms Categories</a></li>
 							<li class=""><a href="bc_badges.html" class="">Leave Archive</a></li>
 						</ul>
 					</li>
+					
 					<!-- WILL BE ACTIVATED SOON -->
 					<!-- <li class="nav-item pcoded-hasmenu">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-book"></i></span><span class="pcoded-mtext">Evaluation Management</span></a>
@@ -80,8 +80,113 @@
 					<li class="nav-item">
 						<a href="../home/dashboard" class="nav-link"><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Leave</span></a>
 					</li>
+					<li class="nav-item pcoded-hasmenu">
+						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-tablet"></i></span><span class="pcoded-mtext">Leave Management</span></a>
+						<ul class="pcoded-submenu">
+							<li class=""><a href="bc_button.html" class="">Leave Categories</a></li>
+							<li class=""><a href="bc_badges.html" class="">Leave Archive</a></li>
+						</ul>
+					</li>
+					<!-- Inventory -->
+					<li class="nav-item pcoded-menu-caption">
+						<label>Inventory</label>
+					</li>
+					<li class="nav-item pcoded-hasmenu">
+						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-inbox"></i></span><span class="pcoded-mtext">Product Settings</span></a>
+						<ul class="pcoded-submenu">
+							<li class=""><a href="../inventory/categories" class="">Categories</a></li>
+							<li class=""><a href="../inventory/brands" class="">Brands/Manufacturers</a></li>
+							<li class=""><a href="../inventory/suppliers" class="">Suppliers</a></li>
+							<li class=""><a href="../inventory/products" class="">Products</a></li>
+							<li class=""><a href="../inventory/purchase" class="">Purchase</a></li>
+							<li class=""><a href="../inventory/transfer" class="">Transfers</a></li>
+							<li class=""><a href="../inventory/employee" class="">Customers</a></li>
+						</ul>
+					</li>
+					<li class="nav-item pcoded-hasmenu">
+						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-tablet"></i></span><span class="pcoded-mtext">POS Settings</span></a>
+						<ul class="pcoded-submenu">
+							<li class=""><a href="bc_button.html" class="">Dashboard</a></li>
+							<li class=""><a href="bc_button.html" class="">Customers</a></li>
+							<li class=""><a href="bc_badges.html" class="">Sales</a></li>
+							<li class=""><a href="bc_badges.html" class="">Discounts/Coupons</a></li>
+						</ul>
+					</li>
+					<!-- Finance -->
+					<li class="nav-item pcoded-menu-caption d-none">
+						<label>Finance</label>
+					</li>
+					<li class="nav-item pcoded-hasmenu ">
+						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-inbox"></i></span><span class="pcoded-mtext">Product Settings</span></a>
+						<ul class="pcoded-submenu">
+							<li class=""><a href="#" class="">To be updated</a></li>
+						</ul>
+					</li>
+					<!-- Sales & Marketing -->
+					<li class="nav-item pcoded-menu-caption d-none">
+						<label>Sales & Marketing</label>
+					</li>
+					<li class="nav-item pcoded-hasmenu d-none">
+						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-inbox"></i></span><span class="pcoded-mtext">Product Settings</span></a>
+						<ul class="pcoded-submenu">
+							<li class=""><a href="#" class="">To be updated</a></li>
+						</ul>
+					</li>
+					<!-- Information Technology -->
+					<li class="nav-item pcoded-menu-caption d-none">
+						<label>Information Technology</label>
+					</li>
+					<li class="nav-item pcoded-hasmenu d-none">
+						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-inbox"></i></span><span class="pcoded-mtext">Product Settings</span></a>
+						<ul class="pcoded-submenu">
+							<li class=""><a href="#" class="">To be updated</a></li>
+						</ul>
+					</li>
+					<!-- Operations -->
+					<li class="nav-item pcoded-menu-caption d-none">
+						<label>Operations</label>
+					</li>
+					<li class="nav-item pcoded-hasmenu d-none">
+						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-inbox"></i></span><span class="pcoded-mtext">Product Settings</span></a>
+						<ul class="pcoded-submenu">
+							<li class=""><a href="#" class="">To be updated</a></li>
+						</ul>
+					</li>
+					<!-- Super Admin -->
+					<li class="nav-item pcoded-menu-caption">
+						<label>Super Administrator</label>
+					</li>
+					<li class="nav-item pcoded-hasmenu">
+						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-users"></i></span><span class="pcoded-mtext">Org Settings</span></a>
+						<ul class="pcoded-submenu">
+							<!-- <li class=""><a href="../management/branch" class="">Branch</a></li> -->
+							<!-- <li class=""><a href="../management/department" class="">Department</a></li> -->
+							<li class=""><a href="../management/permissions" class="">Permissions</a></li>
+							<!-- <li class=""><a href="../management/designation" class="">Designation</a></li> -->
+							<!-- <li class=""><a href="../management/employee" class="">Employee</a></li> -->
+						</ul>
+					</li>
+					<li class="nav-item pcoded-hasmenu">
+						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">Page Settings</span></a>
+						<ul class="pcoded-submenu">
+							<li class=""><a href="../admin/icon" class="">Icon</a></li>
+							<li class=""><a href="../admin/login" class="">Login</a></li>
+							<li class=""><a href="../admin/company" class="">Company Details</a></li>
+							<!-- <li class=""><a href="../management/designation" class="">Designation</a></li> -->
+							<!-- <li class=""><a href="../management/employee" class="">Employee</a></li> -->
+						</ul>
+					</li>
 					
-
+					<li class="nav-item pcoded-hasmenu">
+						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-tablet"></i></span><span class="pcoded-mtext">Leave Management</span></a>
+						<ul class="pcoded-submenu">
+							<li class=""><a href="bc_button.html" class="">Leave Categories</a></li>
+							<li class=""><a href="bc_badges.html" class="">Leave Archive</a></li>
+						</ul>
+					</li>
+					<li style="margin:8rem 0 8rem 0;">
+						
+					</li>
 					<!-- TO BE ACTIVATED SOON -->
 					<!-- <li class="nav-item pcoded-hasmenu">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Attendance</span></a>

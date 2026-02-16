@@ -1016,7 +1016,7 @@
 	<?php include('../pkg/assets/page/footer.php')?>
 	<script>
 		$(function () {
-			$('.table').DataTable({pageLength: 10, lengthChange: false,	ordering:  true, searching: true, responsive: true,
+			$('.table').DataTable({pageLength: 13, lengthChange: false,	ordering:  true, searching: true, responsive: true,
 				columnDefs: [{ targets: 0, orderable: true },
 				{ targets: [2,3], type: 'date' }
 				// { targets: 5, orderable: false }     // example: disable sort for Status

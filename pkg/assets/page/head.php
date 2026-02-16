@@ -1,3 +1,4 @@
+<?php $__t0 = microtime(true); ?>
 <head>
 	<!-- META -->
 	<meta charset="utf-8">
@@ -10,6 +11,8 @@
 
 	<!-- Bootstrap 4 (styling only) -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@1.5.2/dist/select2-bootstrap4.min.css">
+
 	<!-- Daterangepicker (normal date / range with month+year dropdowns) -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
 	<!-- Bootstrap Datepicker (month-only / year-only) -->
@@ -22,10 +25,24 @@
 	<link rel="stylesheet" href="../pkg/assets/fonts/fontawesome/css/fontawesome-all.min.css">
 	<!-- animation css -->
 	<link rel="stylesheet" href="../pkg/assets/plugins/animation/css/animate.min.css">
-	<!-- vendor css -->
-	<link rel="stylesheet" href="../pkg/css/style.css">
 	<!-- data tables -->
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap4.min.css">
-
-
+	<!-- tom select  -->
+	<link href="https://cdn.jsdelivr.net/npm/tom-select@2.4.6/dist/css/tom-select.css" rel="stylesheet">
+	<!-- vendor css -->
+	<link rel="stylesheet" href="../pkg/css/style.css">
+	<!-- datatable css -->
+	<link rel="stylesheet" href="../pkg/assets/plugins/datatables/datatables.css">
+	<!-- sweetalert2 css -->
+	<link rel="stylesheet" href="../pkg/assets/plugins/sweetalert/swal.css">
+	<style>
+		/* Make Tom Select inherit your input typography */
+			.ts-wrapper.form-control,
+			.ts-wrapper .ts-control {
+			border-radius: inherit !important;
+			background: #eff3f6 !important;
+			font-size: 14px;
+			border-radius: .2rem !important;
+		}
+	</style>
 </head>

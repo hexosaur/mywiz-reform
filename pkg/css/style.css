@@ -21,6 +21,33 @@ File: style.css
 /**  =====================
       Custom css start
 ==========================  **/
+
+::-webkit-scrollbar{
+	width:0px;
+	height:0px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+input[type="number"]::-webkit-outer-spin-button,
+	input[type="number"]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+	}
+
+	/* Firefox */
+	input[type="number"] {
+	-moz-appearance: textfield;
+	appearance: textfield;
+  }
+
+/**  =====================
+      Default css start
+==========================  **/
 body {
     font-family: "Mada", sans-serif;
     font-size: 14px;
@@ -79,7 +106,7 @@ p {
 
 b,
 strong {
-    font-weight: 400;
+    font-weight: 800;
 }
 
 .img-radius {
@@ -2573,7 +2600,7 @@ pre[class*=language-]:before {
 .pcoded-navbar .pcoded-inner-navbar li.pcoded-menu-caption {
     font-size: 11px;
     font-weight: 400;
-    padding: 25px 15px 15px 28px;
+    padding: 13px 15px 0px 18px;
     text-transform: capitalize;
     position: relative;
 }
