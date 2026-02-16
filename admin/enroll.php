@@ -19,11 +19,11 @@
 									<div class="row align-items-center">
 										<div class="col-md-8">
 											<div class="page-header-title">
-												<h5 class="m-b-10">Employee</h5>
+												<h5 class="m-b-10">Superadmin</h5>
 											</div>
 											<ul class="breadcrumb">
 												<li class="breadcrumb-item"><a href="../home/dashboard"><i class="feather icon-home"></i></a></li>
-												<li class="breadcrumb-item"><a href="#">Organization</a></li>
+												<li class="breadcrumb-item"><a href="#">Super Admin</a></li>
 												<li class="breadcrumb-item"><a href="#"><span class="page-title"></span></a></li>
 											</ul>
 										</div>
@@ -41,7 +41,7 @@
 											<div class="card-body table-border-style">
 												<div class="row align-items-center">
 														<div class="col-6 col-md-10">
-															<h3 class="mb-0"><span class="page-title"></span> List NOTE(is_active trigger og EMP CODE AUTO GENERATION)</h3>
+															<h3 class="mb-0"><span class="page-title"></span> List</h3>
 														</div>
 														<div class="col-6 col-md-2 d-flex justify-content-end">
 															<button class="btn btn-primary btn-add">Add <span class="page-title"></span></button>
@@ -372,6 +372,7 @@
 					$('#tin_no').val(array.tin_no);
 					$('#philhealth_no').val(array.philhealth_no);
 					// console.log(array);
+					$('.btn_save').attr('data-id', pkid);
 
 
 
@@ -419,7 +420,7 @@
 		});
 	}
 	function setTable() {
-		 $('.table').DataTable();
+		 $('#table_emp').DataTable();
 	}
 	// script for interactions
 	// ACTION LISTENERS

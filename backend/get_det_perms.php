@@ -6,18 +6,14 @@
 	if(true){
 		if (isset($_GET['security']) && $_GET['security'] == '123465' && isset($_GET['id'])) {
 			$id = $_GET['id'];
-			$sql = "SELECT permission_name, permission_title, permission_class, permission_description 
-					FROM mgmt_permissions 
-					WHERE permission_id = '$id'";
+			$sql = "SELECT permission_name, permission_title, permission_class, permission_description FROM mgmt_permissions WHERE permission_id = '$id'";
 
 			// Execute the query
 			if ($result = $conn->query($sql)) {
 				if ($result->num_rows > 0) {
 					$data = array();
 					while ($row = $result->fetch_array()) {
-						$data[] = $row;  // Store the result into an array
-						
-						// Assign individual values for each column to variables (optional)
+						$data[] = $row;  
 						$perms_name = $row['permission_name'];
 						$perms_title = $row['permission_title'];
 						$perms_class = $row['permission_class'];

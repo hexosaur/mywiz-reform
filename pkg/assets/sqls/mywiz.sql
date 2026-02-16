@@ -49,19 +49,37 @@ VALUES
 	('Operations', 'all'),
 	('Customer Service', 'all'),
 	('Information Technology', 'all');
+
+-- THIS TABLE IS FOR ACCESS LEVEL MEANIGN HEIRARCHY ON WHICH IS USEFUL FOR MULTIPLE SYSTEM FUNCTIONALITY
+CREATE TABLE IF NOT EXISTS ref_access_levels (
+	access_level_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	access_level_name VARCHAR(150) NOT NULL,
+	access_level_description TEXT,
+	access_level_value INT NOT NULL,
+	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	
+	PRIMARY KEY (access_level_id),
+	UNIQUE KEY uq_access_level_name (access_level_name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
 -- <!-- THIS IS FOR ROLES TABLE -->
 CREATE TABLE IF NOT EXISTS mgmt_roles (
 	role_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	role_name VARCHAR(150) NOT NULL,
 	role_description TEXT,
 	department_id INT UNSIGNED NOT NULL,
-	access_level INT UNSIGNED NOT NULL,
+	access_level_id INT UNSIGNED NOT NULL,
 	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	
 	PRIMARY KEY (role_id),
-	FOREIGN KEY (department_id) REFERENCES mgmt_departments(department_id) ON DELETE CASCADE
+	FOREIGN KEY (department_id) REFERENCES mgmt_departments(department_id) ON DELETE CASCADE,
+	FOREIGN KEY (access_level_id) REFERENCES ref_access_levels(access_level_id) ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- <!-- THIS IS FOR PERMISSIONS TABLE -->
 CREATE TABLE IF NOT EXISTS mgmt_permissions (
 	permission_id INT UNSIGNED NOT NULL AUTO_INCREMENT,

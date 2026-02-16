@@ -179,6 +179,20 @@ function dd_perms() {
 		});
 	});
 }
+function dd_access() {
+	$.get("../backend/get_dd_access.php", { security: '123465' }, function (data) {
+	$('.dd_access').each(function () {
+			if ($(this).hasClass('tomsel')) {
+				$(this).html(data);
+				tomselDropdowns(this);
+
+			} else {
+				$(this).html(data);
+				$(this).prop('selectedIndex', 0);
+			}
+		});
+	});
+}
 function dd_role(dept_id) {
 	$.get("../backend/get_dd_role.php", { security: '123465' , dept_id : dept_id }, function (data) {
 		$('.dd_role').each(function () {

@@ -25,7 +25,7 @@
 						<a href="../home/dashboard" class="nav-link"><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
 					</li>
 					<li class="nav-item pcoded-hasmenu">
-						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Leave Portal</span></a>
+						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-calendar2"></i></i></span><span class="pcoded-mtext">Leave Portal</span></a>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="../home/leave-portal" class="">File a Leave</a></li>
 							<li class=""><a href="../home/leave-record" class="">Leave Record</a></li>
@@ -52,7 +52,7 @@
 						</ul>
 					</li>
 					<li class="nav-item pcoded-hasmenu">
-						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-tablet"></i></span><span class="pcoded-mtext">File Archives</span></a>
+						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-archive"></i></span><span class="pcoded-mtext">File Archives</span></a>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="bc_button.html" class="">Forms Categories</a></li>
 							<li class=""><a href="bc_badges.html" class="">Leave Archive</a></li>
@@ -81,7 +81,7 @@
 						<a href="../home/dashboard" class="nav-link"><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Leave</span></a>
 					</li>
 					<li class="nav-item pcoded-hasmenu">
-						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-tablet"></i></span><span class="pcoded-mtext">Leave Management</span></a>
+						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-calendar2-event"></i></i></span><span class="pcoded-mtext">Leave Management</span></a>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="bc_button.html" class="">Leave Categories</a></li>
 							<li class=""><a href="bc_badges.html" class="">Leave Archive</a></li>
@@ -104,7 +104,7 @@
 						</ul>
 					</li>
 					<li class="nav-item pcoded-hasmenu">
-						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-tablet"></i></span><span class="pcoded-mtext">POS Settings</span></a>
+						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-bag-heart"></i></span><span class="pcoded-mtext">POS Settings</span></a>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="bc_button.html" class="">Dashboard</a></li>
 							<li class=""><a href="bc_button.html" class="">Customers</a></li>
@@ -117,7 +117,7 @@
 						<label>Finance</label>
 					</li>
 					<li class="nav-item pcoded-hasmenu ">
-						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-inbox"></i></span><span class="pcoded-mtext">Product Settings</span></a>
+						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-bar-chart"></i></span><span class="pcoded-mtext">Summary</span></a>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="#" class="">To be updated</a></li>
 						</ul>
@@ -160,10 +160,12 @@
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-users"></i></span><span class="pcoded-mtext">Org Settings</span></a>
 						<ul class="pcoded-submenu">
 							<!-- <li class=""><a href="../management/branch" class="">Branch</a></li> -->
+							 <li class=""><a href="../admin/access" class="">Access Level</a></li>
 							<!-- <li class=""><a href="../management/department" class="">Department</a></li> -->
-							<li class=""><a href="../management/permissions" class="">Permissions</a></li>
+							<li class=""><a href="../admin/permissions" class="">Permissions</a></li>
 							<!-- <li class=""><a href="../management/designation" class="">Designation</a></li> -->
 							<!-- <li class=""><a href="../management/employee" class="">Employee</a></li> -->
+							 <li class=""><a href="../admin/enroll" class="">Superadmin Enroll</a></li>
 						</ul>
 					</li>
 					<li class="nav-item pcoded-hasmenu">

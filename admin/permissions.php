@@ -23,7 +23,7 @@
 											</div>
 											<ul class="breadcrumb">
 												<li class="breadcrumb-item"><a href="../home/dashboard"><i class="feather icon-home"></i></a></li>
-												<li class="breadcrumb-item"><a href="#">Organization</a></li>
+												<li class="breadcrumb-item"><a href="#">Admin</a></li>
 												<li class="breadcrumb-item"><a href="#"><span class="page-title"></span></a></li>
 											</ul>
 										</div>

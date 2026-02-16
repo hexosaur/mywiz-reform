@@ -41,7 +41,7 @@ if ($role_id == 0) {
 	// ===========================
 	// UPDATE: check if changed
 	// ===========================
-	$sql_check = "SELECT role_name, role_description, department_id, access_level FROM mgmt_roles WHERE role_id = '$role_id'";
+	$sql_check = "SELECT role_name, role_description, department_id, access_level_id FROM mgmt_roles WHERE role_id = '$role_id'";
 	$result = $conn->query($sql_check);
 
 	if (!$result || $result->num_rows == 0) {
@@ -57,7 +57,7 @@ if ($role_id == 0) {
 
 	if (($row['role_description'] ?? '') !== $role_desc) $is_changed = true;
 	if ((int)($row['department_id'] ?? 0) !== $dept_id) $is_changed = true;
-	if ((int)($row['access_level'] ?? 0) !== $access_lvl) $is_changed = true;
+	if ((int)($row['access_level_id'] ?? 0) !== $access_lvl) $is_changed = true;
 
 	// permission changes
 	$existing = [];
@@ -79,10 +79,7 @@ if ($role_id == 0) {
 
 	// only check duplicate name if name changed
 	if ($name_changed) {
-		$exst_name_update = "SELECT 1 FROM mgmt_roles
-							WHERE role_name = '$role_name'
-							AND role_id != '$role_id'
-							LIMIT 1";
+		$exst_name_update = "SELECT 1 FROM mgmt_roles WHERE role_name = '$role_name' AND role_id != '$role_id' LIMIT 1";
 		if ($conn->query($exst_name_update)->num_rows > 0) {
 			echo "exist_name";
 			exit;
@@ -94,8 +91,7 @@ if ($role_id == 0) {
 // INSERT / UPDATE role FIRST
 // ===========================
 if ($role_id == 0) {
-	$sql = "INSERT INTO mgmt_roles(role_name, role_description, department_id, access_level)
-			VALUES ('$role_name', '$role_desc', '$dept_id', '$access_lvl')";
+	$sql = "INSERT INTO mgmt_roles(role_name, role_description, department_id, access_level_id) VALUES ('$role_name', '$role_desc', '$dept_id', '$access_lvl')";
 	if ($conn->query($sql) !== TRUE) {
 		echo "err";
 		exit;
@@ -106,7 +102,7 @@ if ($role_id == 0) {
 			SET role_name = '$role_name',
 				role_description = '$role_desc',
 				department_id = '$dept_id',
-				access_level = '$access_lvl'
+				access_level_id = '$access_lvl'
 			WHERE role_id = '$role_id'";
 	if ($conn->query($sql) !== TRUE) {
 		echo "err";
@@ -123,8 +119,7 @@ if (!empty($role_perms)) {
 	foreach ($role_perms as $pid) {
 		$pid = (int)$pid;
 		if ($pid <= 0) continue;
-		$sql = "INSERT INTO mgmt_role_permissions(role_id, permission_id)
-				VALUES ('$role_id', '$pid')";
+		$sql = "INSERT INTO mgmt_role_permissions(role_id, permission_id) VALUES ('$role_id', '$pid')";
 		if ($conn->query($sql) !== TRUE) {
 			echo "err";
 			exit;

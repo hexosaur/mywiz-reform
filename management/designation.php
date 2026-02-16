@@ -95,13 +95,9 @@
 															</select>
 														</div>
 														<div class="form-group col-md-6">
-															<label>Access <span class="text-danger">*</span></label>
-															<!-- STATIC VALUE FOR THIS AREA -->
-															<select id="role_access" class="form-control" required>
+															<label>Access Heirarchy <span class="text-danger">*</span></label>
+															<select id="role_access" class="dd_access form-control" required>
 																<option disabled selected>Select Access</option>
-																<option value="100">Administrator</option>
-																<option value="10">Manager</option>
-																<option value="1">Employee</option>
 															</select>
 														</div>
 														<div class="form-group col-md-6">
@@ -144,12 +140,12 @@
 	const pagetitle = $('.page-title').html();
 	dd_perms();
 	dd_dept();
+	dd_access();
 	tableload_Roles();
 	function tableload_Roles(){
 		resetDataTable();
 		$.get("../backend/get_list_roles.php?security=123465", function(data,status){
 			$("#table_role tbody").html(data);
-			console.log("Rewrite table done")
 			wrapTable();
 			// EDIT
 			$('.btn-edit').click(function() {

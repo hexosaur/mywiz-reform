@@ -19,11 +19,11 @@
 									<div class="row align-items-center">
 										<div class="col-md-8">
 											<div class="page-header-title">
-												<h5 class="m-b-10">Department</h5>
+												<h5 class="m-b-10">Access</h5>
 											</div>
 											<ul class="breadcrumb">
 												<li class="breadcrumb-item"><a href="../home/dashboard"><i class="feather icon-home"></i></a></li>
-												<li class="breadcrumb-item"><a href="#">Organization</a></li>
+												<li class="breadcrumb-item"><a href="#">Admin</a></li>
 												<li class="breadcrumb-item"><a href="#"><span class="page-title"></span></a></li>
 											</ul>
 										</div>
@@ -41,7 +41,7 @@
 											<div class="card-body table-border-style">
 												<div class="row align-items-center">
 														<div class="col-6 col-md-10">
-															<h3 class="mb-0"><span class="page-title"></span> List NOTE(POST EDIT AND DELETE)</h3>
+															<h3 class="mb-0"><span class="page-title"></span> List</h3>
 														</div>
 														<div class="col-6 col-md-2 d-flex justify-content-end">
 															<button class="btn btn-primary btn-add">Add <span class="page-title"></span></button>
@@ -49,11 +49,13 @@
 													</div>
 												<hr>
 												<div class="table-responsive">
-													<table id="table_department" class="table table-hover">
+													<table id="table_access" class="table table-hover">
 														<thead>
 															<tr>
 																<th class="text-center">#</th>
-																<th class="text-center">Department</th>
+																<th class="text-center">Access Level</th>
+																<th class="text-center">Description</th>
+																<th class="text-center">Value</th>
 																<th class="text-center">Action</th>
 															</tr>
 														</thead>
@@ -76,9 +78,17 @@
 												<hr>
 												<form>
 													<div class="row">
-														<div class=" form-group col-md-7">
-															<label for="dept_name">Department Name <span class="text-danger">*</span></label>
-															<input id="dept_name" class="form-control form-control-sm" placeholder="Department Name"  required/>
+														<div class="form-group col-md-6">
+															<label for="access_name">Access Level Name <span class="text-danger">*</span></label>
+															<input id="access_name" class="form-control form-control-sm" placeholder="Access Name"  required/>
+														</div>
+														<div class="form-group col-md-6">
+															<label for="access_desc">Access Description<span class="text-danger">*</span></label>
+															<input id="access_desc" class="form-control form-control-sm" placeholder="Description"  required/>
+														</div>
+														<div class="form-group col-md-6">
+															<label for="access_val">Value <span class="text-danger">*</span></label>
+															<input id="access_val" type="number" class="form-control form-control-sm" placeholder="Value"/>
 														</div>
 													</div>
 														
@@ -113,14 +123,13 @@
 	// script for body functions default
 	// Initialize
 	const pagetitle = $('.page-title').html();
-	tableload_Dept();
+	tableload_Access();
 	// FUNCTIONS
-	function tableload_Dept(){
+	function tableload_Access(){
 		resetDataTable();
-		$.get("../backend/get_list_dept.php?security=123465", function(data,status){
-			$("#table_department tbody").html(data);
+		$.get("../backend/get_list_access.php?security=123465", function(data,status){
+			$("#table_access tbody").html(data);
 			setTable();
-			// console.log(data);
 			// console.log(data);
 			// wrapTable();
 			// EDIT
@@ -129,16 +138,16 @@
 				$('.view-modify').fadeIn().removeClass('d-none');
 				$('.view-default').hide();
 				pkid = $(this).data('id');
-				// $.get("../backend/get_det_access.php?security=123465&id=" + pkid, function(data, status) {
-				// 	var array = jQuery.parseJSON(data);
-				// 	$('.btn_save').attr('data-id', pkid);
-				// 	$('#access_name').val(array.access_name);
-				// 	$('#access_val').val(array.access_val);
-				// 	$('#access_desc').val(array.access_desc);
+				$.get("../backend/get_det_access.php?security=123465&id=" + pkid, function(data, status) {
+					var array = jQuery.parseJSON(data);
+					$('.btn_save').attr('data-id', pkid);
+					$('#access_name').val(array.access_name);
+					$('#access_val').val(array.access_val);
+					$('#access_desc').val(array.access_desc);
 
 					
 
-				// });
+				});
 			});
 			// DELETE
 			$('.btn-del').click(function(){
