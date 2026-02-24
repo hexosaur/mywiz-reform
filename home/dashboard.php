@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 	<?php include('../pkg/assets/page/head.php')?>
@@ -32,7 +33,6 @@
 							<!-- [ breadcrumb ] end -->
 							<!-- [ Main Content ] start -->
 							<div class="row">
-
 								<!-- product profit start -->
 								<div class="col-xl-3 col-md-6">
 									<div class="card prod-p-card bg-c-red">

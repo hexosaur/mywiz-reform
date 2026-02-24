@@ -21,7 +21,7 @@
 
 	
 	<!-- Favicon icon -->
-	<!-- <link rel="icon" href="../pkg/assets/media/favicon.ico" type="image/x-icon"> -->
+	<link rel="icon" href="../pkg/assets/media/logo-wiz.ico" type="image/x-icon">
 	<!-- fontawesome icon -->
 	<link rel="stylesheet" href="../pkg/assets/fonts/fontawesome/css/fontawesome-all.min.css">
 	<!-- animation css -->

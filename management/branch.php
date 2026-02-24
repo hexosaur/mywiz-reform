@@ -1,3 +1,4 @@
+<?php include('../config/postcheck.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 <?php include('../pkg/assets/page/head.php')?>
@@ -134,39 +135,24 @@
 
 	<?php include('../pkg/assets/page/footer.php')?>
 </body>
+
+<!-- FOR CHECKING SESSIONS ONLY -->
+<?php include('../config/check_sessions.php') ?>
+
 <script>
 	// script for body functions default
 	// Initialize
 	var prov_id, city_id, brgy_id, pkid;
 	const pagetitle = $('.page-title').html();
 	var userPermissions = ['view_branch']; 
-	
-
-
-	function hideAction(tableSelector, userPermissions) {
-		// Check if the user has 'view_branch' permission
-		if (userPermissions.includes('view_branch')) {
-			// Get the DataTable instance
-			var table = $(tableSelector).DataTable();
-
-			// Get the total number of columns
-			var totalColumns = table.columns().count();
-
-			// Hide the last column (Action column)
-			table.column(totalColumns - 1).visible(false);  // -1 refers to the last column
-			console.log("Action column hidden because user has 'view_branch' permission");
-		}
-	}
-
-
-
 
 	tableload_Branch();
 	function tableload_Branch(){
 		resetDataTable();
 		$.get("../backend/get_list_branch.php?security=123465", function(data,status){
 			$("#table_branch tbody").html(data);
-			wrapTable();
+			// SET TABLE EDITABLE OR NOT DYNAMICALLTY SOON
+			setDataTable(".table", {rowHide : 3, showActions : true});
 			
 			// EDIT
 			$('.btn-edit').click(function() {
@@ -228,38 +214,6 @@
 			});
 		});
 	}
-	function wrapTable() {
-		const $tbl = $('.table');
-		const rowHide = 3;
-		$tbl.DataTable({
-			autoWidth: false,
-			columnDefs: [
-				{ targets: rowHide, visible: false, searchable: true },
-				{ targets: rowHide+1, orderable: false, searchable: false } 
-			],
-			createdRow: function (row, data) {
-				const location = (data[rowHide] || '').toString().trim();
-				if (location) {
-					$(row).addClass('dt-row-tip').attr('data-location', location);
-				}
-			},
-			drawCallback: function () {
-				const $rows = $tbl.find('tbody tr.dt-row-tip');
-				$rows.each(function () {
-					$(this).attr('title', $(this).attr('data-location') || '');
-				});
-				$rows.tooltip({
-					container: 'body',
-					trigger: 'hover focus',
-					placement: 'top'
-				});
-			}
-			// ,pageLength: 13, lengthChange: false, 
-		});
-		
-	}
-
-
 
 	// script for interactions
 	// ACTION LISTENERS
@@ -295,7 +249,7 @@
 	});
 	
 
-
+	// console.log("APP_SESSION:", window.APP_SESSION);
 	// MODIFY SOON
 	// tableload_Branch();
 	// hideAction('#table_branch', userPermissions);

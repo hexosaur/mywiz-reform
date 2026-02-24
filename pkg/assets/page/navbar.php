@@ -28,7 +28,7 @@
 			</li>
 		</ul>
 		<ul class="navbar-nav ml-auto">
-			<li>
+			<!-- <li>
 				<div class="dropdown">
 					<a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="icon feather icon-bell"></i></a>
 					<div class="dropdown-menu dropdown-menu-right notification">
@@ -106,7 +106,7 @@
 						</div>
 					</div>
 				</div>
-			</li>
+			</li> -->
 			<li>
 				<div class="dropdown drp-user">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -115,14 +115,14 @@
 					<div class="dropdown-menu dropdown-menu-right profile-notification">
 						<div class="pro-head">
 							<img src="../pkg/assets/media/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
-							<span>John Doe</span>
-							<a href="auth-signin.html" class="dud-logout" title="Logout">
+							<span id="user_name">Test</span>
+							<a href="#" class="dud-logout btn-logout" title="Logout">
 								<i class="feather icon-log-out"></i>
 							</a>
 						</div>
 						<ul class="pro-body">
 							<li><a href="#!" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a></li>
-							<li><a href="#!" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
+							<li><a href="../profile/customize" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
 							<li><a href="message.html" class="dropdown-item"><i class="feather icon-mail"></i> My Messages</a></li>
 							<li><a href="auth-signin.html" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li>
 						</ul>

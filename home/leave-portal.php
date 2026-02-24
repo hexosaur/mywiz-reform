@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <?php include('../pkg/assets/page/head.php')?>
@@ -46,12 +47,9 @@
 											<form>
 												<div class="row">
 													<div class="form-group col-md-6">
-														<select class="mb-3 form-control">
+														<select class="dd_lvtype mb-3 form-control">
 															<option disabled selected>Select Leave Type</option>
-															<option>Voluntary</option>
-															<option>Resignation</option>
-															<hr>
-															<option>Resignation</option>
+
 														</select>
 													</div>
 													<div class="form-group col-md-6">
@@ -120,5 +118,7 @@
 	<?php include('../pkg/assets/page/footer.php')?>
 	
 </body>
-
+<script>
+	dd_leave_type();
+</script>
 </html>

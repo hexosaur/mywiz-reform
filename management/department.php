@@ -1,3 +1,4 @@
+<?php include('../config/postcheck.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 <?php include('../pkg/assets/page/head.php')?>
@@ -41,7 +42,7 @@
 											<div class="card-body table-border-style">
 												<div class="row align-items-center">
 														<div class="col-6 col-md-10">
-															<h3 class="mb-0"><span class="page-title"></span> List NOTE(POST EDIT AND DELETE)</h3>
+															<h3 class="mb-0"><span class="page-title"></span> List</h3>
 														</div>
 														<div class="col-6 col-md-2 d-flex justify-content-end">
 															<button class="btn btn-primary btn-add">Add <span class="page-title"></span></button>
@@ -119,7 +120,7 @@
 		resetDataTable();
 		$.get("../backend/get_list_dept.php?security=123465", function(data,status){
 			$("#table_department tbody").html(data);
-			setTable();
+			setDataTable(".table", {showActions : true});
 			// console.log(data);
 			// console.log(data);
 			// wrapTable();
@@ -129,16 +130,12 @@
 				$('.view-modify').fadeIn().removeClass('d-none');
 				$('.view-default').hide();
 				pkid = $(this).data('id');
-				// $.get("../backend/get_det_access.php?security=123465&id=" + pkid, function(data, status) {
-				// 	var array = jQuery.parseJSON(data);
-				// 	$('.btn_save').attr('data-id', pkid);
-				// 	$('#access_name').val(array.access_name);
-				// 	$('#access_val').val(array.access_val);
-				// 	$('#access_desc').val(array.access_desc);
-
-					
-
-				// });
+				$.get("../backend/get_det_dept.php?security=123465&id=" + pkid, function(data, status) {
+					var array = jQuery.parseJSON(data);
+					console.log(array);
+					$('.btn_save').attr('data-id', pkid);
+					$('#dept_name').val(array.dept_name);
+				});
 			});
 			// DELETE
 			$('.btn-del').click(function(){
@@ -163,11 +160,11 @@
 				}).then((result) => {
 					if (result.isConfirmed) {
 						var id = $(this).data('id');
-						$.post("../backend/del_role.php?security=123465&id=" + id, function (data, status) {
+						$.post("../backend/del_dept.php?security=123465&id=" + id, function (data, status) {
 						data = (data || '').trim();
 						if (data === 'true') {
 							Swal.fire({ showConfirmButton: false, title: 'Deleted!', text: pagetitle+' deleted.', icon: 'success', timer: 700 });
-							tableload_Access();
+							tableload_Dept();
 							showMainPage();
 						} else {
 							Swal.fire({ icon: 'error', title: 'Error deleting '+pagetitle,  showConfirmButton: false, timer: 1200 });
@@ -178,9 +175,6 @@
 			});			
 		});
 	}
-	function setTable() {
-		 $('.table').DataTable();
-	}
 	// script for interactions
 	// ACTION LISTENERS
 	$('.btn_save').click(function(){
@@ -190,10 +184,9 @@
 			// Convert id to a number (if needed)
 			var notif = parseInt(id, 10);
 			let message = notif === 0 ? 'New '+pagetitle+' Saved!' : pagetitle+' Details Updated!';
-			var data = { access_name :  $('#access_name').val(), access_val : $('#access_val').val(),access_desc : $('#access_desc').val(), pkid : id};
-			console.log("PUSHED SAVED DATA: ",data);
+			var data = { dept_name :  $('#dept_name').val(), pkid : id};
 			var json = JSON.stringify(data);
-			$.post("../backend/post_access.php", { data: json}, function (data, a) {
+			$.post("../backend/post_dept.php", { data: json}, function (data, a) {
 				data = data.trim();
 				console.log(data);
 				if(data == 'exist'){
@@ -202,7 +195,7 @@
 					Swal.fire({icon: 'error', title: pagetitle+' Name already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
 				}else if(data == 'true'){
 					Swal.fire({icon: 'success',title: message,showConfirmButton: false,timer:950});
-					tableload_Access();
+					tableload_Dept();
 					showMainPage();
 					is_active = 1;
 				}else if(data.trim() == ''){

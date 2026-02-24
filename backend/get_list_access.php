@@ -17,8 +17,8 @@ if (isset($_GET['security']) && $_GET['security'] == '123465') {
 				$access_level_name = htmlspecialchars($row['access_level_name'] ?? '', ENT_QUOTES, 'UTF-8');
 				$access_level_description = htmlspecialchars($row['access_level_description'] ?? '', ENT_QUOTES, 'UTF-8');
 				$access_level_value = (int)$row['access_level_value'];
-				$table .= "<tr><td class='text-center'>{$n}</td><td class='text-center' data-column='Access Level: '>{$access_level_name}</td><td class='text-center' data-column='Description: '>{$access_level_description}</td><td class='text-center' data-column='Value: '>{$access_level_value}</td>
-				<td class='text-center' data-column='Action: '><div class='btn btn-outline-info btn-sm btn-edit' data-id='{$access_level_id}'><span class='feather icon-edit'></span></div><div class='btn btn-outline-danger btn-sm btn-del' data-id='{$access_level_id}'><span class='feather icon-trash-2'></span></div></td></tr>";
+				$table .= "<tr><td class='text-center'>{$n}</td><td class='text-center' data-column='Access Level: '>{$access_level_name}</td><td class='text-center' data-column='Description: '>{$access_level_description}</td><td class='text-center' data-column='Value: '>{$access_level_value}</td><td class='text-center' data-column='Action: '><div class='btn btn-outline-info btn-sm btn-edit' data-id='{$access_level_id}'><span class='feather icon-edit'></span></div><div class='btn btn-outline-danger btn-sm btn-del' data-id='{$access_level_id}'><span class='feather icon-trash-2'></span></div></td>
+				</tr>";
 				$n++;
 			}
 			$result->free();

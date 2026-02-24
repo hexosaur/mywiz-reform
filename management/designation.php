@@ -1,3 +1,4 @@
+<?php include('../config/postcheck.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 <?php include('../pkg/assets/page/head.php')?>
@@ -146,7 +147,7 @@
 		resetDataTable();
 		$.get("../backend/get_list_roles.php?security=123465", function(data,status){
 			$("#table_role tbody").html(data);
-			wrapTable();
+			setDataTable(".table", {rowHide : 4, showActions : true});
 			// EDIT
 			$('.btn-edit').click(function() {
 				$('.text-btn').text("Edit");
@@ -206,36 +207,7 @@
 			});			
 		});
 	}
-	function wrapTable() {
-		const $tbl = $('.table');
-		const rowHide = 4;
-		const dt = $tbl.DataTable({ autoWidth: false, destroy: true, retrieve: false,
-			columnDefs: [
-				{ targets: rowHide, visible: false, searchable: true },
-				{ targets: rowHide + 1, orderable: false, searchable: false }
-			],
-			createdRow: function (row, data) {
-				const perms = (data[rowHide] || '').toString().trim();
-				if (perms) {
-					$(row)
-						.addClass('dt-row-tip')
-						.attr('data-perms', perms);
-				}
-			}, drawCallback: function () {
-				const $rows = $tbl.find('tbody tr.dt-row-tip');
-				$rows.each(function () {
-					const perms = $(this).attr('data-perms') || '';
-					$(this).attr('title', perms);
-				});
-				$rows.tooltip('dispose').tooltip({
-					container: 'body',
-					trigger: 'hover focus',
-					placement: 'top'
-				});
-			}
-		});
-		dt.columns.adjust().draw(false);
-	}
+	
 	// script for interactions
 	// ACTION LISTENERS
 	$('.btn_save').click(function(){

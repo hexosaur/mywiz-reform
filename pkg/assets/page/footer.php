@@ -1,3 +1,4 @@
+
 <!-- Required Js -->
 <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/tom-select@2.4.6/dist/js/tom-select.complete.min.js"></script>
@@ -19,15 +20,44 @@
 <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
 
+<script src="
+https://cdn.jsdelivr.net/npm/jquery-circle-progress@1.2.2/dist/circle-progress.min.js
+"></script>
 
 
 
-
-
+<script src="../pkg/js/circle-progress.js"></script>
 <script src="../pkg/js/scripts.js"></script>
 <script src="../pkg/js/jqscript.js"></script>
+
+
+
+
 
 <?php $__ms = (microtime(true) - $__t0) * 1000; ?>
 <script>
 	console.log("PHP exec (ms): <?= number_format($__ms, 2) ?>");
+	
+	var user_level = <?php echo ($_SESSION['level']); ?>;
+	console.log(user_level);
+
+
+
+	if(user_level > 9000){
+		$('.superadmin').fadeIn().removeClass('d-none');
+		console.log("true");
+	}
+	if(user_level = 5){
+		console.log("test")
+	}
+
+
+
+
+
+
+
+
+
+
 </script>

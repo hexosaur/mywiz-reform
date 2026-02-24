@@ -1,3 +1,7 @@
+-- **************************************************** -- 
+-- ************		ORGANIZATIONAL TABLE	*********** -- 
+-- **************************************************** -- 
+
 -- <!-- THIS IS FOR THE BRANCHES -->
 CREATE TABLE IF NOT EXISTS mgmt_branch (
 	branch_id     INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -7,39 +11,32 @@ CREATE TABLE IF NOT EXISTS mgmt_branch (
 	city_id       INT UNSIGNED NOT NULL,
 	brgy_id       INT UNSIGNED NOT NULL,
 	address_line  VARCHAR(255) NOT NULL,
-
 	created_at    TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_at    TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-
 	PRIMARY KEY (branch_id),
-
 	UNIQUE KEY uq_branch_code (branch_code),
-
 	KEY idx_branch_prov (prov_id),
 	KEY idx_branch_city (city_id),
 	KEY idx_branch_brgy (brgy_id),
-
 	CONSTRAINT fk_branch_province
 		FOREIGN KEY (prov_id) REFERENCES ref_provinces(prov_id)
 		ON UPDATE CASCADE ON DELETE RESTRICT,
-
 	CONSTRAINT fk_branch_city
 		FOREIGN KEY (city_id) REFERENCES ref_cities(city_id)
 		ON UPDATE CASCADE ON DELETE RESTRICT,
-
 	CONSTRAINT fk_branch_barangay
 		FOREIGN KEY (brgy_id) REFERENCES ref_barangays(brgy_id)
 		ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
--- <!-- THIS IS FOR THE STATIC DEPARTMENT DO NOT CHANGE IT JUST INSERT THIS AS WELL-->
+
+-- <!-- THIS IS FOR THE C DEPARTMENT DO NOT CHANGE IT JUST INSERT THIS AS WELL UNLESS YOU WANT MODIFICATION-->
 CREATE TABLE IF NOT EXISTS mgmt_departments (
 	department_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-	department_name VARCHAR(150) NOT NULL,  -- Department name (e.g., HR, Marketing)
-	department_scope ENUM('all', 'specific') NOT NULL DEFAULT 'all',  -- 'all' means visible for all users, 'specific' for specific users
+	department_name VARCHAR(150) NOT NULL,
+	department_scope ENUM('all', 'specific') NOT NULL DEFAULT 'all',
 	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (department_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 INSERT INTO mgmt_departments (department_name, department_scope) 
 VALUES 
 	('Administration', 'all'),
@@ -62,8 +59,6 @@ CREATE TABLE IF NOT EXISTS ref_access_levels (
 	PRIMARY KEY (access_level_id),
 	UNIQUE KEY uq_access_level_name (access_level_name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-
 
 -- <!-- THIS IS FOR ROLES TABLE -->
 CREATE TABLE IF NOT EXISTS mgmt_roles (
@@ -89,6 +84,7 @@ CREATE TABLE IF NOT EXISTS mgmt_permissions (
 	permission_description TEXT,
 	PRIMARY KEY (permission_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- <!-- THIS IS A MERGING TABLE FOR PERMISSIONS AND ROLES -->
 CREATE TABLE IF NOT EXISTS mgmt_role_permissions (
 	role_permission_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -175,12 +171,9 @@ CREATE TABLE IF NOT EXISTS mgmt_employees (
 	is_active         TINYINT(1) NOT NULL DEFAULT 1,
 	created_at        TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_at        TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-
 	PRIMARY KEY (employee_id),
-
 	UNIQUE KEY uq_emp_email (email),
 	UNIQUE KEY uq_emp_code  (employee_code),
-
 	KEY idx_emp_branch (branch_id),
 	KEY idx_emp_dept   (department_id),
 	KEY idx_emp_role   (role_id),
@@ -191,30 +184,23 @@ CREATE TABLE IF NOT EXISTS mgmt_employees (
 	CONSTRAINT fk_emp_branch
 		FOREIGN KEY (branch_id) REFERENCES mgmt_branch(branch_id)
 		ON UPDATE CASCADE ON DELETE RESTRICT,
-
 	CONSTRAINT fk_emp_department
 		FOREIGN KEY (department_id) REFERENCES mgmt_departments(department_id)
 		ON UPDATE CASCADE ON DELETE RESTRICT,
-
 	CONSTRAINT fk_emp_role
 		FOREIGN KEY (role_id) REFERENCES mgmt_roles(role_id)
 		ON UPDATE CASCADE ON DELETE RESTRICT,
-
 	CONSTRAINT fk_emp_prov
 		FOREIGN KEY (prov_id) REFERENCES ref_provinces(prov_id)
 		ON UPDATE CASCADE ON DELETE RESTRICT,
-
 	CONSTRAINT fk_emp_city
 		FOREIGN KEY (city_id) REFERENCES ref_cities(city_id)
 		ON UPDATE CASCADE ON DELETE RESTRICT,
-
 	CONSTRAINT fk_emp_brgy
 		FOREIGN KEY (brgy_id) REFERENCES ref_barangays(brgy_id)
 		ON UPDATE CASCADE ON DELETE RESTRICT
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-
 
 -- USER MANAGEMENT TABLE
 CREATE TABLE IF NOT EXISTS mgmt_users (
@@ -237,3 +223,97 @@ CREATE TABLE IF NOT EXISTS mgmt_users (
 		FOREIGN KEY (employee_id) REFERENCES mgmt_employees(employee_id)
 		ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- SUPERADMIN TABLE
+CREATE TABLE IF NOT EXISTS admin_superadmin (
+    admin_id               INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    first_name             VARCHAR(80) NOT NULL,
+    middle_name            VARCHAR(80) NULL,
+    surname                VARCHAR(80) NOT NULL,
+    suffix                 VARCHAR(20) NULL,
+    username               VARCHAR(50) NOT NULL,
+    password               VARCHAR(255) NOT NULL,
+    is_active              TINYINT(1) NOT NULL DEFAULT 1,
+    created_at             TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (admin_id),
+    UNIQUE KEY uq_admin_username (username),
+    UNIQUE KEY uq_admin_full_name (first_name, surname)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- DEFAULT super admin where username is administrator with a pass of admin@123465
+INSERT INTO admin_superadmin (first_name, middle_name, surname, suffix, username, password, is_active)  VALUES ('Super Admin', NULL, 'Default', NULL, 'administrator', '59b7068b69ca4d4b48859c110334fc8c60e85151', '1');
+
+-- **************************************************** -- 
+-- ************		LEAVE MGMT TABLE	*************** -- 
+-- **************************************************** -- 
+
+-- BASICALLY THE LEAVE CATEGORIES NAME 
+CREATE TABLE IF NOT EXISTS leave_types (
+	type_id                INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	type_code              VARCHAR(30)  NOT NULL,
+	type_name              VARCHAR(150) NOT NULL,
+	type_description       TEXT NULL,
+	with_pay               TINYINT(1) NOT NULL DEFAULT 1,
+	requires_attachment    TINYINT(1) NOT NULL DEFAULT 0,
+	requires_proxy         TINYINT(1) NOT NULL DEFAULT 0,
+	default_allowed_days   DECIMAL(6,2) NOT NULL DEFAULT 0,
+	allow_half_day         TINYINT(1) NOT NULL DEFAULT 1,
+	gender 				   ENUM('All', 'Male', 'Female') NOT NULL DEFAULT 'All',
+	is_active              TINYINT(1) NOT NULL DEFAULT 1,
+	created_at             TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	updated_at             TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (type_id),
+	UNIQUE KEY uq_leave_type_code (type_code),
+	UNIQUE KEY uq_leave_type_name (type_name)
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- LEAVE ENTITLEMENTS
+CREATE TABLE IF NOT EXISTS leave_entitlements (
+	entitlement_id      INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	employee_id         INT UNSIGNED NOT NULL,
+	type_id             INT UNSIGNED NOT NULL,	
+	scope               TINYINT(1) NOT NULL DEFAULT 0,
+	entitlement_year    YEAR NULL,
+	allocated_days      DECIMAL(6,2) NOT NULL DEFAULT 0.00,
+	modified_days       DECIMAL(6,2) NOT NULL DEFAULT 0.00,
+	used_days           DECIMAL(6,2) NOT NULL DEFAULT 0.00,
+	last_modified_by    INT UNSIGNED NULL,
+	last_modified_at    TIMESTAMP NULL,
+	remarks             TEXT NULL,
+	created_at          TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	updated_at          TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+	PRIMARY KEY (entitlement_id),
+	UNIQUE KEY uq_entitlement_year (employee_id, type_id, entitlement_year, scope),
+	KEY idx_ent_employee (employee_id),
+	KEY idx_ent_type (type_id),
+	KEY idx_ent_scope_year (scope, entitlement_year),
+	CONSTRAINT fk_ent_type
+		FOREIGN KEY (type_id) REFERENCES leave_types(type_id)
+		ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_ent_employee
+		FOREIGN KEY (employee_id) REFERENCES mgmt_employees(employee_id)
+		ON UPDATE CASCADE ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- RESET LEAVE ENTITLEMENTS FOR A NEW YEAR
+UPDATE leave_entitlements SET
+	used_days = 0,  -- Reset used_days
+	remaining_days = allocated_days + modified_days,  -- Reset remaining days based on allocated and modified days
+	modified_days = CASE
+		WHEN scope = 0 THEN 0  -- Reset modified_days only for YEAR_ONLY
+		ELSE modified_days  -- Keep modified_days unchanged for ALL_YEARS
+	END
+WHERE
+	(scope = 0 AND entitlement_year = YEAR(CURDATE()) - 1)  -- Reset for the previous year
+	OR
+	(scope = 1 AND entitlement_year IS NULL);  -- Reset for ALL_YEARS (no specific year)
+
+-- LEAVE REQUEST TABLE SECTION
+
+
+
+
+
+

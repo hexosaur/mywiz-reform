@@ -18,6 +18,8 @@
 			</div>
 			<div class="navbar-content scroll-div">
 				<ul class="nav pcoded-inner-navbar">
+
+					<!-- DEFAULT USER -->
 					<li class="nav-item pcoded-menu-caption">
 						<label>Home</label>
 					</li>
@@ -83,8 +85,9 @@
 					<li class="nav-item pcoded-hasmenu">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-calendar2-event"></i></i></span><span class="pcoded-mtext">Leave Management</span></a>
 						<ul class="pcoded-submenu">
-							<li class=""><a href="bc_button.html" class="">Leave Categories</a></li>
-							<li class=""><a href="bc_badges.html" class="">Leave Archive</a></li>
+							<li class=""><a href="../leave/archive" class="">Leave Archives</a></li>
+							<li class=""><a href="../leave/type" class="">Leave Types</a></li>
+							<li class=""><a href="../leave/entitlement" class="">Leave Entitlements</a></li>
 						</ul>
 					</li>
 					<!-- Inventory -->
@@ -153,22 +156,23 @@
 						</ul>
 					</li>
 					<!-- Super Admin -->
-					<li class="nav-item pcoded-menu-caption">
+				
+					<li class="superadmin nav-item pcoded-menu-caption d-none">
 						<label>Super Administrator</label>
 					</li>
-					<li class="nav-item pcoded-hasmenu">
+					<li class="superadmin nav-item pcoded-hasmenu d-none">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-users"></i></span><span class="pcoded-mtext">Org Settings</span></a>
 						<ul class="pcoded-submenu">
 							<!-- <li class=""><a href="../management/branch" class="">Branch</a></li> -->
-							 <li class=""><a href="../admin/access" class="">Access Level</a></li>
+							<li class=""><a href="../admin/access" class="">Access Level</a></li>
 							<!-- <li class=""><a href="../management/department" class="">Department</a></li> -->
 							<li class=""><a href="../admin/permissions" class="">Permissions</a></li>
 							<!-- <li class=""><a href="../management/designation" class="">Designation</a></li> -->
 							<!-- <li class=""><a href="../management/employee" class="">Employee</a></li> -->
-							 <li class=""><a href="../admin/enroll" class="">Superadmin Enroll</a></li>
+							<li class=""><a href="../admin/enroll" class="">Superadmin Enroll</a></li>
 						</ul>
 					</li>
-					<li class="nav-item pcoded-hasmenu">
+					<li class="superadmin nav-item pcoded-hasmenu d-none">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">Page Settings</span></a>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="../admin/icon" class="">Icon</a></li>
@@ -179,13 +183,19 @@
 						</ul>
 					</li>
 					
-					<li class="nav-item pcoded-hasmenu">
+					<li class="superadmin nav-item pcoded-hasmenu d-none">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-tablet"></i></span><span class="pcoded-mtext">Leave Management</span></a>
 						<ul class="pcoded-submenu">
-							<li class=""><a href="bc_button.html" class="">Leave Categories</a></li>
-							<li class=""><a href="bc_badges.html" class="">Leave Archive</a></li>
+							<li class=""><a href="../leave/archive" class="">Leave Archives</a></li>
+							<li class=""><a href="../leave/category" class="">Leave Categories</a></li>
+							<li class=""><a href="../leave/entitlement" class="">Leave Entitlements</a></li>
+							
 						</ul>
 					</li>
+
+
+
+					<!-- BREAKER -->
 					<li style="margin:8rem 0 8rem 0;">
 						
 					</li>

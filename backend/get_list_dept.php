@@ -23,7 +23,5 @@ if (isset($_GET['security']) && $_GET['security'] == '123465') {
 
 	echo $table;
 	exit;
-
-	// <td class='text-center' data-column='Action: '><div class='btn btn-outline-info btn-sm btn-edit' data-id='{$dept_id}'><span class='feather icon-edit'></span></div><div class='btn btn-outline-danger btn-sm btn-del' data-id='{$dept_id}'><span class='feather icon-trash-2'></span></div></td>
 }
 ?>

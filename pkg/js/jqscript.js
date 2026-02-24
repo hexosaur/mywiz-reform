@@ -193,6 +193,19 @@ function dd_access() {
 		});
 	});
 }
+function dd_leave_type() {
+	$.get("../backend/get_dd_leave_type.php", { security: '123465' }, function (data) {
+	$('.dd_lvtype').each(function () {
+			if ($(this).hasClass('tomsel')) {
+				$(this).html(data);
+				tomselDropdowns(this);
+			} else {
+				$(this).html(data);
+				$(this).prop('selectedIndex', 0);
+			}
+		});
+	});
+}
 function dd_role(dept_id) {
 	$.get("../backend/get_dd_role.php", { security: '123465' , dept_id : dept_id }, function (data) {
 		$('.dd_role').each(function () {
@@ -249,6 +262,71 @@ function resetDataTable(){
 	$tbl.removeAttr('style'); 
 	$tbl.find('thead th, tbody td').removeAttr('style');
 }
+// INITIALIZING THE TABLE WITH CAN OPTOUT
+// setDataTable('#table_emp', { rowHide: 3, showActions: false }); <----- SAMPLE TO CALL
+function setDataTable(selector = '.table', opts = {}) {
+	const {
+		rowHide = null,              // e.g. 3 if you still want to hide a specific column
+		showActions = true,          // permissions flag: true=show last col, false=hide last col
+		extraColumnDefs = [],        // allow per-table additional defs
+		dtOptions = {}               // allow passing other DataTables options
+	} = opts;
+
+	const $tbl = $(selector);
+
+	$tbl.each(function () {
+		const $t = $(this);
+
+		// if already initialized, destroy safely (common for dynamic reloads)
+		if ($.fn.DataTable.isDataTable($t)) {
+		$t.DataTable().destroy();
+		}
+		const columnDefs = [];
+		if (rowHide !== null && rowHide !== undefined) {
+		columnDefs.push({ targets: rowHide, visible: false, searchable: true });
+		// example: next column not orderable/searchable
+		columnDefs.push({ targets: rowHide + 1, orderable: false, searchable: false });
+		}
+
+		columnDefs.push({
+		targets: -1,
+		visible: showActions,
+		orderable: false,
+		searchable: false
+		});
+
+		columnDefs.push(...extraColumnDefs);
+		$t.DataTable({
+		autoWidth: false,
+		columnDefs,
+
+		createdRow: function (row, data) {
+			if (rowHide !== null && rowHide !== undefined) {
+			const location = (data[rowHide] || '').toString().trim();
+			if (location) $(row).addClass('dt-row-tip').attr('data-location', location);
+			}
+		},
+
+		drawCallback: function () {
+			if (rowHide !== null && rowHide !== undefined) {
+			const $rows = $t.find('tbody tr.dt-row-tip');
+			$rows.each(function () {
+				$(this).attr('title', $(this).attr('data-location') || '');
+			});
+			$rows.tooltip({ container: 'body', trigger: 'hover focus', placement: 'top' });
+			}
+		},
+
+		...dtOptions
+		});
+	});
+}
+
+
+
+
+
+
 /**  =====================
 	 DATE PICKER SECTION
 ==========================  **/
@@ -413,7 +491,12 @@ function checkFormValidity(scope = document) {
 
 	return isValid;
 }
+function hidePerms(){
 
+
+
+	
+}
 
 
 
@@ -596,6 +679,25 @@ $(function () {
 	// TRIGGER BRANCH DROPDOWN
 	$(document).on('change', '.dd_branch', function () {
 		// branch_id = $(this).val();
+	});
+
+	// TRIGGER LOGOUT
+	function logoff(){
+		$.get("../config/logout.php",function(data, event){
+			console.log(data);
+			window.location = '/mywiz-reform/';
+		});
+	}
+
+	$('.btn-logout').click(function(){	
+		Swal.fire({ title: 'Are you sure?', 
+			html: 'Are you sure you want to log-out?',
+			icon: 'warning', showCancelButton: true, confirmButtonColor: '#20a661', cancelButtonColor: '#d33', confirmButtonText: 'Yes!'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				logoff();
+			}
+		});
 	});
 	console.log("jquery loaded");
 

@@ -1,3 +1,4 @@
+<?php include('../config/postcheck.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 <?php include('../pkg/assets/page/head.php')?>
@@ -41,7 +42,7 @@
 											<div class="card-body table-border-style">
 												<div class="row align-items-center">
 														<div class="col-6 col-md-10">
-															<h3 class="mb-0"><span class="page-title"></span> List NOTE(is_active trigger og EMP CODE AUTO GENERATION)</h3>
+															<h3 class="mb-0"><span class="page-title"></span> List (if emp is inactive, sets other stuff to inactive related to this)</h3>
 														</div>
 														<div class="col-6 col-md-2 d-flex justify-content-end">
 															<button class="btn btn-primary btn-add">Add <span class="page-title"></span></button>
@@ -58,6 +59,7 @@
 																<th class="text-center">Code</th>
 																<th class="text-center">Department</th>
 																<th class="text-center">Role</th>
+																<th class="text-center">Status</th>
 																<th class="text-center">Action</th>
 															</tr>
 														</thead>
@@ -70,24 +72,6 @@
 									</div>
 								</div>
 								<!-- [ Default View ] end -->
-
-								<!-- USER SOMETHING -->
-								<!-- <div class="row">
-									<div class="form-group col-md-5">
-										<label for="emp_user">Username <span class="text-danger">*</span></label>
-										<div class="input-group col-mb-3">
-											<div class="input-group-prepend">
-												<span class="input-group-text">@</span>
-											</div>
-											<input id="emp_user" type="text" class="form-control" placeholder="Username">
-										</div>
-									</div>
-									<div class="form-group col-md-5">
-										<label for="emp_pass">Password <span class="text-danger">*</span></label>
-										<input id="emp_pass" type="password" class="form-control" placeholder="Username">
-									</div>
-								</div> -->
-
 
 
 								<!-- [ Modify View ] start -->
@@ -106,7 +90,7 @@
 																<input id="first_name" class="form-control form-control-sm" placeholder="First Name"  required/>
 															</div>
 															<div class="form-group col-md-3">
-																<label for="middle_name">Middle Name <span class="text-danger">*</span></label>
+																<label for="middle_name">Middle Name</label>
 																<input id="middle_name" class="form-control form-control-sm" placeholder="Middle Name"/>
 															</div>
 															<div class="form-group col-md-3">
@@ -335,7 +319,7 @@
 		resetDataTable();
 		$.get("../backend/get_list_emp.php?security=123465", function(data,status){
 			$("#table_emp tbody").html(data);
-			setTable();
+			setDataTable(".table", { showActions : true});
 			// console.log(data);
 			// wrapTable();
 			// EDIT
@@ -366,7 +350,6 @@
 					$('#branch_id').val(array.branch_id);
 					$('#daily_rate').val(array.daily_rate);
 					$('#department_id').val(array.department_id);
-					// $('#role_id').val(parseInt(array.role_id));
 					$('#sss_no').val(array.sss_no);
 					$('#pagibig_no').val(array.pagibig_no);
 					$('#tin_no').val(array.tin_no);
@@ -417,9 +400,6 @@
 				});
 			});			
 		});
-	}
-	function setTable() {
-		 $('.table').DataTable();
 	}
 	// script for interactions
 	// ACTION LISTENERS

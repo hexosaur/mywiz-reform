@@ -126,7 +126,31 @@ if ($employee_id == 0) {
 	if ($conn->query($emp_code_sql) !== TRUE) { echo "err"; exit; }
 
 
+	// ------------------------------
+	// Insert Leave Entitlements for Each Leave Type
+	// ------------------------------
+	$entitlement_sql = "SELECT type_id, gender AS genderlv, default_allowed_days FROM leave_types WHERE is_active = 1";
+	$entitlement_result = $conn->query($entitlement_sql);
 
+	if ($entitlement_result && $entitlement_result->num_rows > 0) {
+		while ($row = $entitlement_result->fetch_assoc()) {
+			$type_id = $row['type_id'];
+			$genderlv = $row['genderlv'];  // Get the gender from the leave_types table
+			$default_allowed_days = $row['default_allowed_days'];  // Get default allowed days from the leave_types table
+
+			// Check if employee gender matches the leave type's gender
+			if (($genderlv == 'All') || ($genderlv == 'Male' && $gender == 'Male') || ($genderlv == 'Female' && $gender == 'Female')) {
+				// Insert entitlement record for each employee matching gender condition
+				$insert_entitlement_sql = "INSERT INTO leave_entitlements (employee_id, type_id, scope, allocated_days, modified_days, used_days, created_at, updated_at) 
+					VALUES ('$employee_id', '$type_id', 0, '$default_allowed_days', 0, 0, NOW(), NOW())";
+
+				if ($conn->query($insert_entitlement_sql) !== TRUE) {
+					echo "Error inserting entitlement for employee $employee_id, leave type $type_id.";
+					exit;
+				}
+			}
+		}
+	}
 
 	// ------------------------------
 	// AUTO CREATE USER LOGIN (only if missing)
@@ -146,26 +170,12 @@ if ($employee_id == 0) {
 	if ($chk && $chk->num_rows > 0) { echo "err_user"; exit; }
 	if ($chk) $chk->free();
 
-	$sqlu = "INSERT INTO mgmt_users(employee_id, username, password_hash)
-			VALUES ('$employee_id', '$username', '$pass_md5')";
+	$sqlu = "INSERT INTO mgmt_users(employee_id, username, password_hash) VALUES ('$employee_id', '$username', '$pass_md5')";
 	if ($conn->query($sqlu) !== TRUE) { echo "err"; exit; }
 
 } else {
 	$employee_code = $department_code . '-' . $hire_year . '-' .$employee_id;
-	$sql = "UPDATE mgmt_employees SET
-				-- Update only these fields (those that can change)
-				is_active = '$is_active',
-				date_hired = " . sql_nullable_date($date_hired) . ", 
-				branch_id = " . sql_nullable_int($branch_id) . ", 
-				department_id = " . sql_nullable_int($department_id) . ", 
-				role_id = " . sql_nullable_int($role_id) . ", 
-				daily_rate = " . sql_nullable_decimal($daily_rate) . ", 
-				employee_code = '$employee_code',
-				sss_no = " . sql_nullable_str($conn, $sss_no) . ", 
-				pagibig_no = " . sql_nullable_str($conn, $pagibig_no) . ", 
-				tin_no = " . sql_nullable_str($conn, $tin_no) . ", 
-				philhealth_no = " . sql_nullable_str($conn, $philhealth_no) . "
-			WHERE employee_id = '$employee_id'";
+	$sql = "UPDATE mgmt_employees SET is_active = '$is_active', date_hired = " . sql_nullable_date($date_hired) . ",  branch_id = " . sql_nullable_int($branch_id) . ", department_id = " . sql_nullable_int($department_id) . ", role_id = " . sql_nullable_int($role_id) . ", daily_rate = " . sql_nullable_decimal($daily_rate) . ", employee_code = '$employee_code', sss_no = " . sql_nullable_str($conn, $sss_no) . ", pagibig_no = " . sql_nullable_str($conn, $pagibig_no) . ", tin_no = " . sql_nullable_str($conn, $tin_no) . ", philhealth_no = " . sql_nullable_str($conn, $philhealth_no) . " WHERE employee_id = '$employee_id'";
 
 	if ($conn->query($sql) !== TRUE) { 
 		echo "err"; 

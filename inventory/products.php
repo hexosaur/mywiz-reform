@@ -1,3 +1,4 @@
+<?php include('../config/postcheck.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 <?php include('../pkg/assets/page/head.php')?>

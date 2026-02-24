@@ -1,3 +1,4 @@
+<?php include('../config/postcheck.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 <?php include('../pkg/assets/page/head.php')?>
@@ -129,7 +130,7 @@
 		resetDataTable();
 		$.get("../backend/get_list_access.php?security=123465", function(data,status){
 			$("#table_access tbody").html(data);
-			setTable();
+			setDataTable(".table");
 			// console.log(data);
 			// wrapTable();
 			// EDIT
@@ -186,9 +187,6 @@
 				});
 			});			
 		});
-	}
-	function setTable() {
-		 $('.table').DataTable();
 	}
 	// script for interactions
 	// ACTION LISTENERS

@@ -1,13 +1,10 @@
-| **Access Level** | **Role Name**         | **Use Case**                                                                   |
-| ---------------- | --------------------- | ------------------------------------------------------------------------------ |
-| 150              | Admin                 | Full system access; can approve anything                                       |
-| 130              | Regional Manager      | Can oversee multiple branches and locations                                    |
-| 120              | HR Admin              | Full HR access, including data management                                      |
-| 110              | Branch Manager        | Full access within their branch                                                |
-| 100              | Manager               | Can approve leave within the department                                        |
-| 70               | Department Head       | Manages entire department                                                      |
-| 60               | Leave Coordinator     | Manages leave requests, not other HR tasks                                     |
-| 50               | Supervisor            | Can approve leave requests for their team                                      |
-| 30               | Team Leader           | Manages a small team or group of employees                                     |
-| 5                | Employee              | Can only request their own leave                                               |
-| 1                | Team Member (Trainee) | Limited access, might not be able to request leave or only have partial access |
+now i have this interface for reference where it has table also, it gets the employee name, the ID (pk), and also its role name
+
+
+also it now gets the table for each of the employee's leave
+
+
+
+ICHANGE AND DROPDOWN ACCORDING TO EMPLOYEE SINCE GENDER BASED NA ANG LEAVE
+GETTING ACCESS LEVEL IF EMPLOYEE AS WELL AS PERMISSIONS FOR DYNAMIC HIDE AND SHOW SIDEBAR
+SUNOD NA DAUN KAY ANG MAGFILE OG LEAVE OR LEAVE REQUEST

@@ -1,6 +1,15 @@
+# Custom error pages
+ErrorDocument 403 /mywiz-reform/restrict/403.php
+ErrorDocument 404 /mywiz-reform/restrict/404.php
+
+Options -Indexes
+
+
 RewriteEngine On
 
 # Remove .php extension
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php [L]
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
