@@ -1,14 +1,8 @@
--- =====================================================
--- IMPORT READY SCHEMA (FK SAFE VERSION)
--- Assumes ref_provinces, ref_cities, ref_barangays exist
--- with INT PRIMARY KEYS
--- =====================================================
-
 SET FOREIGN_KEY_CHECKS=0;
 
--- ****************************************************
+-- =====================================================
 -- ORGANIZATIONAL TABLES
--- ****************************************************
+-- =====================================================
 
 CREATE TABLE IF NOT EXISTS mgmt_branch (
     branch_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -86,9 +80,9 @@ CREATE TABLE IF NOT EXISTS mgmt_role_permissions (
     KEY idx_role_perm_perm (permission_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- ****************************************************
+-- =====================================================
 -- EMPLOYEE TABLES
--- ****************************************************
+-- =====================================================
 
 CREATE TABLE IF NOT EXISTS mgmt_employees (
     employee_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -144,48 +138,79 @@ CREATE TABLE IF NOT EXISTS mgmt_users (
     KEY idx_users_employee (employee_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- ****************************************************
--- SUPER ADMIN
--- ****************************************************
+-- =====================================================
+-- LEAVE MANAGEMENT TABLES
+-- =====================================================
 
-CREATE TABLE IF NOT EXISTS admin_superadmin (
-    admin_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    first_name VARCHAR(80) NOT NULL,
-    middle_name VARCHAR(80),
-    surname VARCHAR(80) NOT NULL,
-    suffix VARCHAR(20),
-    username VARCHAR(50) NOT NULL,
-    password VARCHAR(255) NOT NULL,
+CREATE TABLE IF NOT EXISTS leave_types (
+    type_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    type_code VARCHAR(30) NOT NULL,
+    type_name VARCHAR(150) NOT NULL,
+    type_description TEXT,
+    with_pay TINYINT(1) DEFAULT 1,
+    requires_attachment TINYINT(1) DEFAULT 0,
+    requires_proxy TINYINT(1) DEFAULT 0,
+    default_allowed_days DECIMAL(6,2) DEFAULT 0,
+    allow_half_day TINYINT(1) DEFAULT 1,
+    gender ENUM('All','Male','Female') DEFAULT 'All',
     is_active TINYINT(1) DEFAULT 1,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (admin_id),
-    UNIQUE KEY uq_admin_username (username)
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (type_id),
+    UNIQUE KEY uq_leave_type_code (type_code)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO admin_superadmin 
-(first_name,middle_name,surname,suffix,username,password,is_active)
-VALUES 
-('Super Admin',NULL,'Default',NULL,'administrator',
-'$2y$10$VUI1/nifFIufPzm93O15bOOCifv/AhepkjZs64iSSS/OgP5oOLZHy',1);
+CREATE TABLE IF NOT EXISTS leave_entitlements (
+    entitlement_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    employee_id INT UNSIGNED NOT NULL,
+    type_id INT UNSIGNED NOT NULL,
+    scope TINYINT(1) DEFAULT 0,
+    entitlement_year YEAR,
+    allocated_days DECIMAL(6,2) DEFAULT 0,
+    modified_days DECIMAL(6,2) DEFAULT 0,
+    used_days DECIMAL(6,2) DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (entitlement_id),
+    KEY idx_ent_employee (employee_id),
+    KEY idx_ent_type (type_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- ****************************************************
--- ADD FOREIGN KEYS LAST
--- ****************************************************
+CREATE TABLE IF NOT EXISTS leave_requests (
+    request_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    employee_id INT UNSIGNED NOT NULL,
+    entitlement_id INT UNSIGNED NOT NULL,
+    proxy_employee_id INT UNSIGNED,
+    purpose TEXT,
+    date_from DATE NOT NULL,
+    date_to DATE NOT NULL,
+    time_from ENUM('Morning','Afternoon'),
+    time_to ENUM('Morning','Afternoon'),
+    requested_days DECIMAL(6,2) DEFAULT 0,
+    status ENUM('Pending','Approved','Rejected','Cancelled') DEFAULT 'Pending',
+    attachment VARCHAR(255),
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    KEY idx_lr_emp (employee_id),
+    KEY idx_lr_status (status),
+    KEY idx_lr_ent (entitlement_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- =====================================================
+-- FOREIGN KEYS (ADDED LAST)
+-- =====================================================
 
 ALTER TABLE mgmt_branch
 ADD CONSTRAINT fk_branch_province
-FOREIGN KEY (prov_id) REFERENCES ref_provinces(prov_id)
-ON UPDATE CASCADE ON DELETE RESTRICT;
+FOREIGN KEY (prov_id) REFERENCES ref_provinces(prov_id);
 
 ALTER TABLE mgmt_branch
 ADD CONSTRAINT fk_branch_city
-FOREIGN KEY (city_id) REFERENCES ref_cities(city_id)
-ON UPDATE CASCADE ON DELETE RESTRICT;
+FOREIGN KEY (city_id) REFERENCES ref_cities(city_id);
 
 ALTER TABLE mgmt_branch
 ADD CONSTRAINT fk_branch_barangay
-FOREIGN KEY (brgy_id) REFERENCES ref_barangays(brgy_id)
-ON UPDATE CASCADE ON DELETE RESTRICT;
+FOREIGN KEY (brgy_id) REFERENCES ref_barangays(brgy_id);
 
 ALTER TABLE mgmt_roles
 ADD CONSTRAINT fk_role_department
@@ -194,16 +219,6 @@ FOREIGN KEY (department_id) REFERENCES mgmt_departments(department_id);
 ALTER TABLE mgmt_roles
 ADD CONSTRAINT fk_role_access
 FOREIGN KEY (access_level_id) REFERENCES ref_access_levels(access_level_id);
-
-ALTER TABLE mgmt_role_permissions
-ADD CONSTRAINT fk_role_perm_role
-FOREIGN KEY (role_id) REFERENCES mgmt_roles(role_id)
-ON DELETE CASCADE;
-
-ALTER TABLE mgmt_role_permissions
-ADD CONSTRAINT fk_role_perm_perm
-FOREIGN KEY (permission_id) REFERENCES mgmt_permissions(permission_id)
-ON DELETE CASCADE;
 
 ALTER TABLE mgmt_employees
 ADD CONSTRAINT fk_emp_branch
@@ -234,6 +249,20 @@ ADD CONSTRAINT fk_users_employee
 FOREIGN KEY (employee_id) REFERENCES mgmt_employees(employee_id)
 ON DELETE CASCADE;
 
+ALTER TABLE leave_entitlements
+ADD CONSTRAINT fk_ent_employee
+FOREIGN KEY (employee_id) REFERENCES mgmt_employees(employee_id);
+
+ALTER TABLE leave_entitlements
+ADD CONSTRAINT fk_ent_type
+FOREIGN KEY (type_id) REFERENCES leave_types(type_id);
+
+ALTER TABLE leave_requests
+ADD CONSTRAINT fk_lr_employee
+FOREIGN KEY (employee_id) REFERENCES mgmt_employees(employee_id);
+
+ALTER TABLE leave_requests
+ADD CONSTRAINT fk_lr_entitlement
+FOREIGN KEY (entitlement_id) REFERENCES leave_entitlements(entitlement_id);
+
 SET FOREIGN_KEY_CHECKS=1;
-
-
