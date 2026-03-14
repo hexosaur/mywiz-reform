@@ -25,7 +25,7 @@
 									<div class="row align-items-center">
 										<div class="col-md-8">
 											<div class="page-header-title">
-												<h5 class="m-b-10">Role</h5>
+												<h5 class="m-b-10">Role </h5>
 											</div>
 											<ul class="breadcrumb">
 												<li class="breadcrumb-item"><a href="../home/dashboard"><i class="feather icon-home"></i></a></li>
@@ -82,12 +82,12 @@
 									<div class="col-xl-12">
 										<div class="card">
 											<div class="card-body">
-												<h3 class="text-center"><span class="page-title"></span><span class="text-btn"> </span></h3>
+												<h3 class="text-center"><span class="text-btn"></span> <span class="page-title"></span></h3>
 												<hr>
 												<form>
 													<div class="row">
 														<div class="form-group col-md-6">
-															<label for="role_name"><span class="page-title"></span> Name <span class="text-danger">*</span></label>
+															<label for="role_name"><span class="page-title"> </span> Name <span class="text-danger">*</span></label>
 															<input id="role_name" class="form-control form-control-sm" placeholder="Role Name"  required/>
 														</div>
 														<div class="form-group col-md-6">
