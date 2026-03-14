@@ -116,16 +116,18 @@
 						<div class="pro-head">
 							<img id="pfp" src="../pkg/assets/media/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
 							<span id="user_name">Test</span>
-							<a href="#" class="dud-logout btn-logout" title="Logout">
-								<i class="feather icon-log-out"></i>
-							</a>
+							
 						</div>
 						<ul class="pro-body">
-							<li><a href="#!" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a></li>
-							<li><a href="../profile/customize" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
-							<li><a href="message.html" class="dropdown-item"><i class="feather icon-mail"></i> My Messages</a></li>
-							<li><a href="auth-signin.html" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li>
+							<!-- <li><a href="#!" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a></li> -->
+							<li><a href="../profile/customize" class="dropdown-item" id="nav-profile-link"><i class="feather icon-user"></i> Profile</a></li>
+							<!-- <li><a href="message.html" class="dropdown-item"><i class="feather icon-mail"></i> My Messages</a></li>
+							<li><a href="auth-signin.html" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li> -->
+							<hr>
+							<li><a href="#" class="dropdown-item btn-logout dud-logout"><i class="feather icon-log-out"></i> Log out</a></li>
 						</ul>
+						
+
 					</div>
 				</div>
 			</li>

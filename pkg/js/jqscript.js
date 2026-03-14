@@ -826,15 +826,16 @@ $(function () {
 	});
 	// GET PROFILE 
 	$.get("../backend/system_get_employee_profile.php?security=123465", function(data, status){
-		var user = jQuery.parseJSON(data);
-		console.log(user);
-		if(user.status == "success"){
-			$("#user_name").html(user.first_name);
-			$("#pfp").attr("src", "../uploads/profile/" + user.profile_photo);
-			// $(".user-fullname").html(user.full_name);
+		var array = jQuery.parseJSON(data);
+		if(array.status == "success"){
+			$("#user_name").html(array.first_name);
+			$("#pfp").attr("src", "../uploads/profile/" + array.profile_photo);
+			if (array.username && array.username.trim() !== "") {
+				$("#nav-profile-link").attr("href", "../profile/" + encodeURIComponent(array.username));
+			}
 		}
 	});
-	
+	loadProfile();
 
 	console.log("jquery loaded");
 });

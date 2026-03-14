@@ -13,3 +13,10 @@ RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php [L]
 RewriteCond %{HTTPS} !=on
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+
+# Profile username URL, but exclude real special pages
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/mywiz-reform/profile/?$
+RewriteRule ^profile/([A-Za-z0-9_-]+)/?$ profile/customize.php?user=$1 [L,QSA]
