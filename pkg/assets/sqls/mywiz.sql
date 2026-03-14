@@ -321,20 +321,6 @@ CREATE TABLE IF NOT EXISTS ref_reset_leave_logs (
 	UNIQUE KEY uq_reset_year (reset_year)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- RESET LEAVE ENTITLEMENTS FOR A NEW YEAR /MANUAL
--- UPDATE leave_entitlements SET
--- 	used_days = 0,
--- 	remaining_days = allocated_days + modified_days, 
--- 	modified_days = CASE
--- 		WHEN scope = 0 THEN 0
--- 		ELSE modified_days 
--- 	END
--- WHERE
--- 	(scope = 0 AND entitlement_year = YEAR(CURDATE()) - 1)
--- 	OR
--- 	(scope = 1 AND entitlement_year IS NULL);
-
-
 -- LEAVE REQUEST TABLE SECTION
 CREATE TABLE leave_requests (
 	request_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
