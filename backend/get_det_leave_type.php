@@ -9,7 +9,7 @@ if ( !isset($_GET['security']) || $_GET['security'] !== '123465' || !isset($_GET
 }
 
 $id = (int)$_GET['id'];
-$sql = "SELECT type_id, type_code, type_name, type_description, default_allowed_days, with_pay, requires_attachment, requires_proxy, is_active FROM leave_types WHERE type_id = '$id' LIMIT 1";
+$sql = "SELECT type_id, type_code, type_name, type_description, default_allowed_days, with_pay, requires_attachment, requires_proxy, is_active, gender FROM leave_types WHERE type_id = '$id' LIMIT 1";
 
 if ($result = $conn->query($sql)) {
 	if ($result->num_rows > 0) {
@@ -25,7 +25,8 @@ if ($result = $conn->query($sql)) {
 			"type_pay"    => (int)$row['with_pay'],
 			"type_attach" => (int)$row['requires_attachment'],
 			"type_proxy"  => (int)$row['requires_proxy'],
-			"is_active"   => (int)$row['is_active']
+			"is_active"   => (int)$row['is_active'],
+			"gender"	  => $row['gender']
 		));
 		exit;
 

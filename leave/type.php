@@ -179,6 +179,7 @@
 					$('#type_code').val(array.type_code);
 					$('#type_desc').val(array.type_desc);
 					$('#type_days').val(array.type_days);
+					$('#type_gender').val(array.gender);
 					$('#type_pay').prop('checked', !!array.type_pay);
 					$('#type_attach').prop('checked', !!array.type_attach);
 					$('#type_proxy').prop('checked', !!array.type_proxy);

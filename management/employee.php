@@ -414,36 +414,37 @@
 				});
 			});
 			// DELETE
-			$('.btn-del').click(function(){
-				Swal.fire({ title: 'Confirm delete', icon: 'warning', html: `<div style="text-align:left">Deleting this could affect other settings in this<span style="font-weight:bold;"> Proceed with caution!</span><br><br>Type <b>DELETE</b> to enable deletion:</div>`, input: 'text', inputPlaceholder: 'Type DELETE', inputAttributes: { autocapitalize: 'off', autocomplete: 'off'}, showCancelButton: true, ConfirmButtonText: 'Yes, delete it!', confirmButtonColor: '#d33',cancelButtonColor: '#20a661',
+			$('.btn-rst').click(function(){
+				Swal.fire({ title: 'Confirm reset', icon: 'warning', html: `<div style="text-align:left">Resetting this would roll back the employee's password to 1<span style="font-weight:bold;"> Proceed with caution!</span><br><br>Type <b>RESET</b> to proceed:</div>`, input: 'text', inputPlaceholder: 'Type RESET', inputAttributes: { autocapitalize: 'off', autocomplete: 'off'}, showCancelButton: true, ConfirmButtonText: 'Yes, reset it!', confirmButtonColor: '#d33',cancelButtonColor: '#20a661',
 					didOpen: () => {
 						const confirmBtn = Swal.getConfirmButton();
 						confirmBtn.disabled = true;
 						const input = Swal.getInput();
 						input.addEventListener('input', () => {
 						const v = (input.value || '').trim();
-						confirmBtn.disabled = (v !== 'DELETE');
+						confirmBtn.disabled = (v !== 'RESET');
 						});
 						input.focus();
 					},preConfirm: (value) => {
 						const v = (value || '').trim();
-						if (v !== 'DELETE') {
-							Swal.showValidationMessage('Please type DELETE exactly.');
+						if (v !== 'RESET') {
+							Swal.showValidationMessage('Please type RESET exactly.');
 							return false;
 						}
 						return true;
 					}
 				}).then((result) => {
 					if (result.isConfirmed) {
-						var id = $(this).data('id');
-						$.post("../backend/del_role.php?security=123465&id=" + id, function (data, status) {
+						var id = $(this).attr('data-id');
+						$.post("../backend/system_reset_password.php?security=123465",{ id: id }, function (data, status) {
 						data = (data || '').trim();
+						console.log(data)
 						if (data === 'true') {
-							Swal.fire({ showConfirmButton: false, title: 'Deleted!', text: pagetitle+' deleted.', icon: 'success', timer: 700 });
+							Swal.fire({ showConfirmButton: false, title: 'Success', text: pagetitle+' reset.', icon: 'success', timer: 700 });
 							tableload_Employee();
 							showMainPage();
 						} else {
-							Swal.fire({ icon: 'error', title: 'Error deleting '+pagetitle,  showConfirmButton: false, timer: 1200 });
+							Swal.fire({ icon: 'error', title: 'Error resetting '+pagetitle,  showConfirmButton: false, timer: 1200 });
 						}
 						});
 					}
