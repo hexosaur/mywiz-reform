@@ -808,8 +808,8 @@ $(function () {
 	// TRIGGER LOGOUT
 	function logoff(){
 		$.get("../config/logout.php",function(data, event){
-			console.log(data);
-			window.location = '/mywiz-reform/';
+			// console.log(data);
+			window.location = '/mywiz/';
 		});
 	}
 

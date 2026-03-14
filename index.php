@@ -124,7 +124,7 @@ if (!empty($_SESSION['adminlogin']) || !empty($_SESSION['login'])) {
 			Swal.fire({icon: 'error',title: "Fill in the information first!",showConfirmButton: false,timer:1200});
 		} else{
 			var temp = JSON.stringify(data);
-			console.log(temp);
+			// console.log(temp);
 			$.post("config/login.php", { data: temp}, function (data) {
 				data = data.trim();
 				if(data == 'err_acc'){

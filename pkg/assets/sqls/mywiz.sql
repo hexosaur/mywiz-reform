@@ -7,9 +7,9 @@ CREATE TABLE IF NOT EXISTS mgmt_branch (
 	branch_id     INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	branch_name   VARCHAR(150) NOT NULL,
 	branch_code   VARCHAR(30)  NOT NULL,
-	prov_id       INT UNSIGNED NOT NULL,
-	city_id       INT UNSIGNED NOT NULL,
-	brgy_id       INT UNSIGNED NOT NULL,
+	prov_id       INT NOT NULL,
+	city_id       INT NOT NULL,
+	brgy_id       INT NOT NULL,
 	address_line  VARCHAR(255) NOT NULL,
 	created_at    TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_at    TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -320,6 +320,7 @@ CREATE TABLE IF NOT EXISTS ref_reset_leave_logs (
 	PRIMARY KEY (reset_id),
 	UNIQUE KEY uq_reset_year (reset_year)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 -- LEAVE REQUEST TABLE SECTION
 CREATE TABLE leave_requests (
