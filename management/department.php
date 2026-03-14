@@ -202,6 +202,7 @@
 						var id = $(this).data('id');
 						$.post("../backend/del_dept.php?security=123465&id=" + id, function (data, status) {
 						data = (data || '').trim();
+						console.log(data)
 						if (data === 'true') {
 							Swal.fire({ showConfirmButton: false, title: 'Deleted!', text: pagetitle+' deleted.', icon: 'success', timer: 700 });
 							tableload_Dept();

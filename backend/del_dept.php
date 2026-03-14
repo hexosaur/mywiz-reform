@@ -6,7 +6,7 @@ if (isset($_GET['security']) && $_GET['security'] === '123465' && isset($_GET['i
 
 	$pkid = $_GET['id'];
 	$pkid = mysqli_real_escape_string($conn, $pkid);
-	$sql = "DELETE FROM mgmt_department WHERE department_id = '$pkid'";
+	$sql = "DELETE FROM mgmt_departments WHERE department_id = '$pkid'";
 	if ($conn->query($sql) === TRUE) {
 		echo "true";
 		exit;
