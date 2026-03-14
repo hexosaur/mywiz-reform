@@ -29,8 +29,7 @@ function sql_nullable_str($conn, $s) {
 	return "'" . $conn->real_escape_string($s) . "'";  
 }
 
-$hashed_password = sha1(md5($password));
-
+$hashed_password =  password_hash($password, PASSWORD_DEFAULT);
 // ------------------------------
 // DUPLICATE CHECKS
 // ------------------------------

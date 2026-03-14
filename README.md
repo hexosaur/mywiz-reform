@@ -54,7 +54,7 @@ The system is constantly evolving and will soon include:
 
 
 
-# GUIDELINE SAMPLE ON FOR PRE SETUPS
+# GUIDELINE SAMPLE ON FOR PRE-SETUPS
 | **Access Level** | **Role Name**           | **Use Case**                                                          |
 |------------------|-------------------------|-----------------------------------------------------------------------|
 | 150              | Admin                   | Full system access; can approve anything                              |

@@ -1,0 +1,16 @@
+[%TS%] ERROR: Script not found: "C:\xampp\htdocs\mywiz-reform\scripts\cleanup_tokens.php" 
+[%TS%] ERROR: Script not found: "C:\xampp\htdocs\mywiz-reform\scripts\cleantoken.php" 
+[%TS%] ERROR: Script not found: "C:\xampp\htdocs\mywiz-reform\pkg\assets\js\cleantoken.php" 
+----------------------------------------
+MyWiz Remember Token Cleanup
+Started at: 2026-02-28 14:16:34
+----------------------------------------
+ERROR: cfg.php not found at: C:\xampp\htdocs\mywiz-reform\pkg\js/../config/cfg.php
+[%TS%] DONE: ExitCode=1 
+----------------------------------------
+MyWiz Remember Token Cleanup
+Started at: 2026-02-28 14:19:13
+----------------------------------------
+SUCCESS: Expired tokens deleted: 1
+Finished at: 2026-02-28 14:19:13
+[28/02/2026 14:19:13.02] DONE: ExitCode=0 

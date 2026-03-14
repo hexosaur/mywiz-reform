@@ -3,30 +3,10 @@ session_start();
 error_reporting(0);
 include('../config/cfg.php');
 
-function to_mysql_date($s) {
-	$s = trim((string)$s);
-	if ($s === '') return null;
+if (!isset($_POST['data'])) { echo "err"; exit; }
 
-	if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $s)) return $s;
-
-	$dt = DateTime::createFromFormat('F d, Y', $s); // February 13, 2026
-	if ($dt instanceof DateTime) return $dt->format('Y-m-d');
-	// Feb 13, 2026 (optional)
-	// $dt = DateTime::createFromFormat('M d, Y', $s); 
-	// if ($dt instanceof DateTime) return $dt->format('Y-m-d');
-
-	return null;
-}
-
-if (!isset($_POST['employee'])) { echo "err"; exit; }
-
-$emp = json_decode($_POST['employee']);
+$emp = json_decode($_POST['data']);
 if (!$emp) { echo "err"; exit; }
-
-// ------------------------------
-// Assign + sanitize
-// (NO ?? '' — relies on frontend required checks)
-// ------------------------------
 $employee_id   = (int)$emp->pkid;
 
 // $employee_code = $conn->real_escape_string(trim($emp->employee_code));
@@ -69,7 +49,7 @@ $hire_year = date("Y", strtotime($emp->date_hired));
 
 
 // ------------------------------
-// Helpers to build NULL-able SQL safely
+// FUNCTIONS
 // ------------------------------
 function sql_nullable_str($conn, $s) {
 	$s = trim((string)$s);
@@ -85,6 +65,20 @@ function sql_nullable_date($d) {
 }
 function sql_nullable_decimal($n) {
 	return ($n > 0) ? "'" . number_format((float)$n, 2, '.', '') . "'" : "NULL";
+}
+function to_mysql_date($s) {
+	$s = trim((string)$s);
+	if ($s === '') return null;
+
+	if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $s)) return $s;
+
+	$dt = DateTime::createFromFormat('F d, Y', $s); // February 13, 2026
+	if ($dt instanceof DateTime) return $dt->format('Y-m-d');
+	// Feb 13, 2026 (optional)
+	// $dt = DateTime::createFromFormat('M d, Y', $s); 
+	// if ($dt instanceof DateTime) return $dt->format('Y-m-d');
+
+	return null;
 }
 
 // ------------------------------
@@ -125,7 +119,7 @@ if ($employee_id == 0) {
 	$emp_code_sql = "UPDATE mgmt_employees SET employee_code = '$employee_code' WHERE employee_id = '$employee_id'";
 	if ($conn->query($emp_code_sql) !== TRUE) { echo "err"; exit; }
 
-
+	
 	// ------------------------------
 	// Insert Leave Entitlements for Each Leave Type
 	// ------------------------------
@@ -141,9 +135,7 @@ if ($employee_id == 0) {
 			// Check if employee gender matches the leave type's gender
 			if (($genderlv == 'All') || ($genderlv == 'Male' && $gender == 'Male') || ($genderlv == 'Female' && $gender == 'Female')) {
 				// Insert entitlement record for each employee matching gender condition
-				$insert_entitlement_sql = "INSERT INTO leave_entitlements (employee_id, type_id, scope, allocated_days, modified_days, used_days, created_at, updated_at) 
-					VALUES ('$employee_id', '$type_id', 0, '$default_allowed_days', 0, 0, NOW(), NOW())";
-
+				$insert_entitlement_sql = "INSERT INTO leave_entitlements (employee_id, type_id, scope, modified_days, used_days, created_at, updated_at) VALUES ('$employee_id', '$type_id', 0, 0, 0, NOW(), NOW())";
 				if ($conn->query($insert_entitlement_sql) !== TRUE) {
 					echo "Error inserting entitlement for employee $employee_id, leave type $type_id.";
 					exit;
@@ -151,13 +143,13 @@ if ($employee_id == 0) {
 			}
 		}
 	}
-
+	
 	// ------------------------------
 	// AUTO CREATE USER LOGIN (only if missing)
 	// username = employee_id
 	// password = md5("1")
 	// ------------------------------
-	$pass_md5 = sha1(md5("1")); // your chosen default
+	$hashed_password =  password_hash("1", PASSWORD_DEFAULT);
 	$emp_number = str_pad($employee_id, 4, '0', STR_PAD_LEFT);
 	$clean_surname = strtolower(preg_replace('/[^a-zA-Z0-9]/', '', $last_name));
 	$username_raw = $emp_number . $clean_surname;
@@ -170,7 +162,7 @@ if ($employee_id == 0) {
 	if ($chk && $chk->num_rows > 0) { echo "err_user"; exit; }
 	if ($chk) $chk->free();
 
-	$sqlu = "INSERT INTO mgmt_users(employee_id, username, password_hash) VALUES ('$employee_id', '$username', '$pass_md5')";
+	$sqlu = "INSERT INTO mgmt_users(employee_id, username, password_hash) VALUES ('$employee_id', '$username', '$hashed_password')";
 	if ($conn->query($sqlu) !== TRUE) { echo "err"; exit; }
 
 } else {

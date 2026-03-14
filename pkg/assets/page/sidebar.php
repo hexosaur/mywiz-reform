@@ -41,10 +41,11 @@
 							<li class=""><a href="bc_badges.html" class="">My Rating</a></li>
 						</ul>
 					</li> -->
-					<li class="nav-item pcoded-menu-caption">
+					<!-- ADMINISTRATOR -->
+					<li class="admin-permission superadmin d-none nav-item pcoded-menu-caption">
 						<label>Administrator</label>
 					</li>
-					<li class="nav-item pcoded-hasmenu">
+					<li class="admin-permission superadmin d-none nav-item pcoded-hasmenu">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-codepen"></i></span><span class="pcoded-mtext">Organization</span></a>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="../management/branch" class="">Branch</a></li>
@@ -53,36 +54,43 @@
 							<li class=""><a href="../management/employee" class="">Employee</a></li>
 						</ul>
 					</li>
-					<li class="nav-item pcoded-hasmenu">
+					<!-- <li class="admin-permission superadmin d-none nav-item pcoded-hasmenu">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-archive"></i></span><span class="pcoded-mtext">File Archives</span></a>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="bc_button.html" class="">Forms Categories</a></li>
 							<li class=""><a href="bc_badges.html" class="">Leave Archive</a></li>
 						</ul>
 					</li>
-					
-					<!-- WILL BE ACTIVATED SOON -->
-					<!-- <li class="nav-item pcoded-hasmenu">
+					<li class="admin-permission superadmin d-none nav-item pcoded-hasmenu">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-book"></i></span><span class="pcoded-mtext">Evaluation Management</span></a>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="bc_button.html" class="">Evaluation Categories</a></li>
 							<li class=""><a href="bc_badges.html" class="">Evaluation Archive</a></li>
 						</ul>
 					</li>
-					<li class="nav-item pcoded-hasmenu">
+					<li class="admin-permission superadmin d-none nav-item pcoded-hasmenu">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-clock"></i></span><span class="pcoded-mtext">Overtime Management</span></a>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="bc_button.html" class="">Overtime Categories</a></li>
 							<li class=""><a href="bc_badges.html" class="">Overtime Archive</a></li>
 						</ul>
-					</li> -->
-					<li class="nav-item pcoded-menu-caption">
+					</li>
+					
+					
+					
+					
+					
+					
+					-->
+
+					<!-- HUMAN RESOURCE SECTION -->
+					<li class="hr-permission superadmin d-none nav-item pcoded-menu-caption">
 						<label>Human Resource</label>
 					</li>
-					<li class="nav-item">
+					<li class="hr-permission superadmin d-none nav-item">
 						<a href="../home/dashboard" class="nav-link"><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Leave</span></a>
 					</li>
-					<li class="nav-item pcoded-hasmenu">
+					<li class="hr-permission superadmin d-none nav-item pcoded-hasmenu">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-calendar2-event"></i></i></span><span class="pcoded-mtext">Leave Management</span></a>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="../leave/archive" class="">Leave Archives</a></li>
@@ -90,11 +98,18 @@
 							<li class=""><a href="../leave/entitlement" class="">Leave Entitlements</a></li>
 						</ul>
 					</li>
-					<!-- Inventory -->
-					<li class="nav-item pcoded-menu-caption">
+					<li class="hr-permission superadmin d-none nav-item pcoded-hasmenu">
+					<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-luggage"></i></span><span class="pcoded-mtext">Travel Orders</span></a>
+					<ul class="pcoded-submenu">
+						<li class=""><a href="bc_button.html" class="">Forms Categories</a></li>
+						<li class=""><a href="bc_badges.html" class="">Leave Archive</a></li>
+					</ul>
+
+					<!-- INVENTORY SECTION -->
+					<li class="inventory-permission superadmin d-none nav-item pcoded-menu-caption">
 						<label>Inventory</label>
 					</li>
-					<li class="nav-item pcoded-hasmenu">
+					<li class="inventory-permission superadmin d-none nav-item pcoded-hasmenu">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-inbox"></i></span><span class="pcoded-mtext">Product Settings</span></a>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="../inventory/categories" class="">Categories</a></li>
@@ -106,7 +121,7 @@
 							<li class=""><a href="../inventory/employee" class="">Customers</a></li>
 						</ul>
 					</li>
-					<li class="nav-item pcoded-hasmenu">
+					<li class="inventory-permission superadmin d-none nav-item pcoded-hasmenu">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-bag-heart"></i></span><span class="pcoded-mtext">POS Settings</span></a>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="bc_button.html" class="">Dashboard</a></li>
@@ -115,36 +130,39 @@
 							<li class=""><a href="bc_badges.html" class="">Discounts/Coupons</a></li>
 						</ul>
 					</li>
-					<!-- Finance -->
-					<li class="nav-item pcoded-menu-caption d-none">
+					<!-- FINANCE SECTION -->
+					<li class="nav-item pcoded-menu-caption finance-permission superadmin d-none">
 						<label>Finance</label>
 					</li>
-					<li class="nav-item pcoded-hasmenu ">
+					<li class="nav-item pcoded-hasmenu finance-permission superadmin d-none">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-bar-chart"></i></span><span class="pcoded-mtext">Summary</span></a>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="#" class="">To be updated</a></li>
 						</ul>
 					</li>
+
 					<!-- Sales & Marketing -->
-					<li class="nav-item pcoded-menu-caption d-none">
+					<li class="nav-item pcoded-menu-caption sales-permission superadmin d-none">
 						<label>Sales & Marketing</label>
 					</li>
-					<li class="nav-item pcoded-hasmenu d-none">
+					<li class="nav-item pcoded-hasmenu sales-permission superadmin d-none">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-inbox"></i></span><span class="pcoded-mtext">Product Settings</span></a>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="#" class="">To be updated</a></li>
 						</ul>
 					</li>
+
 					<!-- Information Technology -->
-					<li class="nav-item pcoded-menu-caption d-none">
+					<li class="nav-item pcoded-menu-caption superadmin d-none">
 						<label>Information Technology</label>
 					</li>
-					<li class="nav-item pcoded-hasmenu d-none">
+					<li class="nav-item pcoded-hasmenu superadmin d-none">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-inbox"></i></span><span class="pcoded-mtext">Product Settings</span></a>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="#" class="">To be updated</a></li>
 						</ul>
 					</li>
+
 					<!-- Operations -->
 					<li class="nav-item pcoded-menu-caption d-none">
 						<label>Operations</label>
@@ -155,45 +173,26 @@
 							<li class=""><a href="#" class="">To be updated</a></li>
 						</ul>
 					</li>
-					<!-- Super Admin -->
-				
+
+					<!-- SUPER ADMIN SECTION WHICH HAS ACCESS TO ALL -->
 					<li class="superadmin nav-item pcoded-menu-caption d-none">
 						<label>Super Administrator</label>
 					</li>
 					<li class="superadmin nav-item pcoded-hasmenu d-none">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-users"></i></span><span class="pcoded-mtext">Org Settings</span></a>
 						<ul class="pcoded-submenu">
-							<!-- <li class=""><a href="../management/branch" class="">Branch</a></li> -->
 							<li class=""><a href="../admin/access" class="">Access Level</a></li>
-							<!-- <li class=""><a href="../management/department" class="">Department</a></li> -->
 							<li class=""><a href="../admin/permissions" class="">Permissions</a></li>
-							<!-- <li class=""><a href="../management/designation" class="">Designation</a></li> -->
-							<!-- <li class=""><a href="../management/employee" class="">Employee</a></li> -->
 							<li class=""><a href="../admin/enroll" class="">Superadmin Enroll</a></li>
 						</ul>
 					</li>
-					<li class="superadmin nav-item pcoded-hasmenu d-none">
-						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">Page Settings</span></a>
+					<li class="superadmin d-none nav-item pcoded-hasmenu">
+						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-archive"></i></span><span class="pcoded-mtext">File Archives</span></a>
 						<ul class="pcoded-submenu">
-							<li class=""><a href="../admin/icon" class="">Icon</a></li>
-							<li class=""><a href="../admin/login" class="">Login</a></li>
-							<li class=""><a href="../admin/company" class="">Company Details</a></li>
-							<!-- <li class=""><a href="../management/designation" class="">Designation</a></li> -->
-							<!-- <li class=""><a href="../management/employee" class="">Employee</a></li> -->
+							<li class=""><a href="bc_button.html" class="">Forms Categories</a></li>
+							<li class=""><a href="bc_badges.html" class="">Leave Archive</a></li>
 						</ul>
 					</li>
-					
-					<li class="superadmin nav-item pcoded-hasmenu d-none">
-						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-tablet"></i></span><span class="pcoded-mtext">Leave Management</span></a>
-						<ul class="pcoded-submenu">
-							<li class=""><a href="../leave/archive" class="">Leave Archives</a></li>
-							<li class=""><a href="../leave/category" class="">Leave Categories</a></li>
-							<li class=""><a href="../leave/entitlement" class="">Leave Entitlements</a></li>
-							
-						</ul>
-					</li>
-
-
 
 					<!-- BREAKER -->
 					<li style="margin:8rem 0 8rem 0;">
@@ -251,9 +250,9 @@
 					<li class="nav-item"><a href="sample-page.html" class="nav-link"><span class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span class="pcoded-mtext">Sample page</span></a></li>
 					<li class="nav-item disabled"><a href="#!" class="nav-link"><span class="pcoded-micon"><i class="feather icon-power"></i></span><span class="pcoded-mtext">Disabled menu</span></a></li> -->
 				</ul>
+				
 				<!-- <div class="card text-center">
 					<div class="card-block">
-						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 						<i class="feather icon-sunset f-40"></i>
 						<h6 class="mt-3">Upgrade to pro</h6>
 						<p>upgrade for get full themes and 30min support</p>

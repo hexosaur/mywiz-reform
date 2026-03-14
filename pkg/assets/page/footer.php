@@ -38,26 +38,43 @@ https://cdn.jsdelivr.net/npm/jquery-circle-progress@1.2.2/dist/circle-progress.m
 <script>
 	console.log("PHP exec (ms): <?= number_format($__ms, 2) ?>");
 	
-	var user_level = <?php echo ($_SESSION['level']); ?>;
-	console.log(user_level);
+	// CHECK LOGIC ON WHICH TAB TO SHOW
+	var permission_class = <?= json_encode($_SESSION['permission_classes']); ?>;
+	permission_class.forEach(function(perms_class) {
+		$('.' + perms_class).removeClass('d-none').fadeIn();
+	});
+	var permission = <?= json_encode($_SESSION['permissions']); ?>;
+	permission.forEach(function(perms) {
+		$('.' + perms).removeClass('d-none').fadeIn();
+	});
 
 
+</script>
 
-	if(user_level > 9000){
-		$('.superadmin').fadeIn().removeClass('d-none');
-		console.log("true");
+<!-- Preloader -->
+<script>
+(function($){
+	const MIN_MS = 500;
+	const start = Date.now();
+
+	$("body").css("overflow","hidden");
+
+	function hidePreloader(){
+	const elapsed = Date.now() - start;
+	const wait = Math.max(0, MIN_MS - elapsed);
+
+	setTimeout(function(){
+		$("#pagePreloader").addClass("is-hiding");
+		setTimeout(function(){
+		$("#pagePreloader").remove();
+		$("body").css("overflow","");
+		}, 220);
+	}, wait);
 	}
-	if(user_level = 5){
-		console.log("test")
-	}
 
+	$(document).ready(hidePreloader);
+	// If you want it to stay until images finish loading:
+	$(window).on("load", hidePreloader);
 
-
-
-
-
-
-
-
-
+})(jQuery);
 </script>

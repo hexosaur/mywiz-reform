@@ -1,5 +1,4 @@
 <?php
-	// session_start();
 	$sess = [
 	"table"  => $_SESSION['table'] ?? null,
 	"login"  => $_SESSION['login'] ?? null,
@@ -7,8 +6,8 @@
 	"branch" => $_SESSION['branch'] ?? null,
 	"level"  => $_SESSION['level'] ?? null,
 	"role_id" => $_SESSION['role_id'] ?? null,
-	// if you store permissions, this can be big; still okay if small
-	"permissions" => $_SESSION['permissions'] ?? []
+	"permissions" => $_SESSION['permissions'] ?? [],
+	"permission_classes" => $_SESSION['permission_classes'] ?? []
 	];
 ?>
 <script>

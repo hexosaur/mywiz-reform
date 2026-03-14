@@ -97,50 +97,47 @@ CREATE TABLE IF NOT EXISTS mgmt_role_permissions (
 -- Insert preset permissions
 INSERT INTO mgmt_permissions (permission_name, permission_title, permission_class, permission_description)
 VALUES 
-	('view_branch', 'View Branch', 'branch-permission', 'Permission to view branch data'),
-	('edit_branch', 'Edit Branch', 'branch-permission', 'Permission to edit branch data'),
-	('delete_branch', 'Delete Branch', 'branch-permission', 'Permission to delete branch data'),
-	('view_designation', 'View Designation', 'designation-permission', 'Permission to view designation data'),
-	('edit_designation', 'Edit Designation', 'designation-permission', 'Permission to edit designation data'),
-	('delete_designation', 'Delete Designation', 'designation-permission', 'Permission to delete designation data'),
-	('view_employee', 'View Employee', 'employee-permission', 'Permission to view employee data'),
-	('edit_employee', 'Edit Employee', 'employee-permission', 'Permission to edit employee data'),
-	('delete_employee', 'Delete Employee', 'employee-permission', 'Permission to delete employee data'),
-	('view_leave_category', 'View Leave Category', 'leave-category-permission', 'Permission to view leave category data'),
-	('edit_leave_category', 'Edit Leave Category', 'leave-category-permission', 'Permission to edit leave category data'),
-	('delete_leave_category', 'Delete Leave Category', 'leave-category-permission', 'Permission to delete leave category data'),
-	('view_leave_archive', 'View Leave Archive', 'leave-archive-permission', 'Permission to view archived leave data'),
-	('edit_leave_archive', 'Edit Leave Archive', 'leave-archive-permission', 'Permission to edit archived leave data'),
-	('delete_leave_archive', 'Delete Leave Archive', 'leave-archive-permission', 'Permission to delete archived leave data'),
-	('view_leave_archive', 'View Leave Archive', 'leave-archive-permission', 'Permission to view archived leave data'),
-	('edit_leave_archive', 'Edit Leave Archive', 'leave-archive-permission', 'Permission to edit archived leave data'),
-	('delete_leave_archive', 'Delete Leave Archive', 'leave-archive-permission', 'Permission to delete archived leave data'),
-	('view_product_brand', 'View Product Brand', 'product-brand-permission', 'Permission to view product brand data'),
-	('edit_product_brand', 'Edit Product Brand', 'product-brand-permission', 'Permission to edit product brand data'),
-	('delete_product_brand', 'Delete Product Brand', 'product-brand-permission', 'Permission to delete product brand data'),
-	('view_product_supplier', 'View Product Supplier', 'product-supplier-permission', 'Permission to view product supplier data'),
-	('edit_product_supplier', 'Edit Product Supplier', 'product-supplier-permission', 'Permission to edit product supplier data'),
-	('delete_product_supplier', 'Delete Product Supplier', 'product-supplier-permission', 'Permission to delete product supplier data'),
-	('view_product', 'View Product', 'product-permission', 'Permission to view product data'),
-	('edit_product', 'Edit Product', 'product-permission', 'Permission to edit product data'),
-	('delete_product', 'Delete Product', 'product-permission', 'Permission to delete product data'),
-	('view_product_purchase', 'View Product Purchase', 'product-purchase-permission', 'Permission to view product purchase data'),
-	('edit_product_purchase', 'Edit Product Purchase', 'product-purchase-permission', 'Permission to edit product purchase data'),
-	('delete_product_purchase', 'Delete Product Purchase', 'product-purchase-permission', 'Permission to delete product purchase data'),
-	('view_product_transfer', 'View Product Transfer', 'product-transfer-permission', 'Permission to view product transfer data'),
-	('edit_product_transfer', 'Edit Product Transfer', 'product-transfer-permission', 'Permission to edit product transfer data'),
-	('delete_product_transfer', 'Delete Product Transfer', 'product-transfer-permission', 'Permission to delete product transfer data'),
-	('view_customer', 'View Customer', 'customer-permission', 'Permission to view customer data'),
-	('edit_customer', 'Edit Customer', 'customer-permission', 'Permission to edit customer data'),
-	('delete_customer', 'Delete Customer', 'customer-permission', 'Permission to delete customer data'),
-	('view_pos_dashboard', 'View POS Dashboard', 'pos-dashboard-permission', 'Permission to view the POS dashboard'),
-	('edit_pos_dashboard', 'Edit POS Dashboard', 'pos-dashboard-permission', 'Permission to edit POS dashboard settings'),
-	('view_pos_customer', 'View POS Customer', 'pos-customer-permission', 'Permission to view customer data in the POS'),
-	('edit_pos_customer', 'Edit POS Customer', 'pos-customer-permission', 'Permission to edit customer data in the POS'),
-	('view_pos_sales', 'View POS Sales', 'pos-sales-permission', 'Permission to view POS sales data'),
-	('edit_pos_sales', 'Edit POS Sales', 'pos-sales-permission', 'Permission to edit POS sales data'),
-	('view_pos_discount', 'View POS Discounts', 'pos-discount-permission', 'Permission to view POS discount data'),
-	('edit_pos_discount', 'Edit POS Discounts', 'pos-discount-permission', 'Permission to edit POS discount data');
+	('view_branch', 'View Branch', 'admin-permission', 'Permission to view branch data'),
+	('edit_branch', 'Edit Branch', 'admin-permission', 'Permission to edit branch data'),
+	('delete_branch', 'Delete Branch', 'admin-permission', 'Permission to delete branch data'),
+	('view_designation', 'View Designation', 'admin-permission', 'Permission to view designation data'),
+	('edit_designation', 'Edit Designation', 'admin-permission', 'Permission to edit designation data'),
+	('delete_designation', 'Delete Designation', 'admin-permission', 'Permission to delete designation data'),
+	('view_employee', 'View Employee', 'admin-permission', 'Permission to view employee data'),
+	('edit_employee', 'Edit Employee', 'admin-permission', 'Permission to edit employee data'),
+	('delete_employee', 'Delete Employee', 'admin-permission', 'Permission to delete employee data'),
+	('view_leave_category', 'View Leave Category', 'hr-permission', 'Permission to view leave category data'),
+	('edit_leave_category', 'Edit Leave Category', 'hr-permission', 'Permission to edit leave category data'),
+	('delete_leave_category', 'Delete Leave Category', 'hr-permission', 'Permission to delete leave category data'),
+	('view_leave_archive', 'View Leave Archive', 'hr-permission', 'Permission to view archived leave data'),
+	('edit_leave_archive', 'Edit Leave Archive', 'hr-permission', 'Permission to edit archived leave data'),
+	('delete_leave_archive', 'Delete Leave Archive', 'hr-permission', 'Permission to delete archived leave data'),
+	('view_product_brand', 'View Product Brand', 'inventory-permission', 'Permission to view product brand data'),
+	('edit_product_brand', 'Edit Product Brand', 'inventory-permission', 'Permission to edit product brand data'),
+	('delete_product_brand', 'Delete Product Brand', 'inventory-permission', 'Permission to delete product brand data'),
+	('view_product_supplier', 'View Product Supplier', 'inventory-permission', 'Permission to view product supplier data'),
+	('edit_product_supplier', 'Edit Product Supplier', 'inventory-permission', 'Permission to edit product supplier data'),
+	('delete_product_supplier', 'Delete Product Supplier', 'inventory-permission', 'Permission to delete product supplier data'),
+	('view_product', 'View Product', 'inventory-permission', 'Permission to view product data'),
+	('edit_product', 'Edit Product', 'inventory-permission', 'Permission to edit product data'),
+	('delete_product', 'Delete Product', 'inventory-permission', 'Permission to delete product data'),
+	('view_product_purchase', 'View Product Purchase', 'inventory-permission', 'Permission to view product purchase data'),
+	('edit_product_purchase', 'Edit Product Purchase', 'inventory-permission', 'Permission to edit product purchase data'),
+	('delete_product_purchase', 'Delete Product Purchase', 'inventory-permission', 'Permission to delete product purchase data'),
+	('view_product_transfer', 'View Product Transfer', 'inventory-permission', 'Permission to view product transfer data'),
+	('edit_product_transfer', 'Edit Product Transfer', 'inventory-permission', 'Permission to edit product transfer data'),
+	('delete_product_transfer', 'Delete Product Transfer', 'inventory-permission', 'Permission to delete product transfer data'),
+	('view_customer', 'View Customer', 'inventory-permission', 'Permission to view customer data'),
+	('edit_customer', 'Edit Customer', 'inventory-permission', 'Permission to edit customer data'),
+	('delete_customer', 'Delete Customer', 'inventory-permission', 'Permission to delete customer data'),
+	('view_pos_dashboard', 'View POS Dashboard', 'inventory-permission', 'Permission to view the POS dashboard'),
+	('edit_pos_dashboard', 'Edit POS Dashboard', 'inventory-permission', 'Permission to edit POS dashboard settings'),
+	('view_pos_customer', 'View POS Customer', 'inventory-permission', 'Permission to view customer data in the POS'),
+	('edit_pos_customer', 'Edit POS Customer', 'inventory-permission', 'Permission to edit customer data in the POS'),
+	('view_pos_sales', 'View POS Sales', 'inventory-permission', 'Permission to view POS sales data'),
+	('edit_pos_sales', 'Edit POS Sales', 'inventory-permission', 'Permission to edit POS sales data'),
+	('view_pos_discount', 'View POS Discounts', 'inventory-permission', 'Permission to view POS discount data'),
+	('edit_pos_discount', 'Edit POS Discounts', 'inventory-permission', 'Permission to edit POS discount data');
 
 -- EMPLOYEE MANAGEMENT TABLE 
 CREATE TABLE IF NOT EXISTS mgmt_employees (
@@ -208,6 +205,7 @@ CREATE TABLE IF NOT EXISTS mgmt_users (
 	employee_id    INT UNSIGNED NOT NULL,
 	username       VARCHAR(180) NOT NULL,
 	password_hash  VARCHAR(255) NOT NULL,
+	profile_photo  VARCHAR(255) NULL,
 	last_login_at  DATETIME NULL,
 	created_at     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_at     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -226,22 +224,38 @@ CREATE TABLE IF NOT EXISTS mgmt_users (
 
 -- SUPERADMIN TABLE
 CREATE TABLE IF NOT EXISTS admin_superadmin (
-    admin_id               INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    first_name             VARCHAR(80) NOT NULL,
-    middle_name            VARCHAR(80) NULL,
-    surname                VARCHAR(80) NOT NULL,
-    suffix                 VARCHAR(20) NULL,
-    username               VARCHAR(50) NOT NULL,
-    password               VARCHAR(255) NOT NULL,
-    is_active              TINYINT(1) NOT NULL DEFAULT 1,
-    created_at             TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (admin_id),
-    UNIQUE KEY uq_admin_username (username),
-    UNIQUE KEY uq_admin_full_name (first_name, surname)
+	admin_id               INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	first_name             VARCHAR(80) NOT NULL,
+	middle_name            VARCHAR(80) NULL,
+	surname                VARCHAR(80) NOT NULL,
+	suffix                 VARCHAR(20) NULL,
+	username               VARCHAR(50) NOT NULL,
+	password               VARCHAR(255) NOT NULL,
+	is_active              TINYINT(1) NOT NULL DEFAULT 1,
+	created_at             TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (admin_id),
+	UNIQUE KEY uq_admin_username (username),
+	UNIQUE KEY uq_admin_full_name (first_name, surname)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- DEFAULT super admin where username is administrator with a pass of admin@123465
-INSERT INTO admin_superadmin (first_name, middle_name, surname, suffix, username, password, is_active)  VALUES ('Super Admin', NULL, 'Default', NULL, 'administrator', '59b7068b69ca4d4b48859c110334fc8c60e85151', '1');
+INSERT INTO admin_superadmin (first_name, middle_name, surname, suffix, username, password, is_active)  VALUES ('Super Admin', NULL, 'Default', NULL, 'administrator', '$2y$10$VUI1/nifFIufPzm93O15bOOCifv/AhepkjZs64iSSS/OgP5oOLZHy', '1');
+-- DEFAULT TOKEN REMEMBER FOR COOKIES TO HAVE ACCESS OR LOGGED IN FOR 3 MONTHS
+CREATE TABLE auth_remember_tokens (
+	id BIGINT AUTO_INCREMENT PRIMARY KEY,
+	user_id INT NOT NULL,
+	user_type ENUM('admin','employee') NOT NULL,
+	selector CHAR(12) NOT NULL,
+	token_hash CHAR(64) NOT NULL,
+	expires_at DATETIME NOT NULL,
+	created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	last_used_at DATETIME NULL,
+	user_agent VARCHAR(255) NULL,
+	ip_address VARCHAR(45) NULL,
+	UNIQUE KEY (selector),
+	INDEX (user_id, user_type),
+	INDEX (expires_at)
+);
 
 -- **************************************************** -- 
 -- ************		LEAVE MGMT TABLE	*************** -- 
@@ -297,7 +311,17 @@ CREATE TABLE IF NOT EXISTS leave_entitlements (
 		ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- RESET LEAVE ENTITLEMENTS FOR A NEW YEAR
+-- STEPS FOR A RESET AND KEEPS A LOG FOR TRACKING
+CREATE TABLE IF NOT EXISTS ref_reset_leave_logs (
+	reset_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	reset_year YEAR NOT NULL,
+	reset_done_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	reset_done_by INT UNSIGNED NULL,
+	PRIMARY KEY (reset_id),
+	UNIQUE KEY uq_reset_year (reset_year)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- RESET LEAVE ENTITLEMENTS FOR A NEW YEAR /MANUAL
 UPDATE leave_entitlements SET
 	used_days = 0,  -- Reset used_days
 	remaining_days = allocated_days + modified_days,  -- Reset remaining days based on allocated and modified days
@@ -310,10 +334,85 @@ WHERE
 	OR
 	(scope = 1 AND entitlement_year IS NULL);  -- Reset for ALL_YEARS (no specific year)
 
+
 -- LEAVE REQUEST TABLE SECTION
+CREATE TABLE leave_requests (
+	request_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 
+	employee_id INT UNSIGNED NOT NULL,
+	entitlement_id INT UNSIGNED NOT NULL,
+	proxy_employee_id INT UNSIGNED NULL,
 
+	purpose TEXT NULL,
 
+	date_from DATE NOT NULL,
+	date_to DATE NOT NULL,
+	time_from ENUM('Morning','Afternoon') NULL,
+	time_to   ENUM('Morning','Afternoon') NULL,
 
+	requested_days DECIMAL(6,2) NOT NULL DEFAULT 0.00,
 
+	status ENUM('Pending','Approved','Rejected','Cancelled') NOT NULL DEFAULT 'Pending',
+	attachment VARCHAR(255) NULL,
+	created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
+	INDEX idx_lr_emp (employee_id),
+	INDEX idx_lr_status (status),
+	INDEX idx_lr_ent (entitlement_id),
+	INDEX idx_lr_proxy (proxy_employee_id),
+
+	CONSTRAINT fk_lr_employee
+		FOREIGN KEY (employee_id)
+		REFERENCES mgmt_employees(employee_id)
+		ON UPDATE CASCADE
+		ON DELETE RESTRICT,
+
+	CONSTRAINT fk_lr_entitlement
+		FOREIGN KEY (entitlement_id)
+		REFERENCES leave_entitlements(entitlement_id)
+		ON UPDATE CASCADE
+		ON DELETE RESTRICT,
+
+	CONSTRAINT fk_lr_proxy
+		FOREIGN KEY (proxy_employee_id)
+		REFERENCES mgmt_employees(employee_id)
+		ON UPDATE CASCADE
+		ON DELETE RESTRICT
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- STEPS TABLE FOR DYNAMIC REQUEST APPROVAL
+CREATE TABLE leave_request_steps (
+	step_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+
+	request_id INT UNSIGNED NOT NULL,
+	step_no INT UNSIGNED NOT NULL,
+
+	step_type ENUM('BR_DEPT_CHAIN','BRANCH_CHAIN','HR','TOP') NOT NULL,
+	required_min_value INT NOT NULL,
+
+	branch_id INT UNSIGNED NULL,
+	department_id INT UNSIGNED NULL,
+
+	step_status ENUM('Pending','Approved','Rejected','Cancelled') NOT NULL DEFAULT 'Pending',
+	acted_by INT UNSIGNED NULL,
+	acted_at DATETIME NULL,
+	remarks VARCHAR(255) NULL,
+
+	UNIQUE KEY uq_req_step (request_id, step_no),
+	INDEX idx_steps_req (request_id, step_no),
+
+	CONSTRAINT fk_steps_request
+		FOREIGN KEY (request_id)
+		REFERENCES leave_requests(request_id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE,
+
+	CONSTRAINT fk_steps_actor
+		FOREIGN KEY (acted_by)
+		REFERENCES mgmt_employees(employee_id)
+		ON UPDATE CASCADE
+		ON DELETE RESTRICT
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

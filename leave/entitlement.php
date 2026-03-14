@@ -1,4 +1,9 @@
 <?php include('../config/postcheck.php') ?>
+<?php
+	include('../config/check_permission.php');
+	$required_permission_class = ['hr-permission', 'superadmin'];
+	check_permission($required_permission_class);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <?php include('../pkg/assets/page/head.php')?>
@@ -36,7 +41,7 @@
 							<!-- [ Main Content ] start -->
 							<div class="container-fluid">
 								<!-- [ Default View ] start -->
-								<div class="row view-default d-none" >
+								<div class="row view-default" >
 									<div class="col-xl-12">
 										<div class="card">
 											<div class="card-body table-border-style">
@@ -70,7 +75,7 @@
 								<!-- [ Default View ] end -->
 
 								<!-- [ Modify View ] start -->
-								<div class="row view-modify ">
+								<div class="row view-modify d-none">
 									<div class="col-xl-12">
 										<div class="card">
 											<div class="card-body">
@@ -78,15 +83,16 @@
 												<hr>
 												<div class="row">
 													<div class="col-4"><strong>Employee Name:</strong> <span id="emp_name">asd</span> </div>
-													<div class="col-4"><strong>Primary ID:</strong> <span id="emp_name">asd</span> </div>
-													<div class="col-4"><strong>Role:</strong> <span id="emp_name">asd</span> </div>
+													<div class="col-4"><strong>Primary ID:</strong> <span id="emp_id">asd</span> </div>
+													<div class="col-4"><strong>Role:</strong> <span id="emp_role">asd</span> </div>
 												</div>
 												<div class="row align-items-center justify-content-center mt-4">
 													<div class="table-responsive col-8">
 														<table id="leave_stat" class="table table-hover">
 															<thead>
 																<th class="text-center">Leave</th>
-																<th class="text-center">Days</th>
+																<th class="text-center">Default Max Days</th>
+																<th class="text-center">Modified Days</th>
 															</thead>
 															<tbody>
 																<tr class="text-center">
@@ -107,21 +113,21 @@
 															</select>
 														</div>
 														<div class=" form-group col-md-6">
-															<label for="type_code">Modify <span class="text-danger">*</span></label>
-															<input id="type_code" class="form-control form-control-sm" placeholder="Code"  required/>
+															<label for="modified_days">Modify <span class="text-danger">*</span></label>
+															<input id="modified_days" disabled type="number"class="form-control form-control-sm" step="0.5" placeholder="Modified Days"  required/>
 														</div>
 													</div>
 													<div class="row justify-content-evenly">
 														<div class="form-group ml-3 col form-check">
-															<input type="checkbox" class="form-check-input" id="type_pay">
-															<label class="form-check-label" for="type_pay">All year</label>
+															<input type="checkbox" class="form-check-input" id="ent_year">
+															<label class="form-check-label" for="ent_year">All year. <span class="text-primary">Check if this change applies to the yearly leave reset.</span></label>
 														</div>													
 													</div>
 												</form>
 												<hr>
 												<div class="text-center">
 													<button class="btn btn-primary btn_save" data-id="0">Apply</button>
-													<button class="btn btn-danger cnl-btn btn_cancel">Cancel</button>
+													<button class="btn btn-danger btn-cancel ">Cancel</button>
 												</div>
 											</div>
 										</div>
@@ -148,41 +154,90 @@
 	// Initialize
 	const pagetitle = $('.page-title').html();
 	tableload_Ent();
-	function editLeave(){
-		$.get("../backend/get_list_leave_type.php?security=123465", function(data,status){
-			// $("#leave_stat tbody").html(data);
-			setDataTable("#leave_stat",{dtOptions:{ lengthChange: false,	ordering:  false, searching: false, info: false,  paging: false, }});
-			dd_leave_type();
-		});
-	}
-	editLeave();
+
+	// ACTION LISTENERS
+	$('.btn_save').click(function(){
+		var chk = checkFormValidity();
+		var id = $(this).attr('data-id');
+		if(chk){
+			let hasInvalidDays = $('#modified_days').hasClass('is-invalid');
+			if(hasInvalidDays){
+				Swal.fire({ icon: 'error', title: 'Error', text: 'Please change the modified days that is divisible by 0.5.', showConfirmButton: false });
+			}else{
+				var notif = parseInt(id, 10);
+				let message = notif === 0 ? 'New '+pagetitle+' Saved!' : pagetitle+' Details Updated!';
+				let scope    = $('#ent_year').prop('checked') ? 1 : 0;
+				var data = { scope :  scope, modified_days :  $('#modified_days').val(), pkid : id};
+				var json = JSON.stringify(data);
+				// console.log(data);
+				$.post("../backend/post_leave_ent_edit.php", { data: json}, function (data, a) {
+					data = data.trim();
+					if(data == 'exist'){
+						Swal.fire({icon: 'error', title: pagetitle+' has no changes! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
+					}else if(data == 'true'){
+						Swal.fire({icon: 'success',title: message,showConfirmButton: false,timer:950});
+						tableload_Ent();
+						showMainPage();
+						is_active = 1;
+					}else if(data.trim() == ''){
+						Swal.fire({icon: 'error',title: 'Error Uploading to Database!',showConfirmButton: false,timer:1000});
+					}
+				});
+
+
+			}
+			
+		}
+	});
 	
+
+
+
+	$('.btn-cancel').click(function(){	
+
+	});
+	
+
+
+
 	// FUNCTIONS
 	function tableload_Ent(){
-		resetDataTable();
+		resetDataTable('#table_ent');
+
 		$.get("../backend/get_list_leave_ent.php?security=123465", function(data,status){
 			$("#table_ent tbody").html(data);
 			setDataTable("#table_ent", {showActions : true});
 			
 			// EDIT
 			$('.btn-edit').click(function() {
+				
 				$('.text-btn').text("Edit");
 				$('.view-modify').fadeIn().removeClass('d-none');
 				$('.view-default').hide();
 				pkid = $(this).data('id');
-				dd_leave_type();
+				dd_leave_type(pkid);
+				resetDataTable('#leave_stat');
 				$.get("../backend/get_det_leave_ent.php?security=123465&id=" + pkid, function(data, status) {
 					var array = jQuery.parseJSON(data);
-					console.log(array);
-					$('.btn_save').attr('data-id', pkid);
-					$('#type_name').val(array.type_name);
-					$('#type_code').val(array.type_code);
-					$('#type_desc').val(array.type_desc);
-					$('#type_days').val(array.type_days);
-					$('#type_pay').prop('checked', !!array.type_pay);
-					$('#type_attach').prop('checked', !!array.type_attach);
-					$('#type_proxy').prop('checked', !!array.type_proxy);
+					let formatted = String(pkid).padStart(4, '0');
+					$("#leave_stat tbody").html(array.tbody);
+					setDataTable("#leave_stat", {dtOptions:{ lengthChange: false,	ordering:  false, searching: false, info: false,  paging: false, }});
+					// $('.btn_save').attr('data-id', pkid);
+					$('#emp_name').text(array.full_name);
+					$('#emp_id').text(formatted);
+					$('#emp_role').text(array.role_name);
 
+					$('#type_name').change(function(){
+						var ent_id = $('#type_name').val()
+						$('.btn_save').attr('data-id', ent_id);
+						$.get("../backend/get_det_leave_ent_dd.php?security=123465&id=" + ent_id, function(data, status) {
+							var array_ent = jQuery.parseJSON(data);
+							$('#modified_days').prop('disabled', false);
+							$('#modified_days').val(array_ent.modified_days);
+							$('#ent_year').prop('checked', !!array_ent.scope);
+						});
+					});
+					
 				});
 			});
 			// DELETE
@@ -226,44 +281,37 @@
 	// const cancan = 0;
 	// console.log(!!cancan);
 	
+	function isDivisibleByHalf(v){
+		var n = parseFloat(v);
+		return !isNaN(n) && Math.floor(n * 2) === n * 2;
+	}
+	$('#modified_days').on('input change', function () {
+	var v = $(this).val();
 
-	// script for interactions
-	// ACTION LISTENERS
-	$('.btn_save').click(function(){
-		var chk = checkFormValidity();
-		var id = $(this).attr('data-id');
-		if(chk){
-			// Convert id to a number (if needed)
-			var notif = parseInt(id, 10);
-			let message = notif === 0 ? 'New '+pagetitle+' Saved!' : pagetitle+' Details Updated!';
-			let type_pay    = $('#type_pay').prop('checked') ? 1 : 0;
-			let type_attach  = $('#type_attach').prop('checked') ? 1 : 0;
-			let type_proxy   = $('#type_proxy').prop('checked') ? 1 : 0;
-			var data = { type_name :  $('#type_name').val(), type_code :  $('#type_code').val(), type_desc :  $('#type_desc').val(), type_days :  $('#type_days').val(), type_pay :  type_pay, type_attach :  type_attach, type_proxy :  type_proxy, pkid : id};
-			var json = JSON.stringify(data);
-			// console.log(data);
-			$.post("../backend/post_leave_type.php", { data: json}, function (data, a) {
-				data = data.trim();
-				console.log(data);
-				if(data == 'exist_code'){
-					Swal.fire({icon: 'error', title: pagetitle+' Code already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
-				}else if(data == 'exist_name'){
-					Swal.fire({icon: 'error', title: pagetitle+' Name already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
-				}else if(data == 'true'){
-					Swal.fire({icon: 'success',title: message,showConfirmButton: false,timer:950});
-					tableload_Leave();
-					showMainPage();
-					is_active = 1;
-				}else if(data.trim() == ''){
-					Swal.fire({icon: 'error',title: 'Error Uploading to Database!',showConfirmButton: false,timer:1000});
-				}
-			});
-		}
+	if (v === '') {
+		$(this).removeClass('is-invalid');
+		return;
+	}
+	if (!isDivisibleByHalf(v)) {
+		$(this).addClass('is-invalid');
+	} else {
+		$(this).removeClass('is-invalid');
+	}
 	});
-	$('.cnl-btn').click(function(){	
 
-	});
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	
 </script>

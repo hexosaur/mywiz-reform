@@ -87,7 +87,7 @@
 												<hr>
 												<div class="text-center">
 													<button class="btn btn-primary btn_save" data-id="0">Apply</button>
-													<button class="btn btn-danger cnl-btn btn_cancel">Cancel</button>
+													<button class="btn btn-danger btn-cancel ">Cancel</button>
 												</div>
 											</div>
 										</div>
@@ -203,7 +203,7 @@
 			});
 		}
 	});
-	$('.cnl-btn').click(function(){	
+	$('.btn-cancel').click(function(){	
 
 	});
 	

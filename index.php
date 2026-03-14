@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!empty($_SESSION['adminlogin']) || !empty($_SESSION['login'])) {
+	header("Location: home/dashboard");
+	exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <?php $__t0 = microtime(true); ?>
@@ -50,8 +57,8 @@
 											<label for="password">Password</label>
 										</div>
 										<div class="form-check mb-3">
-											<input class="form-check-input" id="password" type="checkbox" value="" />
-											<label class="form-check-label" for="password">Remember Password</label>
+											<input class="form-check-input" id="remember_me" type="checkbox" />
+											<label class="form-check-label" for="remember_me">Keep me logged in</label>
 										</div>
 										<div class="d-flex align-items-center justify-content-between mt-4 mb-0">
 											<a class="small" href="password.html">Forgot Password?</a>
@@ -111,17 +118,15 @@
 	function handleLogin() {
 		var pass = $('#password').val();
 		var user = $('#username').val();
-		var data = { user: user, pass: pass}
-		console.log(data);
+		var remember = $('#remember_me').is(':checked') ? 1 : 0;
+		var data = { user: user, pass: pass, remember : remember}
 		if (user === '' || pass === '') {
-			console.log("Username and password are required.");
 			Swal.fire({icon: 'error',title: "Fill in the information first!",showConfirmButton: false,timer:1200});
 		} else{
 			var temp = JSON.stringify(data);
 			console.log(temp);
 			$.post("config/login.php", { data: temp}, function (data) {
 				data = data.trim();
-				console.log(data);
 				if(data == 'err_acc'){
 					Swal.fire({icon: 'error', title: 'Fail! wrong username or password', showConfirmButton: false, timer: 2500});
 				}else if (data != ""){

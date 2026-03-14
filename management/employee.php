@@ -1,4 +1,9 @@
 <?php include('../config/postcheck.php') ?>
+<?php
+	include('../config/check_permission.php');
+	$required_permission_class = ['admin-permission', 'superadmin'];
+	check_permission($required_permission_class);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <?php include('../pkg/assets/page/head.php')?>
@@ -42,7 +47,7 @@
 											<div class="card-body table-border-style">
 												<div class="row align-items-center">
 														<div class="col-6 col-md-10">
-															<h3 class="mb-0"><span class="page-title"></span> List (if emp is inactive, sets other stuff to inactive related to this)</h3>
+															<h3 class="mb-0"><span class="page-title"></span></h3>
 														</div>
 														<div class="col-6 col-md-2 d-flex justify-content-end">
 															<button class="btn btn-primary btn-add">Add <span class="page-title"></span></button>
@@ -270,7 +275,7 @@
 												<hr>
 												<div class="text-center">
 													<button class="btn btn-primary btn_save" data-id="0">Apply</button>
-													<button class="btn btn-danger cnl-btn btn_cancel">Cancel</button>
+													<button class="btn btn-danger btn-cancel ">Cancel</button>
 												</div>
 											</div>
 										</div>
@@ -297,10 +302,56 @@
 	// Initialize
 	var is_active = 1;
 	const pagetitle = $('.page-title').html();
-	// dd_role();
 	dd_dept();
 	dd_branch();
 	tableload_Employee();
+
+	// script for interactions
+	// ACTION LISTENERS
+	$('.btn_save').click(function(){
+		var chk = checkFormValidity();
+		var id = $(this).attr('data-id');
+		if(chk){
+			// Convert id to a number (if needed)
+			var notif = parseInt(id, 10);
+			let message = notif === 0 ? 'New '+pagetitle+' Saved!' : pagetitle+' Details Updated!';
+			var data = { first_name :  $('#first_name').val(), middle_name : $('#middle_name').val(), surname : $('#surname').val(), suffix : $('#suffix').val(), birth_date : $('#birth_date').val(), marital_status : $('#marital_status').val(), gender : $('#gender').val(), prov_id : $('#prov_id').val(), city_id : $('#city_id').val(), brgy_id : $('#brgy_id').val(), address_line : $('#address_line').val(), email : $('#email').val(), contact_no : $('#contact_no').val(), date_hired : $('#date_hired').val(),  branch_id : $('#branch_id').val(), daily_rate : $('#daily_rate').val(), department_id : $('#department_id').val(), role_id : $('#role_id').val(), sss_no : $('#sss_no').val(), pagibig_no : $('#pagibig_no').val(), tin_no : $('#tin_no').val(), philhealth_no : $('#philhealth_no').val(), pkid : id, is_active : is_active};
+			var json = JSON.stringify(data);
+			$.post("../backend/post_emp.php", { data: json}, function (data, a) {
+				data = data.trim();
+				// console.log(data);
+				if(data == 'exist'){
+					Swal.fire({icon: 'error', title: pagetitle+'already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
+				}else if(data == 'true'){
+					Swal.fire({icon: 'success',title: message,showConfirmButton: false,timer:950});
+					tableload_Employee();
+					showMainPage();
+					is_active = 1;
+				}else if(data.trim() == ''){
+					Swal.fire({icon: 'error',title: 'Error Uploading to Database!',showConfirmButton: false,timer:1000});
+				}
+			});
+		}
+	});
+	$('.btn-cancel').click(function(){	
+		is_active = 1;
+		$('.add-employee').fadeIn().removeClass('d-none');
+		$('.edit-employee').addClass('d-none');
+		$('.add-employee .form-control').attr('disabled', false);
+		$('.add-employee select').attr('disabled', false);
+	});
+	
+
+	$('.btn-group-toggle .btn').click(function() {
+		let val = parseInt($(this).find('input').val());
+		emp_active(val);
+	});
+
+
+
+
+
+
 	// FUNCTIONS
 	function emp_active(value){
 		if (value == 1) {
@@ -316,12 +367,11 @@
 		is_active = value;
 	}
 	function tableload_Employee(){
-		resetDataTable();
+		resetDataTable('.table');
 		$.get("../backend/get_list_emp.php?security=123465", function(data,status){
 			$("#table_emp tbody").html(data);
 			setDataTable(".table", { showActions : true});
 			// console.log(data);
-			// wrapTable();
 			// EDIT
 			$('.btn-edit').click(function() {
 				$('.text-btn').text("Edit");
@@ -401,47 +451,7 @@
 			});			
 		});
 	}
-	// script for interactions
-	// ACTION LISTENERS
-	$('.btn_save').click(function(){
-		var chk = checkFormValidity();
-		var id = $(this).attr('data-id');
-		if(chk){
-			// Convert id to a number (if needed)
-			var notif = parseInt(id, 10);
-			let message = notif === 0 ? 'New '+pagetitle+' Saved!' : pagetitle+' Details Updated!';
-			var data = { first_name :  $('#first_name').val(), middle_name : $('#middle_name').val(), surname : $('#surname').val(), suffix : $('#suffix').val(), birth_date : $('#birth_date').val(), marital_status : $('#marital_status').val(), gender : $('#gender').val(), prov_id : $('#prov_id').val(), city_id : $('#city_id').val(), brgy_id : $('#brgy_id').val(), address_line : $('#address_line').val(), email : $('#email').val(), contact_no : $('#contact_no').val(), date_hired : $('#date_hired').val(),  branch_id : $('#branch_id').val(), daily_rate : $('#daily_rate').val(), department_id : $('#department_id').val(), role_id : $('#role_id').val(), sss_no : $('#sss_no').val(), pagibig_no : $('#pagibig_no').val(), tin_no : $('#tin_no').val(), philhealth_no : $('#philhealth_no').val(), pkid : id, is_active : is_active};
-			console.log("PUSHED SAVED DATA: ",data);
-			var json = JSON.stringify(data);
-			$.post("../backend/post_emp.php", { employee: json}, function (data, a) {
-				data = data.trim();
-				console.log(data);
-				if(data == 'exist'){
-					Swal.fire({icon: 'error', title: pagetitle+'already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
-				}else if(data == 'true'){
-					Swal.fire({icon: 'success',title: message,showConfirmButton: false,timer:950});
-					tableload_Employee();
-					showMainPage();
-					is_active = 1;
-				}else if(data.trim() == ''){
-					Swal.fire({icon: 'error',title: 'Error Uploading to Database!',showConfirmButton: false,timer:1000});
-				}
-			});
-		}
-	});
-	$('.cnl-btn').click(function(){	
-		is_active = 1;
-		$('.add-employee').fadeIn().removeClass('d-none');
-		$('.edit-employee').addClass('d-none');
-		$('.add-employee .form-control').attr('disabled', false);
-		$('.add-employee select').attr('disabled', false);
-	});
 	
-
-	$('.btn-group-toggle .btn').click(function() {
-		let val = parseInt($(this).find('input').val());
-		emp_active(val);
-	});
 	
 </script>
 

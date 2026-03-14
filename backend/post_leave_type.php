@@ -65,7 +65,7 @@ if ($type_id == 0) {
 			// Gender matching logic
 			if ($type_gender == 'All' || ($type_gender == 'Male' && $employee_gender == 'Male') || ($type_gender == 'Female' && $employee_gender == 'Female')) {
 				// Insert entitlement for the employee
-				$insert_entitlement_sql = " INSERT INTO leave_entitlements (employee_id, type_id, scope, allocated_days, modified_days, used_days, created_at, updated_at) VALUES ('$employee_id', '$new_type_id', 0, '$default_days', 0, 0, NOW(), NOW())";
+				$insert_entitlement_sql = " INSERT INTO leave_entitlements (employee_id, type_id, scope, modified_days, used_days, created_at, updated_at) VALUES ('$employee_id', '$new_type_id', 0, 0, 0, NOW(), NOW())";
 
 				if ($conn->query($insert_entitlement_sql) !== TRUE) {
 					echo "Error inserting entitlement for employee $employee_id.";
@@ -79,12 +79,8 @@ if ($type_id == 0) {
 	exit;
 
 } else {
-	// Update existing leave type
 	$sql = "UPDATE leave_types SET type_code = '$type_code', type_name = '$type_name', type_description = " . ($type_desc !== '' ? "'$type_desc'" : "NULL") . ", with_pay = '$with_pay', requires_attachment = '$requires_attachment', requires_proxy = '$requires_proxy', default_allowed_days = '" . number_format($default_days, 2, '.', '') . "', gender = '$type_gender', is_active = '$is_active' WHERE type_id = '$type_id'";
 	if ($conn->query($sql) !== TRUE) { echo "err"; exit; }
-
-	// Optionally, you could add logic to update existing entitlements if needed
-
 	echo "true";
 	exit;
 }

@@ -1,4 +1,9 @@
 <?php include('../config/postcheck.php') ?>
+<?php
+	include('../config/check_permission.php');
+	$required_permission_class = ['superadmin'];
+	check_permission($required_permission_class);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <?php include('../pkg/assets/page/head.php')?>
@@ -98,7 +103,7 @@
 												<hr>
 												<div class="text-center">
 													<button class="btn btn-primary btn_save" data-id="0">Apply</button>
-													<button class="btn btn-danger cnl-btn btn_cancel">Cancel</button>
+													<button class="btn btn-danger btn-cancel ">Cancel</button>
 												</div>
 											</div>
 										</div>
@@ -127,7 +132,7 @@
 	tableload_Access();
 	// FUNCTIONS
 	function tableload_Access(){
-		resetDataTable();
+		resetDataTable('.table');
 		$.get("../backend/get_list_access.php?security=123465", function(data,status){
 			$("#table_access tbody").html(data);
 			setDataTable(".table");
@@ -218,7 +223,7 @@
 			});
 		}
 	});
-	$('.cnl-btn').click(function(){	
+	$('.btn-cancel').click(function(){	
 
 	});
 	

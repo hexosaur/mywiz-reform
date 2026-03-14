@@ -193,8 +193,8 @@ function dd_access() {
 		});
 	});
 }
-function dd_leave_type() {
-	$.get("../backend/get_dd_leave_type.php", { security: '123465' }, function (data) {
+function dd_leave_type(employee_id) {
+	$.get("../backend/get_dd_leave_type.php", { security: '123465' , id : employee_id}, function (data) {
 	$('.dd_lvtype').each(function () {
 			if ($(this).hasClass('tomsel')) {
 				$(this).html(data);
@@ -220,7 +220,19 @@ function dd_role(dept_id) {
 		});
 	});
 }	
-
+function dd_proxy(employee_id) {
+	$.get("../backend/get_dd_leave_proxy.php", { security: '123465' , id : employee_id}, function (data) {
+	$('.dd_proxy').each(function () {
+			if ($(this).hasClass('tomsel')) {
+				$(this).html(data);
+				tomselDropdowns(this);
+			} else {
+				$(this).html(data);
+				$(this).prop('selectedIndex', 0);
+			}
+		});
+	});
+}
 
 
 
@@ -252,8 +264,8 @@ function tomselDropdowns(element) {
 /**  =====================
 	DATATABLE SECTION
 ==========================  **/
-function resetDataTable(){
-	const $tbl = $('.table');
+function resetDataTable(tablename){
+	const $tbl = $(tablename);
 	if ($.fn.DataTable.isDataTable($tbl)) {
 		const dt = $tbl.DataTable();
 		$tbl.find('[data-toggle="tooltip"],[title]').tooltip?.('dispose');
@@ -333,17 +345,12 @@ function setDataTable(selector = '.table', opts = {}) {
 // OPTIONAL FOR A NO SUNDAY, SATURDAY OR WEEKENDS
 function getInvalidDateFn($el) {
 // Extendable rules
-	if ($el.hasClass('noSunday')) {
-		return function (date) { return date.day() === 0; };
-	}
-	if ($el.hasClass('noWeekend')) {
-		return function (date) { return date.day() === 0 || date.day() === 6; };
-	}
-	if ($el.hasClass('noSaturday')) {
-		return function (date) { return date.day() === 6; };
-	}
+	if ($el.hasClass('noSunday')) { return function (date) { return date.day() === 0; }; }
+	if ($el.hasClass('noWeekend')) { return function (date) { return date.day() === 0 || date.day() === 6; }; }
+	if ($el.hasClass('noSaturday')) { return function (date) { return date.day() === 6; }; }
 	return null;
 }
+
 function rangeContainsInvalid(start, end, invalidFn) {
 	if (!invalidFn) return false;
 	let d = start.clone().startOf('day');
@@ -382,6 +389,94 @@ function initEndPicker($end, minDate, $startRef) {
 		$(this).val('');
 		});
 }
+
+// DATE CALCULATOR FOR NUMBER OF DAYS
+function countValidDays(start, end, invalidFn) {
+	if (!start || !end) return 0;
+	if (!moment.isMoment(start)) start = moment(start);
+	if (!moment.isMoment(end)) end = moment(end);
+	if (!start.isValid() || !end.isValid()) return 0;
+
+	let d = start.clone().startOf('day');
+	const last = end.clone().startOf('day');
+	let count = 0;
+
+	while (d.isSameOrBefore(last, 'day')) {
+		if (!invalidFn || !invalidFn(d)) count++;
+		d.add(1, 'day');
+	}
+	return count;
+}
+function computeDaySelect(startSel, endSel, timeFromSel, timeToSel) {
+	const $start = $(startSel);
+	const $end   = $(endSel);
+
+	if (!$start.length || !$end.length) return 0;
+
+	const sVal = $start.val();
+	const eVal = $end.val();
+	if (!sVal || !eVal) return 0;
+
+	// your start/end picker stores: "MMMM DD, YYYY"
+	const start = moment(sVal, 'MMMM DD, YYYY', true);
+	const end   = moment(eVal, 'MMMM DD, YYYY', true);
+	if (!start.isValid() || !end.isValid()) return 0;
+
+	const invalidFn = getInvalidDateFn($start) || getInvalidDateFn($end);
+
+	let days = countValidDays(start, end, invalidFn);
+
+	// Case 1: only if both time selectors exist + have values
+	if (timeFromSel && timeToSel && $(timeFromSel).length && $(timeToSel).length) {
+		const timeFrom = $(timeFromSel).val(); // "Morning"/"Afternoon"
+		const timeTo   = $(timeToSel).val();
+
+		if (timeFrom && timeTo && days > 0) {
+			if (timeFrom === 'Afternoon') days -= 0.5;
+			if (timeTo === 'Morning')    days -= 0.5;
+			if (days < 0) days = 0;
+		}
+	}
+
+	return days;
+}
+function computeDayRange(rangeSel, timeFromSel, timeToSel) {
+	const $range = $(rangeSel);
+	if (!$range.length) return 0;
+
+	const val = $range.val();
+	if (!val) return 0;
+
+	const parts = val.split(' - ');
+	if (parts.length !== 2) return 0;
+
+	// range picker stores: "MM/DD/YY - MM/DD/YY"
+	const start = moment(parts[0], 'MM/DD/YY', true);
+	const end   = moment(parts[1], 'MM/DD/YY', true);
+	if (!start.isValid() || !end.isValid()) return 0;
+
+	const invalidFn = getInvalidDateFn($range);
+	let days = countValidDays(start, end, invalidFn);
+
+	// Optional: Case 1 (half-day) if time selectors exist
+	if (timeFromSel && timeToSel && $(timeFromSel).length && $(timeToSel).length) {
+		const timeFrom = $(timeFromSel).val();
+		const timeTo   = $(timeToSel).val();
+
+		if (timeFrom && timeTo && days > 0) {
+			if (timeFrom === 'Afternoon') days -= 0.5;
+			if (timeTo === 'Morning')    days -= 0.5;
+			if (days < 0) days = 0;
+		}
+	}
+
+	return days;
+}
+
+
+
+
+
 	
 /**  =====================
 	HIDE AND SHOW SECTION
@@ -498,7 +593,34 @@ function hidePerms(){
 	
 }
 
-
+/**  =====================
+IMAGE/FILE ATTACHMENT SECTION
+==========================  **/
+function setupFilePreview(fileInputId, previewImgId) {
+	const defpath = "../pkg/assets/media/img/attach.png";
+	const fileInput = $(fileInputId);
+	const previewImg = $(previewImgId);
+	const modalImg = $('#fullImagePreview');
+	const modal = $('#imagePreviewModal');
+	fileInput.change(function(event) {
+		if (event.target.files.length === 0) {
+			previewImg.attr('src',defpath);
+			modalImg.attr('src', defpath);
+			console.log("No file selected.");
+			return;
+		}
+		const file = event.target.files[0];
+		
+		if (file) {
+			const reader = new FileReader();
+			reader.onload = function(e) {
+				previewImg.attr('src', e.target.result);
+				modalImg.attr('src', e.target.result);
+			};
+			reader.readAsDataURL(file);
+		}
+	});
+}
 
 
 /***********************************************************************************************
@@ -543,17 +665,19 @@ $(function () {
 
 		$el.daterangepicker(opts)
 			.on('apply.daterangepicker', function (e, picker) {
+
 			// If you want "no Sunday inside the whole range", enforce it here
-			if (rangeContainsInvalid(picker.startDate, picker.endDate, invalidFn)) {
-				$(this).val('');
-				if (typeof log === 'function') log('Range invalid (restricted days not allowed).');
-				else console.warn('Range invalid (restricted days not allowed).');
-				return;
-			}
+			// if (rangeContainsInvalid(picker.startDate, picker.endDate, invalidFn)) {
+			// 	$(this).val('');
+			// 	if (typeof log === 'function') log('Range invalid (restricted days not allowed).');
+			// 	else console.warn('Range invalid (restricted days not allowed).');
+			// 	return;
+			// }
 
 			const val = picker.startDate.format('MM/DD/YY') + ' - ' + picker.endDate.format('MM/DD/YY');
 			$(this).val(val);
 			if (typeof log === 'function') log('Range: ' + val);
+			else console.log('Range: ' + val);
 			})
 			.on('cancel.daterangepicker', function () {
 			$(this).val('');
@@ -564,7 +688,7 @@ $(function () {
 	// START date picker
 	$('.startDatePicker').each(function () {
 		const $start = $(this);
-
+		console.log("called");
 		const startOpts = {
 			singleDatePicker: true,
 			showDropdowns: true,
@@ -616,7 +740,7 @@ $(function () {
 	// 	$('.view-modify').fadeIn().removeClass('d-none');
 	// 	$('.view-default').hide();
 	// });
-	$('.cnl-btn').click(function(){	
+	$('.btn-cancel').click(function(){	
 		showMainPage();
 	});
 	// COUNTRY DROP DOWNS ACTION LISTENERS
@@ -689,6 +813,7 @@ $(function () {
 		});
 	}
 
+
 	$('.btn-logout').click(function(){	
 		Swal.fire({ title: 'Are you sure?', 
 			html: 'Are you sure you want to log-out?',
@@ -699,6 +824,17 @@ $(function () {
 			}
 		});
 	});
-	console.log("jquery loaded");
+	// GET PROFILE 
+	$.get("../backend/system_get_employee_profile.php?security=123465", function(data, status){
+		var user = jQuery.parseJSON(data);
+		console.log(user);
+		if(user.status == "success"){
+			$("#user_name").html(user.first_name);
+			$("#pfp").attr("src", "../uploads/profile/" + user.profile_photo);
+			// $(".user-fullname").html(user.full_name);
+		}
+	});
+	
 
+	console.log("jquery loaded");
 });

@@ -12,7 +12,7 @@
 	</a>
 	<div class="collapse navbar-collapse">
 		<a href="#!" class="mob-toggler"></a>
-		<ul class="navbar-nav mr-auto">
+		<!-- <ul class="navbar-nav mr-auto">
 			<li class="nav-item">
 				<div class="main-search open">
 					<div class="input-group">
@@ -26,7 +26,7 @@
 					</div>
 				</div>
 			</li>
-		</ul>
+		</ul> -->
 		<ul class="navbar-nav ml-auto">
 			<!-- <li>
 				<div class="dropdown">
@@ -114,7 +114,7 @@
 					</a>
 					<div class="dropdown-menu dropdown-menu-right profile-notification">
 						<div class="pro-head">
-							<img src="../pkg/assets/media/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
+							<img id="pfp" src="../pkg/assets/media/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
 							<span id="user_name">Test</span>
 							<a href="#" class="dud-logout btn-logout" title="Logout">
 								<i class="feather icon-log-out"></i>
@@ -132,4 +132,6 @@
 		</ul>
 	</div>
 </header>
+
+
 <!-- [ Header ] end -->

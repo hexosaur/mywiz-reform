@@ -1,4 +1,9 @@
 <?php include('../config/postcheck.php') ?>
+<?php
+	include('../config/check_permission.php');
+	$required_permission_class = ['admin-permission', 'superadmin'];
+	check_permission($required_permission_class);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <?php include('../pkg/assets/page/head.php')?>
@@ -77,7 +82,7 @@
 									<div class="col-xl-12">
 										<div class="card">
 											<div class="card-body">
-												<h3 class="text-center"><span class="text-btn"></span> <span class="page-title"></span></h3>
+												<h3 class="text-center"><span class="page-title"></span><span class="text-btn"> </span></h3>
 												<hr>
 												<form>
 													<div class="row">
@@ -102,8 +107,8 @@
 															</select>
 														</div>
 														<div class="form-group col-md-6">
-															<label>Permissions <span class="text-danger">*</span></label>
-															<select id="role_perms" class="dd_perms tomsel form-control" multiple required>
+															<label>Permissions</label>
+															<select id="role_perms" class="dd_perms tomsel form-control" multiple>
 															</select>
 														</div>
 													</div>
@@ -111,15 +116,13 @@
 												<hr>
 												<div class="text-center">
 													<button class="btn btn-primary btn_save" data-id="0">Apply</button>
-													<button class="btn btn-danger cnl-btn btn_cancel">Cancel</button>
+													<button class="btn btn-danger btn-cancel ">Cancel</button>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-								<!-- [ Modify View ] end -->
-                               
-								
+								<!-- [ Modify View ] end -->								
 							</div>
 							<!-- [ Main Content ] end -->
 						</div>
@@ -143,8 +146,40 @@
 	dd_dept();
 	dd_access();
 	tableload_Roles();
+	
+	// script for interactions
+	// ACTION LISTENERS
+	$('.btn_save').click(function(){
+		var chk = checkFormValidity();
+		var id = $(this).attr('data-id');
+		// console.log("DATA ID OF SAVE BUTTON: ",id)
+		if(chk){
+			// Convert id to a number (if needed)
+			var notif = parseInt(id, 10);
+			let message = notif === 0 ? 'New '+pagetitle+' Saved!' : pagetitle+' Details Updated!';
+			var data = { role_name: $('#role_name').val(), role_desc : $('#role_desc').val(), role_dept :  $('#role_dept').val(), role_access : $('#role_access').val(), role_perms : $('#role_perms').val(),  pkid : id}
+			// console.log(data)
+			var json = JSON.stringify(data)
+			// console.log(json);
+			$.post("../backend/post_role.php", {data: json}, function (data, a) {
+				data = data.trim();
+				console.log(data);
+				if(data == 'exist'){
+					Swal.fire({icon: 'error', title: pagetitle+'already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
+				}else if(data == 'true'){
+					Swal.fire({icon: 'success',title: message,showConfirmButton: false,timer:950});
+					tableload_Roles();
+					showMainPage();
+				}else if(data.trim() == ''){
+					Swal.fire({icon: 'error',title: 'Error Uploading to Database!',showConfirmButton: false,timer:1000});
+				}
+			});
+		}
+	});
+
+	// FUNCTIONS
 	function tableload_Roles(){
-		resetDataTable();
+		resetDataTable('.table');
 		$.get("../backend/get_list_roles.php?security=123465", function(data,status){
 			$("#table_role tbody").html(data);
 			setDataTable(".table", {rowHide : 4, showActions : true});
@@ -207,39 +242,6 @@
 			});			
 		});
 	}
-	
-	// script for interactions
-	// ACTION LISTENERS
-	$('.btn_save').click(function(){
-		var chk = checkFormValidity();
-		var id = $(this).attr('data-id');
-		// console.log("DATA ID OF SAVE BUTTON: ",id)
-		if(chk){
-			// Convert id to a number (if needed)
-			var notif = parseInt(id, 10);
-			let message = notif === 0 ? 'New '+pagetitle+' Saved!' : pagetitle+' Details Updated!';
-			var data = { role_name: $('#role_name').val(), role_desc : $('#role_desc').val(), role_dept :  $('#role_dept').val(), role_access : $('#role_access').val(), role_perms : $('#role_perms').val(),  pkid : id}
-			// console.log(data)
-			var json = JSON.stringify(data)
-			// console.log(json);
-			$.post("../backend/post_role.php", {role: json}, function (data, a) {
-				data = data.trim();
-				console.log(data);
-				if(data == 'exist'){
-					Swal.fire({icon: 'error', title: pagetitle+'already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
-				}else if(data == 'true'){
-					Swal.fire({icon: 'success',title: message,showConfirmButton: false,timer:950});
-					tableload_Roles();
-					showMainPage();
-				}else if(data.trim() == ''){
-					Swal.fire({icon: 'error',title: 'Error Uploading to Database!',showConfirmButton: false,timer:1000});
-				}
-			});
-		}
-	});
-	$('.cnl-btn').click(function(){	
-	
-	});
 	
 </script>
 

@@ -3,12 +3,12 @@ session_start();
 error_reporting(E_ALL);
 include('../config/cfg.php');
 
-if (!isset($_POST['role'])) {
+if (!isset($_POST['data'])) {
 	echo "err";
 	exit;
 }
 
-$role = json_decode($_POST['role']);
+$role = json_decode($_POST['data']);
 
 $role_name  = $conn->real_escape_string($role->role_name ?? '');
 $role_desc  = $conn->real_escape_string($role->role_desc ?? '');

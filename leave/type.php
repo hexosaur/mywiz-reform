@@ -1,4 +1,9 @@
 <?php include('../config/postcheck.php') ?>
+<?php
+	include('../config/check_permission.php');
+	$required_permission_class = ['hr-permission', 'superadmin'];
+	check_permission($required_permission_class);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <?php include('../pkg/assets/page/head.php')?>
@@ -20,7 +25,7 @@
 									<div class="row align-items-center">
 										<div class="col-md-8">
 											<div class="page-header-title">
-												<h5 class="m-b-10">Category</h5>
+												<h5 class="m-b-10">Leave Type</h5>
 											</div>
 											<ul class="breadcrumb">
 												<li class="breadcrumb-item"><a href="../home/dashboard"><i class="feather icon-home"></i></a></li>
@@ -127,7 +132,7 @@
 												<hr>
 												<div class="text-center">
 													<button class="btn btn-primary btn_save" data-id="0">Apply</button>
-													<button class="btn btn-danger cnl-btn btn_cancel">Cancel</button>
+													<button class="btn btn-danger btn-cancel ">Cancel</button>
 												</div>
 											</div>
 										</div>
@@ -156,7 +161,7 @@
 	tableload_Leave();
 	// FUNCTIONS
 	function tableload_Leave(){
-		resetDataTable();
+		resetDataTable('.table');
 		$.get("../backend/get_list_leave_type.php?security=123465", function(data,status){
 			$("#table_leave tbody").html(data);
 			setDataTable(".table", {rowHide : 3, showActions : true});
@@ -236,10 +241,10 @@
 			let type_proxy = $('#type_proxy').prop('checked') ? 1 : 0;
 			var data = { type_name : $('#type_name').val(), type_code : $('#type_code').val(), type_gender : $('#type_gender').val() , type_desc : $('#type_desc').val(), type_days : $('#type_days').val(), type_pay : type_pay, type_attach : type_attach, type_proxy : type_proxy, pkid : id };
 			var json = JSON.stringify(data);
-			console.log(data);
+			// console.log(data);
 			$.post("../backend/post_leave_type.php", { data: json}, function (data, a) {
 				data = data.trim();
-				console.log(data);
+				// console.log(data);
 				if(data == 'exist_code'){
 					Swal.fire({icon: 'error', title: pagetitle+' Code already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
 				}else if(data == 'exist_name'){
@@ -255,7 +260,7 @@
 			});
 		}
 	});
-	$('.cnl-btn').click(function(){	
+	$('.btn-cancel').click(function(){	
 
 	});
 	

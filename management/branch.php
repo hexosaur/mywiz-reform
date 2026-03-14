@@ -1,4 +1,9 @@
 <?php include('../config/postcheck.php') ?>
+<?php
+	include('../config/check_permission.php');
+	$required_permission_class = ['admin-permission', 'superadmin'];
+	check_permission($required_permission_class);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <?php include('../pkg/assets/page/head.php')?>
@@ -114,7 +119,7 @@
 												<hr>
 												<div class="text-center">
 													<button class="btn btn-primary btn_save" data-id="0">Apply</button>
-													<button class="btn btn-danger cnl-btn btn_cancel">Cancel</button>
+													<button class="btn btn-danger btn-cancel ">Cancel</button>
 												</div>
 											</div>
 										</div>
@@ -140,15 +145,52 @@
 <?php include('../config/check_sessions.php') ?>
 
 <script>
-	// script for body functions default
+
 	// Initialize
 	var prov_id, city_id, brgy_id, pkid;
 	const pagetitle = $('.page-title').html();
 	var userPermissions = ['view_branch']; 
 
 	tableload_Branch();
+	
+
+	// script for interactions
+	// ACTION LISTENERS
+	$('.btn_save').click(function(){
+		var chk = checkFormValidity();
+		var id = $(this).attr('data-id');
+		if(chk){
+			// Convert id to a number (if needed)
+			var notif = parseInt(id, 10);
+			let message = notif === 0 ?  'New '+pagetitle+' Saved!' : pagetitle+' Details Updated!';
+			var data = { branch_name: $('#branch_name').val(), branch_code : $('#branch_code').val(), prov_id : prov_id, city_id : city_id, brgy_id : brgy_id, addr : $('#addr').val(), pkid : id}
+			var json = JSON.stringify(data)
+			$.post("../backend/post_branch.php", {data: json}, function (data, a) {
+				data = data.trim();
+				if(data == 'exist'){
+					Swal.fire({icon: 'error', title: pagetitle+' already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
+				}else if(data == 'exist_code'){
+					Swal.fire({icon: 'error', title: pagetitle+' Code already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
+				}else if(data == 'true'){
+					tableload_Branch();
+					Swal.fire({icon: 'success',title: message,showConfirmButton: false,timer:950});
+					showMainPage();
+				}else if(data.trim() == ''){
+					Swal.fire({icon: 'error',title: 'Error Uploading to Database!',showConfirmButton: false,timer:1000});
+				}
+			});
+		}
+	});
+	$('.btn-cancel').click(function(){	
+		pkid = 0;
+		resetDependentSelect($('.dd_city'), 'Select City');
+		resetDependentSelect($('.dd_brgy'), 'Select Barangay');
+	});
+
+
+	// script for body functions default
 	function tableload_Branch(){
-		resetDataTable();
+		resetDataTable('.table');
 		$.get("../backend/get_list_branch.php?security=123465", function(data,status){
 			$("#table_branch tbody").html(data);
 			// SET TABLE EDITABLE OR NOT DYNAMICALLTY SOON
@@ -214,40 +256,6 @@
 			});
 		});
 	}
-
-	// script for interactions
-	// ACTION LISTENERS
-	$('.btn_save').click(function(){
-		var chk = checkFormValidity();
-		var id = $(this).attr('data-id');
-		if(chk){
-			// Convert id to a number (if needed)
-			var notif = parseInt(id, 10);
-			let message = notif === 0 ?  'New '+pagetitle+' Saved!' : pagetitle+' Details Updated!';
-			var data = { branch_name: $('#branch_name').val(), branch_code : $('#branch_code').val(), prov_id : prov_id, city_id : city_id, brgy_id : brgy_id, addr : $('#addr').val(), pkid : id}
-			var json = JSON.stringify(data)
-			$.post("../backend/post_branch.php", {branch: json}, function (data, a) {
-				data = data.trim();
-				if(data == 'exist'){
-					Swal.fire({icon: 'error', title: pagetitle+' already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
-				}else if(data == 'exist_code'){
-					Swal.fire({icon: 'error', title: pagetitle+' Code already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
-				}else if(data == 'true'){
-					tableload_Branch();
-					Swal.fire({icon: 'success',title: message,showConfirmButton: false,timer:950});
-					showMainPage();
-				}else if(data.trim() == ''){
-					Swal.fire({icon: 'error',title: 'Error Uploading to Database!',showConfirmButton: false,timer:1000});
-				}
-			});
-		}
-	});
-	$('.cnl-btn').click(function(){	
-		pkid = 0;
-		resetDependentSelect($('.dd_city'), 'Select City');
-		resetDependentSelect($('.dd_brgy'), 'Select Barangay');
-	});
-	
 
 	// console.log("APP_SESSION:", window.APP_SESSION);
 	// MODIFY SOON

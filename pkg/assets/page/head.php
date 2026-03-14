@@ -1,4 +1,8 @@
 <?php $__t0 = microtime(true); ?>
+<?php
+	$LOADER_TEXT = "Loading page...";
+	include __DIR__ . "/loader.php";
+?>
 <head>
 	<!-- META -->
 	<meta charset="utf-8">

@@ -4,8 +4,8 @@ error_reporting(0);
 include('../config/cfg.php');
 
 if(true){
-	if (isset($_POST['branch'])){
-		$branch = json_decode($_POST['branch']);
+	if (isset($_POST['data'])){
+		$branch = json_decode($_POST['data']);
 
 		$branch_name =  $conn->real_escape_string($branch->branch_name);
 		$branch_code =  $conn->real_escape_string($branch->branch_code);
@@ -58,14 +58,7 @@ if(true){
 			}
 
 		} else {
-			$sql = "UPDATE mgmt_branch 
-					SET branch_name = '$branch_name', 
-						branch_code = '$branch_code', 
-						prov_id = '$prov_id', 
-						city_id = '$city_id', 
-						brgy_id = '$brgy_id', 
-						address_line = '$addr'
-					WHERE branch_id = '$branch_id'";
+			$sql = "UPDATE mgmt_branch SET branch_name = '$branch_name', branch_code = '$branch_code', prov_id = '$prov_id', city_id = '$city_id', brgy_id = '$brgy_id', address_line = '$addr' WHERE branch_id = '$branch_id'";
 
 			if ($conn->query($sql) === TRUE) {
 				echo "true";

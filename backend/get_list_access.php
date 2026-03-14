@@ -5,7 +5,7 @@ include('../config/cfg.php');
 
 if (isset($_GET['security']) && $_GET['security'] == '123465') {
 	// SQL query to retrieve access levels
-	$sql = "SELECT access_level_id, access_level_name, access_level_description, access_level_value FROM ref_access_levels ORDER BY access_level_name ASC";
+	$sql = "SELECT access_level_id, access_level_name, access_level_description, access_level_value FROM ref_access_levels ORDER BY access_level_value ASC";
 
 	$n = 1;  // For numbering the rows in the table
 	$table = "";

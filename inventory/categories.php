@@ -1,4 +1,9 @@
 <?php include('../config/postcheck.php') ?>
+<?php
+	include('../config/check_permission.php');
+	$required_permission_class = ['inventory-permission', 'superadmin'];
+	check_permission($required_permission_class);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <?php include('../pkg/assets/page/head.php')?>
@@ -96,7 +101,7 @@
 												<hr>
 												<div class="text-center">
 													<button class="btn btn-primary">Apply</button>
-													<button class="btn btn-danger cnl-btn">Cancel</button>
+													<button class="btn btn-danger btn-cancel">Cancel</button>
 												</div>
 											</div>
 										</div>

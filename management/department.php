@@ -1,4 +1,9 @@
 <?php include('../config/postcheck.php') ?>
+<?php
+	include('../config/check_permission.php');
+	$required_permission_class = ['admin-permission', 'superadmin'];
+	check_permission($required_permission_class);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <?php include('../pkg/assets/page/head.php')?>
@@ -88,7 +93,7 @@
 												<hr>
 												<div class="text-center">
 													<button class="btn btn-primary btn_save" data-id="0">Apply</button>
-													<button class="btn btn-danger cnl-btn btn_cancel">Cancel</button>
+													<button class="btn btn-danger btn-cancel ">Cancel</button>
 												</div>
 											</div>
 										</div>
@@ -115,9 +120,43 @@
 	// Initialize
 	const pagetitle = $('.page-title').html();
 	tableload_Dept();
+	
+	// script for interactions
+	// ACTION LISTENERS
+	$('.btn_save').click(function(){
+		var chk = checkFormValidity();
+		var id = $(this).attr('data-id');
+		if(chk){
+			// Convert id to a number (if needed)
+			var notif = parseInt(id, 10);
+			let message = notif === 0 ? 'New '+pagetitle+' Saved!' : pagetitle+' Details Updated!';
+			var data = { dept_name :  $('#dept_name').val(), pkid : id};
+			var json = JSON.stringify(data);
+			$.post("../backend/post_dept.php", { data: json}, function (data, a) {
+				data = data.trim();
+				console.log(data);
+				if(data == 'exist'){
+					Swal.fire({icon: 'error', title: pagetitle+'already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
+				}else if(data == 'exist_name'){
+					Swal.fire({icon: 'error', title: pagetitle+' Name already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
+				}else if(data == 'true'){
+					Swal.fire({icon: 'success',title: message,showConfirmButton: false,timer:950});
+					tableload_Dept();
+					showMainPage();
+					is_active = 1;
+				}else if(data.trim() == ''){
+					Swal.fire({icon: 'error',title: 'Error Uploading to Database!',showConfirmButton: false,timer:1000});
+				}
+			});
+		}
+	});
+	$('.btn-cancel').click(function(){	
+
+	});
+	
 	// FUNCTIONS
 	function tableload_Dept(){
-		resetDataTable();
+		resetDataTable('.table');
 		$.get("../backend/get_list_dept.php?security=123465", function(data,status){
 			$("#table_department tbody").html(data);
 			setDataTable(".table", {showActions : true});
@@ -175,40 +214,6 @@
 			});			
 		});
 	}
-	// script for interactions
-	// ACTION LISTENERS
-	$('.btn_save').click(function(){
-		var chk = checkFormValidity();
-		var id = $(this).attr('data-id');
-		if(chk){
-			// Convert id to a number (if needed)
-			var notif = parseInt(id, 10);
-			let message = notif === 0 ? 'New '+pagetitle+' Saved!' : pagetitle+' Details Updated!';
-			var data = { dept_name :  $('#dept_name').val(), pkid : id};
-			var json = JSON.stringify(data);
-			$.post("../backend/post_dept.php", { data: json}, function (data, a) {
-				data = data.trim();
-				console.log(data);
-				if(data == 'exist'){
-					Swal.fire({icon: 'error', title: pagetitle+'already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
-				}else if(data == 'exist_name'){
-					Swal.fire({icon: 'error', title: pagetitle+' Name already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
-				}else if(data == 'true'){
-					Swal.fire({icon: 'success',title: message,showConfirmButton: false,timer:950});
-					tableload_Dept();
-					showMainPage();
-					is_active = 1;
-				}else if(data.trim() == ''){
-					Swal.fire({icon: 'error',title: 'Error Uploading to Database!',showConfirmButton: false,timer:1000});
-				}
-			});
-		}
-	});
-	$('.cnl-btn').click(function(){	
-
-	});
-	
-
 	
 </script>
 
