@@ -1,7 +1,7 @@
 <?php include('../config/postcheck.php') ?>
 <?php
 	include('../config/check_permission.php');
-	$required_permission_class = ['inventory-permission', 'superadmin'];
+	$required_permission_class = ['superadmin'];
 	check_permission($required_permission_class);
 ?>
 <!DOCTYPE html>

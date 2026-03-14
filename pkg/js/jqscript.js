@@ -835,7 +835,5 @@ $(function () {
 			}
 		}
 	});
-	loadProfile();
-
 	console.log("jquery loaded");
 });

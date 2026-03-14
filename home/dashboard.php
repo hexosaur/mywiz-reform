@@ -53,7 +53,7 @@
 									</div>
 								</div>
 
-								<div class="col-xl-3 col-md-6">
+								<!-- <div class="col-xl-3 col-md-6">
 									<div class="card prod-p-card bg-c-blue" style="cursor: pointer;">
 										<div class="card-body">
 											<div class="row align-items-center m-b-25">
@@ -104,41 +104,8 @@
 											<p class="m-b-0 text-white"><span class="label label-danger m-r-10">15</span>Unread Announcements</p>
 										</div>
 									</div>
-								</div>
-
-								<div class="col-xl-3 col-md-6">
-									<div class="card prod-p-card bg-c-red" style="cursor: pointer;">
-										<div class="card-body  text-white">
-											<p>
-											NAGHIMO NKA OG YEARLY LEAVE RESET ALSO CHECK THE TABLE AND SQL NAME KAY PLAN TO RENAME It
-											PROFILE MODIFICATION ON LOGIN NA DAUN KA HUMANA NA DAUN!
-											<br>
-											<br>
-											LEAVE TYPE PD DAUN IS ILISAN TITLE
-											<br>
-											CHECK PD DIAY SA HR LEVEL KAY NAAY NIAPPEAR NA PRESIDENT DAUN TOP MANAGEMENT MURAG MADOUBLE SYA AYHA MA APPROVE PERO SA PINAKATOP MANAGEMENT KAY NAAY HR LANG
-											<br>
-											LEAVE ARCHIVE ADD ALSO TO HAVE TOTAL LIST OF LEAVE REQUESTS
-											</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-xl-3 col-md-6">
-									<div class="card prod-p-card bg-c-red" style="cursor: pointer;">
-										<div class="card-body">
-											<div class="row align-items-center m-b-25">
-												<div class="col">
-													<h6 class="m-b-5 text-white">Announcements</h6>
-													<h3 class="m-b-0 text-white">15 Unread</h3>
-												</div>
-												<div class="col-auto">
-													<i class="fas fa-money-bill-alt text-c-red f-18"></i>
-												</div>
-											</div>
-											<p class="m-b-0 text-white"><span class="label label-danger m-r-10">15</span>Unread Announcements</p>
-										</div>
-									</div>
-								</div>
+								</div> -->
+				
 
 							</div>
 							<!-- [ Main Content ] end -->

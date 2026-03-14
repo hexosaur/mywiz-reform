@@ -74,7 +74,7 @@
 														<div class="col-md-7 col-sm-6 text-center text-sm-left mb-3 mb-md-0">
 															<h2 class="mb-1 font-weight-bold"><span  id="profile-name"></span></h2>
 															<h6 class=" mb-1"><span class="profile-code"></span></h6>
-															<h6 class=" mb-1"><span id="">Nickname</span></h6>
+															<!-- <h6 class=" mb-1"><span id="">Nickname</span></h6> -->
 														</div>
 														<!-- Edit Button -->
 														<div class="col-md-3 col-sm-3 text-center text-sm-right">
@@ -273,7 +273,7 @@
 								</div>
 								
 								<div class="row view-default" >
-									<div class="col-xl-4">
+									<div class="col-xl-5">
 										<div class="card">
 											<div class="card-body">
 												<div class="row">
@@ -354,7 +354,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-xl-8 profile-post">
+									<div class="col-xl-7 profile-post">
 										<h3 class="text-center f-w-600 text-muted mt-2">No post available</h3>
 										<h3 class="text-center f-w-600 text-muted mt-2">Will be updated sooner...</h3>
 										<div class="card d-none">
@@ -470,8 +470,6 @@
 					$.get("../backend/get_det_emp.php?security=123465&id=" + pkid, function(data, status){
 
 						var employee = jQuery.parseJSON(data);
-						console.log(employee);
-
 						$("#profile-address").html(employee.address);
 						$(".profile-rate span").html("₱ "+employee.daily_rate);
 						$("#profile-birthday").html(employee.birth_date);
