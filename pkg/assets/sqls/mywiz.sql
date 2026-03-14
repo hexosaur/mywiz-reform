@@ -322,17 +322,17 @@ CREATE TABLE IF NOT EXISTS ref_reset_leave_logs (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- RESET LEAVE ENTITLEMENTS FOR A NEW YEAR /MANUAL
-UPDATE leave_entitlements SET
-	used_days = 0,  -- Reset used_days
-	remaining_days = allocated_days + modified_days,  -- Reset remaining days based on allocated and modified days
-	modified_days = CASE
-		WHEN scope = 0 THEN 0  -- Reset modified_days only for YEAR_ONLY
-		ELSE modified_days  -- Keep modified_days unchanged for ALL_YEARS
-	END
-WHERE
-	(scope = 0 AND entitlement_year = YEAR(CURDATE()) - 1)  -- Reset for the previous year
-	OR
-	(scope = 1 AND entitlement_year IS NULL);  -- Reset for ALL_YEARS (no specific year)
+-- UPDATE leave_entitlements SET
+-- 	used_days = 0,
+-- 	remaining_days = allocated_days + modified_days, 
+-- 	modified_days = CASE
+-- 		WHEN scope = 0 THEN 0
+-- 		ELSE modified_days 
+-- 	END
+-- WHERE
+-- 	(scope = 0 AND entitlement_year = YEAR(CURDATE()) - 1)
+-- 	OR
+-- 	(scope = 1 AND entitlement_year IS NULL);
 
 
 -- LEAVE REQUEST TABLE SECTION
