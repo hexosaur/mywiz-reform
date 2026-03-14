@@ -3,12 +3,12 @@ session_start();
 error_reporting(0);
 include('../config/cfg.php');
 
-if (!isset($_POST['department'])) {
+if (!isset($_POST['data'])) {
 	echo "err";
 	exit;
 }
 
-$dept = json_decode($_POST['department']);
+$dept = json_decode($_POST['data']);
 if (!$dept) {
 	echo "err";
 	exit;

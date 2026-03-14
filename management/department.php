@@ -82,7 +82,7 @@
 												<hr>
 												<form>
 													<div class="row">
-														<div class=" form-group col-md-7">
+														<div class=" form-group col-md-12">
 															<label for="dept_name">Department Name <span class="text-danger">*</span></label>
 															<input id="dept_name" class="form-control form-control-sm" placeholder="Department Name"  required/>
 														</div>
@@ -132,6 +132,7 @@
 			let message = notif === 0 ? 'New '+pagetitle+' Saved!' : pagetitle+' Details Updated!';
 			var data = { dept_name :  $('#dept_name').val(), pkid : id};
 			var json = JSON.stringify(data);
+			console.log(json)
 			$.post("../backend/post_dept.php", { data: json}, function (data, a) {
 				data = data.trim();
 				console.log(data);
