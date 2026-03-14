@@ -114,8 +114,8 @@
 					</a>
 					<div class="dropdown-menu dropdown-menu-right profile-notification">
 						<div class="pro-head">
-							<img id="pfp" src="../pkg/assets/media/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
-							<span id="user_name">Test</span>
+							<img id="pfp" src="../pkg/assets/media/user/avatar-1.jpg" style="width:40px;height:40px;border-radius: 50%; object-fit: cover; object-position: center;" alt="User-Profile-Image"> Hi! 
+							<span id="user_name"></span>
 							
 						</div>
 						<ul class="pro-body">

@@ -15,6 +15,15 @@
 	.img-preview img:hover {
 		opacity: 0.8;
 	}
+	.profile-avatar {
+		width: 130px;
+		height: 130px;
+		border-radius: 50%;
+		object-fit: cover;
+		object-position: center;
+		border: 3px solid #fff;
+		box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	}
 </style>
 <body>
 	<!-- [ navigation menu ] start -->
@@ -67,7 +76,7 @@
 														<div class="col-md-2 col-sm-3 text-center text-sm-left mb-3 mb-md-0">
 															<img id="profile-picture"
 																src="../uploads/profile/default.jpg"
-																class="img-fluid img-radius"
+																class="profile-avatar"
 																alt="User Profile Image">
 														</div>
 														<!-- Profile Info -->
