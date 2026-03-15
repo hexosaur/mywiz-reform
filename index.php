@@ -75,7 +75,7 @@ if (!empty($_SESSION['adminlogin']) || !empty($_SESSION['login'])) {
 		}
 
 		.login-form-panel {
-			width: 42%;
+			width: 45%;
 			min-width: 360px;
 			background: rgba(255,255,255,0.98);
 			padding: 42px 34px 32px;
