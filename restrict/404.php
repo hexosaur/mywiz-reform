@@ -42,7 +42,7 @@
 			</p>
 
 			<div class="searchbox p-2 mb-4">
-				<form class="d-flex gap-2" action="/mywiz-reform/" method="get">
+				<form class="d-flex gap-2" action="/mywiz/" method="get">
 				<input class="form-control border-0 bg-transparent" type="text" name="q"
 						placeholder="Search (optional)…" aria-label="Search">
 				<button class="btn btn-primary px-4" type="submit">Search</button>
@@ -50,8 +50,8 @@
 			</div>
 
 			<div class="d-flex flex-wrap gap-2">
-				<a class="btn btn-primary px-4" href="/mywiz-reform/home/dashboard">Go to Home</a>
-				<a class="btn btn-light px-4" href="/mywiz-reform/">Login</a>
+				<a class="btn btn-primary px-4" href="/mywiz/home/dashboard">Go to Home</a>
+				<a class="btn btn-light px-4" href="/mywiz/">Login</a>
 				<button class="btn btn-light px-4" onclick="history.back()">Go Back</button>
 			</div>
 
