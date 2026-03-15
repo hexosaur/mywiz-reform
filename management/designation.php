@@ -152,18 +152,16 @@
 	$('.btn_save').click(function(){
 		var chk = checkFormValidity();
 		var id = $(this).attr('data-id');
-		// console.log("DATA ID OF SAVE BUTTON: ",id)
 		if(chk){
 			// Convert id to a number (if needed)
 			var notif = parseInt(id, 10);
 			let message = notif === 0 ? 'New '+pagetitle+' Saved!' : pagetitle+' Details Updated!';
 			var data = { role_name: $('#role_name').val(), role_desc : $('#role_desc').val(), role_dept :  $('#role_dept').val(), role_access : $('#role_access').val(), role_perms : $('#role_perms').val(),  pkid : id}
-			// console.log(data)
 			var json = JSON.stringify(data)
 			// console.log(json);
 			$.post("../backend/post_role.php", {data: json}, function (data, a) {
 				data = data.trim();
-				console.log(data);
+				// console.log(data);
 				if(data == 'exist'){
 					Swal.fire({icon: 'error', title: pagetitle+'already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
 				}else if(data == 'true'){

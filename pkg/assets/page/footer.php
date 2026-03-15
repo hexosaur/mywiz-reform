@@ -35,6 +35,8 @@ https://cdn.jsdelivr.net/npm/jquery-circle-progress@1.2.2/dist/circle-progress.m
 
 
 <?php $__ms = (microtime(true) - $__t0) * 1000; ?>
+
+
 <script>
 	console.log("PHP exec (ms): <?= number_format($__ms, 2) ?>");
 	
@@ -48,33 +50,130 @@ https://cdn.jsdelivr.net/npm/jquery-circle-progress@1.2.2/dist/circle-progress.m
 		$('.' + perms).removeClass('d-none').fadeIn();
 	});
 
-
+	
 </script>
 
+
+<!-- FOR CHECKING SESSIONS ONLY -->
+<?php include('../debugs/check_sessions.php') ?>
+<script>
+	// console.log("APP_SESSION:", window.APP_SESSION);
+</script>
 <!-- Preloader -->
 <script>
 (function($){
-	const MIN_MS = 500;
-	const start = Date.now();
+	const SHOW_AFTER_MS = 180;
+	let finished = false;
+	let shown = false;
+	let showTimer = null;
 
-	$("body").css("overflow","hidden");
+	function showPreloader(){
+		if (finished || shown) return;
+		shown = true;
 
-	function hidePreloader(){
-	const elapsed = Date.now() - start;
-	const wait = Math.max(0, MIN_MS - elapsed);
-
-	setTimeout(function(){
-		$("#pagePreloader").addClass("is-hiding");
-		setTimeout(function(){
-		$("#pagePreloader").remove();
-		$("body").css("overflow","");
-		}, 220);
-	}, wait);
+		$("body").css("overflow", "hidden");
+		$("#pagePreloader").addClass("is-visible").removeClass("is-hiding");
 	}
 
-	$(document).ready(hidePreloader);
-	// If you want it to stay until images finish loading:
+	function hidePreloader(){
+		if (finished) return;
+		finished = true;
+
+		clearTimeout(showTimer);
+
+		// If page loaded fast, loader was never shown
+		if (!shown) {
+			$("#pagePreloader").remove();
+			return;
+		}
+
+		$("#pagePreloader").addClass("is-hiding").removeClass("is-visible");
+		setTimeout(function(){
+			$("#pagePreloader").remove();
+			$("body").css("overflow", "");
+		}, 180);
+	}
+	showTimer = setTimeout(showPreloader, SHOW_AFTER_MS);
 	$(window).on("load", hidePreloader);
 
 })(jQuery);
+</script>
+<script>
+$(function () {
+	const STORAGE_KEY = 'site-theme-mode';
+
+	function getSavedThemeMode() {
+		return localStorage.getItem(STORAGE_KEY) || 'auto';
+	}
+
+	function getSystemTheme() {
+		return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+	}
+
+	function getEffectiveTheme(mode) {
+		return mode === 'auto' ? getSystemTheme() : mode;
+	}
+
+	function updateThemeIcon(mode, effectiveTheme) {
+		let iconClass = 'bi bi-circle-half';
+
+		if (mode === 'light') {
+			iconClass = 'bi bi-brightness-high';
+		} else if (mode === 'dark') {
+			iconClass = 'bi bi-moon';
+		} else {
+			iconClass = effectiveTheme === 'dark' ? 'bi bi-moon' : 'bi bi-brightness-high';
+		}
+
+		$('#themeNavbarIcon').attr('class', iconClass);
+	}
+
+	function updateThemeLabel(mode, effectiveTheme) {
+		if (mode === 'auto') {
+			$('#theme-current-label').text('Current: Auto (' + (effectiveTheme === 'dark' ? 'Dark' : 'Light') + ')');
+		} else {
+			$('#theme-current-label').text('Current: ' + (mode.charAt(0).toUpperCase() + mode.slice(1)));
+		}
+	}
+
+	function applyTheme(mode) {
+		const effectiveTheme = getEffectiveTheme(mode);
+
+		$('html').removeClass('theme-dark theme-light')
+				 .addClass(effectiveTheme === 'dark' ? 'theme-dark' : 'theme-light');
+
+		updateThemeIcon(mode, effectiveTheme);
+		updateThemeLabel(mode, effectiveTheme);
+	}
+
+	function setTheme(mode) {
+		localStorage.setItem(STORAGE_KEY, mode);
+		applyTheme(mode);
+	}
+
+	$(document).on('click', '.btn-theme-change', function (e) {
+		e.preventDefault();
+		const mode = $(this).data('theme-value');
+		setTheme(mode);
+	});
+
+	const initialMode = getSavedThemeMode();
+	applyTheme(initialMode);
+
+	const media = window.matchMedia('(prefers-color-scheme: dark)');
+
+	if (typeof media.addEventListener === 'function') {
+		media.addEventListener('change', function () {
+			if (getSavedThemeMode() === 'auto') {
+				applyTheme('auto');
+			}
+		});
+	} else if (typeof media.addListener === 'function') {
+		media.addListener(function () {
+			if (getSavedThemeMode() === 'auto') {
+				applyTheme('auto');
+			}
+		});
+	}
+});
 </script>

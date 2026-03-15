@@ -65,45 +65,10 @@ $(function () {
 	const log = (msg) => $('#log').text(msg);
 	
 	// SWEET ALERT 2
-	// CHECKING VALIDITY
-	
-
-
-
-	// DATA TABLES INITIALIZE
-	// const $tbl = $('.datatable');
-	// // prevent double init if you revisit/re-render
-	// if ($.fn.DataTable.isDataTable($tbl)) {
-	// 	$tbl.DataTable().destroy();
-	// }
-
-	// $tbl.DataTable({
-	// 	pageLength: 10,
-	// 	lengthChange: true,
-	// 	ordering: true,
-	// 	searching: true,
-	// 	autoWidth: false,
-	// 	order: [[0, 'desc']],
-	// 	columnDefs: [
-	// 	{ targets: [4], orderable: false, searchable: false }, 
-	// 	{ targets: [3], className: 'dt-location' }            
-	// 	]
-	// });
-	
-	
-
-
-	
+	// CHECKING VALIDITY	
 	
 
 	// FORM REQUIREMENT CHECKER
 
-
-
-
-	
-
-	
-
-	console.log("script loaded");
+	// console.log("script loaded");
 });

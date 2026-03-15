@@ -18,6 +18,16 @@ if (!isset($LOADER_TEXT)) $LOADER_TEXT = "Loading page...";
 	background: var(--loader-bg);
 	backdrop-filter: blur(4px);
 	-webkit-backdrop-filter: blur(4px);
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transition: opacity .18s ease, visibility .18s ease;
+}
+
+#pagePreloader.is-visible{
+	opacity: 1;
+	visibility: visible;
+	pointer-events: auto;
 }
 
 #pagePreloader .loader-card{
@@ -29,8 +39,10 @@ if (!isset($LOADER_TEXT)) $LOADER_TEXT = "Loading page...";
 	padding: 22px 22px 18px;
 	transform: translateY(8px);
 	opacity: 0;
-	animation: loaderIn .18s ease forwards;
 	text-align: center;
+}
+#pagePreloader.is-visible .loader-card{
+	animation: loaderIn .18s ease forwards;
 }
 @keyframes loaderIn{ to{ transform:translateY(0); opacity:1; } }
 #pagePreloader .spinner-border{

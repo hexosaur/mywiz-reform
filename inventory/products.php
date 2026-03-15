@@ -47,12 +47,22 @@
 										<div class="card">
 											<div class="card-body table-border-style">
 												<div class="row align-items-center">
-														<div class="col-6 col-md-10">
+														<div class="col col-md-6">
 															<h3 class="mb-0">Product List</h3>
 														</div>
-														<div class="col-6 col-md-2 d-flex justify-content-end">
+														<div class="col col-md-6 d-flex justify-content-between">
+															<div class="d-flex align-items-center">
+																<button class="btn btn-outline-secondary btn-sm"><i class="bi bi-box-arrow-in-down"></i> EXPORT</button>
+															</div>
+															<div class="d-flex align-items-center">
+																<button class="btn btn-outline-secondary btn-sm"><i class="bi bi-box-arrow-in-down"></i> GET TEMPLATE</button>
+															</div>
+															<div class="d-flex align-items-center">
+																<button class="btn btn-outline-secondary btn-sm"><i class="bi bi-upload"></i> IMPORT</button>
+															</div>
 															<button class="btn btn-primary btn-add">Add <span class="page-title"></span></button>
 														</div>
+														
 													</div>
 												<hr>
 												<div class="table-responsive">

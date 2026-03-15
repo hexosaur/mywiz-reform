@@ -1,7 +1,7 @@
 <?php include('../config/postcheck.php') ?>
 <?php
 	include('../config/check_permission.php');
-	$required_permission_class = ['hr-permission', 'superadmin'];
+	$required_permission_class = ['superadmin'];
 	check_permission($required_permission_class);
 ?>
 <!DOCTYPE html>
@@ -25,11 +25,11 @@
 									<div class="row align-items-center">
 										<div class="col-md-8">
 											<div class="page-header-title">
-												<h5 class="m-b-10">Leave Type</h5>
+												<h5 class="m-b-10">Page Settings</h5>
 											</div>
 											<ul class="breadcrumb">
 												<li class="breadcrumb-item"><a href="../home/dashboard"><i class="feather icon-home"></i></a></li>
-												<li class="breadcrumb-item"><a href="#">Leave</a></li>
+												<li class="breadcrumb-item"><a href="#">Admin</a></li>
 												<li class="breadcrumb-item"><a href="#"><span class="page-title"></span></a></li>
 											</ul>
 										</div>
@@ -55,16 +55,13 @@
 													</div>
 												<hr>
 												<div class="table-responsive">
-													<table id="table_leave" class="table table-hover">
+													<table id="table_access" class="table table-hover">
 														<thead>
 															<tr>
 																<th class="text-center">#</th>
-																<th class="text-center">Code</th>
-																<th class="text-center">Name</th>
+																<th class="text-center">Access Level</th>
 																<th class="text-center">Description</th>
-																<th class="text-center">Days</th>
-																<th class="text-center">Type</th>
-																<th class="text-center">Status</th>
+																<th class="text-center">Value</th>
 																<th class="text-center">Action</th>
 															</tr>
 														</thead>
@@ -79,7 +76,7 @@
 								<!-- [ Default View ] end -->
 
 								<!-- [ Modify View ] start -->
-								<div class="row view-modify d-none">
+								<div class="row view-modify">
 									<div class="col-xl-12">
 										<div class="card">
 											<div class="card-body">
@@ -87,46 +84,20 @@
 												<hr>
 												<form>
 													<div class="row">
-														<div class=" form-group col-md-6">
-															<label for="type_name">Leave Category Name <span class="text-danger">*</span></label>
-															<input id="type_name" class="form-control form-control-sm" placeholder="Name" required/>
+														<div class="form-group col-md-6">
+															<label for="access_name">Access Level Name <span class="text-danger">*</span></label>
+															<input id="access_name" class="form-control form-control-sm" placeholder="Access Name"  required/>
 														</div>
-														<div class=" form-group col-md-3">
-															<label for="type_code">Leave Category Code <span class="text-danger">*</span></label>
-															<input id="type_code" class="form-control form-control-sm" placeholder="Code" required/>
+														<div class="form-group col-md-6">
+															<label for="access_desc">Access Description<span class="text-danger">*</span></label>
+															<input id="access_desc" class="form-control form-control-sm" placeholder="Description"  required/>
 														</div>
-														<div class=" form-group col-md-3">
-															<label>Gender <span class="text-danger">*</span></label>
-															<select id="type_gender" class="form-control" required>
-																<option value="All" selected>All</option>
-																<option value="Male">Male only</option>
-																<option value="Female">Female Only</option>
-															</select>
-														</div>
-														<div class=" form-group col-md-6">
-															<label for="type_desc">Leave Description <span class="text-danger">*</span></label>
-															<input id="type_desc" class="form-control form-control-sm" placeholder="Description"/>
-														</div>
-														<div class=" form-group col-md-6">
-															<label for="type_days">Maximum Number of Days <span class="text-danger">*</span></label>
-															<input id="type_days" type="number" class="form-control form-control-sm" placeholder="Max Days" required/>
+														<div class="form-group col-md-6">
+															<label for="access_val">Value <span class="text-danger">*</span></label>
+															<input id="access_val" type="number" class="form-control form-control-sm" placeholder="Value"/>
 														</div>
 													</div>
-													<div class="row justify-content-evenly">
-														<div class="form-group ml-3 col form-check">
-															<input type="checkbox" class="form-check-input" id="type_pay">
-															<label class="form-check-label" for="type_pay">With Pay</label>
-														</div>
-														<div class="form-group ml-3 col form-check">
-															<input type="checkbox" class="form-check-input" id="type_attach">
-															<label class="form-check-label" for="type_attach">Attachment Required</label>
-														</div>
-														<div class="form-group ml-3 col form-check">
-															<input type="checkbox" class="form-check-input" id="type_proxy">
-															<label class="form-check-label" for="type_proxy">Has Proxy</label>
-														</div>
 														
-													</div>
 														
 												</form>
 												<hr>
@@ -139,7 +110,7 @@
 									</div>
 								</div>
 								<!-- [ Modify View ] end -->
-							
+                               
 								
 							</div>
 							<!-- [ Main Content ] end -->
@@ -158,31 +129,29 @@
 	// script for body functions default
 	// Initialize
 	const pagetitle = $('.page-title').html();
-	tableload_Leave();
+	tableload_Access();
 	// FUNCTIONS
-	function tableload_Leave(){
+	function tableload_Access(){
 		resetDataTable('.table');
-		$.get("../backend/get_list_leave_type.php?security=123465", function(data,status){
-			$("#table_leave tbody").html(data);
-			setDataTable(".table", {rowHide : 3, showActions : true});
+		$.get("../backend/get_list_access.php?security=123465", function(data,status){
+			$("#table_access tbody").html(data);
+			setDataTable(".table");
+			// console.log(data);
+			// wrapTable();
 			// EDIT
 			$('.btn-edit').click(function() {
 				$('.text-btn').text("Edit");
 				$('.view-modify').fadeIn().removeClass('d-none');
 				$('.view-default').hide();
 				pkid = $(this).data('id');
-				$.get("../backend/get_det_leave_type.php?security=123465&id=" + pkid, function(data, status) {
+				$.get("../backend/get_det_access.php?security=123465&id=" + pkid, function(data, status) {
 					var array = jQuery.parseJSON(data);
-					// console.log(array);
 					$('.btn_save').attr('data-id', pkid);
-					$('#type_name').val(array.type_name);
-					$('#type_code').val(array.type_code);
-					$('#type_desc').val(array.type_desc);
-					$('#type_days').val(array.type_days);
-					$('#type_gender').val(array.gender);
-					$('#type_pay').prop('checked', !!array.type_pay);
-					$('#type_attach').prop('checked', !!array.type_attach);
-					$('#type_proxy').prop('checked', !!array.type_proxy);
+					$('#access_name').val(array.access_name);
+					$('#access_val').val(array.access_val);
+					$('#access_desc').val(array.access_desc);
+
+					
 
 				});
 			});
@@ -209,14 +178,14 @@
 				}).then((result) => {
 					if (result.isConfirmed) {
 						var id = $(this).data('id');
-						$.post("../backend/del_leave_type.php?security=123465&id=" + id, function (data, status) {
+						$.post("../backend/del_role.php?security=123465&id=" + id, function (data, status) {
 						data = (data || '').trim();
 						if (data === 'true') {
 							Swal.fire({ showConfirmButton: false, title: 'Deleted!', text: pagetitle+' deleted.', icon: 'success', timer: 700 });
-							tableload_Leave();
+							tableload_Access();
 							showMainPage();
 						} else {
-							Swal.fire({ icon: 'error', title: 'Error deleting '+pagetitle, showConfirmButton: false, timer: 1200 });
+							Swal.fire({ icon: 'error', title: 'Error deleting '+pagetitle,  showConfirmButton: false, timer: 1200 });
 						}
 						});
 					}
@@ -224,7 +193,6 @@
 			});			
 		});
 	}
-
 	// script for interactions
 	// ACTION LISTENERS
 	$('.btn_save').click(function(){
@@ -234,22 +202,19 @@
 			// Convert id to a number (if needed)
 			var notif = parseInt(id, 10);
 			let message = notif === 0 ? 'New '+pagetitle+' Saved!' : pagetitle+' Details Updated!';
-			let type_pay = $('#type_pay').prop('checked') ? 1 : 0;
-			let type_attach = $('#type_attach').prop('checked') ? 1 : 0;
-			let type_proxy = $('#type_proxy').prop('checked') ? 1 : 0;
-			var data = { type_name : $('#type_name').val(), type_code : $('#type_code').val(), type_gender : $('#type_gender').val() , type_desc : $('#type_desc').val(), type_days : $('#type_days').val(), type_pay : type_pay, type_attach : type_attach, type_proxy : type_proxy, pkid : id };
+			var data = { access_name :  $('#access_name').val(), access_val : $('#access_val').val(),access_desc : $('#access_desc').val(), pkid : id};
+			console.log("PUSHED SAVED DATA: ",data);
 			var json = JSON.stringify(data);
-			// console.log(data);
-			$.post("../backend/post_leave_type.php", { data: json}, function (data, a) {
+			$.post("../backend/post_access.php", { data: json}, function (data, a) {
 				data = data.trim();
-				// console.log(data);
-				if(data == 'exist_code'){
-					Swal.fire({icon: 'error', title: pagetitle+' Code already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
+				console.log(data);
+				if(data == 'exist'){
+					Swal.fire({icon: 'error', title: pagetitle+'already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
 				}else if(data == 'exist_name'){
 					Swal.fire({icon: 'error', title: pagetitle+' Name already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
 				}else if(data == 'true'){
 					Swal.fire({icon: 'success',title: message,showConfirmButton: false,timer:950});
-					tableload_Leave();
+					tableload_Access();
 					showMainPage();
 					is_active = 1;
 				}else if(data.trim() == ''){

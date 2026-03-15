@@ -140,10 +140,6 @@
 
 	<?php include('../pkg/assets/page/footer.php')?>
 </body>
-
-<!-- FOR CHECKING SESSIONS ONLY -->
-<?php include('../config/check_sessions.php') ?>
-
 <script>
 
 	// Initialize
@@ -256,12 +252,6 @@
 			});
 		});
 	}
-
-	// console.log("APP_SESSION:", window.APP_SESSION);
-	// MODIFY SOON
-	// tableload_Branch();
-	// hideAction('#table_branch', userPermissions);
-
 </script>
 
 

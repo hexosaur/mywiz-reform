@@ -473,8 +473,22 @@ function computeDayRange(rangeSel, timeFromSel, timeToSel) {
 	return days;
 }
 
+// DYNAMIC AHEAD LIMITING DAYS
+// MUST USE THE CLASS "daylimit-n" such that n will get the number of days ahead
+function getDayLimitMinDate($el) {
+	if (!$el || !$el.length) return null;
 
+	const classList = ($el.attr('class') || '').split(/\s+/);
 
+	for (let cls of classList) {
+		const match = cls.match(/^daylimit-(\d+)$/);
+		if (match) {
+			return moment().startOf('day').add(parseInt(match[1], 10) + 1, 'days');
+		}
+	}
+
+	return null;
+}
 
 
 	
@@ -644,6 +658,10 @@ $(function () {
 
 	const opts = { singleDatePicker: true, showDropdowns: true, autoUpdateInput: false, locale: { format: 'MM/DD/YY', cancelLabel: 'Clear' } };
 
+	// ADDED
+	const classLimit = getDayLimitMinDate($el);
+	if (classLimit) opts.minDate = classLimit;
+
 	const invalidFn = getInvalidDateFn($el);
 	if (invalidFn) opts.isInvalidDate = invalidFn;
 
@@ -659,6 +677,11 @@ $(function () {
 		const $el = $(this);
 
 		const opts = { showDropdowns: true, autoUpdateInput: false, locale: { format: 'MM/DD/YY', cancelLabel: 'Clear' } };
+
+		// ADDED
+		const classLimit = getDayLimitMinDate($el);
+		if (classLimit) opts.minDate = classLimit;
+
 
 		const invalidFn = getInvalidDateFn($el);
 		if (invalidFn) opts.isInvalidDate = invalidFn;
@@ -735,11 +758,6 @@ $(function () {
 		$('.view-modify').fadeIn().removeClass('d-none');
 		$('.view-default').hide();
 	});
-	// $('.btn-edit').click(function(){
-	// 	$('.text-btn').text("Edit");
-	// 	$('.view-modify').fadeIn().removeClass('d-none');
-	// 	$('.view-default').hide();
-	// });
 	$('.btn-cancel').click(function(){	
 		showMainPage();
 	});
@@ -824,6 +842,7 @@ $(function () {
 			}
 		});
 	});
+	
 	// GET PROFILE 
 	$.get("../backend/system_get_employee_profile.php?security=123465", function(data, status){
 		var array = jQuery.parseJSON(data);
@@ -835,5 +854,5 @@ $(function () {
 			}
 		}
 	});
-	console.log("jquery loaded");
+	// console.log("jquery loaded");
 });

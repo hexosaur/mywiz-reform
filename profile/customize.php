@@ -135,7 +135,7 @@
 																				</div>
 																			</div>
 																			<div class="form-group col-md-8 align-items-center">
-																				<label class=" mt-4" for="profile-image" class="mr-2">Attach Image <span class="text-danger">*</span></label>
+																				<label class=" mt-4" for="profile-image" class="mr-2">Upload Profile Picture <span class="text-danger">*</span></label>
 																				<input type="file" class="form-control" id="profile-image" />
 																			</div>
 																																				

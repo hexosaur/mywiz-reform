@@ -132,10 +132,8 @@
 			let message = notif === 0 ? 'New '+pagetitle+' Saved!' : pagetitle+' Details Updated!';
 			var data = { dept_name :  $('#dept_name').val(), pkid : id};
 			var json = JSON.stringify(data);
-			console.log(json)
 			$.post("../backend/post_dept.php", { data: json}, function (data, a) {
 				data = data.trim();
-				console.log(data);
 				if(data == 'exist'){
 					Swal.fire({icon: 'error', title: pagetitle+'already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
 				}else if(data == 'exist_name'){
@@ -161,9 +159,6 @@
 		$.get("../backend/get_list_dept.php?security=123465", function(data,status){
 			$("#table_department tbody").html(data);
 			setDataTable(".table", {showActions : true});
-			// console.log(data);
-			// console.log(data);
-			// wrapTable();
 			// EDIT
 			$('.btn-edit').click(function() {
 				$('.text-btn').text("Edit");
@@ -172,7 +167,7 @@
 				pkid = $(this).data('id');
 				$.get("../backend/get_det_dept.php?security=123465&id=" + pkid, function(data, status) {
 					var array = jQuery.parseJSON(data);
-					console.log(array);
+					// console.log(array);
 					$('.btn_save').attr('data-id', pkid);
 					$('#dept_name').val(array.dept_name);
 				});
@@ -202,7 +197,7 @@
 						var id = $(this).data('id');
 						$.post("../backend/del_dept.php?security=123465&id=" + id, function (data, status) {
 						data = (data || '').trim();
-						console.log(data)
+						// console.log(data)
 						if (data === 'true') {
 							Swal.fire({ showConfirmButton: false, title: 'Deleted!', text: pagetitle+' deleted.', icon: 'success', timer: 700 });
 							tableload_Dept();

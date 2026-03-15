@@ -12,5 +12,4 @@
 ?>
 <script>
 	window.APP_SESSION = <?= json_encode($sess, JSON_HEX_TAG|JSON_HEX_APOS|JSON_HEX_QUOT|JSON_HEX_AMP) ?>;
-	// console.log("APP_SESSION:", window.APP_SESSION);
 </script>

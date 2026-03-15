@@ -176,8 +176,6 @@
 					formData.append('fileupload', fileInput[0].files[0]);
 				} 
 				formData.append('data', json);
-				// console.log(formData);
-				
 				$.ajax({
 					url: "../backend/post_leave_request.php",
 					type: "POST",
@@ -185,7 +183,6 @@
 					contentType: false, 
 					processData: false,
 					success: function(data) {
-						console.log(data.trim());
 						if(data.trim() == 'err'){
 							Swal.fire({icon: 'error', title: 'Fail to file leave request.', showConfirmButton: false, timer: 2500});
 						}else if(data.trim() == 'true'){
@@ -213,13 +210,10 @@
 	$('#req_type').change(function(){
 		var req_id = $('#req_proxy').val()
 		var ent_id = $(this).val();
-		// console.log(ent_id);
 		$('.btn_save').attr('data-id', req_id);
 		$.get("../backend/get_det_leave_ent_dd.php?security=123465&id=" + ent_id, function(data, status) {
 			var array_ent = jQuery.parseJSON(data);
-			console.log(array_ent);
 			usable_days = parseFloat(array_ent.allowed_days + array_ent.modified_days - array_ent.used_days, 2);
-			console.log(usable_days);
 			const needsAttach = array_ent.requires_attachment == 1;
 			const needsProxy = array_ent.requires_proxy == 1;
 			const $wrap = $('#req_attach').closest('.form-group');			

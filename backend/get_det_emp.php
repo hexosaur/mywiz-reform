@@ -8,8 +8,9 @@
 			$id = $_GET['id'];
 
 			// SQL query to retrieve employee details including province, city, barangay names
-			$sql = "SELECT e.employee_id, e.employee_code, CONCAT( e.first_name, ' ', IF(e.middle_name IS NOT NULL AND e.middle_name != '', CONCAT(LEFT(e.middle_name,1), '. '), '' ), e.surname, IF(e.suffix IS NOT NULL AND e.suffix != '', CONCAT(' ', e.suffix), '' ) ) AS full_name, e.birth_date, e.marital_status, e.gender, e.email, e.contact_no, e.address_line, e.date_hired, e.branch_id, e.department_id, e.role_id, e.daily_rate, e.sss_no, e.pagibig_no, e.tin_no, e.philhealth_no, e.is_active, p.prov_name, c.city_name, b.brgy_name
+			$sql = "SELECT e.employee_id, e.employee_code, CONCAT( e.first_name, ' ', IF(e.middle_name IS NOT NULL AND e.middle_name != '', CONCAT(LEFT(e.middle_name,1), '. '), '' ), e.surname, IF(e.suffix IS NOT NULL AND e.suffix != '', CONCAT(' ', e.suffix), '' ) ) AS full_name, e.birth_date, e.marital_status, e.gender, e.email, e.contact_no, e.address_line, e.date_hired, e.branch_id, e.department_id, e.role_id, e.daily_rate, e.sss_no, e.pagibig_no, e.tin_no, e.philhealth_no, e.is_active, p.prov_name, c.city_name, b.brgy_name, u.username
 					FROM mgmt_employees e
+					JOIN mgmt_users u ON e.employee_id = u.employee_id
 					LEFT JOIN ref_provinces p ON e.prov_id = p.prov_id
 					LEFT JOIN ref_cities c ON e.city_id = c.city_id
 					LEFT JOIN ref_barangays b ON e.brgy_id = b.brgy_id
@@ -50,6 +51,7 @@
 						"tin_no"        => $row['tin_no'],
 						"philhealth_no" => $row['philhealth_no'],
 						"is_active"     => $row['is_active'],
+						"username"     => $row['username'],
 					));
 					exit;
 				} else {

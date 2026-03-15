@@ -102,10 +102,11 @@
 					<li class="superadmin d-none nav-item pcoded-hasmenu">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-inbox"></i></span><span class="pcoded-mtext">Product Settings</span></a>
 						<ul class="pcoded-submenu">
+							<li class=""><a href="../inventory/products" class="">Products</a></li>
 							<li class=""><a href="../inventory/categories" class="">Categories</a></li>
+							<li class=""><a href="../inventory/categories" class="">Warehouse</a></li>
 							<li class=""><a href="../inventory/brands" class="">Brands/Manufacturers</a></li>
 							<li class=""><a href="../inventory/suppliers" class="">Suppliers</a></li>
-							<li class=""><a href="../inventory/products" class="">Products</a></li>
 							<li class=""><a href="../inventory/purchase" class="">Purchase</a></li>
 							<li class=""><a href="../inventory/transfer" class="">Transfers</a></li>
 							<li class=""><a href="../inventory/employee" class="">Customers</a></li>
@@ -172,6 +173,14 @@
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-users"></i></span><span class="pcoded-mtext">Org Settings</span></a>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="../admin/access" class="">Access Level</a></li>
+							<li class=""><a href="../admin/permissions" class="">Permissions</a></li>
+							<li class=""><a href="../admin/enroll" class="">Superadmin Enroll</a></li>
+						</ul>
+					</li>
+					<li class="superadmin nav-item pcoded-hasmenu d-none">
+						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-gear-wide-connected"></i></span><span class="pcoded-mtext">Page Settings</span></a>
+						<ul class="pcoded-submenu">
+							<li class=""><a href="../admin/settings" class="">Company Information</a></li>
 							<li class=""><a href="../admin/permissions" class="">Permissions</a></li>
 							<li class=""><a href="../admin/enroll" class="">Superadmin Enroll</a></li>
 						</ul>

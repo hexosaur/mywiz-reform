@@ -169,7 +169,6 @@
 				let scope    = $('#ent_year').prop('checked') ? 1 : 0;
 				var data = { scope :  scope, modified_days :  $('#modified_days').val(), pkid : id};
 				var json = JSON.stringify(data);
-				// console.log(data);
 				$.post("../backend/post_leave_ent_edit.php", { data: json}, function (data, a) {
 					data = data.trim();
 					if(data == 'exist'){
@@ -278,8 +277,6 @@
 			});			
 		});
 	}
-	// const cancan = 0;
-	// console.log(!!cancan);
 	
 	function isDivisibleByHalf(v){
 		var n = parseFloat(v);

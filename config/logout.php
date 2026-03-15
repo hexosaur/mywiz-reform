@@ -10,7 +10,7 @@ if (!empty($_COOKIE['remember_me'])) {
         $del->bind_param("s", $selector);
         $del->execute();
     }
-    setcookie("remember_me", "", time() - 3600, "/");
+    setcookie("remember_me", "", time() - 3600, "`/");
 }
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();

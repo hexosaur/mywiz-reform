@@ -263,7 +263,6 @@
 		var id = $(this).attr('data-id');
 		$.post("../backend/post_leave_cancel_request.php", { id: id}, function (data, a) {
 			data = data.trim();
-			// console.log(data);
 			if(data == 'true'){
 				Swal.fire({icon: 'success',title: "Success!", text : "Cancelation of Filed Leave Success",showConfirmButton: false,timer:1200});
 				tableload_LeaveRequests();
@@ -289,8 +288,6 @@
 				pkid = $(this).data('id');
 				$.get("../backend/get_det_leave_request.php?security=123465&id=" + pkid, function(data, status) {
 					var array = jQuery.parseJSON(data);
-					// console.log(data);
-					console.log(array);
 					$('.btn_save').attr('data-id', pkid);
 					
 					var imgPath = `../uploads/leaves/${array.request_details.attachment}`;

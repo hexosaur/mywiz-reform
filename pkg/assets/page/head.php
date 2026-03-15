@@ -3,6 +3,17 @@
 	$LOADER_TEXT = "Loading page...";
 	include __DIR__ . "/loader.php";
 ?>
+<script>
+(function () {
+	const STORAGE_KEY = 'site-theme-mode';
+	const saved = localStorage.getItem(STORAGE_KEY) || 'auto';
+	const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+	const effective = saved === 'auto' ? (systemDark ? 'dark' : 'light') : saved;
+
+	document.documentElement.classList.remove('theme-dark', 'theme-light');
+	document.documentElement.classList.add(effective === 'dark' ? 'theme-dark' : 'theme-light');
+})();
+</script>
 <head>
 	<!-- META -->
 	<meta charset="utf-8">

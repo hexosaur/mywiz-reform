@@ -162,7 +162,6 @@
 		let id = $(this).attr('data-id');
 		$.post("../backend/post_leave_request_approve.php", { id: id}, function (data, a) {
 			data = data.trim();
-			// console.log(data);
 			if(data == 'true'){
 				Swal.fire({icon: 'success',title: "Success!", text : "Leave request approved!",showConfirmButton: false,timer:1200});
 				tableload_LeaveRequests();
@@ -180,7 +179,6 @@
 		let id = $(this).attr('data-id');
 		$.post("../backend/post_leave_request_reject.php", { id: id}, function (data, a) {
 			data = data.trim();
-			// console.log(data);
 			if(data == 'true'){
 				Swal.fire({icon: 'success',title: "Success!", text : "Leave request rejected!",showConfirmButton: false,timer:1200});
 				tableload_LeaveRequests();
@@ -201,7 +199,6 @@
 			$("#table_requests tbody").html(data);
 			setDataTable("#table_requests", { showActions : true, dtOptions : {pageLength: 13, lengthChange: false,	ordering:  true, searching: true, responsive: true, ordering: false , dom: 'lrtip' }});
 			var array = jQuery.parseJSON(data);
-			console.log(array);
 			$("#table_requests tbody").html("");
 			let employee_level  = parseInt(array.employee.access_level_value);
 			let employee_branch = parseInt(array.employee.branch_id);

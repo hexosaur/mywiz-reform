@@ -386,6 +386,7 @@
 				$.get("../backend/get_det_emp.php?security=123465&id=" + pkid, function(data, status) {
 					var array = jQuery.parseJSON(data);
 					is_active = parseInt(array.is_active);
+					// console.log(array)
 					emp_active(is_active);
 					dd_role(array.department_id);
 					$('.btn_save').attr('data-id', pkid);
@@ -404,10 +405,6 @@
 					$('#pagibig_no').val(array.pagibig_no);
 					$('#tin_no').val(array.tin_no);
 					$('#philhealth_no').val(array.philhealth_no);
-					// console.log(array);
-
-
-
 					setTimeout(function() {
 						$('#role_id').val(parseInt(array.role_id));
 					}, 100); 
@@ -438,7 +435,6 @@
 						var id = $(this).attr('data-id');
 						$.post("../backend/system_reset_password.php?security=123465",{ id: id }, function (data, status) {
 						data = (data || '').trim();
-						console.log(data)
 						if (data === 'true') {
 							Swal.fire({ showConfirmButton: false, title: 'Success', text: pagetitle+' reset.', icon: 'success', timer: 700 });
 							tableload_Employee();

@@ -105,7 +105,37 @@
 										</div>
 									</div>
 								</div> -->
-				
+								<!-- <div class="col-md-12 col-xl-4">
+									<div class="card card-social">
+										<div class="card-block border-bottom">
+											<div class="row align-items-center justify-content-center">
+												<div class="col-auto">
+													<i class="fas fa-users text-primary f-36"></i>
+												</div>
+												<div class="col text-right">
+													<h3>12,281</h3>
+													<h5 class="text-c-blue mb-0">X <span class="text-muted">Total Employees</span></h5>
+												</div>
+											</div>
+										</div>
+										<div class="card-block">
+											<div class="row align-items-center justify-content-center card-active">
+												<div class="col-6">
+													<h6 class="text-center m-b-10"><span class="text-muted m-r-5">Target:</span>35,098</h6>
+													<div class="progress">
+														<div class="progress-bar progress-c-blue" role="progressbar" style="width:60%;height:6px;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+													</div>
+												</div>
+												<div class="col-6">
+													<h6 class="text-center  m-b-10"><span class="text-muted m-r-5">Duration:</span>350</h6>
+													<div class="progress">
+														<div class="progress-bar progress-c-green" role="progressbar" style="width:45%;height:6px;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div> -->
 
 							</div>
 							<!-- [ Main Content ] end -->
@@ -135,7 +165,6 @@
 	// YEARLY RESET FOR LEAVE
 	$.get("../backend/system_yearly_leave_reset.php", function(data, status){
 		data = data.trim();
-		console.log("Yearly leave crosscheck:", data);
 	});
 
 	$('.leave-permissions').click(function(){
@@ -144,10 +173,8 @@
 	})
 	$.get("../backend/get_leave_request.php?security=123465", function(data,status){
 		var array = jQuery.parseJSON(data);
-		// console.log(array);
 		if(array.status == 'error'){
 			var is_adminlogin = <?php echo (isset($_SESSION['adminlogin']) && !empty($_SESSION['adminlogin'])) ? 1 : 0; ?>;
-			console.log(is_adminlogin)
 			employee_level = 9999;
 		}else{
 			employee_level =  parseInt(array.employee.access_level_value);

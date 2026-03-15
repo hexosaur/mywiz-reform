@@ -2,7 +2,7 @@
 <header class="navbar pcoded-header navbar-expand-lg navbar-light headerpos-fixed">
 	<div class="m-header">
 		<a class="mobile-menu" id="mobile-collapse1" href="#!"><span></span></a>
-		<a href="index.html" class="b-brand">
+		<a href="../home/dashboard" class="b-brand">
 			<img src="../pkg/assets/media/logo.svg" alt="" class="logo images">
 			<img src="../pkg/assets/media/logo-icon.svg" alt="" class="logo-thumb images">
 		</a>
@@ -108,6 +108,36 @@
 				</div>
 			</li> -->
 			<li>
+				<div class="dropdown drp-theme">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="themeDropdownToggle" title="Theme">
+						<i class="bi bi-circle-half" id="themeNavbarIcon"></i>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right profile-notification">
+						<div class="pro-head">
+							<i class="bi bi-circle-half mr-2"></i> Theme
+							<div class="small mt-1" id="theme-current-label">Current: Auto</div>
+						</div>
+						<ul class="pro-body">
+							<li>
+								<a href="#" class="dropdown-item btn-theme-change" data-theme-value="auto">
+									<i class="bi bi-circle-half"></i> Auto
+								</a>
+							</li>
+							<li>
+								<a href="#" class="dropdown-item btn-theme-change" data-theme-value="light">
+									<i class="bi bi-brightness-high"></i> Light
+								</a>
+							</li>
+							<li>
+								<a href="#" class="dropdown-item btn-theme-change" data-theme-value="dark">
+									<i class="bi bi-moon"></i> Dark
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</li>
+			<li>
 				<div class="dropdown drp-user">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<i class="icon feather icon-settings"></i>
@@ -116,8 +146,8 @@
 						<div class="pro-head">
 							<img id="pfp" src="../pkg/assets/media/user/avatar-1.jpg" style="width:40px;height:40px;border-radius: 50%; object-fit: cover; object-position: center;" alt="User-Profile-Image"> Hi! 
 							<span id="user_name"></span>
-							
 						</div>
+
 						<ul class="pro-body">
 							<!-- <li><a href="#!" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a></li> -->
 							<li><a href="../profile/customize" class="dropdown-item" id="nav-profile-link"><i class="feather icon-user"></i> Profile</a></li>
@@ -126,14 +156,10 @@
 							<hr>
 							<li><a href="#" class="dropdown-item btn-logout dud-logout"><i class="feather icon-log-out"></i> Log out</a></li>
 						</ul>
-						
-
 					</div>
 				</div>
 			</li>
 		</ul>
 	</div>
 </header>
-
-
 <!-- [ Header ] end -->
