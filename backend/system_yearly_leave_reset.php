@@ -11,7 +11,7 @@
 		// =========================================================
 		// CHECK IF RESET FOR CURRENT YEAR WAS ALREADY DONE
 		// =========================================================
-		$sql_check = "SELECT reset_id FROM leave_reset_logs WHERE reset_year = '$current_year' LIMIT 1";
+		$sql_check = "SELECT reset_id FROM ref_leave_reset_logs WHERE reset_year = '$current_year' LIMIT 1";
 		$res_check = $conn->query($sql_check);
 
 		if ($res_check && $res_check->num_rows > 0) {
@@ -68,7 +68,7 @@
 			// INSERT RESET LOG SO IT WON'T RUN AGAIN THIS YEAR
 			// =========================================================
 			$sql_log = "
-				INSERT INTO leave_reset_logs (reset_year, reset_done_at, reset_done_by)
+				INSERT INTO ref_leave_reset_logs (reset_year, reset_done_at, reset_done_by)
 				VALUES (
 					'$current_year',
 					NOW(),

@@ -28,9 +28,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `ref_barangays` (
-  `brgy_id` int(11) NOT NULL,
+  `brgy_id` INT UNSIGNED NOT NULL,
   `brgy_name` varchar(100) NOT NULL,
-  `city_id` int(11) DEFAULT NULL
+  `city_id` INT UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -42128,9 +42128,9 @@ INSERT INTO `ref_barangays` (`brgy_id`, `brgy_name`, `city_id`) VALUES
 --
 
 CREATE TABLE `ref_cities` (
-  `city_id` int(11) NOT NULL,
+  `city_id` INT UNSIGNED NOT NULL,
   `city_name` varchar(100) NOT NULL,
-  `prov_id` int(11) DEFAULT NULL
+  `prov_id` INT UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -43781,7 +43781,7 @@ INSERT INTO `ref_cities` (`city_id`, `city_name`, `prov_id`) VALUES
 --
 
 CREATE TABLE `ref_provinces` (
-  `prov_id` int(11) NOT NULL,
+  `prov_id` INT UNSIGNED NOT NULL,
   `prov_name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -43906,20 +43906,20 @@ ALTER TABLE `ref_provinces`
 -- AUTO_INCREMENT for table `ref_barangays`
 --
 ALTER TABLE `ref_barangays`
-  MODIFY `brgy_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42062;
+  MODIFY `brgy_id` INT UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42062;
 
 --
 -- AUTO_INCREMENT for table `ref_cities`
 --
 ALTER TABLE `ref_cities`
-  MODIFY `city_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1634;
+  MODIFY `city_id` INT UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1634;
 
 
 --
 -- AUTO_INCREMENT for table `ref_provinces`
 --
 ALTER TABLE `ref_provinces`
-  MODIFY `prov_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `prov_id` INT UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- Constraints for dumped tables

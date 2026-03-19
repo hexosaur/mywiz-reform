@@ -16,7 +16,7 @@ if (!empty($_SESSION['adminlogin']) || !empty($_SESSION['login'])) {
 	<meta name="keywords" content="mywiz, login, portal, wizmaster" />
 	<meta name="author" content="Wizmaster Corporation" />
 
-	<link rel="icon" href="pkg/assets/media/logo-wiz.ico" type="image/x-icon">
+	<link rel="icon" href="page.ico" type="image/x-icon">
 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">

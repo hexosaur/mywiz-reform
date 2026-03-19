@@ -7,6 +7,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php include('../pkg/assets/page/head.php')?>
+<style>
+	.clickable-row{
+		cursor: pointer;
+	}
+</style>
 <body>
 	<!-- [ navigation menu ] start -->
 	<?php include('../pkg/assets/page/sidebar.php')?>
@@ -134,9 +139,9 @@
 																</select>
 															</div>
 															<div class="form-group col-md-2">
-																<label>Gender <span class="text-danger">*</span></label>
+																<label>Sex at birth<span class="text-danger">*</span></label>
 																<select id="gender" class="form-control" required>
-																	<option disabled selected>Select Gender</option>
+																	<option disabled selected>Select Sex</option>
 																	<option value="Male">Male</option>
 																	<option value="Female">Female</option>
 																</select>
@@ -164,16 +169,16 @@
 																</select>
 															</div>
 															<div class="form-group col-md-8">
-																<label for="address_line">Address Line <span class="text-danger">*</span></label>
+																<label for="address_line">Address Line</label>
 																<input id="address_line" class="form-control form-control-sm" placeholder="Input Address line"/>
 															</div>
 															<div class="form-group col-md-6">
-																<label for="email">E-mail <span class="text-danger">*</span></label>
+																<label for="email">E-mail</label>
 																<input id="email" type="email" class="form-control form-control-sm" placeholder="Input E-mail"/>
 															</div>
 															<div class="form-group col-md-6">
-																<label for="contact_no">Contact Number <span class="text-danger">*</span></label>
-																<input id="contact_no" type="tel" minlength="11" maxlength="13"class="form-control form-control-sm" placeholder="09xxxxxxxxx"/>
+																<label for="contact_no">Contact Number</label>
+																<input id="contact_no" type="tel" minlength="11" maxlength="13"class="form-control form-control-sm input-no-letters" placeholder="09xxxxxxxxx"/>
 															</div>
 														</div>
 													</div>
@@ -182,7 +187,7 @@
 														
 														<div class="row">
 															<div class="col-md-5">
-																<strong>Employee Name: </strong> <span id="edit-full-name">TEST FULL NAME</span>
+																<strong>Employee Name: </strong> <span id="edit-full-name">Full Name</span>
 															</div>
 															<div class="col-md-3">
 																<strong>Marital Status: </strong><span id="edit-status">Single</span>
@@ -192,7 +197,7 @@
 															</div>
 															
 															<div class="col-md-5">
-																<strong>Address: </strong><span id="edit-address">Address Line, Barangay, City, Province</span>
+																<strong>Address: </strong><span id="edit-address">Address Line</span>
 															</div>
 															<div class="col-md-5">
 																<strong>Birthday: </strong><span id="edit-birthday">Date</span>
@@ -255,20 +260,20 @@
 													</div>
 													<div class="row">
 														<div class="form-group col-md-4">
-															<label for="sss_no">SSS Number <span class="text-danger">*</span></label>
-															<input id="sss_no" type="number" class="form-control form-control-sm" placeholder="SSS No."/>
+															<label for="sss_no">SSS Number</label>
+															<input id="sss_no" type="number" class="form-control form-control-sm input-no-letters input-no-plus input-no-space" placeholder="SSS No."/>
 														</div>
 														<div class="form-group col-md-4">
-															<label for="pagibig_no">Pag-Ibig Number <span class="text-danger">*</span></label>
-															<input id="pagibig_no" type="number" class="form-control form-control-sm" placeholder="Pag-Ibig No."/>
+															<label for="pagibig_no">Pag-Ibig Number</label>
+															<input id="pagibig_no" type="number" class="form-control form-control-sm input-no-letters input-no-plus input-no-space" placeholder="Pag-Ibig No."/>
 														</div>
 														<div class="form-group col-md-4">
-															<label for="tin_no">TIN Number <span class="text-danger">*</span></label>
-															<input id="tin_no" type="number" class="form-control form-control-sm" placeholder="TIN No."/>
+															<label for="tin_no">TIN Number</label>
+															<input id="tin_no" type="number" class="form-control form-control-sm input-no-letters input-no-plus input-no-space" placeholder="TIN No."/>
 														</div>
 														<div class="form-group col-md-4">
-															<label for="philhealth_no">PhilHealth Number <span class="text-danger">*</span></label>
-															<input id="philhealth_no" type="number" class="form-control form-control-sm" placeholder="PhilHealth No."/>
+															<label for="philhealth_no">PhilHealth Number</label>
+															<input id="philhealth_no" type="number" class="form-control form-control-sm input-no-letters input-no-plus input-no-space" placeholder="PhilHealth No."/>
 														</div>													
 													</div>
 												</form>
@@ -297,7 +302,23 @@
 	<?php include('../pkg/assets/page/footer.php')?>
 </body>
 <script>
-	
+	$(document).on('click', '.clickable-row', function (e) {
+
+		// 🚫 Prevent redirect if clicking inside action column/buttons
+		if ($(e.target).closest('.btn, a, button').length) {
+			return;
+		}
+
+		let link = $(this).data('href');
+
+		if (link) {
+			window.location.href = link;
+		}
+	});
+	$(document).on('mouseenter', '.clickable-row', function () {
+		let name = $(this).data('name') || 'employee';
+		$(this).attr('title', `Click to View ${name}'s profile`);
+	});
 	// script for body functions default
 	// Initialize
 	var is_active = 1;
@@ -371,6 +392,7 @@
 		$.get("../backend/get_list_emp.php?security=123465", function(data,status){
 			$("#table_emp tbody").html(data);
 			setDataTable(".table", { showActions : true});
+			
 			// console.log(data);
 			// EDIT
 			$('.btn-edit').click(function() {

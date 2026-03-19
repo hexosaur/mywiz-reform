@@ -25,7 +25,7 @@
 									<div class="row align-items-center">
 										<div class="col-md-8">
 											<div class="page-header-title">
-												<h5 class="m-b-10">Department</h5>
+												<h5 class="m-b-10">Department / Group</h5>
 											</div>
 											<ul class="breadcrumb">
 												<li class="breadcrumb-item"><a href="../home/dashboard"><i class="feather icon-home"></i></a></li>
@@ -59,7 +59,7 @@
 														<thead>
 															<tr>
 																<th class="text-center">#</th>
-																<th class="text-center">Department</th>
+																<th class="">Department</th>
 																<th class="text-center">Action</th>
 															</tr>
 														</thead>
@@ -158,7 +158,7 @@
 		resetDataTable('.table');
 		$.get("../backend/get_list_dept.php?security=123465", function(data,status){
 			$("#table_department tbody").html(data);
-			setDataTable(".table", {showActions : true});
+			setDataTable(".table", {showActions : true, dtOptions : {ordering: false}});
 			// EDIT
 			$('.btn-edit').click(function() {
 				$('.text-btn').text("Edit");

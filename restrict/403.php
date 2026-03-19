@@ -47,7 +47,7 @@
 			</div>
 
 			<div class="d-flex flex-wrap gap-2">
-				<a class="btn btn-primary px-4" href="/mywiz-reform/home/dashboard">Go to Home</a>
+				<a class="btn btn-primary px-4" href="/mywiz/home/dashboard">Go to Home</a>
 				<a class="btn btn-outline-primary px-4" href="/mywiz/">Login</a>
 				<button class="btn btn-light px-4" onclick="history.back()">Go Back</button>
 			</div>

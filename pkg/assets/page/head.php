@@ -35,8 +35,8 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker3.min.css"/>
 
 	<!-- Favicon icon -->
-	<link rel="icon" type="image/png" href="/mywiz/pkg/assets/media/logo-wiz.png?v=9999">
-	<link rel="shortcut icon" href="/mywiz/pkg/assets/media/logo-wiz.ico?v=9999">
+	<link rel="icon" type="image/x-icon" href="/mywiz/pkg/assets/media/logo-wiz.ico?v=1">
+	<link rel="shortcut icon" type="image/x-icon" href="/mywiz/pkg/assets/media/logo-wiz.ico?v=1">
 	<!-- fontawesome icon -->
 	<link rel="stylesheet" href="../pkg/assets/fonts/fontawesome/css/fontawesome-all.min.css">
 	<!-- animation css -->

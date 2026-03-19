@@ -64,7 +64,6 @@
 																<th class="text-center">Description</th>
 																<th class="text-center">Days</th>
 																<th class="text-center">Type</th>
-																<th class="text-center">Status</th>
 																<th class="text-center">Action</th>
 															</tr>
 														</thead>

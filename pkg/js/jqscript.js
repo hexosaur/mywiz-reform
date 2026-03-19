@@ -284,6 +284,12 @@ function setDataTable(selector = '.table', opts = {}) {
 		dtOptions = {}               // allow passing other DataTables options
 	} = opts;
 
+	// 🔧 Helper: truncate text
+	function truncateText(text, limit) {
+		if (!text) return '';
+		text = text.toString().trim();
+		return text.length > limit ? text.substring(0, limit) + '...' : text;
+	}
 	const $tbl = $(selector);
 
 	$tbl.each(function () {
@@ -295,41 +301,45 @@ function setDataTable(selector = '.table', opts = {}) {
 		}
 		const columnDefs = [];
 		if (rowHide !== null && rowHide !== undefined) {
-		columnDefs.push({ targets: rowHide, visible: false, searchable: true });
-		// example: next column not orderable/searchable
-		columnDefs.push({ targets: rowHide + 1, orderable: false, searchable: false });
+			columnDefs.push({ targets: rowHide, visible: false, searchable: true });
+			// example: next column not orderable/searchable
+			columnDefs.push({ targets: rowHide + 1, orderable: false, searchable: false });
 		}
 
 		columnDefs.push({
-		targets: -1,
-		visible: showActions,
-		orderable: false,
-		searchable: false
+			targets: -1,
+			visible: showActions,
+			orderable: false,
+			searchable: false
 		});
 
 		columnDefs.push(...extraColumnDefs);
 		$t.DataTable({
-		autoWidth: false,
-		columnDefs,
+			autoWidth: false,
+			columnDefs,
 
-		createdRow: function (row, data) {
-			if (rowHide !== null && rowHide !== undefined) {
-			const location = (data[rowHide] || '').toString().trim();
-			if (location) $(row).addClass('dt-row-tip').attr('data-location', location);
-			}
-		},
+			createdRow: function (row, data) {
+				if (rowHide !== null && rowHide !== undefined) {
+					const location = (data[rowHide] || '').toString().trim();
+					if (location) $(row).addClass('dt-row-tip').attr('data-location', location);
+				}
+			},
 
-		drawCallback: function () {
-			if (rowHide !== null && rowHide !== undefined) {
-			const $rows = $t.find('tbody tr.dt-row-tip');
-			$rows.each(function () {
-				$(this).attr('title', $(this).attr('data-location') || '');
-			});
-			$rows.tooltip({ container: 'body', trigger: 'hover focus', placement: 'top' });
-			}
-		},
+			drawCallback: function () {
+				if (rowHide !== null && rowHide !== undefined) {
+					const $rows = $t.find('tbody tr.dt-row-tip');
+					
+					$rows.each(function () {
+						let fullText = $(this).attr('data-location') || '';
+						let shortText = truncateText(fullText, 100);
+						$(this).attr('title', shortText)
+							.attr('data-short', shortText);
+					});
+					$rows.tooltip({ container: 'body', trigger: 'hover focus', placement: 'top' });
+				}
+			},
 
-		...dtOptions
+			...dtOptions
 		});
 	});
 }
@@ -549,6 +559,7 @@ function clearForms(scope = document) {
 // VALIDITY CHECKING FORM
 function checkFormValidity(scope = document) {
 	var isValid = true;
+	$(scope).find('.form-control, .form-select').removeClass('is-invalid');
 
 	$(scope)
 		.find('.form-control[required]')
@@ -563,6 +574,7 @@ function checkFormValidity(scope = document) {
 			if (type === 'checkbox' || type === 'radio') {
 				if (!$el.is(':checked')) {
 					isValid = false;
+					$el.addClass('is-invalid');
 					$el.trigger('focus');
 					return false; // break
 				}
@@ -576,6 +588,7 @@ function checkFormValidity(scope = document) {
 				if (!ok) {
 					isValid = false;
 					$el.trigger('focus');
+					$el.addClass('is-invalid');
 					return false;
 				}
 				return;
@@ -585,6 +598,7 @@ function checkFormValidity(scope = document) {
 			if (!String($el.val() || '').trim()) {
 				isValid = false;
 				$el.trigger('focus');
+				$el.addClass('is-invalid');
 				return false; 
 			}
 		});
@@ -636,6 +650,46 @@ function setupFilePreview(fileInputId, previewImgId) {
 	});
 }
 
+
+
+/**  =====================
+ 	LIVE TIME SECTION
+==========================  **/
+function updateLiveDateTime() {
+	const now = new Date();
+
+	const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+	const months = ["January", "February", "March", "April", "May", "June",
+					"July", "August", "September", "October", "November", "December"];
+
+	const dayName = days[now.getDay()];
+	const monthName = months[now.getMonth()];
+	const day = now.getDate();
+	const year = now.getFullYear();
+
+	let hours = now.getHours();
+	let minutes = now.getMinutes();
+	let seconds = now.getSeconds();
+
+	const ampm = hours >= 12 ? 'PM' : 'AM';
+
+	hours = hours % 12;
+	hours = hours ? hours : 12;
+
+	hours = String(hours).padStart(2, '0');
+	minutes = String(minutes).padStart(2, '0');
+
+	$('.now_date').text(`${dayName}, ${monthName} ${day}, ${year}`);
+	$('.hour_part').text(hours);
+	$('.minute_part').text(minutes);
+	$('.ampm_part').text(ampm);
+
+	if (seconds % 2 === 0) {
+		$('.blink_colon').css('visibility', 'visible');
+	} else {
+		$('.blink_colon').css('visibility', 'hidden');
+	}
+}
 
 /***********************************************************************************************
 *****************			JQUERY FUNCTIONS ONLY TO BE CALLED GLOBALLY 		****************
@@ -808,7 +862,18 @@ $(function () {
 		}
 		dd_role(dept_id);
 	});
-	
+
+	//INPUT TRIGGERS IF NUMBERS
+	// input-no-letters input-no-plus input-no-space
+	$(document).on('input', '.input-no-letters', function(){
+		this.value = this.value.replace(/[A-Za-z]/g, '');
+	});
+	$(document).on('input', '.input-no-plus', function(){
+		this.value = this.value.replace(/\+/g, '');
+	});
+	$(document).on('input', '.input-no-space', function(){
+		this.value = this.value.replace(/\s/g, '');
+	}); 
 
 
 	// TRIGGER BARANGAY DROPDOWN

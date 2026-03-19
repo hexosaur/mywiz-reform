@@ -61,6 +61,8 @@ https://cdn.jsdelivr.net/npm/jquery-circle-progress@1.2.2/dist/circle-progress.m
 </script>
 <!-- Preloader -->
 <script>
+updateLiveDateTime();
+setInterval(updateLiveDateTime, 1000);
 (function($){
 	const SHOW_AFTER_MS = 250;
 	let finished = false;

@@ -45,34 +45,40 @@
 					<li class="superadmin d-none nav-item pcoded-menu-caption">
 						<label>Administrator</label>
 					</li>
+					<li class="superadmin d-none nav-item pcoded-hasmenu">
+						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-archive"></i></span><span class="pcoded-mtext">Archives</span></a>
+						<ul class="pcoded-submenu">
+							<li class=""><a href="#" class="">Forms Categories</a></li>
+							<li class=""><a href="#" class="">Evaluation Archives</a></li>
+							<li class=""><a href="../leave/archive" class="">Leave Archives</a></li>
+							<li class=""><a href="#" class="">Overtime Archives</a></li>
+							<li class=""><a href="#" class="">Travel Order Archives</a></li>
+						</ul>
+					</li>
 					<li class="admin-permission superadmin d-none nav-item pcoded-hasmenu">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-codepen"></i></span><span class="pcoded-mtext">Organization</span></a>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="../management/branch" class="">Branch</a></li>
-							<li class=""><a href="../management/department" class="">Department</a></li>
+							<li class=""><a href="../management/department" class="">Department / Group</a></li>
 							<li class=""><a href="../management/designation" class="">Designation</a></li>
 							<li class=""><a href="../management/employee" class="">Employee</a></li>
 						</ul>
 					</li>
-					<li class="superadmin d-none nav-item pcoded-hasmenu">
-						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-archive"></i></span><span class="pcoded-mtext">File Archives</span></a>
-						<ul class="pcoded-submenu">
-							<li class=""><a href="#" class="">Forms Categories</a></li>
-							<li class=""><a href="#" class="">Leave Archive</a></li>
-						</ul>
+					<li class="superadmin d-none nav-item">
+						<a href="../home/dashboard" class="nav-link"><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Post an Announcement</span></a>
 					</li>
+
+
 					<li class="superadmin d-none nav-item pcoded-hasmenu">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-book"></i></span><span class="pcoded-mtext">Evaluation Management</span></a>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="#" class="">Evaluation Categories</a></li>
-							<li class=""><a href="#" class="">Evaluation Archive</a></li>
 						</ul>
 					</li>
 					<li class="superadmin d-none nav-item pcoded-hasmenu">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-clock"></i></span><span class="pcoded-mtext">Overtime Management</span></a>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="#" class="">Overtime Categories</a></li>
-							<li class=""><a href="#" class="">Overtime Archive</a></li>
 						</ul>
 					</li>
 				
@@ -91,8 +97,12 @@
 					<li class="superadmin d-none nav-item pcoded-hasmenu">
 					<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-luggage"></i></span><span class="pcoded-mtext">Travel Orders</span></a>
 					<ul class="pcoded-submenu">
-						<li class=""><a href="#" class="">Forms Categories</a></li>
-						<li class=""><a href="#" class="">Leave Archive</a></li>
+						<li class=""><a href="#" class="">Format to be Updated</a></li>
+					</ul>
+					<li class="superadmin d-none nav-item pcoded-hasmenu">
+					<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-luggage"></i></span><span class="pcoded-mtext">Payroll</span></a>
+					<ul class="pcoded-submenu">
+						<li class=""><a href="#" class="">Format to be Updated</a></li>
 					</ul>
 
 					<!-- INVENTORY SECTION -->
@@ -145,25 +155,17 @@
 
 					<!-- Information Technology -->
 					<li class="nav-item pcoded-menu-caption superadmin d-none">
-						<label>Information Technology</label>
+						<label>Projects & Operations</label>
 					</li>
-					<li class="nav-item pcoded-hasmenu superadmin d-none">
-						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-inbox"></i></span><span class="pcoded-mtext">Product Settings</span></a>
+					<li class="nav-item pcoded-hasmenu operations superadmin d-none">
+						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-tools"></i></i></span><span class="pcoded-mtext">Project</span></a>
 						<ul class="pcoded-submenu">
-							<li class=""><a href="#" class="">To be updated</a></li>
+							<li class=""><a href="../project/dashboard" class="">Dashboard</a></li>
+							<li class=""><a href="../project/projects" class="">Project</a></li>
+							<li class=""><a href="#" class="">Maintenance</a></li>
 						</ul>
 					</li>
 
-					<!-- Operations -->
-					<li class="nav-item pcoded-menu-caption superadmin d-none">
-						<label>Operations</label>
-					</li>
-					<li class="nav-item pcoded-hasmenu superadmin d-none">
-						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-inbox"></i></span><span class="pcoded-mtext">Product Settings</span></a>
-						<ul class="pcoded-submenu">
-							<li class=""><a href="#" class="">To be updated</a></li>
-						</ul>
-					</li>
 
 					<!-- SUPER ADMIN SECTION WHICH HAS ACCESS TO ALL -->
 					<li class="superadmin nav-item pcoded-menu-caption d-none">
@@ -183,13 +185,6 @@
 							<li class=""><a href="../admin/settings" class="">Company Information</a></li>
 							<li class=""><a href="../admin/permissions" class="">Permissions</a></li>
 							<li class=""><a href="../admin/enroll" class="">Superadmin Enroll</a></li>
-						</ul>
-					</li>
-					<li class="superadmin d-none nav-item pcoded-hasmenu">
-						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-archive"></i></span><span class="pcoded-mtext">File Archives</span></a>
-						<ul class="pcoded-submenu">
-							<li class=""><a href="#" class="">Forms Categories</a></li>
-							<li class=""><a href="#" class="">Leave Archive</a></li>
 						</ul>
 					</li>
 

@@ -7,9 +7,9 @@ CREATE TABLE IF NOT EXISTS mgmt_branch (
 	branch_id     INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	branch_name   VARCHAR(150) NOT NULL,
 	branch_code   VARCHAR(30)  NOT NULL,
-	prov_id       INT NOT NULL,
-	city_id       INT NOT NULL,
-	brgy_id       INT NOT NULL,
+	prov_id       INT UNSIGNED NOT NULL,
+	city_id       INT UNSIGNED NOT NULL,
+	brgy_id       INT UNSIGNED NOT NULL,
 	address_line  VARCHAR(255) NOT NULL,
 	created_at    TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_at    TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -152,9 +152,9 @@ CREATE TABLE IF NOT EXISTS mgmt_employees (
 	gender            VARCHAR(20)  NULL,
 	email             VARCHAR(150) NULL,
 	contact_no        VARCHAR(30)  NULL,
-	prov_id           INT NULL,
-	city_id           INT NULL,
-	brgy_id           INT NULL,
+	prov_id           INT UNSIGNED NULL,
+	city_id           INT UNSIGNED NULL,
+	brgy_id           INT UNSIGNED NULL,
 	address_line      VARCHAR(255) NULL,
 	date_hired        DATE         NULL,
 	branch_id         INT UNSIGNED NOT NULL,
@@ -243,7 +243,7 @@ INSERT INTO admin_superadmin (first_name, middle_name, surname, suffix, username
 -- DEFAULT TOKEN REMEMBER FOR COOKIES TO HAVE ACCESS OR LOGGED IN FOR 3 MONTHS
 CREATE TABLE auth_remember_tokens (
 	id BIGINT AUTO_INCREMENT PRIMARY KEY,
-	user_id INT NOT NULL,
+	user_id INT UNSIGNED NOT NULL,
 	user_type ENUM('admin','employee') NOT NULL,
 	selector CHAR(12) NOT NULL,
 	token_hash CHAR(64) NOT NULL,
@@ -312,7 +312,7 @@ CREATE TABLE IF NOT EXISTS leave_entitlements (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- STEPS FOR A RESET AND KEEPS A LOG FOR TRACKING
-CREATE TABLE IF NOT EXISTS ref_reset_leave_logs (
+CREATE TABLE IF NOT EXISTS ref_leave_reset_logs (
 	reset_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	reset_year YEAR NOT NULL,
 	reset_done_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,

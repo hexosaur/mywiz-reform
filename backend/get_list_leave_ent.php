@@ -18,7 +18,7 @@ if (isset($_GET['security']) && $_GET['security'] == '123465') {
 				$full_name = htmlspecialchars($row['full_name'] ?? '', ENT_QUOTES, 'UTF-8');
 
 				// Append the row to the table with Edit action button
-				$table .= "<tr><td class='text-center'>{$n}</td><td class='text-center' data-column='Employee Name: '>{$full_name}</td><td class='text-center' data-column='Action: '><div class='btn btn-outline-info btn-sm btn-edit' data-id='{$employee_id}'><span class='feather icon-edit'></span></div></td></tr>";
+				$table .= "<tr><td class='text-center'>{$n}</td><td data-column='Employee Name: '>{$full_name}</td><td class='text-center' data-column='Action: '><div class='btn btn-outline-info btn-sm btn-edit' data-id='{$employee_id}'><span class='feather icon-edit'></span></div></td></tr>";
 				$n++;
 			}
 			$result->free();

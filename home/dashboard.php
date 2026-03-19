@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<?php include('../pkg/assets/page/head.php')?>
-
+<head></head>
 <body class="">
 	<?php include('../pkg/assets/page/sidebar.php')?>
 	<?php include('../pkg/assets/page/navbar.php')?>
@@ -19,14 +19,21 @@
 							<div class="page-header">
 								<div class="page-block">
 									<div class="row align-items-center">
-										<div class="col-md-12">
+										<div class="col-md-8">
 											<div class="page-header-title">
 												<h5>Dashboard</h5>
 											</div>
 											<ul class="breadcrumb">
 												<li class="breadcrumb-item"><a href="../home/dashboard"><i class="feather icon-home"></i></a></li>
-												<li class="breadcrumb-item"><a href="#!">Home Dashboard</a></li>
+												<li class="breadcrumb-item"><a href="#">Home Dashboard</a></li>
 											</ul>
+										</div>
+										<div class="col-md-4 text-right">
+											<h4 class="now_time mb-0">
+												<span class="hour_part"></span><span class="blink_colon">:</span><span class="minute_part"></span>
+												<span class="ampm_part"></span>
+											</h4>
+											<div class="now_date text-muted">date</div>
 										</div>
 									</div>
 								</div>
@@ -155,15 +162,10 @@
 
 	// FOR LEAVE
 	var employee_level, employee_branch, employee_dept, request_value, request_chain;
-
-
-
-
-
-
 	// FUNCTIONS
 	// YEARLY RESET FOR LEAVE
 	$.get("../backend/system_yearly_leave_reset.php", function(data, status){
+		console.log(data)
 		data = data.trim();
 	});
 
@@ -221,6 +223,9 @@
 			$(".approval_count").html(approval_count);
 		}
 	});
+
+
+	
 
 
 
