@@ -1,3 +1,8 @@
+<?php
+	$__t0 = microtime(true);
+	$LOADER_TEXT = "Loading page...";
+	include __DIR__ . "/loader.php";
+?>
 <!-- [ Header ] start -->
 <header class="navbar pcoded-header navbar-expand-lg navbar-light headerpos-fixed">
 	<div class="m-header">
@@ -28,7 +33,7 @@
 			</li>
 		</ul> -->
 		<ul class="navbar-nav ml-auto">
-			<!-- <li>
+			<li>
 				<div class="dropdown">
 					<a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="icon feather icon-bell"></i></a>
 					<div class="dropdown-menu dropdown-menu-right notification">
@@ -106,7 +111,7 @@
 						</div>
 					</div>
 				</div>
-			</li> -->
+			</li>
 			<li>
 				<div class="dropdown drp-theme">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="themeDropdownToggle" title="Theme">

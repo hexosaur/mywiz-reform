@@ -164,7 +164,7 @@
 	var employee_level, employee_branch, employee_dept, request_value, request_chain;
 	// FUNCTIONS
 	// YEARLY RESET FOR LEAVE
-	$.get("../backend/system_yearly_leave_reset.php", function(data, status){
+	$.get("../backend/system/system_yearly_leave_reset.php", function(data, status){
 		console.log(data)
 		data = data.trim();
 	});
@@ -173,7 +173,7 @@
 		window.location.href = "../leave/requests";
 
 	})
-	$.get("../backend/get_leave_request.php?security=123465", function(data,status){
+	$.get("../backend/leave/get_leave_request.php?security=123465", function(data,status){
 		var array = jQuery.parseJSON(data);
 		if(array.status == 'error'){
 			var is_adminlogin = <?php echo (isset($_SESSION['adminlogin']) && !empty($_SESSION['adminlogin'])) ? 1 : 0; ?>;

@@ -161,7 +161,7 @@
 			let message = notif === 0 ?  'New '+pagetitle+' Saved!' : pagetitle+' Details Updated!';
 			var data = { branch_name: $('#branch_name').val(), branch_code : $('#branch_code').val(), prov_id : prov_id, city_id : city_id, brgy_id : brgy_id, addr : $('#addr').val(), pkid : id}
 			var json = JSON.stringify(data)
-			$.post("../backend/post_branch.php", {data: json}, function (data, a) {
+			$.post("../backend/management/post_branch.php", {data: json}, function (data, a) {
 				data = data.trim();
 				if(data == 'exist'){
 					Swal.fire({icon: 'error', title: pagetitle+' already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
@@ -187,7 +187,7 @@
 	// script for body functions default
 	function tableload_Branch(){
 		resetDataTable('.table');
-		$.get("../backend/get_list_branch.php?security=123465", function(data,status){
+		$.get("../backend/management/get_list_branch.php?security=123465", function(data,status){
 			$("#table_branch tbody").html(data);
 			// SET TABLE EDITABLE OR NOT DYNAMICALLTY SOON
 			setDataTable(".table", {rowHide : 3, showActions : true});
@@ -198,7 +198,7 @@
 				$('.view-modify').fadeIn().removeClass('d-none');
 				$('.view-default').hide();
 				pkid = $(this).data('id');
-				$.get("../backend/get_det_branch.php?security=123465&id=" + pkid, function(data, status) {
+				$.get("../backend/management/get_det_branch.php?security=123465&id=" + pkid, function(data, status) {
 					var array = jQuery.parseJSON(data);
 					$('.btn_save').attr('data-id', pkid);
 					$('#branch_name').val(array.branch_name);
@@ -237,7 +237,7 @@
 				}).then((result) => {
 					if (result.isConfirmed) {
 						var id = $(this).data('id');
-						$.post("../backend/del_branch.php?security=123465&id=" + id, function (data, status) {
+						$.post("../backend/management/del_branch.php?security=123465&id=" + id, function (data, status) {
 						data = (data || '').trim();
 						if (data === 'true') {
 							Swal.fire({ showConfirmButton: false, title: 'Deleted!', text: pagetitle+' deleted.', icon: 'success', timer: 700 });

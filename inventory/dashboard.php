@@ -21,11 +21,11 @@
 									<div class="row align-items-center">
 										<div class="col-md-8">
 											<div class="page-header-title">
-												<h5>Dashboard</h5>
+												<h5>Summary</h5>
 											</div>
 											<ul class="breadcrumb">
-												<li class="breadcrumb-item"><a href="../home/dashboard"><i class="feather icon-home"></i></a></li>
-												<li class="breadcrumb-item"><a href="#!">Home Dashboard</a></li>
+												<li class="breadcrumb-item"><a href="../inventory/dashboard"><i class="feather icon-home"></i></a></li>
+												<li class="breadcrumb-item"><a href="#!"><span class="page-title"></span></a></li>
 											</ul>
 										</div>
 										<div class="col-md-4 text-right">

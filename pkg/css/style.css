@@ -4369,7 +4369,16 @@ body.layout-1 .pcoded-navbar.active-dark .sidemenu li.active:after {
 }
 
 /* ====== [ menu fixed end ] ======== */
+/* ====== [ Tom Select start ] ======== */
+.ts-wrapper.form-control,
+	.ts-wrapper .ts-control {
+	border-radius: inherit !important;
+	background: #eff3f6 !important;
+	font-size: 14px;
+	border-radius: .2rem !important;
+}
 
+/* ====== [ Tom Select end ] ======== */
 /* ====== [ Header Fixed start ] ======== */
 .pcoded-header.headerpos-fixed {
 	position: fixed;
@@ -9104,6 +9113,22 @@ html.theme-dark .pcoded-header[class*="header-"] .header-logo {
 	}
 }
 
+/* keep bootstrap/text utility colors alive in dark mode */
+html.theme-dark .text-primary   { color: var(--color-primary) !important; }
+html.theme-dark .text-danger    { color: var(--color-danger) !important; }
+html.theme-dark .text-success   { color: var(--color-success) !important; }
+html.theme-dark .text-warning   { color: var(--color-warning) !important; }
+html.theme-dark .text-info      { color: var(--color-info) !important; }
+html.theme-dark .text-secondary { color: var(--color-text-2) !important; }
+html.theme-dark .text-muted     { color: var(--color-text-2) !important; }
+
+/* optional: preserve custom utility colors too */
+html.theme-dark .text-c-blue    { color: var(--color-primary) !important; }
+html.theme-dark .text-c-red     { color: var(--color-danger) !important; }
+html.theme-dark .text-c-green   { color: var(--color-success) !important; }
+html.theme-dark .text-c-yellow  { color: var(--color-warning) !important; }
+html.theme-dark .text-c-purple  { color: var(--color-secondary) !important; }
+html.theme-dark .text-c-info    { color: var(--color-info) !important; }
 
 @-webkit-keyframes anim-rotate {
 	100% {

@@ -29,9 +29,9 @@
 												<h5 class="m-b-10">Products</h5>
 											</div>
 											<ul class="breadcrumb">
-												<li class="breadcrumb-item"><a href="../home/dashboard"><i class="feather icon-home"></i></a></li>
+												<li class="breadcrumb-item"><a href="../inventory/dashboard"><i class="feather icon-home"></i></a></li>
 												<li class="breadcrumb-item"><a href="#">Inventory</a></li>
-												<li class="breadcrumb-item"><a href="#">Products</a></li>
+												<li class="breadcrumb-item"><a href="#"><span class="page-title"></span></a></li>
 											</ul>
 										</div>
 									</div>
@@ -110,45 +110,72 @@
 															<label for="">Product Name <span class="text-danger">*</span></label>
 															<input id="" class=" form-control form-control-sm" placeholder="Product Name" required/>
 														</div>
-														<div class="form-group col-md-6">
-															<label for="">Product Cost <span class="text-danger">*</span></label>
-															<input id="" type="number" class="notnega form-control form-control-sm" placeholder="Product Cost" required/>
+														<div class="form-group col-md-3">
+															<label for="">Product Code</label>
+															<input id="" class=" form-control form-control-sm" placeholder="Product Code"/>
 														</div>
-														<div class="form-group col-md-6">
-															<label for="">Tax <span class="text-danger">*</span></label>
-															<input id="" type="number" class="notnega form-control form-control-sm" placeholder="Tax" required/>
+														<div class="form-group col-md-3">
+															<label>Base Unit <span class="text-danger">*</span></label>
+															<select class=" form-control" required>
+																<option disabled selected>Select Base Unit</option>
+																<option>Voluntary</option>
+															</select>
 														</div>
-														<div class="form-group col-md-6">
-															<label for="">SRP / Markup<span class="text-danger"> *</span></label>
-															<input min="0" type="number" id="" class="notnega form-control form-control-sm" placeholder="SRP" required/>
-														</div>
-														<!-- <div class="form-group col-md-6">
-															<label for="">Street/Building</label>
-															<input id="" class=" form-control form-control-sm" placeholder="Street/Building" />
-														</div> -->
-														<div class="form-group col-md-6">
+														<div class="form-group col-md-4">
 															<label>Category <span class="text-danger">*</span></label>
-															<select class=" form-control">
+															<select class=" form-control" required>
 																<option disabled selected>Select Category</option>
 																<option>Voluntary</option>
 															</select>
 														</div>
-														<div class="form-group col-md-6">
-															<label>Supplier</label>
+														<div class="form-group col-md-4">
+															<label>Brand</label>
+															<select class=" form-control">
+																<option disabled selected>Select Brand</option>
+																<option>Voluntary</option>
+															</select>
+														</div>
+														<div class="form-group col-md-4">
+															<label for="">Reorder Level <span class="text-danger">*</span></label>
+															<input id="" type="number" class="notnega form-control form-control-sm" placeholder="Reorder Level" required/>
+														</div>
+														<!-- <div class="form-group col-md-3">
+															<label for="">Product Cost <span class="text-danger">*</span></label>
+															<input id="" type="number" class="notnega form-control form-control-sm" placeholder="Product Cost" required/>
+														</div>
+														<div class="form-group col-md-2">
+															<label>Currency <span class="text-danger">*</span></label>
+															<select class=" form-control">
+																<option disabled selected>Select Currency</option>
+																<option>Voluntary</option>
+															</select>
+														</div> -->
+														<div class="form-group col-md-4">
+															<label>Supplier <span class="text-danger">*</span></label>
 															<select class=" form-control">
 																<option disabled selected>Select Supplier</option>
 																<option>Voluntary</option>
 															</select>
 														</div>
-														<div class="form-group col-md-6">
-															<label>Barangay</label>
-															<select class=" form-control">
-																<option disabled selected>Select Barangay</option>
-																<option>Voluntary</option>
-																<option>Voluntary1</option>
-																<option>Voluntary2</option>
-																<option>Voluntary3</option>
-															</select>
+														<div class="form-group col-md-3">
+															<label for="">Mark up %<span class="text-danger"> *</span></label>
+															<input min="0" type="number" id="" class="notnega form-control form-control-sm" placeholder="Mark up %" required/>
+														</div>
+														<div class="form-group col-md-5">
+															<label for="">Product Image<span class="text-danger"> *</span></label>
+															<input min="0" type="file" id="" class="notnega form-control form-control-sm" placeholder="Product Image"/>
+														</div>
+														<div class="form-group col-md-12">
+															<label for="">Product Description <span class="text-danger">*</span></label>
+															<input id="" class=" form-control form-control-sm" placeholder="Product Description"/>
+														</div>
+														
+														
+													</div>
+													<div class="row justify-content-evenly">
+														<div class="form-group ml-3 col form-check">
+															<input type="checkbox" class="form-check-input" id="">
+															<label class="form-check-label" for="">Serialized</label>
 														</div>
 													</div>
 												</form>

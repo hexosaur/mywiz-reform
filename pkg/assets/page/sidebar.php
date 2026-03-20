@@ -109,17 +109,34 @@
 					<li class="superadmin d-none nav-item pcoded-menu-caption">
 						<label>Inventory</label>
 					</li>
+					<li class="nav-item superadmin d-none">
+						<a href="../inventory/dashboard" class="nav-link"><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Summary</span></a>
+					</li>
 					<li class="superadmin d-none nav-item pcoded-hasmenu">
-						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-inbox"></i></span><span class="pcoded-mtext">Product Settings</span></a>
+						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-inbox"></i></span><span class="pcoded-mtext">Master Data</span></a>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="../inventory/products" class="">Products</a></li>
 							<li class=""><a href="../inventory/categories" class="">Categories</a></li>
-							<li class=""><a href="../inventory/categories" class="">Warehouse</a></li>
+							<li class=""><a href="../inventory/warehouse" class="">Warehouse</a></li>
+							<li class=""><a href="../inventory/suppliers" class="">Units</a></li>
 							<li class=""><a href="../inventory/brands" class="">Brands/Manufacturers</a></li>
 							<li class=""><a href="../inventory/suppliers" class="">Suppliers</a></li>
+						</ul>
+					</li>
+					<li class="superadmin d-none nav-item pcoded-hasmenu">
+						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-bag-heart"></i></span><span class="pcoded-mtext">Purchasing</span></a>
+						<ul class="pcoded-submenu">
 							<li class=""><a href="../inventory/purchase" class="">Purchase</a></li>
-							<li class=""><a href="../inventory/transfer" class="">Transfers</a></li>
-							<li class=""><a href="../inventory/employee" class="">Customers</a></li>
+							<li class=""><a href="../inventory/purchase" class="">Receiving</a></li>
+						</ul>
+					</li>
+					<li class="superadmin d-none nav-item pcoded-hasmenu">
+						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-inbox"></i></span><span class="pcoded-mtext">Stock Operations</span></a>
+						<ul class="pcoded-submenu">
+							<li class=""><a href="../inventory/products" class="">Stocks On Hand</a></li>
+							<li class=""><a href="../inventory/categories" class="">Transfers</a></li>
+							<li class=""><a href="../inventory/warehouse" class="">Adjustments</a></li>
+							<li class=""><a href="../inventory/brands" class="">Stock Count</a></li>
 						</ul>
 					</li>
 					<li class="superadmin d-none nav-item pcoded-hasmenu">

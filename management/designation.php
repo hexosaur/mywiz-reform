@@ -159,7 +159,7 @@
 			var data = { role_name: $('#role_name').val(), role_desc : $('#role_desc').val(), role_dept :  $('#role_dept').val(), role_access : $('#role_access').val(), role_perms : $('#role_perms').val(),  pkid : id}
 			var json = JSON.stringify(data)
 			// console.log(json);
-			$.post("../backend/post_role.php", {data: json}, function (data, a) {
+			$.post("../backend/management/post_role.php", {data: json}, function (data, a) {
 				data = data.trim();
 				// console.log(data);
 				if(data == 'exist'){
@@ -178,7 +178,7 @@
 	// FUNCTIONS
 	function tableload_Roles(){
 		resetDataTable('.table');
-		$.get("../backend/get_list_roles.php?security=123465", function(data,status){
+		$.get("../backend/management/get_list_roles.php?security=123465", function(data,status){
 			$("#table_role tbody").html(data);
 			setDataTable(".table", {rowHide : 4, showActions : true});
 			// EDIT
@@ -187,7 +187,7 @@
 				$('.view-modify').fadeIn().removeClass('d-none');
 				$('.view-default').hide();
 				pkid = $(this).data('id');
-				$.get("../backend/get_det_roles.php?security=123465&id=" + pkid, function(data, status) {
+				$.get("../backend/management/get_det_roles.php?security=123465&id=" + pkid, function(data, status) {
 					var array = jQuery.parseJSON(data);
 					// console.log(array);
 					const sel = document.querySelector('#role_perms');
@@ -225,7 +225,7 @@
 				}).then((result) => {
 					if (result.isConfirmed) {
 						var id = $(this).data('id');
-						$.post("../backend/del_role.php?security=123465&id=" + id, function (data, status) {
+						$.post("../backend/management/del_role.php?security=123465&id=" + id, function (data, status) {
 						data = (data || '').trim();
 						if (data === 'true') {
 							Swal.fire({ showConfirmButton: false, title: 'Deleted!', text: pagetitle+' deleted.', icon: 'success', timer: 700 });

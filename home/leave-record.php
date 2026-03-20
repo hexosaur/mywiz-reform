@@ -238,7 +238,7 @@
 	$('.btn_save').click(function(){
 		// var chk = checkFormValidity();
 		var id = $(this).attr('data-id');
-		$.post("../backend/post_leave_cancel_request.php", { id: id}, function (data, a) {
+		$.post("../backend/leave/post_leave_cancel_request.php", { id: id}, function (data, a) {
 			data = data.trim();
 			if(data == 'true'){
 				Swal.fire({icon: 'success',title: "Success!", text : "Cancelation of Filed Leave Success",showConfirmButton: false,timer:1200});
@@ -255,14 +255,14 @@
 	});
 	function tableload_LeaveRequests(){
 		resetDataTable('#table_requests');
-		$.get("../backend/get_list_leave_request.php?security=123465&mode=record", function(data,status){
+		$.get("../backend/leave/get_list_leave_request.php?security=123465&mode=record", function(data,status){
 			$("#table_requests tbody").html(data);
 			setDataTable("#table_requests", { showActions : true, dtOptions : {pageLength: 13, lengthChange: false,	ordering:  true, searching: true, responsive: true }});
 			$('.btn-edit').click(function() {
 				$('.view-modify').fadeIn().removeClass('d-none');
 				$('.view-default').hide();
 				pkid = $(this).data('id');
-				$.get("../backend/get_det_leave_request.php?security=123465&id=" + pkid, function(data, status) {
+				$.get("../backend/leave/get_det_leave_request.php?security=123465&id=" + pkid, function(data, status) {
 					var array = jQuery.parseJSON(data);
 					$('.btn_save').attr('data-id', pkid);
 					
@@ -322,7 +322,7 @@
 				});
 			});
 		});
-		$.get("../backend/get_list_leave_request_days.php?security=123465", function(data,status){
+		$.get("../backend/leave/get_list_leave_request_days.php?security=123465", function(data,status){
 			$(".remaining_days").html(data);
 		});
 	}

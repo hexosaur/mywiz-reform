@@ -160,7 +160,7 @@
 
 	$('.btn-success').click(function(){
 		let id = $(this).attr('data-id');
-		$.post("../backend/post_leave_request_approve.php", { id: id}, function (data, a) {
+		$.post("../backend/leave/post_leave_request_approve.php", { id: id}, function (data, a) {
 			data = data.trim();
 			if(data == 'true'){
 				Swal.fire({icon: 'success',title: "Success!", text : "Leave request approved!",showConfirmButton: false,timer:1200});
@@ -177,7 +177,7 @@
 	});
 	$('.btn-danger').click(function(){
 		let id = $(this).attr('data-id');
-		$.post("../backend/post_leave_request_reject.php", { id: id}, function (data, a) {
+		$.post("../backend/leave/post_leave_request_reject.php", { id: id}, function (data, a) {
 			data = data.trim();
 			if(data == 'true'){
 				Swal.fire({icon: 'success',title: "Success!", text : "Leave request rejected!",showConfirmButton: false,timer:1200});
@@ -195,7 +195,7 @@
 	
 	function tableload_LeaveRequests(){
 		resetDataTable('#table_requests');
-		$.get("../backend/get_leave_request.php?security=123465", function(data, status){
+		$.get("../backend/leave/get_leave_request.php?security=123465", function(data, status){
 			$("#table_requests tbody").html(data);
 			setDataTable("#table_requests", { showActions : true, dtOptions : {pageLength: 13, lengthChange: false,	ordering:  true, searching: true, responsive: true, ordering: false , dom: 'lrtip' }});
 			var array = jQuery.parseJSON(data);
@@ -245,7 +245,7 @@
 				$('.view-modify').fadeIn().removeClass('d-none');
 				$('.view-default').hide();
 				pkid = $(this).data('id');
-				$.get("../backend/get_det_leave_request.php?security=123465&id=" + pkid, function(data, status) {
+				$.get("../backend/leave/get_det_leave_request.php?security=123465&id=" + pkid, function(data, status) {
 					var array = jQuery.parseJSON(data);
 					$('.btn-success, .btn-danger').attr('data-id', pkid);
 					var imgPath = `../uploads/leaves/${array.request_details.attachment}`;

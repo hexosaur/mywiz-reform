@@ -115,7 +115,7 @@ function enableSelectTypeFilter(selector, opts = {}) {
 
 // DROP DOWN GET FUNCTION
 function dd_prov(isEdit = false, prov_id) {
-$.get("../backend/get_dd_prov.php", { security: '123465' }, function (data) {
+$.get("../backend/system/get_dd_prov.php", { security: '123465' }, function (data) {
 	$('.dd_prov').html(data);
 	if (isEdit && prov_id !== null) {
 	$('.dd_prov').val(prov_id).trigger('change');
@@ -123,7 +123,7 @@ $.get("../backend/get_dd_prov.php", { security: '123465' }, function (data) {
 });
 }
 function dd_city(isEdit = false,prov_id, city_id){
-	$.get("../backend/get_dd_city.php", {security: '123465', id : prov_id}, function (data) {
+	$.get("../backend/system/get_dd_city.php", {security: '123465', id : prov_id}, function (data) {
 		$('.dd_city').removeAttr("disabled");
 		$('.dd_city').html(data);
 		
@@ -135,7 +135,7 @@ function dd_city(isEdit = false,prov_id, city_id){
 	});
 }
 function dd_brgy(isEdit = false,city_id, brgy_id = null) {
-	$.get("../backend/get_dd_brgy.php", {security: '123465', id: city_id}, function (data) {
+	$.get("../backend/system/get_dd_brgy.php", {security: '123465', id: city_id}, function (data) {
 		$('.dd_brgy').removeAttr("disabled").html(data);
 		if (isEdit && brgy_id !== null) {
 			setTimeout(function() {
@@ -147,12 +147,12 @@ function dd_brgy(isEdit = false,city_id, brgy_id = null) {
 
 // ORGANIZATION DROPDOWNS HERE 
 function dd_dept() {
-	$.get("../backend/get_dd_dept.php", { security: '123465' }, function (data) {
+	$.get("../backend/management/get_dd_dept.php", { security: '123465' }, function (data) {
 		$('.dd_dept').html(data);
 	});
 }
 function dd_branch() {
-	$.get("../backend/get_dd_branch.php", { security: '123465' }, function (data) {
+	$.get("../backend/management/get_dd_branch.php", { security: '123465' }, function (data) {
 	$('.dd_branch').each(function () {
 			if ($(this).hasClass('tomsel')) {
 				$(this).html(data);
@@ -166,7 +166,7 @@ function dd_branch() {
 	});
 }
 function dd_perms() {
-	$.get("../backend/get_dd_perms.php", { security: '123465' }, function (data) {
+	$.get("../backend/management/get_dd_perms.php", { security: '123465' }, function (data) {
 	$('.dd_perms').each(function () {
 			if ($(this).hasClass('tomsel')) {
 				$(this).html(data);
@@ -180,7 +180,7 @@ function dd_perms() {
 	});
 }
 function dd_access() {
-	$.get("../backend/get_dd_access.php", { security: '123465' }, function (data) {
+	$.get("../backend/management/get_dd_access.php", { security: '123465' }, function (data) {
 	$('.dd_access').each(function () {
 			if ($(this).hasClass('tomsel')) {
 				$(this).html(data);
@@ -194,7 +194,7 @@ function dd_access() {
 	});
 }
 function dd_leave_type(employee_id) {
-	$.get("../backend/get_dd_leave_type.php", { security: '123465' , id : employee_id}, function (data) {
+	$.get("../backend/leave/get_dd_leave_type.php", { security: '123465' , id : employee_id}, function (data) {
 	$('.dd_lvtype').each(function () {
 			if ($(this).hasClass('tomsel')) {
 				$(this).html(data);
@@ -207,7 +207,7 @@ function dd_leave_type(employee_id) {
 	});
 }
 function dd_role(dept_id) {
-	$.get("../backend/get_dd_role.php", { security: '123465' , dept_id : dept_id }, function (data) {
+	$.get("../backend/management/get_dd_role.php", { security: '123465' , dept_id : dept_id }, function (data) {
 		$('.dd_role').each(function () {
 			if ($(this).hasClass('tomsel')) {
 				$(this).html(data);
@@ -221,7 +221,7 @@ function dd_role(dept_id) {
 	});
 }	
 function dd_proxy(employee_id) {
-	$.get("../backend/get_dd_leave_proxy.php", { security: '123465' , id : employee_id}, function (data) {
+	$.get("../backend/leave/get_dd_leave_proxy.php", { security: '123465' , id : employee_id}, function (data) {
 	$('.dd_proxy').each(function () {
 			if ($(this).hasClass('tomsel')) {
 				$(this).html(data);
@@ -554,6 +554,52 @@ function clearForms(scope = document) {
 		this.selectedIndex = 0;
 		$(this).trigger('change');
 	});
+
+	// ✅ ADDED: fully clear/reset datepicker inputs and their UI state
+	$s.find('input').each(function () {
+		const el = this;
+		const $el = $(el);
+
+		// ✅ ADDED: Flatpickr
+		if (el._flatpickr) {
+			el._flatpickr.clear();
+			el._flatpickr.setDate(null, false);
+			return;
+		}
+
+		// ✅ ADDED: DateRangePicker / single date picker
+		if ($el.data('daterangepicker')) {
+			const drp = $el.data('daterangepicker');
+
+			$el.val(''); // clear visible input
+
+			// reset internal state so old selected year/date won't remain
+			drp.setStartDate(moment());
+			drp.setEndDate(moment());
+
+			// hide picker so UI refreshes
+			drp.hide();
+
+			return;
+		}
+		if ($el.data('datepicker') || $el.data('uiDatepicker')) {
+			try {
+				$el.datepicker('setDate', null);
+				$el.datepicker('refresh');
+			} catch (e) {
+				$el.val('');
+			}
+			$el.trigger('change');
+			return;
+		}
+		if (el.type === 'date') {
+			$el.val('').trigger('change');
+			return;
+		}
+	});
+
+
+
 	IS_CLEARING = false;
 }
 // VALIDITY CHECKING FORM
@@ -765,7 +811,6 @@ $(function () {
 	// START date picker
 	$('.startDatePicker').each(function () {
 		const $start = $(this);
-		console.log("called");
 		const startOpts = {
 			singleDatePicker: true,
 			showDropdowns: true,
@@ -909,7 +954,7 @@ $(function () {
 	});
 	
 	// GET PROFILE 
-	$.get("../backend/system_get_employee_profile.php?security=123465", function(data, status){
+	$.get("../backend/system/system_get_employee_profile.php?security=123465", function(data, status){
 		var array = jQuery.parseJSON(data);
 		if(array.status == "success"){
 			$("#user_name").html(array.first_name);

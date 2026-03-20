@@ -11,6 +11,9 @@
 	.img-preview img:hover {
 		opacity: 0.8;
 	}
+	.form-group.smooth-resize {
+		transition: all 0.1s ease;
+	}
 </style>
 <body class="">
 	<!-- [ navigation menu ] start -->
@@ -56,14 +59,14 @@
 											<hr>
 											<form>
 												<div class="row">
-													<div class="form-group col-md-6">
+													<div class="form-group col-md-12 smooth-resize">
 														<label for="req_type">Choose Leave Type <span class="text-danger">*</span></label>
 														<select id="req_type" class="dd_lvtype mb-3 form-control">
 															<option disabled selected>Select Leave Type</option>
 
 														</select>
 													</div>
-													<div class="form-group col-md-6">
+													<div class="form-group col-md-6 d-none" id="proxy_group">
 														<label for="req_proxy">Select Proxy <span class="text-danger">*</span></label>
 														<select disabled id="req_proxy" class="dd_proxy mb-3 form-control">
 															<option disabled selected>Select Proxy</option>
@@ -177,7 +180,7 @@
 				} 
 				formData.append('data', json);
 				$.ajax({
-					url: "../backend/post_leave_request.php",
+					url: "../backend/leave/post_leave_request.php",
 					type: "POST",
 					data: formData,
 					contentType: false, 
@@ -211,12 +214,13 @@
 		var req_id = $('#req_proxy').val()
 		var ent_id = $(this).val();
 		$('.btn_save').attr('data-id', req_id);
-		$.get("../backend/get_det_leave_ent_dd.php?security=123465&id=" + ent_id, function(data, status) {
+		$.get("../backend/leave/get_det_leave_ent_dd.php?security=123465&id=" + ent_id, function(data, status) {
 			var array_ent = jQuery.parseJSON(data);
 			usable_days = parseFloat(array_ent.allowed_days + array_ent.modified_days - array_ent.used_days, 2);
 			const needsAttach = array_ent.requires_attachment == 1;
 			const needsProxy = array_ent.requires_proxy == 1;
-			const $wrap = $('#req_attach').closest('.form-group');			
+			const $wrap = $('#req_attach').closest('.form-group');
+			const $proxywrap = $('#req_proxy').closest('.form-group');			
 			if (needsAttach) {
 				$wrap.removeClass('d-none').hide().fadeIn(400);
 				$('#req_attach').prop('required', true);
@@ -228,12 +232,23 @@
 					$('.img-preview').addClass('d-none').show();
 				});
 			}
+			
 			if (needsProxy) {
-				dd_proxy(employee_id);
-				$('#dd_proxy').prop('required', true);
+				dd_proxy(employee_id);	
+				$('.dd_proxy').prop('required', true);
+				$('#req_type').closest('.form-group').removeClass('col-md-12').addClass('col-md-6').css('width', '');
+				setTimeout(function() {
+					$proxywrap.removeClass('d-none').hide().show();
+				}, 150);
+				
+				
 			}else{
 				$('.dd_proxy').prop('selectedIndex', 0);
-				$('#dd_proxy').prop('required', false).val('');
+				$('.dd_proxy').prop('required', false).val('');
+				$('#req_type').closest('.form-group').removeClass('col-md-6').addClass('col-md-12').css('width', '');
+				$proxywrap.fadeOut(10, function () {
+					$proxywrap.addClass('d-none').show();
+				});
 			}
 			$('#req_proxy').prop('disabled', array_ent.requires_proxy != 1);
 		});

@@ -338,7 +338,7 @@
 			let message = notif === 0 ? 'New '+pagetitle+' Saved!' : pagetitle+' Details Updated!';
 			var data = { first_name :  $('#first_name').val(), middle_name : $('#middle_name').val(), surname : $('#surname').val(), suffix : $('#suffix').val(), birth_date : $('#birth_date').val(), marital_status : $('#marital_status').val(), gender : $('#gender').val(), prov_id : $('#prov_id').val(), city_id : $('#city_id').val(), brgy_id : $('#brgy_id').val(), address_line : $('#address_line').val(), email : $('#email').val(), contact_no : $('#contact_no').val(), date_hired : $('#date_hired').val(),  branch_id : $('#branch_id').val(), daily_rate : $('#daily_rate').val(), department_id : $('#department_id').val(), role_id : $('#role_id').val(), sss_no : $('#sss_no').val(), pagibig_no : $('#pagibig_no').val(), tin_no : $('#tin_no').val(), philhealth_no : $('#philhealth_no').val(), pkid : id, is_active : is_active};
 			var json = JSON.stringify(data);
-			$.post("../backend/post_emp.php", { data: json}, function (data, a) {
+			$.post("../backend/management/post_emp.php", { data: json}, function (data, a) {
 				data = data.trim();
 				// console.log(data);
 				if(data == 'exist'){
@@ -389,7 +389,7 @@
 	}
 	function tableload_Employee(){
 		resetDataTable('.table');
-		$.get("../backend/get_list_emp.php?security=123465", function(data,status){
+		$.get("../backend/management/get_list_emp.php?security=123465", function(data,status){
 			$("#table_emp tbody").html(data);
 			setDataTable(".table", { showActions : true});
 			
@@ -405,7 +405,7 @@
 				$('.add-employee .form-control').attr('disabled', true);
 				$('.add-employee select').attr('disabled', true);
 				pkid = $(this).data('id');
-				$.get("../backend/get_det_emp.php?security=123465&id=" + pkid, function(data, status) {
+				$.get("../backend/management/get_det_emp.php?security=123465&id=" + pkid, function(data, status) {
 					var array = jQuery.parseJSON(data);
 					is_active = parseInt(array.is_active);
 					// console.log(array)
@@ -455,7 +455,7 @@
 				}).then((result) => {
 					if (result.isConfirmed) {
 						var id = $(this).attr('data-id');
-						$.post("../backend/system_reset_password.php?security=123465",{ id: id }, function (data, status) {
+						$.post("../backend/system/system_reset_password.php?security=123465",{ id: id }, function (data, status) {
 						data = (data || '').trim();
 						if (data === 'true') {
 							Swal.fire({ showConfirmButton: false, title: 'Success', text: pagetitle+' reset.', icon: 'success', timer: 700 });

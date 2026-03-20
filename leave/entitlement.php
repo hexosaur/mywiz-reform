@@ -154,22 +154,22 @@
 	// Initialize
 	const pagetitle = $('.page-title').html();
 	tableload_Ent();
+	invalidDays = false;
 
 	// ACTION LISTENERS
 	$('.btn_save').click(function(){
 		var chk = checkFormValidity();
 		var id = $(this).attr('data-id');
 		if(chk){
-			let hasInvalidDays = $('#modified_days').hasClass('is-invalid');
-			if(hasInvalidDays){
+			if(invalidDays){
 				Swal.fire({ icon: 'error', title: 'Error', text: 'Please change the modified days that is divisible by 0.5.', showConfirmButton: false });
-			}else{
+			}else{	
 				var notif = parseInt(id, 10);
 				let message = notif === 0 ? 'New '+pagetitle+' Saved!' : pagetitle+' Details Updated!';
 				let scope    = $('#ent_year').prop('checked') ? 1 : 0;
 				var data = { scope :  scope, modified_days :  $('#modified_days').val(), pkid : id};
 				var json = JSON.stringify(data);
-				$.post("../backend/post_leave_ent_edit.php", { data: json}, function (data, a) {
+				$.post("../backend/leave/post_leave_ent_edit.php", { data: json}, function (data, a) {
 					data = data.trim();
 					if(data == 'exist'){
 						Swal.fire({icon: 'error', title: pagetitle+' has no changes! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
@@ -188,14 +188,7 @@
 			
 		}
 	});
-	
-
-
-
-	$('.btn-cancel').click(function(){	
-
-	});
-	
+		
 
 
 
@@ -203,7 +196,7 @@
 	function tableload_Ent(){
 		resetDataTable('#table_ent');
 
-		$.get("../backend/get_list_leave_ent.php?security=123465", function(data,status){
+		$.get("../backend/leave/get_list_leave_ent.php?security=123465", function(data,status){
 			$("#table_ent tbody").html(data);
 			setDataTable("#table_ent", {showActions : true});
 			
@@ -216,7 +209,7 @@
 				pkid = $(this).data('id');
 				dd_leave_type(pkid);
 				resetDataTable('#leave_stat');
-				$.get("../backend/get_det_leave_ent.php?security=123465&id=" + pkid, function(data, status) {
+				$.get("../backend/leave/get_det_leave_ent.php?security=123465&id=" + pkid, function(data, status) {
 					var array = jQuery.parseJSON(data);
 					let formatted = String(pkid).padStart(4, '0');
 					$("#leave_stat tbody").html(array.tbody);
@@ -229,7 +222,7 @@
 					$('#type_name').change(function(){
 						var ent_id = $('#type_name').val()
 						$('.btn_save').attr('data-id', ent_id);
-						$.get("../backend/get_det_leave_ent_dd.php?security=123465&id=" + ent_id, function(data, status) {
+						$.get("../backend/leave/get_det_leave_ent_dd.php?security=123465&id=" + ent_id, function(data, status) {
 							var array_ent = jQuery.parseJSON(data);
 							$('#modified_days').prop('disabled', false);
 							$('#modified_days').val(array_ent.modified_days);
@@ -238,43 +231,7 @@
 					});
 					
 				});
-			});
-			// DELETE
-			$('.btn-del').click(function(){
-				Swal.fire({ title: 'Confirm delete', icon: 'warning', html: `<div style="text-align:left">Deleting this could affect other settings in this<span style="font-weight:bold;"> Proceed with caution!</span><br><br>Type <b>DELETE</b> to enable deletion:</div>`, input: 'text', inputPlaceholder: 'Type DELETE', inputAttributes: { autocapitalize: 'off', autocomplete: 'off'}, showCancelButton: true, ConfirmButtonText: 'Yes, delete it!', confirmButtonColor: '#d33',cancelButtonColor: '#20a661',
-					didOpen: () => {
-						const confirmBtn = Swal.getConfirmButton();
-						confirmBtn.disabled = true;
-						const input = Swal.getInput();
-						input.addEventListener('input', () => {
-						const v = (input.value || '').trim();
-						confirmBtn.disabled = (v !== 'DELETE');
-						});
-						input.focus();
-					},preConfirm: (value) => {
-						const v = (value || '').trim();
-						if (v !== 'DELETE') {
-							Swal.showValidationMessage('Please type DELETE exactly.');
-							return false;
-						}
-						return true;
-					}
-				}).then((result) => {
-					if (result.isConfirmed) {
-						var id = $(this).data('id');
-						$.post("../backend/del_leave_type.php?security=123465&id=" + id, function (data, status) {
-						data = (data || '').trim();
-						if (data === 'true') {
-							Swal.fire({ showConfirmButton: false, title: 'Deleted!', text: pagetitle+' deleted.', icon: 'success', timer: 700 });
-							tableload_Leave();
-							showMainPage();
-						} else {
-							Swal.fire({ icon: 'error', title: 'Error deleting '+pagetitle,  showConfirmButton: false, timer: 1200 });
-						}
-						});
-					}
-				});
-			});			
+			});		
 		});
 	}
 	
@@ -283,17 +240,18 @@
 		return !isNaN(n) && Math.floor(n * 2) === n * 2;
 	}
 	$('#modified_days').on('input change', function () {
-	var v = $(this).val();
-
-	if (v === '') {
-		$(this).removeClass('is-invalid');
-		return;
-	}
-	if (!isDivisibleByHalf(v)) {
-		$(this).addClass('is-invalid');
-	} else {
-		$(this).removeClass('is-invalid');
-	}
+		var v = $(this).val();
+		if (v === '') {
+			$(this).removeClass('is-invalid');
+			return;
+		}
+		if (!isDivisibleByHalf(v)) {
+			$(this).addClass('is-invalid');
+			invalidDays = true;
+		} else {
+			$(this).removeClass('is-invalid');
+			invalidDays = false;
+		}
 	});
 
 

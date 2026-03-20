@@ -438,7 +438,7 @@
 	function loadProfile(){
 			const path = window.location.pathname.replace(/\/+$/, ''); // remove trailing slash
 			const lastSegment = path.substring(path.lastIndexOf('/') + 1);
-			let requestURL = "../backend/system_get_employee_profile.php?security=123465";
+			let requestURL = "../backend/system/system_get_employee_profile.php?security=123465";
 			if(lastSegment && lastSegment !== "customize" && lastSegment !== "profile"){
 				requestURL += "&user=" + encodeURIComponent(lastSegment);
 			}
@@ -476,7 +476,7 @@
 					$("#surname").val(array.surname);
 					$("#suffix").val(array.suffix ? array.suffix : "N/A");
 
-					$.get("../backend/get_det_emp.php?security=123465&id=" + pkid, function(data, status){
+					$.get("../backend/management/get_det_emp.php?security=123465&id=" + pkid, function(data, status){
 
 						var employee = jQuery.parseJSON(data);
 						$("#profile-address").html(employee.address);
@@ -545,7 +545,7 @@
 		}).then((result) => {
 			if (!result.isConfirmed) return;
 			var verifyPassword = result.value;
-			$.post("../backend/system_verify_profile_password.php", {
+			$.post("../backend/system/system_verify_profile_password.php", {
 				password: verifyPassword
 			}, function (verifyRes) {
 				verifyRes = verifyRes.trim();
@@ -557,7 +557,7 @@
 					formData.append('data', json);
 					formData.append('verify_password', verifyPassword);
 					$.ajax({
-						url: "../backend/post_update_profile.php",
+						url: "../backend/profile/post_update_profile.php",
 						type: "POST",
 						data: formData,
 						processData: false,

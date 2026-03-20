@@ -103,7 +103,7 @@
 															</select>
 														</div>
 														<div class=" form-group col-md-6">
-															<label for="type_desc">Leave Description <span class="text-danger">*</span></label>
+															<label for="type_desc">Leave Description</label>
 															<input id="type_desc" class="form-control form-control-sm" placeholder="Description"/>
 														</div>
 														<div class=" form-group col-md-6">
@@ -124,7 +124,6 @@
 															<input type="checkbox" class="form-check-input" id="type_proxy">
 															<label class="form-check-label" for="type_proxy">Has Proxy</label>
 														</div>
-														
 													</div>
 														
 												</form>
@@ -161,7 +160,7 @@
 	// FUNCTIONS
 	function tableload_Leave(){
 		resetDataTable('.table');
-		$.get("../backend/get_list_leave_type.php?security=123465", function(data,status){
+		$.get("../backend/leave/get_list_leave_type.php?security=123465", function(data,status){
 			$("#table_leave tbody").html(data);
 			setDataTable(".table", {rowHide : 3, showActions : true});
 			// EDIT
@@ -170,7 +169,7 @@
 				$('.view-modify').fadeIn().removeClass('d-none');
 				$('.view-default').hide();
 				pkid = $(this).data('id');
-				$.get("../backend/get_det_leave_type.php?security=123465&id=" + pkid, function(data, status) {
+				$.get("../backend/leave/get_det_leave_type.php?security=123465&id=" + pkid, function(data, status) {
 					var array = jQuery.parseJSON(data);
 					// console.log(array);
 					$('.btn_save').attr('data-id', pkid);
@@ -208,7 +207,7 @@
 				}).then((result) => {
 					if (result.isConfirmed) {
 						var id = $(this).data('id');
-						$.post("../backend/del_leave_type.php?security=123465&id=" + id, function (data, status) {
+						$.post("../backend/leave/del_leave_type.php?security=123465&id=" + id, function (data, status) {
 						data = (data || '').trim();
 						if (data === 'true') {
 							Swal.fire({ showConfirmButton: false, title: 'Deleted!', text: pagetitle+' deleted.', icon: 'success', timer: 700 });
@@ -239,7 +238,7 @@
 			var data = { type_name : $('#type_name').val(), type_code : $('#type_code').val(), type_gender : $('#type_gender').val() , type_desc : $('#type_desc').val(), type_days : $('#type_days').val(), type_pay : type_pay, type_attach : type_attach, type_proxy : type_proxy, pkid : id };
 			var json = JSON.stringify(data);
 			// console.log(data);
-			$.post("../backend/post_leave_type.php", { data: json}, function (data, a) {
+			$.post("../backend/leave/post_leave_type.php", { data: json}, function (data, a) {
 				data = data.trim();
 				// console.log(data);
 				if(data == 'exist_code'){

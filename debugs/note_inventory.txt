@@ -1,0 +1,230 @@
+INVENTORY DATABASE NOTES
+========================
+
+1. MASTER DATA RELATIONSHIP
+---------------------------
+inv_products depends on:
+- inv_categories
+- inv_units
+- inv_brands
+
+This means every product should belong to:
+- one category
+- one unit
+- optional brand
+
+Example:
+Product: Cement
+Category: Construction Materials
+Unit: Bag
+Brand: Holcim
+
+inv_suppliers and inv_warehouses are also master data because transactions will point to them.
+
+2. PURCHASING FLOW
+------------------
+Step 1: Create Purchase Order
+
+Header goes to:
+- inv_purchase_orders
+
+Items go to:
+- inv_purchase_order_items
+
+This means:
+- one PO has many PO items
+- each PO item points to one product
+
+Example:
+PO-0001
+Supplier: ABC Trading
+Warehouse: Main Warehouse
+
+PO Items:
+- Cement, 100 bags
+- Steel bars, 50 pcs
+
+3. RECEIVING FLOW
+-----------------
+When items actually arrive, do not rely only on PO tables.
+
+You create:
+- inv_receivings
+- inv_receiving_items
+
+Why separate receiving from PO?
+
+Because one purchase order can be:
+- fully received
+- partially received
+- received in multiple deliveries
+
+Example:
+PO ordered 100 bags cement
+first truck delivers only 60
+second truck delivers remaining 40
+
+That is why receiving should be its own transaction.
+
+When receiving is posted:
+1. add quantity to inv_stock_balances
+2. create inv_stock_movements entry with reference_type = 'purchase_receiving'
+3. update qty_received in inv_purchase_order_items
+
+4. STOCK ON HAND
+----------------
+inv_stock_balances is the live stock per product and warehouse.
+
+This table is for fast display:
+- current quantity
+- average cost
+- available stock
+
+Example:
+Warehouse A + Cement = 85 bags
+Warehouse B + Cement = 20 bags
+
+This is what the “Stocks On Hand” page should read from.
+
+5. STOCK MOVEMENT LEDGER
+------------------------
+inv_stock_movements is the audit trail.
+
+This should record every inventory change:
+- receiving
+- transfer out
+- transfer in
+- adjustment add
+- adjustment less
+- stock count gain/loss
+
+Think of this as the inventory history log.
+
+Example:
+purchase_receiving | Main   | Cement | qty_in 60 | qty_out 0
+transfer_out       | Main   | Cement | qty_in 0  | qty_out 20
+transfer_in        | Branch | Cement | qty_in 20 | qty_out 0
+adjustment_less    | Branch | Cement | qty_in 0  | qty_out 2
+
+This is the most important table for tracing errors.
+
+6. TRANSFERS
+------------
+Transfers need two effects:
+
+Header:
+- inv_stock_transfers
+
+Items:
+- inv_stock_transfer_items
+
+When transfer is completed:
+1. deduct stock from from_warehouse_id
+2. add stock to to_warehouse_id
+3. create two movement entries:
+   - transfer_out
+   - transfer_in
+
+This is why transfers are not just master data. They are real stock transactions.
+
+7. ADJUSTMENTS
+--------------
+Adjustments are manual corrections.
+
+Example reasons:
+- damaged stock
+- expired stock
+- missing item
+- extra stock found
+- wrong encoding correction
+
+Tables used:
+- inv_stock_adjustments
+- inv_stock_adjustment_items
+
+When posted:
+- if add, increase inv_stock_balances
+- if deduct, decrease inv_stock_balances
+- insert to inv_stock_movements
+
+8. STOCK COUNT
+--------------
+Stock count is different from adjustment.
+
+Adjustment = manual correction
+Stock count = physical verification against system quantity
+
+Tables used:
+- inv_stock_counts
+- inv_stock_count_items
+
+Process:
+1. system shows current qty
+2. user physically counts actual stock
+3. system computes variance
+4. if posted:
+   - positive variance = stock_count_gain
+   - negative variance = stock_count_loss
+5. update inv_stock_balances
+6. insert ledger records into inv_stock_movements
+
+9. ACTUAL WORKFLOW EXAMPLE
+--------------------------
+1. Setup master data
+   - category
+   - unit
+   - brand
+   - supplier
+   - warehouse
+   - product
+
+2. Create PO
+   - inv_purchase_orders
+   - inv_purchase_order_items
+
+3. Receive items
+   - insert into inv_receivings
+   - insert into inv_receiving_items
+   - update inv_stock_balances
+   - insert into inv_stock_movements
+   - update PO received quantity
+
+4. Transfer stock
+   - create inv_stock_transfers
+   - create inv_stock_transfer_items
+   - deduct source warehouse balance
+   - add destination warehouse balance
+   - insert two movement records
+
+5. Adjust stock
+   - create adjustment record
+   - update stock balance
+   - insert movement record
+
+6. Count stock physically
+   - create stock count
+   - compare system vs actual
+   - post variance
+   - update balance
+   - insert movement record
+
+10. BEST PRACTICAL RULE
+-----------------------
+Use inv_stock_balances for:
+- fast current stock display
+- dashboards
+- low stock alerts
+
+Use inv_stock_movements for:
+- history
+- tracing
+- audit
+- reports
+- debugging wrong stock
+
+So:
+- balances = current state
+- movements = complete history
+
+You need both.
+

@@ -29,9 +29,9 @@
 												<h5 class="m-b-10">Brands</h5>
 											</div>
 											<ul class="breadcrumb">
-												<li class="breadcrumb-item"><a href="../home/dashboard"><i class="feather icon-home"></i></a></li>
+												<li class="breadcrumb-item"><a href="../inventory/dashboard"><i class="feather icon-home"></i></a></li>
 												<li class="breadcrumb-item"><a href="#">Inventory</a></li>
-												<li class="breadcrumb-item"><a href="#">Brands</a></li>
+												<li class="breadcrumb-item"><a href="#"><span class="page-title"></span></a></li>
 											</ul>
 										</div>
 									</div>

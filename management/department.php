@@ -132,7 +132,7 @@
 			let message = notif === 0 ? 'New '+pagetitle+' Saved!' : pagetitle+' Details Updated!';
 			var data = { dept_name :  $('#dept_name').val(), pkid : id};
 			var json = JSON.stringify(data);
-			$.post("../backend/post_dept.php", { data: json}, function (data, a) {
+			$.post("../backend/management/post_dept.php", { data: json}, function (data, a) {
 				data = data.trim();
 				if(data == 'exist'){
 					Swal.fire({icon: 'error', title: pagetitle+'already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
@@ -156,7 +156,7 @@
 	// FUNCTIONS
 	function tableload_Dept(){
 		resetDataTable('.table');
-		$.get("../backend/get_list_dept.php?security=123465", function(data,status){
+		$.get("../backend/management/get_list_dept.php?security=123465", function(data,status){
 			$("#table_department tbody").html(data);
 			setDataTable(".table", {showActions : true, dtOptions : {ordering: false}});
 			// EDIT
@@ -165,7 +165,7 @@
 				$('.view-modify').fadeIn().removeClass('d-none');
 				$('.view-default').hide();
 				pkid = $(this).data('id');
-				$.get("../backend/get_det_dept.php?security=123465&id=" + pkid, function(data, status) {
+				$.get("../backend/management/get_det_dept.php?security=123465&id=" + pkid, function(data, status) {
 					var array = jQuery.parseJSON(data);
 					// console.log(array);
 					$('.btn_save').attr('data-id', pkid);
@@ -195,7 +195,7 @@
 				}).then((result) => {
 					if (result.isConfirmed) {
 						var id = $(this).data('id');
-						$.post("../backend/del_dept.php?security=123465&id=" + id, function (data, status) {
+						$.post("../backend/management/del_dept.php?security=123465&id=" + id, function (data, status) {
 						data = (data || '').trim();
 						// console.log(data)
 						if (data === 'true') {
