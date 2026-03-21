@@ -92,7 +92,7 @@
 												</form>
 												<hr>
 												<div class="text-center">
-													<button class="btn btn-primary btn_save" data-id="0">Apply</button>
+													<button class="btn btn-primary btn-save" data-id="0">Apply</button>
 													<button class="btn btn-danger btn-cancel ">Cancel</button>
 												</div>
 											</div>
@@ -119,11 +119,11 @@
 	// script for body functions default
 	// Initialize
 	const pagetitle = $('.page-title').html();
-	tableload_Dept();
+	tableload();
 	
 	// script for interactions
 	// ACTION LISTENERS
-	$('.btn_save').click(function(){
+	$('.btn-save').click(function(){
 		var chk = checkFormValidity();
 		var id = $(this).attr('data-id');
 		if(chk){
@@ -140,7 +140,7 @@
 					Swal.fire({icon: 'error', title: pagetitle+' Name already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
 				}else if(data == 'true'){
 					Swal.fire({icon: 'success',title: message,showConfirmButton: false,timer:950});
-					tableload_Dept();
+					tableload();
 					showMainPage();
 					is_active = 1;
 				}else if(data.trim() == ''){
@@ -149,66 +149,42 @@
 			});
 		}
 	});
+	// EDIT
+	$('.table').on('click', '.btn-edit', function () {
+		$('.text-btn').text("Edit");
+		$('.view-modify').fadeIn().removeClass('d-none');
+		$('.view-default').hide();
+		pkid = $(this).data('id');
+		$.get("../backend/management/get_det_dept.php?security=123465&id=" + pkid, function(data, status) {
+			var array = jQuery.parseJSON(data);
+			// console.log(array);
+			$('.btn-save').attr('data-id', pkid);
+			$('#dept_name').val(array.dept_name);
+		});
+	});
+
+	// DEL
+	$('.table').on('click', '.btn-del', function () {
+		const id = $(this).data('id');
+		confirmTypedDelete({
+			url: "../backend/management/del_dept.php?security=123465&id=" + id,
+			pageTitle: pagetitle,
+			onSuccess: function () {
+				tableload();
+				showMainPage();
+			}
+		});
+	});
 	$('.btn-cancel').click(function(){	
 
 	});
 	
 	// FUNCTIONS
-	function tableload_Dept(){
+	function tableload(){
 		resetDataTable('.table');
 		$.get("../backend/management/get_list_dept.php?security=123465", function(data,status){
 			$("#table_department tbody").html(data);
 			setDataTable(".table", {showActions : true, dtOptions : {ordering: false}});
-			// EDIT
-			$('.btn-edit').click(function() {
-				$('.text-btn').text("Edit");
-				$('.view-modify').fadeIn().removeClass('d-none');
-				$('.view-default').hide();
-				pkid = $(this).data('id');
-				$.get("../backend/management/get_det_dept.php?security=123465&id=" + pkid, function(data, status) {
-					var array = jQuery.parseJSON(data);
-					// console.log(array);
-					$('.btn_save').attr('data-id', pkid);
-					$('#dept_name').val(array.dept_name);
-				});
-			});
-			// DELETE
-			$('.btn-del').click(function(){
-				Swal.fire({ title: 'Confirm delete', icon: 'warning', html: `<div style="text-align:left">Deleting this could affect other settings in this<span style="font-weight:bold;"> Proceed with caution!</span><br><br>Type <b>DELETE</b> to enable deletion:</div>`, input: 'text', inputPlaceholder: 'Type DELETE', inputAttributes: { autocapitalize: 'off', autocomplete: 'off'}, showCancelButton: true, ConfirmButtonText: 'Yes, delete it!', confirmButtonColor: '#d33',cancelButtonColor: '#20a661',
-					didOpen: () => {
-						const confirmBtn = Swal.getConfirmButton();
-						confirmBtn.disabled = true;
-						const input = Swal.getInput();
-						input.addEventListener('input', () => {
-						const v = (input.value || '').trim();
-						confirmBtn.disabled = (v !== 'DELETE');
-						});
-						input.focus();
-					},preConfirm: (value) => {
-						const v = (value || '').trim();
-						if (v !== 'DELETE') {
-							Swal.showValidationMessage('Please type DELETE exactly.');
-							return false;
-						}
-						return true;
-					}
-				}).then((result) => {
-					if (result.isConfirmed) {
-						var id = $(this).data('id');
-						$.post("../backend/management/del_dept.php?security=123465&id=" + id, function (data, status) {
-						data = (data || '').trim();
-						// console.log(data)
-						if (data === 'true') {
-							Swal.fire({ showConfirmButton: false, title: 'Deleted!', text: pagetitle+' deleted.', icon: 'success', timer: 700 });
-							tableload_Dept();
-							showMainPage();
-						} else {
-							Swal.fire({ icon: 'error', title: 'Error deleting '+pagetitle,  showConfirmButton: false, timer: 1200 });
-						}
-						});
-					}
-				});
-			});			
 		});
 	}
 	

@@ -213,7 +213,7 @@
 												</div>
 												<hr>
 												<div class="text-center">
-													<button class="btn btn-primary btn_save" data-id="0">Cancel Request</button>
+													<button class="btn btn-primary btn-save" data-id="0">Cancel Request</button>
 													<button class="btn btn-danger btn-cancel ">Go Back</button>
 												</div>
 											</div>
@@ -231,105 +231,109 @@
 
 	<?php include('../pkg/assets/page/footer.php')?>
 <script>
-	tableload_LeaveRequests();
+	tableload();
 
 
 
-	$('.btn_save').click(function(){
+	$('.btn-save').click(function(){
 		// var chk = checkFormValidity();
 		var id = $(this).attr('data-id');
 		$.post("../backend/leave/post_leave_cancel_request.php", { id: id}, function (data, a) {
 			data = data.trim();
 			if(data == 'true'){
 				Swal.fire({icon: 'success',title: "Success!", text : "Cancelation of Filed Leave Success",showConfirmButton: false,timer:1200});
-				tableload_LeaveRequests();
+				tableload();
 				showMainPage();
 			}else if(data == 'err'){
 				Swal.fire({icon: 'success',title: "",showConfirmButton: false,timer:950});
-				tableload_LeaveRequests();
+				tableload();
 				showMainPage();
 			}else if(data.trim() == ''){
 				Swal.fire({icon: 'error',title: 'Error Uploading to Database!',showConfirmButton: false,timer:1000});
 			}
 		});
 	});
-	function tableload_LeaveRequests(){
+	// EDIT
+	$('.table').on('click', '.btn-edit', function () {
+		$('.view-modify').fadeIn().removeClass('d-none');
+		$('.view-default').hide();
+		pkid = $(this).data('id');
+		$.get("../backend/leave/get_det_leave_request.php?security=123465&id=" + pkid, function(data, status) {
+			var array = jQuery.parseJSON(data);
+			$('.btn-save').attr('data-id', pkid);
+			
+			var imgPath = `../uploads/leaves/${array.request_details.attachment}`;
+			var dateFiled = moment(array.request_details.created_at).format('MMM DD, YYYY hh:mm A');
+			var dateFrom = moment(array.request_details.date_from).format('MMM DD, YYYY');
+			var dateTo = moment(array.request_details.date_to).format('MMM DD, YYYY');
+			var dateLeave;
+			var stepsData = array.steps;
+			var stepsHtml = '';
+			if(array.request_details.attachment == null){
+				$(".image-file img").addClass('d-none');
+				imgPath = "../pkg/assets/media/img/attach.png";
+			}else{
+				$(".image-file img").removeClass('d-none');
+			}
+			$('.btn-save').prop('disabled', array.request_details.status !== 'Pending');
+			$("#type_name").html(array.request_details.type_name);
+			$("#proxy").html(array.request_details.proxy_name);
+			$("#requested_days").html(array.request_details.requested_days);
+			$("#date_file").html(dateFiled);
+			$("#purpose").html(array.request_details.purpose);
+			$("#dateleave").html(dateFrom === dateTo ? dateFrom : dateFrom + " - " + dateTo);
+			$("#status").html(array.request_details.status);
+			$.each(stepsData, function(index, step) {
+				var stepClass = '';
+				var stepLabel = '';
+				var actedAt = '';
+
+				if (step.step_status == 'Approved') {
+					stepClass = 'approved';
+					actedAt = step.acted_at ? moment(step.acted_at).format('YYYY-MM-DD hh:mm A') : 'Approved';
+				} 
+				else if (step.step_status == 'Rejected') {
+					stepClass = 'rejected';
+					actedAt = step.acted_at ? moment(step.acted_at).format('YYYY-MM-DD hh:mm A') : 'Rejected';
+				} 
+				else if (step.step_status == 'Pending') {
+					stepClass = 'pending';
+					actedAt = 'Pending';
+				}
+				else if (step.step_status == 'Cancelled') {
+					stepClass = 'cancelled';
+					actedAt = 'Stopped';
+				}
+
+				stepsHtml += `
+					<div class="step ${stepClass} text-center position-relative">
+						<div class="step-circle">${step.step_no}</div>
+						<div class="step-label mt-2">${step.step_label}</div>
+						<div class="step-meta small text-muted">${actedAt}</div>
+					</div>
+				`;
+			});
+			$(".approval-stepper").html(stepsHtml);				
+			$(".image-file img").attr('src',imgPath);
+		});
+	});
+	
+	$('.btn-cancel').click(function(){
+		tableload();
+	});
+
+
+	function tableload(){
 		resetDataTable('#table_requests');
 		$.get("../backend/leave/get_list_leave_request.php?security=123465&mode=record", function(data,status){
 			$("#table_requests tbody").html(data);
 			setDataTable("#table_requests", { showActions : true, dtOptions : {pageLength: 13, lengthChange: false,	ordering:  true, searching: true, responsive: true }});
-			$('.btn-edit').click(function() {
-				$('.view-modify').fadeIn().removeClass('d-none');
-				$('.view-default').hide();
-				pkid = $(this).data('id');
-				$.get("../backend/leave/get_det_leave_request.php?security=123465&id=" + pkid, function(data, status) {
-					var array = jQuery.parseJSON(data);
-					$('.btn_save').attr('data-id', pkid);
-					
-					var imgPath = `../uploads/leaves/${array.request_details.attachment}`;
-					var dateFiled = moment(array.request_details.created_at).format('MMM DD, YYYY hh:mm A');
-					var dateFrom = moment(array.request_details.date_from).format('MMM DD, YYYY');
-					var dateTo = moment(array.request_details.date_to).format('MMM DD, YYYY');
-					var dateLeave;
-					var stepsData = array.steps;
-					var stepsHtml = '';
-					if(array.request_details.attachment == null){
-						$(".image-file img").addClass('d-none');
-						imgPath = "../pkg/assets/media/img/attach.png";
-					}else{
-						$(".image-file img").removeClass('d-none');
-					}
-					$('.btn_save').prop('disabled', array.request_details.status !== 'Pending');
-					$("#type_name").html(array.request_details.type_name);
-					$("#proxy").html(array.request_details.proxy_name);
-					$("#requested_days").html(array.request_details.requested_days);
-					$("#date_file").html(dateFiled);
-					$("#purpose").html(array.request_details.purpose);
-					$("#dateleave").html(dateFrom === dateTo ? dateFrom : dateFrom + " - " + dateTo);
-					$("#status").html(array.request_details.status);
-					$.each(stepsData, function(index, step) {
-						var stepClass = '';
-						var stepLabel = '';
-						var actedAt = '';
-
-						if (step.step_status == 'Approved') {
-							stepClass = 'approved';
-							actedAt = step.acted_at ? moment(step.acted_at).format('YYYY-MM-DD hh:mm A') : 'Approved';
-						} 
-						else if (step.step_status == 'Rejected') {
-							stepClass = 'rejected';
-							actedAt = step.acted_at ? moment(step.acted_at).format('YYYY-MM-DD hh:mm A') : 'Rejected';
-						} 
-						else if (step.step_status == 'Pending') {
-							stepClass = 'pending';
-							actedAt = 'Pending';
-						}
-						else if (step.step_status == 'Cancelled') {
-							stepClass = 'cancelled';
-							actedAt = 'Stopped';
-						}
-
-						stepsHtml += `
-							<div class="step ${stepClass} text-center position-relative">
-								<div class="step-circle">${step.step_no}</div>
-								<div class="step-label mt-2">${step.step_label}</div>
-								<div class="step-meta small text-muted">${actedAt}</div>
-							</div>
-						`;
-					});
-					$(".approval-stepper").html(stepsHtml);				
-					$(".image-file img").attr('src',imgPath);
-				});
-			});
 		});
 		$.get("../backend/leave/get_list_leave_request_days.php?security=123465", function(data,status){
 			$(".remaining_days").html(data);
 		});
 	}
 
-	$('.btn-cancel').click(function(){
-		tableload_LeaveRequests();
-	});
 
 	
 

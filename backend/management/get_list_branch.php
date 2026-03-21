@@ -5,19 +5,7 @@
 
 	if (isset($_GET['security']) && $_GET['security'] == '123465') {
 
-		$sql = "SELECT 
-					mb.branch_id,
-					mb.branch_name,
-					mb.branch_code,
-					mb.address_line,
-					p.prov_name,
-					c.city_name,
-					b.brgy_name
-				FROM mgmt_branch mb
-				LEFT JOIN ref_provinces p ON p.prov_id = mb.prov_id
-				LEFT JOIN ref_cities    c ON c.city_id = mb.city_id
-				LEFT JOIN ref_barangays b ON b.brgy_id = mb.brgy_id
-				ORDER BY mb.branch_name ASC";
+		$sql = "SELECT  mb.branch_id, mb.branch_name, mb.branch_code, mb.address_line, p.prov_name, c.city_name, b.brgy_name FROM mgmt_branch mb LEFT JOIN ref_provinces p ON p.prov_id = mb.prov_id LEFT JOIN ref_cities c ON c.city_id = mb.city_id LEFT JOIN ref_barangays b ON b.brgy_id = mb.brgy_id ORDER BY mb.branch_name ASC";
 
 		$n = 1;
 		$table = "";

@@ -130,7 +130,7 @@
 											</form>
 											<hr>
 											<div class="text-center">
-												<button class="btn btn-primary btn_save">Apply</button>
+												<button class="btn btn-primary btn-save">Apply</button>
 												<button class="btn btn-danger btn-cancel" onclick="location.href='../home/dashboard'">Cancel</button>
 											</div>
 										</div>
@@ -161,7 +161,7 @@
 	setupFilePreview('#req_attach', '.img-preview img');
 
 
-	$('.btn_save').click(function () {
+	$('.btn-save').click(function () {
 		var chk = checkFormValidity();
 		var id = employee_id;
 		
@@ -213,7 +213,7 @@
 	$('#req_type').change(function(){
 		var req_id = $('#req_proxy').val()
 		var ent_id = $(this).val();
-		$('.btn_save').attr('data-id', req_id);
+		$('.btn-save').attr('data-id', req_id);
 		$.get("../backend/leave/get_det_leave_ent_dd.php?security=123465&id=" + ent_id, function(data, status) {
 			var array_ent = jQuery.parseJSON(data);
 			usable_days = parseFloat(array_ent.allowed_days + array_ent.modified_days - array_ent.used_days, 2);

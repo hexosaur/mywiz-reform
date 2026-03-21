@@ -27,16 +27,7 @@
 					$result->free();
 
 					// Return the data in JSON format
-					echo json_encode(array(
-						"branch_name" => $branch_name, 
-						"branch_code" => $branch_code, 
-						"branch_address" => $branch_address, 
-						"prov_name" => $prov_name, 
-						"prov_id" => $prov_id, 
-						"city_name" => $city_name, 
-						"city_id" => $city_id, 
-						"brgy_name" => $brgy_name, 
-						"brgy_id" => $brgy_id
+					echo json_encode(array( "branch_name" => $branch_name, "branch_code" => $branch_code, "branch_address" => $branch_address, "prov_name" => $prov_name, "prov_id" => $prov_id, "city_name" => $city_name, "city_id" => $city_id, "brgy_name" => $brgy_name, "brgy_id" => $brgy_id
 					));
 					exit;
 				} else {

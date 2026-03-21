@@ -26,6 +26,9 @@
 					<li class="nav-item">
 						<a href="../home/dashboard" class="nav-link"><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
 					</li>
+					<li class="nav-item superadmin d-none">
+						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-wallet2"></i></span><span class="pcoded-mtext">Payslip</span></a>
+					</li>
 					<li class="nav-item pcoded-hasmenu">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-calendar2"></i></i></span><span class="pcoded-mtext">Leave Portal</span></a>
 						<ul class="pcoded-submenu">
@@ -45,16 +48,6 @@
 					<li class="superadmin d-none nav-item pcoded-menu-caption">
 						<label>Administrator</label>
 					</li>
-					<li class="superadmin d-none nav-item pcoded-hasmenu">
-						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-archive"></i></span><span class="pcoded-mtext">Archives</span></a>
-						<ul class="pcoded-submenu">
-							<li class=""><a href="#" class="">Forms Categories</a></li>
-							<li class=""><a href="#" class="">Evaluation Archives</a></li>
-							<li class=""><a href="../leave/archive" class="">Leave Archives</a></li>
-							<li class=""><a href="#" class="">Overtime Archives</a></li>
-							<li class=""><a href="#" class="">Travel Order Archives</a></li>
-						</ul>
-					</li>
 					<li class="admin-permission superadmin d-none nav-item pcoded-hasmenu">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-codepen"></i></span><span class="pcoded-mtext">Organization</span></a>
 						<ul class="pcoded-submenu">
@@ -64,24 +57,19 @@
 							<li class=""><a href="../management/employee" class="">Employee</a></li>
 						</ul>
 					</li>
+					<!-- <li class="superadmin d-none nav-item pcoded-hasmenu">
+						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-archive"></i></span><span class="pcoded-mtext">Archives</span></a>
+						<ul class="pcoded-submenu">
+							<li class=""><a href="#" class="">Forms Categories</a></li>
+							<li class=""><a href="#" class="">Evaluation Archives</a></li>
+							<li class=""><a href="../leave/archive" class="">Leave Archives</a></li>
+							<li class=""><a href="#" class="">Overtime Archives</a></li>
+							<li class=""><a href="#" class="">Travel Order Archives</a></li>
+						</ul>
+					</li>
 					<li class="superadmin d-none nav-item">
 						<a href="../home/dashboard" class="nav-link"><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Post an Announcement</span></a>
-					</li>
-
-
-					<li class="superadmin d-none nav-item pcoded-hasmenu">
-						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-book"></i></span><span class="pcoded-mtext">Evaluation Management</span></a>
-						<ul class="pcoded-submenu">
-							<li class=""><a href="#" class="">Evaluation Categories</a></li>
-						</ul>
-					</li>
-					<li class="superadmin d-none nav-item pcoded-hasmenu">
-						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-clock"></i></span><span class="pcoded-mtext">Overtime Management</span></a>
-						<ul class="pcoded-submenu">
-							<li class=""><a href="#" class="">Overtime Categories</a></li>
-						</ul>
-					</li>
-				
+					</li> -->
 					<!-- HUMAN RESOURCE SECTION -->
 					<li class="hr-permission superadmin d-none nav-item pcoded-menu-caption">
 						<label>Human Resource</label>
@@ -94,23 +82,35 @@
 							<li class=""><a href="../leave/entitlement" class="">Leave Entitlements</a></li>
 						</ul>
 					</li>
-					<li class="superadmin d-none nav-item pcoded-hasmenu">
+					<!-- <li class="superadmin d-none nav-item pcoded-hasmenu">
 					<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-luggage"></i></span><span class="pcoded-mtext">Travel Orders</span></a>
 					<ul class="pcoded-submenu">
 						<li class=""><a href="#" class="">Format to be Updated</a></li>
 					</ul>
 					<li class="superadmin d-none nav-item pcoded-hasmenu">
-					<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-luggage"></i></span><span class="pcoded-mtext">Payroll</span></a>
+					<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-cash-coin"></i></span><span class="pcoded-mtext">Payroll</span></a>
 					<ul class="pcoded-submenu">
 						<li class=""><a href="#" class="">Format to be Updated</a></li>
 					</ul>
+					<li class="superadmin d-none nav-item pcoded-hasmenu">
+						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-book"></i></span><span class="pcoded-mtext">Evaluation Management</span></a>
+						<ul class="pcoded-submenu">
+							<li class=""><a href="#" class="">Evaluation Categories</a></li>
+						</ul>
+					</li>
+					<li class="superadmin d-none nav-item pcoded-hasmenu">
+						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-clock"></i></span><span class="pcoded-mtext">Overtime Management</span></a>
+						<ul class="pcoded-submenu">
+							<li class=""><a href="#" class="">Overtime Categories</a></li>
+						</ul>
+					</li> -->
 
 					<!-- INVENTORY SECTION -->
 					<li class="superadmin d-none nav-item pcoded-menu-caption">
 						<label>Inventory</label>
 					</li>
 					<li class="nav-item superadmin d-none">
-						<a href="../inventory/dashboard" class="nav-link"><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Summary</span></a>
+						<a href="../inventory/dashboard" class="nav-link"><span class="pcoded-micon"><i class="bi bi-bar-chart"></i></span><span class="pcoded-mtext">Summary</span></a>
 					</li>
 					<li class="superadmin d-none nav-item pcoded-hasmenu">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-inbox"></i></span><span class="pcoded-mtext">Master Data</span></a>
@@ -118,12 +118,12 @@
 							<li class=""><a href="../inventory/products" class="">Products</a></li>
 							<li class=""><a href="../inventory/categories" class="">Categories</a></li>
 							<li class=""><a href="../inventory/warehouse" class="">Warehouse</a></li>
-							<li class=""><a href="../inventory/suppliers" class="">Units</a></li>
+							<li class=""><a href="../inventory/units" class="">Units</a></li>
 							<li class=""><a href="../inventory/brands" class="">Brands/Manufacturers</a></li>
 							<li class=""><a href="../inventory/suppliers" class="">Suppliers</a></li>
 						</ul>
 					</li>
-					<li class="superadmin d-none nav-item pcoded-hasmenu">
+					<!-- <li class="superadmin d-none nav-item pcoded-hasmenu">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-bag-heart"></i></span><span class="pcoded-mtext">Purchasing</span></a>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="../inventory/purchase" class="">Purchase</a></li>
@@ -147,9 +147,9 @@
 							<li class=""><a href="#" class="">Sales</a></li>
 							<li class=""><a href="#" class="">Discounts/Coupons</a></li>
 						</ul>
-					</li>
+					</li> -->
 					<!-- FINANCE SECTION -->
-					<li class="nav-item pcoded-menu-caption superadmin d-none">
+					<!-- <li class="nav-item pcoded-menu-caption superadmin d-none">
 						<label>Finance</label>
 					</li>
 					<li class="nav-item pcoded-hasmenu superadmin d-none">
@@ -157,10 +157,10 @@
 						<ul class="pcoded-submenu">
 							<li class=""><a href="#" class="">To be updated</a></li>
 						</ul>
-					</li>
+					</li> -->
 
 					<!-- Sales & Marketing -->
-					<li class="nav-item pcoded-menu-caption superadmin d-none">
+					<!-- <li class="nav-item pcoded-menu-caption superadmin d-none">
 						<label>Sales & Marketing</label>
 					</li>
 					<li class="nav-item pcoded-hasmenu superadmin d-none">
@@ -168,7 +168,7 @@
 						<ul class="pcoded-submenu">
 							<li class=""><a href="#" class="">To be updated</a></li>
 						</ul>
-					</li>
+					</li> -->
 
 					<!-- Information Technology -->
 					<li class="nav-item pcoded-menu-caption superadmin d-none">

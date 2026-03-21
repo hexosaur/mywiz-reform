@@ -102,7 +102,7 @@
 												</form>
 												<hr>
 												<div class="text-center">
-													<button class="btn btn-primary btn_save" data-id="0">Apply</button>
+													<button class="btn btn-primary btn-save" data-id="0">Apply</button>
 													<button class="btn btn-danger btn-cancel ">Cancel</button>
 												</div>
 											</div>
@@ -129,73 +129,11 @@
 	// script for body functions default
 	// Initialize
 	const pagetitle = $('.page-title').html();
-	tableload_Access();
-	// FUNCTIONS
-	function tableload_Access(){
-		resetDataTable('.table');
-		$.get("../backend/get_list_access.php?security=123465", function(data,status){
-			$("#table_access tbody").html(data);
-			setDataTable(".table");
-			// console.log(data);
-			// wrapTable();
-			// EDIT
-			$('.btn-edit').click(function() {
-				$('.text-btn').text("Edit");
-				$('.view-modify').fadeIn().removeClass('d-none');
-				$('.view-default').hide();
-				pkid = $(this).data('id');
-				$.get("../backend/get_det_access.php?security=123465&id=" + pkid, function(data, status) {
-					var array = jQuery.parseJSON(data);
-					$('.btn_save').attr('data-id', pkid);
-					$('#access_name').val(array.access_name);
-					$('#access_val').val(array.access_val);
-					$('#access_desc').val(array.access_desc);
-
-					
-
-				});
-			});
-			// DELETE
-			$('.btn-del').click(function(){
-				Swal.fire({ title: 'Confirm delete', icon: 'warning', html: `<div style="text-align:left">Deleting this could affect other settings in this<span style="font-weight:bold;"> Proceed with caution!</span><br><br>Type <b>DELETE</b> to enable deletion:</div>`, input: 'text', inputPlaceholder: 'Type DELETE', inputAttributes: { autocapitalize: 'off', autocomplete: 'off'}, showCancelButton: true, ConfirmButtonText: 'Yes, delete it!', confirmButtonColor: '#d33',cancelButtonColor: '#20a661',
-					didOpen: () => {
-						const confirmBtn = Swal.getConfirmButton();
-						confirmBtn.disabled = true;
-						const input = Swal.getInput();
-						input.addEventListener('input', () => {
-						const v = (input.value || '').trim();
-						confirmBtn.disabled = (v !== 'DELETE');
-						});
-						input.focus();
-					},preConfirm: (value) => {
-						const v = (value || '').trim();
-						if (v !== 'DELETE') {
-							Swal.showValidationMessage('Please type DELETE exactly.');
-							return false;
-						}
-						return true;
-					}
-				}).then((result) => {
-					if (result.isConfirmed) {
-						var id = $(this).data('id');
-						$.post("../backend/del_role.php?security=123465&id=" + id, function (data, status) {
-						data = (data || '').trim();
-						if (data === 'true') {
-							Swal.fire({ showConfirmButton: false, title: 'Deleted!', text: pagetitle+' deleted.', icon: 'success', timer: 700 });
-							tableload_Access();
-							showMainPage();
-						} else {
-							Swal.fire({ icon: 'error', title: 'Error deleting '+pagetitle,  showConfirmButton: false, timer: 1200 });
-						}
-						});
-					}
-				});
-			});			
-		});
-	}
+	tableload();
+	
 	// script for interactions
 	// ACTION LISTENERS
-	$('.btn_save').click(function(){
+	$('.btn-save').click(function(){
 		var chk = checkFormValidity();
 		var id = $(this).attr('data-id');
 		if(chk){
@@ -205,7 +143,7 @@
 			var data = { access_name :  $('#access_name').val(), access_val : $('#access_val').val(),access_desc : $('#access_desc').val(), pkid : id};
 			console.log("PUSHED SAVED DATA: ",data);
 			var json = JSON.stringify(data);
-			$.post("../backend/post_access.php", { data: json}, function (data, a) {
+			$.post("../backend/admin/post_access.php", { data: json}, function (data, a) {
 				data = data.trim();
 				console.log(data);
 				if(data == 'exist'){
@@ -214,7 +152,7 @@
 					Swal.fire({icon: 'error', title: pagetitle+' Name already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
 				}else if(data == 'true'){
 					Swal.fire({icon: 'success',title: message,showConfirmButton: false,timer:950});
-					tableload_Access();
+					tableload();
 					showMainPage();
 					is_active = 1;
 				}else if(data.trim() == ''){
@@ -223,11 +161,42 @@
 			});
 		}
 	});
-	$('.btn-cancel').click(function(){	
+	// EDIT
+	$('.table').on('click', '.btn-edit', function () {
+		$('.text-btn').text("Edit");
+		$('.view-modify').fadeIn().removeClass('d-none');
+		$('.view-default').hide();
+		pkid = $(this).data('id');
+		$.get("../backend/admin/get_det_access.php?security=123465&id=" + pkid, function(data, status) {
+			var array = jQuery.parseJSON(data);
+			$('.btn-save').attr('data-id', pkid);
+			$('#access_name').val(array.access_name);
+			$('#access_val').val(array.access_val);
+			$('#access_desc').val(array.access_desc);
+		});
+	});
 
+	// DEL
+	$('.table').on('click', '.btn-del', function () {
+		const id = $(this).data('id');
+		confirmTypedDelete({
+			url: "../backend/admin/del_access.php?security=123465&id=" + id,
+			pageTitle: pagetitle,
+			onSuccess: function () {
+				tableload();
+				showMainPage();
+			}
+		});
 	});
 	
-
+	// FUNCTIONS
+	function tableload(){
+		resetDataTable('.table');
+		$.get("../backend/admin/get_list_access.php?security=123465", function(data,status){
+			$("#table_access tbody").html(data);
+			setDataTable(".table");
+		});
+	}
 	
 </script>
 

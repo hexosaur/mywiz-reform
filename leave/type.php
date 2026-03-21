@@ -59,11 +59,11 @@
 														<thead>
 															<tr>
 																<th class="text-center">#</th>
-																<th class="text-center">Code</th>
-																<th class="text-center">Name</th>
-																<th class="text-center">Description</th>
-																<th class="text-center">Days</th>
-																<th class="text-center">Type</th>
+																<th>Code</th>
+																<th>Name</th>
+																<th>Description</th>
+																<th>Days</th>
+																<th>Type</th>
 																<th class="text-center">Action</th>
 															</tr>
 														</thead>
@@ -129,7 +129,7 @@
 												</form>
 												<hr>
 												<div class="text-center">
-													<button class="btn btn-primary btn_save" data-id="0">Apply</button>
+													<button class="btn btn-primary btn-save" data-id="0">Apply</button>
 													<button class="btn btn-danger btn-cancel ">Cancel</button>
 												</div>
 											</div>
@@ -156,76 +156,20 @@
 	// script for body functions default
 	// Initialize
 	const pagetitle = $('.page-title').html();
-	tableload_Leave();
+	tableload();
 	// FUNCTIONS
-	function tableload_Leave(){
+	function tableload(){
 		resetDataTable('.table');
 		$.get("../backend/leave/get_list_leave_type.php?security=123465", function(data,status){
 			$("#table_leave tbody").html(data);
 			setDataTable(".table", {rowHide : 3, showActions : true});
-			// EDIT
-			$('.btn-edit').click(function() {
-				$('.text-btn').text("Edit");
-				$('.view-modify').fadeIn().removeClass('d-none');
-				$('.view-default').hide();
-				pkid = $(this).data('id');
-				$.get("../backend/leave/get_det_leave_type.php?security=123465&id=" + pkid, function(data, status) {
-					var array = jQuery.parseJSON(data);
-					// console.log(array);
-					$('.btn_save').attr('data-id', pkid);
-					$('#type_name').val(array.type_name);
-					$('#type_code').val(array.type_code);
-					$('#type_desc').val(array.type_desc);
-					$('#type_days').val(array.type_days);
-					$('#type_gender').val(array.gender);
-					$('#type_pay').prop('checked', !!array.type_pay);
-					$('#type_attach').prop('checked', !!array.type_attach);
-					$('#type_proxy').prop('checked', !!array.type_proxy);
-
-				});
-			});
-			// DELETE
-			$('.btn-del').click(function(){
-				Swal.fire({ title: 'Confirm delete', icon: 'warning', html: `<div style="text-align:left">Deleting this could affect other settings in this<span style="font-weight:bold;"> Proceed with caution!</span><br><br>Type <b>DELETE</b> to enable deletion:</div>`, input: 'text', inputPlaceholder: 'Type DELETE', inputAttributes: { autocapitalize: 'off', autocomplete: 'off'}, showCancelButton: true, ConfirmButtonText: 'Yes, delete it!', confirmButtonColor: '#d33',cancelButtonColor: '#20a661',
-					didOpen: () => {
-						const confirmBtn = Swal.getConfirmButton();
-						confirmBtn.disabled = true;
-						const input = Swal.getInput();
-						input.addEventListener('input', () => {
-						const v = (input.value || '').trim();
-						confirmBtn.disabled = (v !== 'DELETE');
-						});
-						input.focus();
-					},preConfirm: (value) => {
-						const v = (value || '').trim();
-						if (v !== 'DELETE') {
-							Swal.showValidationMessage('Please type DELETE exactly.');
-							return false;
-						}
-						return true;
-					}
-				}).then((result) => {
-					if (result.isConfirmed) {
-						var id = $(this).data('id');
-						$.post("../backend/leave/del_leave_type.php?security=123465&id=" + id, function (data, status) {
-						data = (data || '').trim();
-						if (data === 'true') {
-							Swal.fire({ showConfirmButton: false, title: 'Deleted!', text: pagetitle+' deleted.', icon: 'success', timer: 700 });
-							tableload_Leave();
-							showMainPage();
-						} else {
-							Swal.fire({ icon: 'error', title: 'Error deleting '+pagetitle, showConfirmButton: false, timer: 1200 });
-						}
-						});
-					}
-				});
-			});			
 		});
 	}
 
+
 	// script for interactions
 	// ACTION LISTENERS
-	$('.btn_save').click(function(){
+	$('.btn-save').click(function(){
 		var chk = checkFormValidity();
 		var id = $(this).attr('data-id');
 		if(chk){
@@ -247,7 +191,7 @@
 					Swal.fire({icon: 'error', title: pagetitle+' Name already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
 				}else if(data == 'true'){
 					Swal.fire({icon: 'success',title: message,showConfirmButton: false,timer:950});
-					tableload_Leave();
+					tableload();
 					showMainPage();
 					is_active = 1;
 				}else if(data.trim() == ''){
@@ -260,6 +204,41 @@
 
 	});
 	
+
+	// EDIT
+	$('#table_leave').on('click', '.btn-edit', function () {
+		$('.text-btn').text("Edit");
+		$('.view-modify').fadeIn().removeClass('d-none');
+		$('.view-default').hide();
+
+		let pkid = $(this).data('id');
+
+		$.get("../backend/leave/get_det_leave_type.php?security=123465&id=" + pkid, function(data, status) {
+			var array = jQuery.parseJSON(data);
+
+			$('.btn-save').attr('data-id', pkid);
+			$('#type_name').val(array.type_name);
+			$('#type_code').val(array.type_code);
+			$('#type_desc').val(array.type_desc);
+			$('#type_days').val(array.type_days);
+			$('#type_gender').val(array.gender);
+			$('#type_pay').prop('checked', !!array.type_pay);
+			$('#type_attach').prop('checked', !!array.type_attach);
+			$('#type_proxy').prop('checked', !!array.type_proxy);
+		});
+	});
+	// DELETE
+	$('#table_leave').on('click', '.btn-del', function () {
+		const id = $(this).data('id');
+		confirmTypedDelete({
+			url: "../backend/leave/del_leave_type.php?security=123465&id=" + id,
+			pageTitle: pagetitle,
+			onSuccess: function () {
+				tableload();
+				showMainPage();
+			}
+		});
+	});
 
 	
 </script>

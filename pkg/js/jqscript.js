@@ -165,6 +165,7 @@ function dd_branch() {
 		});
 	});
 }
+
 function dd_perms() {
 	$.get("../backend/management/get_dd_perms.php", { security: '123465' }, function (data) {
 	$('.dd_perms').each(function () {
@@ -193,19 +194,6 @@ function dd_access() {
 		});
 	});
 }
-function dd_leave_type(employee_id) {
-	$.get("../backend/leave/get_dd_leave_type.php", { security: '123465' , id : employee_id}, function (data) {
-	$('.dd_lvtype').each(function () {
-			if ($(this).hasClass('tomsel')) {
-				$(this).html(data);
-				tomselDropdowns(this);
-			} else {
-				$(this).html(data);
-				$(this).prop('selectedIndex', 0);
-			}
-		});
-	});
-}
 function dd_role(dept_id) {
 	$.get("../backend/management/get_dd_role.php", { security: '123465' , dept_id : dept_id }, function (data) {
 		$('.dd_role').each(function () {
@@ -220,6 +208,21 @@ function dd_role(dept_id) {
 		});
 	});
 }	
+
+// LEAVE DROPDOWNS HERE 
+function dd_leave_type(employee_id) {
+	$.get("../backend/leave/get_dd_leave_type.php", { security: '123465' , id : employee_id}, function (data) {
+	$('.dd_lvtype').each(function () {
+			if ($(this).hasClass('tomsel')) {
+				$(this).html(data);
+				tomselDropdowns(this);
+			} else {
+				$(this).html(data);
+				$(this).prop('selectedIndex', 0);
+			}
+		});
+	});
+}
 function dd_proxy(employee_id) {
 	$.get("../backend/leave/get_dd_leave_proxy.php", { security: '123465' , id : employee_id}, function (data) {
 	$('.dd_proxy').each(function () {
@@ -233,6 +236,61 @@ function dd_proxy(employee_id) {
 		});
 	});
 }
+// INVENTORY DROPDOWNS HERE 
+function dd_inv_category() {
+	$.get("../backend/inventory/get_dd_inv_category.php", { security: '123465'}, function (data) {
+	$('.dd_inv_category').each(function () {
+			if ($(this).hasClass('tomsel')) {
+				$(this).html(data);
+				tomselDropdowns(this);
+			} else {
+				$(this).html(data);
+				$(this).prop('selectedIndex', 0);
+			}
+		});
+	});
+}
+function dd_inv_brand() {
+	$.get("../backend/inventory/get_dd_inv_brands.php", { security: '123465'}, function (data) {
+	$('.dd_inv_brand').each(function () {
+			if ($(this).hasClass('tomsel')) {
+				$(this).html(data);
+				tomselDropdowns(this);
+			} else {
+				$(this).html(data);
+				$(this).prop('selectedIndex', 0);
+			}
+		});
+	});
+}
+function dd_inv_suppliers() {
+	$.get("../backend/inventory/get_dd_inv_suppliers.php", { security: '123465'}, function (data) {
+	$('.dd_inv_suppliers').each(function () {
+			if ($(this).hasClass('tomsel')) {
+				$(this).html(data);
+				tomselDropdowns(this);
+			} else {
+				$(this).html(data);
+				$(this).prop('selectedIndex', 0);
+			}
+		});
+	});
+}
+function dd_inv_unit() {
+	$.get("../backend/inventory/get_dd_inv_units.php", { security: '123465'}, function (data) {
+	$('.dd_inv_unit').each(function () {
+			if ($(this).hasClass('tomsel')) {
+				$(this).html(data);
+				tomselDropdowns(this);
+			} else {
+				$(this).html(data);
+				$(this).prop('selectedIndex', 0);
+			}
+		});
+	});
+}
+
+
 
 
 
@@ -507,11 +565,30 @@ function getDayLimitMinDate($el) {
 ==========================  **/
 // RESETS THE FORMS AND FUNCTIONS
 function showMainPage(){
-	$('.btn_save').attr('data-id', 0);
+	// $('.btn_save').attr('data-id', 0);
+	$('.btn-save').attr('data-id', 0);
 	$('.view-default').fadeIn().removeClass('d-none');
 	$('.view-modify').hide();	
 	$('.dd_city, .dd_brgy').prop('disabled', true).prop('selectedIndex', 0);
 	clearForms('.view-modify');	
+}
+function hidePerms(){
+
+
+	
+}
+// TOGGLE FOR ACTIVE/INACTIVE
+function isActiveToggle(value){
+	if (value == 1) {
+		$('#is-active').prop('checked', true);
+		$('#is-active').parent().removeClass("btn-secondary").addClass("btn-success active");
+		$('#is-inactive').parent().removeClass('active').addClass("btn-secondary").removeClass('btn-danger');
+	}
+	else if (value == 0) {
+		$('#is-inactive').prop('checked', true);
+		$('#is-active').parent().removeClass('active').addClass("btn-secondary").removeClass('btn-success');;
+		$('#is-inactive').parent().removeClass("btn-secondary").addClass("btn-danger active");
+	}
 }
 
 /**  =====================
@@ -660,11 +737,41 @@ function checkFormValidity(scope = document) {
 
 	return isValid;
 }
-function hidePerms(){
 
 
-
-	
+/**  ===========================
+	SWEET ALERT / SWAL SECTION
+================================  **/
+function confirmTypedDelete({ trigger, url, pageTitle, onSuccess = null, onError = null }) {
+	Swal.fire({ title: 'Confirm delete', icon: 'warning', html: `<div style="text-align:left"> Deleting this could affect other settings in this <span style="font-weight:bold;"> Proceed with caution!</span> <br><br> Type <b>DELETE</b> to enable deletion: </div>`, input: 'text', inputPlaceholder: 'Type DELETE', inputAttributes: { autocapitalize: 'off', autocomplete: 'off' }, showCancelButton: true, confirmButtonText: 'Yes, delete it!', confirmButtonColor: '#d33', cancelButtonColor: '#20a661',
+		didOpen: () => {
+			const confirmBtn = Swal.getConfirmButton();
+			const input = Swal.getInput();
+			confirmBtn.disabled = true;
+			input.addEventListener('input', () => {
+				confirmBtn.disabled = (input.value || '').trim() !== 'DELETE';
+			});
+			input.focus();
+		},
+		preConfirm: (value) => {
+			if ((value || '').trim() !== 'DELETE') {
+				Swal.showValidationMessage('Please type DELETE exactly.');
+				return false;
+			}
+			return true;
+		}
+	}).then((result) => {
+		if (!result.isConfirmed) return;
+		$.post(url, function (data) {
+			data = (data || '').trim();
+			if (data === 'true') { Swal.fire({ showConfirmButton: false, title: 'Deleted!', text: pageTitle + ' deleted.', icon: 'success', timer: 700 });
+				if (typeof onSuccess === 'function') onSuccess(data);
+			} else {
+				Swal.fire({ icon: 'error', title: 'Error deleting ' + pageTitle, showConfirmButton: false, timer: 1200 });
+				if (typeof onError === 'function') onError(data);
+			}
+		});
+	});
 }
 
 /**  =====================
@@ -940,6 +1047,8 @@ $(function () {
 			window.location = '/mywiz/';
 		});
 	}
+	
+
 
 
 	$('.btn-logout').click(function(){	

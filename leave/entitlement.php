@@ -60,7 +60,7 @@
 														<thead>
 															<tr>
 																<th class="text-center">#</th>
-																<th class="text-center">Employee</th>
+																<th>Employee</th>
 																<th class="text-center">Action</th>
 															</tr>
 														</thead>
@@ -126,7 +126,7 @@
 												</form>
 												<hr>
 												<div class="text-center">
-													<button class="btn btn-primary btn_save" data-id="0">Apply</button>
+													<button class="btn btn-primary btn-save" data-id="0">Apply</button>
 													<button class="btn btn-danger btn-cancel ">Cancel</button>
 												</div>
 											</div>
@@ -153,11 +153,11 @@
 	// script for body functions default
 	// Initialize
 	const pagetitle = $('.page-title').html();
-	tableload_Ent();
+	tableload();
 	invalidDays = false;
 
 	// ACTION LISTENERS
-	$('.btn_save').click(function(){
+	$('.btn-save').click(function(){
 		var chk = checkFormValidity();
 		var id = $(this).attr('data-id');
 		if(chk){
@@ -175,70 +175,47 @@
 						Swal.fire({icon: 'error', title: pagetitle+' has no changes! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
 					}else if(data == 'true'){
 						Swal.fire({icon: 'success',title: message,showConfirmButton: false,timer:950});
-						tableload_Ent();
+						tableload();
 						showMainPage();
 						is_active = 1;
 					}else if(data.trim() == ''){
 						Swal.fire({icon: 'error',title: 'Error Uploading to Database!',showConfirmButton: false,timer:1000});
 					}
 				});
-
-
 			}
-			
 		}
 	});
-		
+	// EDIT
+	$('.table').on('click', '.btn-edit', function () {
+		$('.text-btn').text("Edit");
+		$('.view-modify').fadeIn().removeClass('d-none');
+		$('.view-default').hide();
+		pkid = $(this).data('id');
+		dd_leave_type(pkid);
+		resetDataTable('#leave_stat');
+		$.get("../backend/leave/get_det_leave_ent.php?security=123465&id=" + pkid, function(data, status) {
+			var array = jQuery.parseJSON(data);
+			let formatted = String(pkid).padStart(4, '0');
+			$("#leave_stat tbody").html(array.tbody);
+			setDataTable("#leave_stat", {dtOptions:{ lengthChange: false,	ordering:  false, searching: false, info: false,  paging: false, }});
+			// $('.btn-save').attr('data-id', pkid);
+			$('#emp_name').text(array.full_name);
+			$('#emp_id').text(formatted);
+			$('#emp_role').text(array.role_name);
 
-
-
-	// FUNCTIONS
-	function tableload_Ent(){
-		resetDataTable('#table_ent');
-
-		$.get("../backend/leave/get_list_leave_ent.php?security=123465", function(data,status){
-			$("#table_ent tbody").html(data);
-			setDataTable("#table_ent", {showActions : true});
-			
-			// EDIT
-			$('.btn-edit').click(function() {
-				
-				$('.text-btn').text("Edit");
-				$('.view-modify').fadeIn().removeClass('d-none');
-				$('.view-default').hide();
-				pkid = $(this).data('id');
-				dd_leave_type(pkid);
-				resetDataTable('#leave_stat');
-				$.get("../backend/leave/get_det_leave_ent.php?security=123465&id=" + pkid, function(data, status) {
-					var array = jQuery.parseJSON(data);
-					let formatted = String(pkid).padStart(4, '0');
-					$("#leave_stat tbody").html(array.tbody);
-					setDataTable("#leave_stat", {dtOptions:{ lengthChange: false,	ordering:  false, searching: false, info: false,  paging: false, }});
-					// $('.btn_save').attr('data-id', pkid);
-					$('#emp_name').text(array.full_name);
-					$('#emp_id').text(formatted);
-					$('#emp_role').text(array.role_name);
-
-					$('#type_name').change(function(){
-						var ent_id = $('#type_name').val()
-						$('.btn_save').attr('data-id', ent_id);
-						$.get("../backend/leave/get_det_leave_ent_dd.php?security=123465&id=" + ent_id, function(data, status) {
-							var array_ent = jQuery.parseJSON(data);
-							$('#modified_days').prop('disabled', false);
-							$('#modified_days').val(array_ent.modified_days);
-							$('#ent_year').prop('checked', !!array_ent.scope);
-						});
-					});
-					
+			$('#type_name').change(function(){
+				var ent_id = $('#type_name').val()
+				$('.btn-save').attr('data-id', ent_id);
+				$.get("../backend/leave/get_det_leave_ent_dd.php?security=123465&id=" + ent_id, function(data, status) {
+					var array_ent = jQuery.parseJSON(data);
+					$('#modified_days').prop('disabled', false);
+					$('#modified_days').val(array_ent.modified_days);
+					$('#ent_year').prop('checked', !!array_ent.scope);
 				});
-			});		
+			});
+			
 		});
-	}
-	
-	function isDivisibleByHalf(v){
-		var n = parseFloat(v);
-		return !isNaN(n) && Math.floor(n * 2) === n * 2;
-	}
+	});
 	$('#modified_days').on('input change', function () {
 		var v = $(this).val();
 		if (v === '') {
@@ -253,6 +230,24 @@
 			invalidDays = false;
 		}
 	});
+		
+
+
+
+	// FUNCTIONS
+	function tableload(){
+		resetDataTable('#table_ent');
+		$.get("../backend/leave/get_list_leave_ent.php?security=123465", function(data,status){
+			$("#table_ent tbody").html(data);
+			setDataTable("#table_ent", {showActions : true});
+		});
+	}
+	
+	function isDivisibleByHalf(v){
+		var n = parseFloat(v);
+		return !isNaN(n) && Math.floor(n * 2) === n * 2;
+	}
+	
 
 
 

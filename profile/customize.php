@@ -266,7 +266,7 @@
 																	</div>
 																	<hr>
 																	<div class="text-center">
-																		<button class="btn btn-primary btn_save" data-id="0">Apply</button>
+																		<button class="btn btn-primary btn-save" data-id="0">Apply</button>
 																		<button class="btn btn-danger btn-cancel" data-toggle="collapse" data-target="#profile-edit" aria-expanded="false" aria-controls="profile-edit">Cancel</button>
 																	</div>
 																</div>
@@ -445,7 +445,6 @@
 			$.get(requestURL, function(data, status){
 				var array = jQuery.parseJSON(data);
 				if(array.status == "success"){
-
 					$("#profile-picture").attr("src", "../uploads/profile/" + array.profile_photo);
 					$("#profile-name").html(array.full_name);
 					$(".profile-code").html(array.employee_code);
@@ -477,7 +476,6 @@
 					$("#suffix").val(array.suffix ? array.suffix : "N/A");
 
 					$.get("../backend/management/get_det_emp.php?security=123465&id=" + pkid, function(data, status){
-
 						var employee = jQuery.parseJSON(data);
 						$("#profile-address").html(employee.address);
 						$(".profile-rate span").html("₱ "+employee.daily_rate);
@@ -515,7 +513,7 @@
 
 	// script for interactions
 	// ACTION LISTENERS
-	$('.btn_save').click(function () {
+	$('.btn-save').click(function () {
 		var fileInput = $('#profile-image');
 		var data = {
 			username: $("#username").val(),

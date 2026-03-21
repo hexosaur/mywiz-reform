@@ -156,7 +156,7 @@
 
 	<?php include('../pkg/assets/page/footer.php')?>
 <script>
-	tableload_LeaveRequests();
+	tableload();
 
 	$('.btn-success').click(function(){
 		let id = $(this).attr('data-id');
@@ -164,11 +164,11 @@
 			data = data.trim();
 			if(data == 'true'){
 				Swal.fire({icon: 'success',title: "Success!", text : "Leave request approved!",showConfirmButton: false,timer:1200});
-				tableload_LeaveRequests();
+				tableload();
 				showMainPage();
 			}else if(data == 'err'){
 				Swal.fire({icon: 'success',title: "",showConfirmButton: false,timer:950});
-				tableload_LeaveRequests();
+				tableload();
 				showMainPage();
 			}else if(data.trim() == ''){
 				Swal.fire({icon: 'error',title: 'Error Uploading to Database!',showConfirmButton: false,timer:1000});
@@ -181,19 +181,52 @@
 			data = data.trim();
 			if(data == 'true'){
 				Swal.fire({icon: 'success',title: "Success!", text : "Leave request rejected!",showConfirmButton: false,timer:1200});
-				tableload_LeaveRequests();
+				tableload();
 				showMainPage();
 			}else if(data == 'err'){
 				Swal.fire({icon: 'success',title: "",showConfirmButton: false,timer:950});
-				tableload_LeaveRequests();
+				tableload();
 				showMainPage();
 			}else if(data.trim() == ''){
 				Swal.fire({icon: 'error',title: 'Error Uploading to Database!',showConfirmButton: false,timer:1000});
 			}
 		});
 	});
-	
-	function tableload_LeaveRequests(){
+	// EDIT
+	$('.table').on('click', '.btn-edit', function () {
+		$('.view-modify').fadeIn().removeClass('d-none');
+		$('.view-default').hide();
+		pkid = $(this).data('id');
+		$.get("../backend/leave/get_det_leave_request.php?security=123465&id=" + pkid, function(data, status) {
+			var array = jQuery.parseJSON(data);
+			$('.btn-success, .btn-danger').attr('data-id', pkid);
+			var imgPath = `../uploads/leaves/${array.request_details.attachment}`;
+			var dateFiled = moment(array.request_details.created_at).format('MMM DD, YYYY hh:mm A');
+			var dateFrom = moment(array.request_details.date_from).format('MMM DD, YYYY');
+			var dateTo = moment(array.request_details.date_to).format('MMM DD, YYYY');
+			var dateLeave;
+			if(array.request_details.attachment == null){
+				$(".image-file").addClass('d-none');
+				imgPath = "../pkg/assets/media/img/attach.png";
+			}else{
+				$(".image-file").removeClass('d-none');
+			}
+			$("#requester").html(array.request_details.employee_full_name);
+			$("#type_name").html(array.request_details.type_name);
+			$("#proxy").html(array.request_details.proxy_name);
+			$("#requested_days").html(array.request_details.requested_days);
+			$("#date_file").html(dateFiled);
+			$("#purpose").html(array.request_details.purpose);
+			$("#dateleave").html(dateFrom === dateTo ? dateFrom : dateFrom + " - " + dateTo);
+			$(".image-file img").attr('src',imgPath);
+		});
+	});
+
+	// DEL
+	$('.table').on('click', '.btn-del', function () {
+		
+	});
+	function tableload(){
 		resetDataTable('#table_requests');
 		$.get("../backend/leave/get_leave_request.php?security=123465", function(data, status){
 			$("#table_requests tbody").html(data);
@@ -234,50 +267,11 @@
 					row_no++;
 				}
 			});
-			
 			if(approval_count <= 0){
 				setTimeout(function() {
 					window.location.href = "../home/dashboard";
 				}, 1300); 
 			}
-
-			$('.btn-edit').click(function() {
-				$('.view-modify').fadeIn().removeClass('d-none');
-				$('.view-default').hide();
-				pkid = $(this).data('id');
-				$.get("../backend/leave/get_det_leave_request.php?security=123465&id=" + pkid, function(data, status) {
-					var array = jQuery.parseJSON(data);
-					$('.btn-success, .btn-danger').attr('data-id', pkid);
-					var imgPath = `../uploads/leaves/${array.request_details.attachment}`;
-					var dateFiled = moment(array.request_details.created_at).format('MMM DD, YYYY hh:mm A');
-					var dateFrom = moment(array.request_details.date_from).format('MMM DD, YYYY');
-					var dateTo = moment(array.request_details.date_to).format('MMM DD, YYYY');
-					var dateLeave;
-					if(array.request_details.attachment == null){
-						$(".image-file").addClass('d-none');
-						imgPath = "../pkg/assets/media/img/attach.png";
-					}else{
-						$(".image-file").removeClass('d-none');
-					}
-					$("#requester").html(array.request_details.employee_full_name);
-					$("#type_name").html(array.request_details.type_name);
-					$("#proxy").html(array.request_details.proxy_name);
-					$("#requested_days").html(array.request_details.requested_days);
-					$("#date_file").html(dateFiled);
-					$("#purpose").html(array.request_details.purpose);
-					$("#dateleave").html(dateFrom === dateTo ? dateFrom : dateFrom + " - " + dateTo);
-					$(".image-file img").attr('src',imgPath);
-				});
-			});
-
-
-
-
-
-
-
-
-
 		});
 	}
 

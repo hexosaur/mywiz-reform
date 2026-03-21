@@ -7,6 +7,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php include('../pkg/assets/page/head.php')?>
+<style>
+	.product-image{
+		width: 220px;
+		aspect-ratio: 1 / 1;
+	}
+
+	.product-image img{
+		object-fit: cover;
+	}
+</style>
 <body class="">
 	<!-- [ navigation menu ] start -->
 	<?php include('../pkg/assets/page/sidebar.php')?>
@@ -48,7 +58,7 @@
 											<div class="card-body table-border-style">
 												<div class="row align-items-center">
 														<div class="col col-md-6">
-															<h3 class="mb-0">Product List</h3>
+															<h3 class="mb-0"><span class="page-title"></span> Catalog</h3>
 														</div>
 														<div class="col col-md-6 d-flex justify-content-between">
 															<div class="d-flex align-items-center">
@@ -66,22 +76,62 @@
 													</div>
 												<hr>
 												<div class="table-responsive">
-													<table class="table  table-hover">
+													<table class="table_product table table-hover">
 														<thead>
 															<tr>
-																<th class="text-center">#</th>
 																<th class="text-center">Product</th>
 																<th class="text-center">Category</th>
-																<th class="text-center">Price</th>
+																<th class="text-center">Brand</th>
+																<th class="text-center">Supplier</th>
+																<th class="text-center">Unit</th>
+																<th class="text-center">Status</th>
 																<th class="text-center">Action</th>
 															</tr>
 														</thead>
 														<tbody>
 															<tr>
-																<td class="text-center">2</td>
-																<td class="text-center">Test</td>
-																<td class="text-center">Iligan</td>
-																<td class="text-center">199.00 PHP</td>
+																<td>TEST PRODUCT NAME <br><small>CODEHERE</small></td>
+																<td>Test</td>
+																<td>Logitech</td>
+																<td>Angkol</td>
+																<td class="text-center">box</td>
+																<td class="text-center"><span class="badge badge-pill badge-success">Active</span></td>
+																<td class="text-center">
+																	<div class="btn btn-outline-info btn-sm btn-edit"><span class="feather icon-edit"></span></div>
+																	<div class="btn btn-outline-danger btn-sm btn-del"><span class="feather icon-trash-2"></div>
+																</td>
+															</tr>
+															<tr>
+																<td>TEST PRODUCT NAME <br><small>CODEHERE</small></td>
+																<td>Test</td>
+																<td>Logitech</td>
+																<td>Angkol</td>
+																<td class="text-center">box</td>
+																<td class="text-center"><span class="badge badge-pill badge-warning">Low Stock</span></td>
+																<td class="text-center">
+																	<div class="btn btn-outline-info btn-sm btn-edit"><span class="feather icon-edit"></span></div>
+																	<div class="btn btn-outline-danger btn-sm btn-del"><span class="feather icon-trash-2"></div>
+																</td>
+															</tr>
+															<tr>
+																<td>TEST PRODUCT NAME <br><small>CODEHERE</small></td>
+																<td>Test</td>
+																<td>Logitech</td>
+																<td>Angkol</td>
+																<td class="text-center">box</td>
+																<td class="text-center"><span class="badge badge-pill badge-danger">Inactive</span></td>
+																<td class="text-center">
+																	<div class="btn btn-outline-info btn-sm btn-edit"><span class="feather icon-edit"></span></div>
+																	<div class="btn btn-outline-danger btn-sm btn-del"><span class="feather icon-trash-2"></div>
+																</td>
+															</tr>
+															<tr>
+																<td>TEST PRODUCT NAME <br><small>CODEHERE</small></td>
+																<td>Test</td>
+																<td>Logitech</td>
+																<td>Angkol</td>
+																<td class="text-center">box</td>
+																<td class="text-center"><span class="badge badge-pill badge-dark">End of Life</span></td>
 																<td class="text-center">
 																	<div class="btn btn-outline-info btn-sm btn-edit"><span class="feather icon-edit"></span></div>
 																	<div class="btn btn-outline-danger btn-sm btn-del"><span class="feather icon-trash-2"></div>
@@ -105,72 +155,72 @@
 												<h3 class="text-center"><span class="text-btn"></span> <span class="page-title"></span></h3>
 												<hr>
 												<form>
+													<div class="row d-flex align-items-center">
+														<div class="col-md-3">
+															<div class="col-auto">
+																<div class="product-image border rounded overflow-hidden">
+																	<img src="../pkg/assets/media/img/default.jpg" class="w-100 h-100" alt="">
+																</div>
+															</div>
+														</div>
+														<div class="col-md-9">
+															<div class="row">
+																<div class="form-group col-md-6">
+																	<label for="">Product Name <span class="text-danger">*</span></label>
+																	<input id="" class=" form-control form-control-sm" placeholder="Product Name" required/>
+																</div>
+																<div class="form-group col-md-3">
+																	<label for="">Product Code</label>
+																	<input id="" class=" form-control form-control-sm" placeholder="Product Code"/>
+																</div>
+																<div class="form-group col-md-3">
+																	<label>Base Unit <span class="text-danger">*</span></label>
+																	<select class="dd_inv_unit form-control" required>
+																		<option disabled selected>Select Base Unit</option>
+																		<option>Voluntary</option>
+																	</select>
+																</div>
+																<div class="form-group col-md-5">
+																	<label>Category <span class="text-danger">*</span></label>
+																	<select class="dd_inv_category form-control" required>
+																		<option disabled selected>Select Category</option>
+																		<option>Voluntary</option>
+																	</select>
+																</div>
+																<div class="form-group col-md-5">
+																	<label>Brand</label>
+																	<select class="dd_inv_brand form-control">
+																		<option disabled selected>Select Brand</option>
+																		<option>Voluntary</option>
+																	</select>
+																</div>
+																<div class="form-group col-md-2">
+																	<label for="">Reorder Level <span class="text-danger">*</span></label>
+																	<input id="" type="number" class="notnega form-control form-control-sm" placeholder="Value" required/>
+																</div>
+																<div class="form-group col-md-4">
+																	<label>Supplier <span class="text-danger">*</span></label>
+																	<select class="dd_inv_suppliers form-control">
+																		<option disabled selected>Select Supplier</option>
+																		<option>Voluntary</option>
+																	</select>
+																</div>
+																<div class="form-group col-md-3">
+																	<label for="">Mark up %<span class="text-danger"> *</span></label>
+																	<input min="0" type="number" id="" class="notnega form-control form-control-sm" placeholder="Mark up %" required/>
+																</div>
+																<div class="form-group col-md-5">
+																	<label for="">Product Image<span class="text-danger"> *</span></label>
+																	<input min="0" type="file" id="" class="notnega form-control form-control-sm" placeholder="Product Image"/>
+																</div>
+															</div>
+														</div>
+													</div>
 													<div class="row">
-														<div class="form-group col-md-6">
-															<label for="">Product Name <span class="text-danger">*</span></label>
-															<input id="" class=" form-control form-control-sm" placeholder="Product Name" required/>
-														</div>
-														<div class="form-group col-md-3">
-															<label for="">Product Code</label>
-															<input id="" class=" form-control form-control-sm" placeholder="Product Code"/>
-														</div>
-														<div class="form-group col-md-3">
-															<label>Base Unit <span class="text-danger">*</span></label>
-															<select class=" form-control" required>
-																<option disabled selected>Select Base Unit</option>
-																<option>Voluntary</option>
-															</select>
-														</div>
-														<div class="form-group col-md-4">
-															<label>Category <span class="text-danger">*</span></label>
-															<select class=" form-control" required>
-																<option disabled selected>Select Category</option>
-																<option>Voluntary</option>
-															</select>
-														</div>
-														<div class="form-group col-md-4">
-															<label>Brand</label>
-															<select class=" form-control">
-																<option disabled selected>Select Brand</option>
-																<option>Voluntary</option>
-															</select>
-														</div>
-														<div class="form-group col-md-4">
-															<label for="">Reorder Level <span class="text-danger">*</span></label>
-															<input id="" type="number" class="notnega form-control form-control-sm" placeholder="Reorder Level" required/>
-														</div>
-														<!-- <div class="form-group col-md-3">
-															<label for="">Product Cost <span class="text-danger">*</span></label>
-															<input id="" type="number" class="notnega form-control form-control-sm" placeholder="Product Cost" required/>
-														</div>
-														<div class="form-group col-md-2">
-															<label>Currency <span class="text-danger">*</span></label>
-															<select class=" form-control">
-																<option disabled selected>Select Currency</option>
-																<option>Voluntary</option>
-															</select>
-														</div> -->
-														<div class="form-group col-md-4">
-															<label>Supplier <span class="text-danger">*</span></label>
-															<select class=" form-control">
-																<option disabled selected>Select Supplier</option>
-																<option>Voluntary</option>
-															</select>
-														</div>
-														<div class="form-group col-md-3">
-															<label for="">Mark up %<span class="text-danger"> *</span></label>
-															<input min="0" type="number" id="" class="notnega form-control form-control-sm" placeholder="Mark up %" required/>
-														</div>
-														<div class="form-group col-md-5">
-															<label for="">Product Image<span class="text-danger"> *</span></label>
-															<input min="0" type="file" id="" class="notnega form-control form-control-sm" placeholder="Product Image"/>
-														</div>
 														<div class="form-group col-md-12">
 															<label for="">Product Description <span class="text-danger">*</span></label>
 															<input id="" class=" form-control form-control-sm" placeholder="Product Description"/>
 														</div>
-														
-														
 													</div>
 													<div class="row justify-content-evenly">
 														<div class="form-group ml-3 col form-check">
@@ -181,7 +231,7 @@
 												</form>
 												<hr>
 												<div class="text-center">
-													<button class="btn btn-primary">Apply</button>
+													<button class="btn btn-primary btn-save" data-id="0">Apply</button>
 													<button class="btn btn-danger btn-cancel">Cancel</button>
 												</div>
 											</div>
@@ -203,5 +253,13 @@
 
 	<?php include('../pkg/assets/page/footer.php')?>
 </body>
+<script>
+	setDataTable(".table", { showActions : true});
+	dd_inv_category();
+	dd_inv_brand();
+	dd_inv_suppliers();
+	dd_inv_unit();
+	
+</script>
 
 </html>

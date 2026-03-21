@@ -64,11 +64,11 @@
 														<thead>
 															<tr>
 																<th class="text-center">#</th>
-																<th class="text-center">ID</th>
-																<th class="text-center">Name</th>
-																<th class="text-center">Code</th>
-																<th class="text-center">Department</th>
-																<th class="text-center">Role</th>
+																<th>ID</th>
+																<th>Name</th>
+																<th>Code</th>
+																<th>Department</th>
+																<th>Role</th>
 																<th class="text-center">Status</th>
 																<th class="text-center">Action</th>
 															</tr>
@@ -279,7 +279,7 @@
 												</form>
 												<hr>
 												<div class="text-center">
-													<button class="btn btn-primary btn_save" data-id="0">Apply</button>
+													<button class="btn btn-primary btn-save" data-id="0">Apply</button>
 													<button class="btn btn-danger btn-cancel ">Cancel</button>
 												</div>
 											</div>
@@ -325,11 +325,11 @@
 	const pagetitle = $('.page-title').html();
 	dd_dept();
 	dd_branch();
-	tableload_Employee();
+	tableload();
 
 	// script for interactions
 	// ACTION LISTENERS
-	$('.btn_save').click(function(){
+	$('.btn-save').click(function(){
 		var chk = checkFormValidity();
 		var id = $(this).attr('data-id');
 		if(chk){
@@ -345,7 +345,7 @@
 					Swal.fire({icon: 'error', title: pagetitle+'already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
 				}else if(data == 'true'){
 					Swal.fire({icon: 'success',title: message,showConfirmButton: false,timer:950});
-					tableload_Employee();
+					tableload();
 					showMainPage();
 					is_active = 1;
 				}else if(data.trim() == ''){
@@ -354,6 +354,81 @@
 			});
 		}
 	});
+	// EDIT
+	$('.table').on('click', '.btn-edit', function () {
+		$('.text-btn').text("Edit");
+		$('.view-modify').fadeIn().removeClass('d-none');
+		$('.view-default').hide();
+		$('.add-employee').hide().addClass('d-none');
+		$('.edit-employee').fadeIn().removeClass('d-none');
+		$('.add-employee .form-control').attr('disabled', true);
+		$('.add-employee select').attr('disabled', true);
+		pkid = $(this).data('id');
+		$.get("../backend/management/get_det_emp.php?security=123465&id=" + pkid, function(data, status) {
+			var array = jQuery.parseJSON(data);
+			is_active = parseInt(array.is_active);
+			// console.log(array)
+			isActiveToggle(is_active);
+			dd_role(array.department_id);
+			$('.btn-save').attr('data-id', pkid);
+			$('#edit-full-name').html(array.fullname);
+			$('#edit-status').html(array.marital_status);
+			$('#edit-gender').html(array.gender);
+			$('#edit-birthday').html(array.birth_date);
+			$('#edit-address').html(array.address);
+			$('#edit-email').html(array.email);
+			$('#edit-contact').html(array.contact_no);
+			$('#date_hired').val(array.date_hired);
+			$('#branch_id').val(array.branch_id);
+			$('#daily_rate').val(array.daily_rate);
+			$('#department_id').val(array.department_id);
+			$('#sss_no').val(array.sss_no);
+			$('#pagibig_no').val(array.pagibig_no);
+			$('#tin_no').val(array.tin_no);
+			$('#philhealth_no').val(array.philhealth_no);
+			setTimeout(function() {
+				$('#role_id').val(parseInt(array.role_id));
+			}, 100); 
+		});
+	});
+
+	// RESET
+	$('.table').on('click', '.btn-rst', function () {
+		Swal.fire({ title: 'Confirm reset', icon: 'warning', html: `<div style="text-align:left">Resetting this would roll back the employee's password to 1<span style="font-weight:bold;"> Proceed with caution!</span><br><br>Type <b>RESET</b> to proceed:</div>`, input: 'text', inputPlaceholder: 'Type RESET', inputAttributes: { autocapitalize: 'off', autocomplete: 'off'}, showCancelButton: true, ConfirmButtonText: 'Yes, reset it!', confirmButtonColor: '#d33',cancelButtonColor: '#20a661',
+			didOpen: () => {
+				const confirmBtn = Swal.getConfirmButton();
+				confirmBtn.disabled = true;
+				const input = Swal.getInput();
+				input.addEventListener('input', () => {
+				const v = (input.value || '').trim();
+				confirmBtn.disabled = (v !== 'RESET');
+				});
+				input.focus();
+			},preConfirm: (value) => {
+				const v = (value || '').trim();
+				if (v !== 'RESET') {
+					Swal.showValidationMessage('Please type RESET exactly.');
+					return false;
+				}
+				return true;
+			}
+		}).then((result) => {
+			if (result.isConfirmed) {
+				var id = $(this).attr('data-id');
+				$.post("../backend/system/system_reset_password.php?security=123465",{ id: id }, function (data, status) {
+				data = (data || '').trim();
+				if (data === 'true') {
+					Swal.fire({ showConfirmButton: false, title: 'Success', text: pagetitle+' reset.', icon: 'success', timer: 700 });
+					tableload();
+					showMainPage();
+				} else {
+					Swal.fire({ icon: 'error', title: 'Error resetting '+pagetitle,  showConfirmButton: false, timer: 1200 });
+				}
+				});
+			}
+		});
+	});
+	// CANCEL
 	$('.btn-cancel').click(function(){	
 		is_active = 1;
 		$('.add-employee').fadeIn().removeClass('d-none');
@@ -361,113 +436,20 @@
 		$('.add-employee .form-control').attr('disabled', false);
 		$('.add-employee select').attr('disabled', false);
 	});
-	
-
+	// TOGGLE
 	$('.btn-group-toggle .btn').click(function() {
 		let val = parseInt($(this).find('input').val());
-		emp_active(val);
+		isActiveToggle(val);
 	});
 
 
 
-
-
-
 	// FUNCTIONS
-	function emp_active(value){
-		if (value == 1) {
-			$('#is-active').prop('checked', true);
-			$('#is-active').parent().removeClass("btn-secondary").addClass("btn-success active");
-			$('#is-inactive').parent().removeClass('active').addClass("btn-secondary").removeClass('btn-danger');
-		}
-		else if (value == 0) {
-			$('#is-inactive').prop('checked', true);
-			$('#is-active').parent().removeClass('active').addClass("btn-secondary").removeClass('btn-success');;
-			$('#is-inactive').parent().removeClass("btn-secondary").addClass("btn-danger active");
-		}
-		is_active = value;
-	}
-	function tableload_Employee(){
+	function tableload(){
 		resetDataTable('.table');
 		$.get("../backend/management/get_list_emp.php?security=123465", function(data,status){
 			$("#table_emp tbody").html(data);
-			setDataTable(".table", { showActions : true});
-			
-			// console.log(data);
-			// EDIT
-			$('.btn-edit').click(function() {
-				$('.text-btn').text("Edit");
-				$('.view-modify').fadeIn().removeClass('d-none');
-				$('.view-default').hide();
-				$('.add-employee').hide().addClass('d-none');
-				$('.edit-employee').fadeIn().removeClass('d-none');
-				// Disable required fields in the add-employee form to prevent validation
-				$('.add-employee .form-control').attr('disabled', true);
-				$('.add-employee select').attr('disabled', true);
-				pkid = $(this).data('id');
-				$.get("../backend/management/get_det_emp.php?security=123465&id=" + pkid, function(data, status) {
-					var array = jQuery.parseJSON(data);
-					is_active = parseInt(array.is_active);
-					// console.log(array)
-					emp_active(is_active);
-					dd_role(array.department_id);
-					$('.btn_save').attr('data-id', pkid);
-					$('#edit-full-name').html(array.fullname);
-					$('#edit-status').html(array.marital_status);
-					$('#edit-gender').html(array.gender);
-					$('#edit-birthday').html(array.birth_date);
-					$('#edit-address').html(array.address);
-					$('#edit-email').html(array.email);
-					$('#edit-contact').html(array.contact_no);
-					$('#date_hired').val(array.date_hired);
-					$('#branch_id').val(array.branch_id);
-					$('#daily_rate').val(array.daily_rate);
-					$('#department_id').val(array.department_id);
-					$('#sss_no').val(array.sss_no);
-					$('#pagibig_no').val(array.pagibig_no);
-					$('#tin_no').val(array.tin_no);
-					$('#philhealth_no').val(array.philhealth_no);
-					setTimeout(function() {
-						$('#role_id').val(parseInt(array.role_id));
-					}, 100); 
-				});
-			});
-			// DELETE
-			$('.btn-rst').click(function(){
-				Swal.fire({ title: 'Confirm reset', icon: 'warning', html: `<div style="text-align:left">Resetting this would roll back the employee's password to 1<span style="font-weight:bold;"> Proceed with caution!</span><br><br>Type <b>RESET</b> to proceed:</div>`, input: 'text', inputPlaceholder: 'Type RESET', inputAttributes: { autocapitalize: 'off', autocomplete: 'off'}, showCancelButton: true, ConfirmButtonText: 'Yes, reset it!', confirmButtonColor: '#d33',cancelButtonColor: '#20a661',
-					didOpen: () => {
-						const confirmBtn = Swal.getConfirmButton();
-						confirmBtn.disabled = true;
-						const input = Swal.getInput();
-						input.addEventListener('input', () => {
-						const v = (input.value || '').trim();
-						confirmBtn.disabled = (v !== 'RESET');
-						});
-						input.focus();
-					},preConfirm: (value) => {
-						const v = (value || '').trim();
-						if (v !== 'RESET') {
-							Swal.showValidationMessage('Please type RESET exactly.');
-							return false;
-						}
-						return true;
-					}
-				}).then((result) => {
-					if (result.isConfirmed) {
-						var id = $(this).attr('data-id');
-						$.post("../backend/system/system_reset_password.php?security=123465",{ id: id }, function (data, status) {
-						data = (data || '').trim();
-						if (data === 'true') {
-							Swal.fire({ showConfirmButton: false, title: 'Success', text: pagetitle+' reset.', icon: 'success', timer: 700 });
-							tableload_Employee();
-							showMainPage();
-						} else {
-							Swal.fire({ icon: 'error', title: 'Error resetting '+pagetitle,  showConfirmButton: false, timer: 1200 });
-						}
-						});
-					}
-				});
-			});			
+			setDataTable(".table", { showActions : true});	
 		});
 	}
 	

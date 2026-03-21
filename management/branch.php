@@ -59,8 +59,8 @@
 														<thead>
 															<tr>
 																<th class="text-center">#</th>
-																<th class="text-center">Branch</th>
-																<th class="text-center">Code</th>
+																<th>Branch</th>
+																<th>Code</th>
 																<th class="text-center">Location</th>
 																<th class="text-center">Action</th>
 															</tr>
@@ -118,7 +118,7 @@
 												</form>
 												<hr>
 												<div class="text-center">
-													<button class="btn btn-primary btn_save" data-id="0">Apply</button>
+													<button class="btn btn-primary btn-save" data-id="0">Apply</button>
 													<button class="btn btn-danger btn-cancel ">Cancel</button>
 												</div>
 											</div>
@@ -147,12 +147,12 @@
 	const pagetitle = $('.page-title').html();
 	var userPermissions = ['view_branch']; 
 
-	tableload_Branch();
+	tableload();
 	
 
 	// script for interactions
 	// ACTION LISTENERS
-	$('.btn_save').click(function(){
+	$('.btn-save').click(function(){
 		var chk = checkFormValidity();
 		var id = $(this).attr('data-id');
 		if(chk){
@@ -168,7 +168,7 @@
 				}else if(data == 'exist_code'){
 					Swal.fire({icon: 'error', title: pagetitle+' Code already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
 				}else if(data == 'true'){
-					tableload_Branch();
+					tableload();
 					Swal.fire({icon: 'success',title: message,showConfirmButton: false,timer:950});
 					showMainPage();
 				}else if(data.trim() == ''){
@@ -177,79 +177,52 @@
 			});
 		}
 	});
+	// EDIT
+	$('.table').on('click', '.btn-edit', function () {
+		$('.text-btn').text("Edit");
+		$('.view-modify').fadeIn().removeClass('d-none');
+		$('.view-default').hide();
+		pkid = $(this).data('id');
+		$.get("../backend/management/get_det_branch.php?security=123465&id=" + pkid, function(data, status) {
+			var array = jQuery.parseJSON(data);
+			$('.btn-save').attr('data-id', pkid);
+			$('#branch_name').val(array.branch_name);
+			$('#branch_code').val(array.branch_code);
+			$('#addr').val(array.branch_address);
+			$('#branch_prov').html(array.prov_name); 
+			$('#branch_city').val(array.city_name);
+			$('#branch_brgy').val(array.brgy_name); 
+			dd_prov(true, array.prov_id);
+			dd_city(true,array.prov_id, array.city_id);
+			dd_brgy(true,array.city_id, array.brgy_id);
+			
+		});
+	});
+	// DEL
+	$('.table').on('click', '.btn-del', function () {
+		const id = $(this).data('id');
+		confirmTypedDelete({
+			url: "../backend/management/del_branch.php?security=123465&id=" + id,
+			pageTitle: pagetitle,
+			onSuccess: function () {
+				tableload();
+				showMainPage();
+			}
+		});
+	});
 	$('.btn-cancel').click(function(){	
 		pkid = 0;
 		resetDependentSelect($('.dd_city'), 'Select City');
 		resetDependentSelect($('.dd_brgy'), 'Select Barangay');
 	});
-
+	
+	
 
 	// script for body functions default
-	function tableload_Branch(){
+	function tableload(){
 		resetDataTable('.table');
 		$.get("../backend/management/get_list_branch.php?security=123465", function(data,status){
-			$("#table_branch tbody").html(data);
-			// SET TABLE EDITABLE OR NOT DYNAMICALLTY SOON
-			setDataTable(".table", {rowHide : 3, showActions : true});
-			
-			// EDIT
-			$('.btn-edit').click(function() {
-				$('.text-btn').text("Edit");
-				$('.view-modify').fadeIn().removeClass('d-none');
-				$('.view-default').hide();
-				pkid = $(this).data('id');
-				$.get("../backend/management/get_det_branch.php?security=123465&id=" + pkid, function(data, status) {
-					var array = jQuery.parseJSON(data);
-					$('.btn_save').attr('data-id', pkid);
-					$('#branch_name').val(array.branch_name);
-					$('#branch_code').val(array.branch_code);
-					$('#addr').val(array.branch_address);
-					$('#branch_prov').html(array.prov_name); 
-					$('#branch_city').val(array.city_name);
-					$('#branch_brgy').val(array.brgy_name); 
-					dd_prov(true, array.prov_id);
-					dd_city(true,array.prov_id, array.city_id);
-					dd_brgy(true,array.city_id, array.brgy_id);
-					
-				});
-			});
-
-			// DELETE
-			$('.btn-del').click(function(){
-				Swal.fire({ title: 'Confirm delete', icon: 'warning', html: `<div style="text-align:left">Deleting this could affect other settings in this<span style="font-weight:bold;"> Proceed with caution!</span><br><br>Type <b>DELETE</b> to enable deletion:</div>`, input: 'text', inputPlaceholder: 'Type DELETE', inputAttributes: { autocapitalize: 'off', autocomplete: 'off'}, showCancelButton: true, ConfirmButtonText: 'Yes, delete it!', confirmButtonColor: '#d33',cancelButtonColor: '#20a661',
-					didOpen: () => {
-						const confirmBtn = Swal.getConfirmButton();
-						confirmBtn.disabled = true;
-						const input = Swal.getInput();
-						input.addEventListener('input', () => {
-						const v = (input.value || '').trim();
-						confirmBtn.disabled = (v !== 'DELETE');
-						});
-						input.focus();
-					},preConfirm: (value) => {
-						const v = (value || '').trim();
-						if (v !== 'DELETE') {
-							Swal.showValidationMessage('Please type DELETE exactly.');
-							return false;
-						}
-						return true;
-					}
-				}).then((result) => {
-					if (result.isConfirmed) {
-						var id = $(this).data('id');
-						$.post("../backend/management/del_branch.php?security=123465&id=" + id, function (data, status) {
-						data = (data || '').trim();
-						if (data === 'true') {
-							Swal.fire({ showConfirmButton: false, title: 'Deleted!', text: pagetitle+' deleted.', icon: 'success', timer: 700 });
-							tableload_Branch();
-							showMainPage();
-						} else {
-							Swal.fire({ icon: 'error', title: 'Error deleting '+pagetitle,  showConfirmButton: false, timer: 1200 });
-						}
-						});
-					}
-				});
-			});
+			$("#table_branch tbody").html(data);			
 		});
 	}
 </script>

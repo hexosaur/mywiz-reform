@@ -116,7 +116,7 @@
 												</form>
 												<hr>
 												<div class="text-center">
-													<button class="btn btn-primary btn_save" data-id="0">Apply</button>
+													<button class="btn btn-primary btn-save" data-id="0">Apply</button>
 													<button class="btn btn-danger btn-cancel ">Cancel</button>
 												</div>
 											</div>
@@ -143,10 +143,10 @@
 	const pagetitle = $('.page-title').html();
 	// script for body functions default
 	// Initialize
-	tableload_Perms();
-	function tableload_Perms() {
+	tableload();
+	function tableload() {
 		resetDataTable('.table');
-		$.get("../backend/get_list_perms.php?security=123465", function (data) {
+		$.get("../backend/admin/get_list_perms.php?security=123465", function (data) {
 			data = (data || "").trim();
 			$("#table_perms tbody").html(data);
 			setDataTable(".table", {rowHide : 4});
@@ -156,10 +156,10 @@
 				$('.view-modify').fadeIn().removeClass('d-none');
 				$('.view-default').hide();
 				pkid = $(this).data('id');
-				$.get("../backend/get_det_perms.php?security=123465&id=" + pkid, function(data, status) {
+				$.get("../backend/admin/get_det_perms.php?security=123465&id=" + pkid, function(data, status) {
 					var array = jQuery.parseJSON(data);
 					// console.log(array);
-					$('.btn_save').attr('data-id', pkid);
+					$('.btn-save').attr('data-id', pkid);
 					$('#perms_name').val(array.perms_name);
 					$('#perms_title').val(array.perms_title);
 					$('#perms_class').val(array.perms_class);
@@ -168,37 +168,13 @@
 			});
 			// DELETE
 			$('.btn-del').click(function(){
-				Swal.fire({ title: 'Confirm delete', icon: 'warning', html: `<div style="text-align:left">Deleting this could affect other settings in this<span style="font-weight:bold;"> Proceed with caution!</span><br><br>Type <b>DELETE</b> to enable deletion:</div>`, input: 'text', inputPlaceholder: 'Type DELETE', inputAttributes: { autocapitalize: 'off', autocomplete: 'off'}, showCancelButton: true, ConfirmButtonText: 'Yes, delete it!', confirmButtonColor: '#d33',cancelButtonColor: '#20a661',
-					didOpen: () => {
-						const confirmBtn = Swal.getConfirmButton();
-						confirmBtn.disabled = true;
-						const input = Swal.getInput();
-						input.addEventListener('input', () => {
-						const v = (input.value || '').trim();
-						confirmBtn.disabled = (v !== 'DELETE');
-						});
-						input.focus();
-					},preConfirm: (value) => {
-						const v = (value || '').trim();
-						if (v !== 'DELETE') {
-							Swal.showValidationMessage('Please type DELETE exactly.');
-							return false;
-						}
-						return true;
-					}
-				}).then((result) => {
-					if (result.isConfirmed) {
-						var id = $(this).data('id');
-						$.post("../backend/del_perms.php?security=123465&id=" + id, function (data, status) {
-						data = (data || '').trim();
-						if (data === 'true') {
-							Swal.fire({ showConfirmButton: false, title: 'Deleted!', text: pagetitle+' deleted.', icon: 'success', timer: 700 });
-							tableload_Perms();
-							showMainPage();
-						} else {
-							Swal.fire({ icon: 'error', title: 'Error deleting '+pagetitle,  showConfirmButton: false, timer: 1200 });
-						}
-						});
+				const id = $(this).data('id');
+				confirmTypedDelete({
+					url: "../backend/admin/del_perms.php?security=123465&id=" + id,
+					pageTitle: pagetitle,
+					onSuccess: function () {
+						tableload();
+						showMainPage();
 					}
 				});
 			});
@@ -218,7 +194,7 @@
 
 	// script for interactions
 	// ACTION LISTENERS
-	$('.btn_save').click(function(){
+	$('.btn-save').click(function(){
 		var chk = checkFormValidity();
 		var id = $(this).attr('data-id');
 		if(chk){
@@ -227,7 +203,7 @@
 			let message = notif === 0 ?  'New '+pagetitle+' Saved!' : pagetitle+' Details Updated!';
 			var data = { perms_name: $('#perms_name').val(), perms_title : $('#perms_title').val(), perms_class : $('#perms_class').val(), perms_desc :  $('#perms_desc').val(), pkid : id}
 			var json = JSON.stringify(data);
-			$.post("../backend/post_perms.php", {permission: json}, function (data, a) {
+			$.post("../backend/admin/post_perms.php", {permission: json}, function (data, a) {
 				data = data.trim();
 				// console.log(data)
 				if(data == 'exist_name'){
@@ -239,7 +215,7 @@
 				}else if(data == 'exist'){
 					Swal.fire({icon: 'error', title: 'No changes made! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
 				}else if(data == 'true'){
-					tableload_Perms();
+					tableload();
 					Swal.fire({icon: 'success',title: message,showConfirmButton: false,timer:950});
 					showMainPage();
 				}else if(data.trim() == ''){

@@ -47,7 +47,7 @@
 											<div class="card-body table-border-style">
 												<div class="row align-items-center">
 														<div class="col-6 col-md-10">
-															<h3 class="mb-0"><span class="page-title"></span> List</h3>
+															<h3 class="mb-0"><span class="page-title"></span> List NOT FUNCTIONAL YET</h3>
 														</div>
 														<div class="col-6 col-md-2 d-flex justify-content-end">
 															<button class="btn btn-primary btn-add">Add <span class="page-title"></span></button>
@@ -102,7 +102,7 @@
 												</form>
 												<hr>
 												<div class="text-center">
-													<button class="btn btn-primary btn_save" data-id="0">Apply</button>
+													<button class="btn btn-primary btn-save" data-id="0">Apply</button>
 													<button class="btn btn-danger btn-cancel ">Cancel</button>
 												</div>
 											</div>
@@ -146,7 +146,7 @@
 				pkid = $(this).data('id');
 				$.get("../backend/get_det_access.php?security=123465&id=" + pkid, function(data, status) {
 					var array = jQuery.parseJSON(data);
-					$('.btn_save').attr('data-id', pkid);
+					$('.btn-save').attr('data-id', pkid);
 					$('#access_name').val(array.access_name);
 					$('#access_val').val(array.access_val);
 					$('#access_desc').val(array.access_desc);
@@ -195,7 +195,7 @@
 	}
 	// script for interactions
 	// ACTION LISTENERS
-	$('.btn_save').click(function(){
+	$('.btn-save').click(function(){
 		var chk = checkFormValidity();
 		var id = $(this).attr('data-id');
 		if(chk){

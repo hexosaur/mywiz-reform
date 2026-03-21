@@ -59,11 +59,11 @@
 														<thead>
 															<tr>
 																<th class="text-center">#</th>
-																<th class="text-center">Role</th>
-																<th class="text-center">Department</th>
-																<th class="text-center">Access</th>
-																<th class="text-center">Permissions</th>
-																<th class="text-center">Description</th>
+																<th>Role</th>
+																<th>Department</th>
+																<th>Access</th>
+																<th>Permissions</th>
+																<th>Description</th>
 																<th class="text-center">Action</th>
 															</tr>
 														</thead>
@@ -115,7 +115,7 @@
 												</form>
 												<hr>
 												<div class="text-center">
-													<button class="btn btn-primary btn_save" data-id="0">Apply</button>
+													<button class="btn btn-primary btn-save" data-id="0">Apply</button>
 													<button class="btn btn-danger btn-cancel ">Cancel</button>
 												</div>
 											</div>
@@ -145,11 +145,11 @@
 	dd_perms();
 	dd_dept();
 	dd_access();
-	tableload_Roles();
+	tableload();
 	
 	// script for interactions
 	// ACTION LISTENERS
-	$('.btn_save').click(function(){
+	$('.btn-save').click(function(){
 		var chk = checkFormValidity();
 		var id = $(this).attr('data-id');
 		if(chk){
@@ -166,7 +166,7 @@
 					Swal.fire({icon: 'error', title: pagetitle+'already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
 				}else if(data == 'true'){
 					Swal.fire({icon: 'success',title: message,showConfirmButton: false,timer:950});
-					tableload_Roles();
+					tableload();
 					showMainPage();
 				}else if(data.trim() == ''){
 					Swal.fire({icon: 'error',title: 'Error Uploading to Database!',showConfirmButton: false,timer:1000});
@@ -174,70 +174,47 @@
 			});
 		}
 	});
+	// EDIT
+	$('.table').on('click', '.btn-edit', function () {
+		$('.text-btn').text("Edit");
+		$('.view-modify').fadeIn().removeClass('d-none');
+		$('.view-default').hide();
+		pkid = $(this).data('id');
+		$.get("../backend/management/get_det_roles.php?security=123465&id=" + pkid, function(data, status) {
+			var array = jQuery.parseJSON(data);
+			// console.log(array);
+			const sel = document.querySelector('#role_perms');
+			$('.btn-save').attr('data-id', pkid);
+			$('#role_name').val(array.role_name);
+			$('#role_desc').val(array.role_desc);
+			$('#role_dept').val(array.role_dept);
+			$('#role_access').val(array.role_access); 
+			if (sel && sel.tomselect) {
+				sel.tomselect.setValue(array.role_perms || [], true);
+				sel.tomselect.refreshItems();
+			}
+		});
+	});
+
+	// DEL
+	$('.table').on('click', '.btn-del', function () {
+		const id = $(this).data('id');
+		confirmTypedDelete({
+			url: "../backend/management/del_role.php?security=123465&id=" + id,
+			pageTitle: pagetitle,
+			onSuccess: function () {
+				tableload();
+				showMainPage();
+			}
+		});
+	});
 
 	// FUNCTIONS
-	function tableload_Roles(){
+	function tableload(){
 		resetDataTable('.table');
 		$.get("../backend/management/get_list_roles.php?security=123465", function(data,status){
 			$("#table_role tbody").html(data);
-			setDataTable(".table", {rowHide : 4, showActions : true});
-			// EDIT
-			$('.btn-edit').click(function() {
-				$('.text-btn').text("Edit");
-				$('.view-modify').fadeIn().removeClass('d-none');
-				$('.view-default').hide();
-				pkid = $(this).data('id');
-				$.get("../backend/management/get_det_roles.php?security=123465&id=" + pkid, function(data, status) {
-					var array = jQuery.parseJSON(data);
-					// console.log(array);
-					const sel = document.querySelector('#role_perms');
-					$('.btn_save').attr('data-id', pkid);
-					$('#role_name').val(array.role_name);
-					$('#role_desc').val(array.role_desc);
-					$('#role_dept').val(array.role_dept);
-					$('#role_access').val(array.role_access); 
-					if (sel && sel.tomselect) {
-						sel.tomselect.setValue(array.role_perms || [], true); // true = silent (no change event spam)
-						sel.tomselect.refreshItems(); // optional
-					}
-				});
-			});
-			// DELETE
-			$('.btn-del').click(function(){
-				Swal.fire({ title: 'Confirm delete', icon: 'warning', html: `<div style="text-align:left">Deleting this could affect other settings in this<span style="font-weight:bold;"> Proceed with caution!</span><br><br>Type <b>DELETE</b> to enable deletion:</div>`, input: 'text', inputPlaceholder: 'Type DELETE', inputAttributes: { autocapitalize: 'off', autocomplete: 'off'}, showCancelButton: true, ConfirmButtonText: 'Yes, delete it!', confirmButtonColor: '#d33',cancelButtonColor: '#20a661',
-					didOpen: () => {
-						const confirmBtn = Swal.getConfirmButton();
-						confirmBtn.disabled = true;
-						const input = Swal.getInput();
-						input.addEventListener('input', () => {
-						const v = (input.value || '').trim();
-						confirmBtn.disabled = (v !== 'DELETE');
-						});
-						input.focus();
-					},preConfirm: (value) => {
-						const v = (value || '').trim();
-						if (v !== 'DELETE') {
-							Swal.showValidationMessage('Please type DELETE exactly.');
-							return false;
-						}
-						return true;
-					}
-				}).then((result) => {
-					if (result.isConfirmed) {
-						var id = $(this).data('id');
-						$.post("../backend/management/del_role.php?security=123465&id=" + id, function (data, status) {
-						data = (data || '').trim();
-						if (data === 'true') {
-							Swal.fire({ showConfirmButton: false, title: 'Deleted!', text: pagetitle+' deleted.', icon: 'success', timer: 700 });
-							tableload_Roles();
-							showMainPage();
-						} else {
-							Swal.fire({ icon: 'error', title: 'Error deleting '+pagetitle,  showConfirmButton: false, timer: 1200 });
-						}
-						});
-					}
-				});
-			});			
+			setDataTable(".table", {rowHide : 4, showActions : true});	
 		});
 	}
 	
