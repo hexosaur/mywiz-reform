@@ -15,7 +15,7 @@ if (isset($_GET['security']) && $_GET['security'] == '123465') {
 				$brand_id    = (int)$row['brand_id'];
 				$brand_name  = htmlspecialchars($row['brand_name'] ?? '', ENT_QUOTES, 'UTF-8');
 				$description = htmlspecialchars((isset($row['description']) && trim($row['description']) !== '') ? $row['description'] : 'No Description', ENT_QUOTES, 'UTF-8');
-				$table .= "<tr><td class='text-center'>{$n}</td><td data-column='Brand: '>{$brand_name}</td><td data-column='Description: '>{$description}</td><td class='text-center' data-column='Action: '><div class='btn btn-outline-info btn-sm btn-edit' data-id='{$brand_id}'><span class='feather icon-edit'></span></div><div class='btn btn-outline-danger btn-sm btn-del' data-id='{$brand_id}'><span class='feather icon-trash-2'></span></div></td></tr>";
+				$table .= "<tr><td class='text-center align-middle'>{$n}</td><td class='align-middle' data-column='Brand: '>{$brand_name}</td><td class='align-middle' data-column='Description: '>{$description}</td><td class='text-center align-middle' data-column='Action: '><div class='btn btn-outline-info btn-sm btn-edit' data-id='{$brand_id}'><span class='feather icon-edit'></span></div><div class='btn btn-outline-danger btn-sm btn-del' data-id='{$brand_id}'><span class='feather icon-trash-2'></span></div></td></tr>";
 				$n++;
 			}
 			$result->free();

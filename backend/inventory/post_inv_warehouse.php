@@ -3,70 +3,72 @@ session_start();
 error_reporting(0);
 include('../../config/cfg.php');
 
-if(true){
-	if (isset($_POST['data'])){
-		$branch = json_decode($_POST['data']);
+if (isset($_POST['data'])) {
+	$warehouse = json_decode($_POST['data']);
 
-		$branch_name =  $conn->real_escape_string($branch->branch_name);
-		$branch_code =  $conn->real_escape_string($branch->branch_code);
-		$prov_id = (int)$branch->prov_id;
-		$city_id = (int)$branch->city_id;
-		$brgy_id = (int)$branch->brgy_id;
-		$addr = $conn->real_escape_string($branch->addr);
-		$branch_id = (int)$branch->pkid;
-		$pcd = true;
-		if($branch_id == 0){
-			$exst_name = "SELECT 1 FROM mgmt_branch WHERE branch_name = '$branch_name' LIMIT 1";
-			if($conn->query($exst_name)->num_rows > 0){
-				echo "exist_name";
-				exit;
-			}
+	$warehouse_name = $conn->real_escape_string(trim($warehouse->warehouse_name ?? ''));
+	$warehouse_code = $conn->real_escape_string(trim($warehouse->warehouse_code ?? ''));
+	$prov_id        = (int)($warehouse->prov_id ?? 0);
+	$city_id        = (int)($warehouse->city_id ?? 0);
+	$brgy_id        = isset($warehouse->brgy_id) && $warehouse->brgy_id !== '' ? (int)$warehouse->brgy_id : "NULL";
+	$address_line   = $conn->real_escape_string(trim($warehouse->address_line ?? ''));
+	$status         = isset($warehouse->status) ? (int)$warehouse->status : 1;
+	$warehouse_id   = (int)($warehouse->pkid ?? 0);
 
-			$exst_code = "SELECT 1 FROM mgmt_branch WHERE branch_code = '$branch_code' LIMIT 1";
-			if($conn->query($exst_code)->num_rows > 0){
-				echo "exist_code";
-				exit;
-			}
+	if ($warehouse_name == '' || $warehouse_code == '' || $prov_id <= 0 || $city_id <= 0) {
+		echo "err";
+		exit;
+	}
 
-		} else {
-			$exst_name_update = "SELECT 1 FROM mgmt_branch WHERE branch_name = '$branch_name' AND branch_id != '$branch_id' LIMIT 1";
-			if($conn->query($exst_name_update)->num_rows > 0){
-				echo "exist_name";
-				exit;
-			}
-			$exst_code_update = "SELECT 1 FROM mgmt_branch WHERE branch_code = '$branch_code' AND branch_id != '$branch_id' LIMIT 1";
-			if($conn->query($exst_code_update)->num_rows > 0){
-				echo "exist_code";
-				exit;
-			}
+	// check duplicate name
+	if ($warehouse_id == 0) {
+		$sql_name = "SELECT 1 FROM inv_warehouses WHERE warehouse_name = '$warehouse_name' LIMIT 1";
+		$res_name = $conn->query($sql_name);
+		if ($res_name && $res_name->num_rows > 0) {
+			echo "exist_name";
+			exit;
 		}
 
-		// ===== INSERT / UPDATE =====
-		if($branch_id == 0){
+		$sql_code = "SELECT 1 FROM inv_warehouses WHERE warehouse_code = '$warehouse_code' LIMIT 1";
+		$res_code = $conn->query($sql_code);
+		if ($res_code && $res_code->num_rows > 0) {
+			echo "exist_code";
+			exit;
+		}
 
-			$sql = "INSERT INTO mgmt_branch(branch_name, branch_code, prov_id, city_id, brgy_id, address_line) VALUES ('$branch_name', '$branch_code', '$prov_id', '$city_id', '$brgy_id', '$addr')";
-			if ($conn->query($sql) !== TRUE) {
-				$pcd = false;
-				echo "err";
-				exit;
-			}
-			if($pcd) {
-				echo "true";
-			} else {
-				echo "err";
-				exit;
-			}
+		$sql = "INSERT INTO inv_warehouses ( warehouse_name, warehouse_code, prov_id, city_id, brgy_id, address_line, status ) VALUES ( '$warehouse_name', '$warehouse_code', '$prov_id', '$city_id', " . ($brgy_id === "NULL" ? "NULL" : "'$brgy_id'") . ", '$address_line', '$status' )";
 
+		if ($conn->query($sql) === TRUE) {
+			echo "true";
+			exit;
 		} else {
-			$sql = "UPDATE mgmt_branch SET branch_name = '$branch_name', branch_code = '$branch_code', prov_id = '$prov_id', city_id = '$city_id', brgy_id = '$brgy_id', address_line = '$addr' WHERE branch_id = '$branch_id'";
+			echo "err";
+			exit;
+		}
 
-			if ($conn->query($sql) === TRUE) {
-				echo "true";
-				exit;
-			} else {
-				echo "err";
-				exit;
-			}
+	} else {
+		$sql_name = "SELECT 1 FROM inv_warehouses WHERE warehouse_name = '$warehouse_name' AND warehouse_id != '$warehouse_id' LIMIT 1";
+		$res_name = $conn->query($sql_name);
+		if ($res_name && $res_name->num_rows > 0) {
+			echo "exist_name";
+			exit;
+		}
+
+		$sql_code = "SELECT 1 FROM inv_warehouses WHERE warehouse_code = '$warehouse_code' AND warehouse_id != '$warehouse_id' LIMIT 1";
+		$res_code = $conn->query($sql_code);
+		if ($res_code && $res_code->num_rows > 0) {
+			echo "exist_code";
+			exit;
+		}
+
+		$sql = "UPDATE inv_warehouses SET warehouse_name = '$warehouse_name', warehouse_code = '$warehouse_code', prov_id = '$prov_id', city_id = '$city_id', brgy_id = " . ($brgy_id === "NULL" ? "NULL" : "'$brgy_id'") . ", address_line = '$address_line', status = '$status' WHERE warehouse_id = '$warehouse_id'";
+
+		if ($conn->query($sql) === TRUE) {
+			echo "true";
+			exit;
+		} else {
+			echo "err";
+			exit;
 		}
 	}
 }

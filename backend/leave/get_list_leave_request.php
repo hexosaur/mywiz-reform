@@ -51,9 +51,9 @@ if ($result = $conn->query($sql)) {
 				$status_badge = "<span class='badge badge-pill badge-secondary'>" . htmlspecialchars($status_raw, ENT_QUOTES, 'UTF-8') . "</span>";
 			}
 			if ($mode === 'archive') {
-				$table .= "<tr><td>{$n}</td><td data-column='Name: '>{$name}</td><td data-column='From: '>{$date_from}</td><td data-column='To: '>{$date_to}</td><td data-column='Days: '>{$days}</td><td data-column='Status: '>{$status_badge}</td><td data-column='Leave Type: '>{$type}</td><td data-column='Action: '><div class='btn btn-outline-info btn-sm btn-edit' data-id='{$request_id}'><span class='feather icon-eye'></span></div></td></tr>";
+				$table .= "<tr><td  class='align-middle'>{$n}</td><td class='align-middle' data-column='Name: '>{$name}</td><td class='align-middle' data-column='From: '>{$date_from}</td><td class='align-middle' data-column='To: '>{$date_to}</td><td class='align-middle' data-column='Days: '>{$days}</td><td class='align-middle' data-column='Status: '>{$status_badge}</td><td class='align-middle' data-column='Leave Type: '>{$type}</td><td class='align-middle' data-column='Action: '><div class='btn btn-outline-info btn-sm btn-edit' data-id='{$request_id}'><span class='feather icon-eye'></span></div></td></tr>";
 			} else {
-				$table .= "<tr><td>{$n}</td><td data-column='From: '>{$date_from}</td><td data-column='To: '>{$date_to}</td><td data-column='Days: '>{$days}</td><td data-column='Status: '>{$status_badge}</td><td data-column='Leave Type: '>{$type}</td><td data-column='Action: '><div class='btn btn-outline-info btn-sm btn-edit' data-id='{$request_id}'><span class='feather icon-eye'></span></div></td></tr>";
+				$table .= "<tr><td  class='align-middle'>{$n}</td><td class='align-middle' data-column='From: '>{$date_from}</td><td class='align-middle' data-column='To: '>{$date_to}</td><td class='align-middle' data-column='Days: '>{$days}</td><td class='align-middle' data-column='Status: '>{$status_badge}</td><td class='align-middle' data-column='Leave Type: '>{$type}</td><td class='align-middle' data-column='Action: '><div class='btn btn-outline-info btn-sm btn-edit' data-id='{$request_id}'><span class='feather icon-eye'></span></div></td></tr>";
 			}
 
 			$n++;

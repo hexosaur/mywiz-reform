@@ -87,15 +87,15 @@
 												<hr>
 												<form>
 													<div class="row mt-3 mb-3 d-none is-edit">
-															<div class="col text-center">
-																<div class="btn-group btn-group-toggle " data-toggle="buttons">
-																	<label for="is-active" class="btn btn-sm btn-secondary">
-																	<input type="radio" name="options" id="is-active" value="1"> Active</label>
-																	<label for="is-inactive" class="btn btn-sm btn-secondary">
-																	<input type="radio" name="options" id="is-inactive" value="0"> Inactive</label>
-																</div>
+														<div class="col text-center">
+															<div class="btn-group btn-group-toggle " data-toggle="buttons">
+																<label for="is-active" class="btn btn-sm btn-secondary">
+																<input type="radio" name="options" id="is-active" value="1"> Active</label>
+																<label for="is-inactive" class="btn btn-sm btn-secondary">
+																<input type="radio" name="options" id="is-inactive" value="0"> Inactive</label>
 															</div>
 														</div>
+													</div>
 													<div class="row">
 														<div class="form-group col-md-6">
 															<label for="supplier_name">Supplier <span class="text-danger">*</span></label>

@@ -25,7 +25,7 @@
 
 					$location = trim($brgy . ", " . $city . ", " . $prov . ", " . $addr, " ,");
 
-					$table .= "<tr><td class='text-center'>{$n}</td><td data-column='Branch: '>{$branch_name}</td><td data-column='Code: '>{$branch_code}</td><td data-column='Location: '>{$location}</td><td class='text-center' data-column='Action: '><div class='btn btn-outline-info btn-sm btn-edit' data-id='{$branch_id}'><span class='feather icon-edit'></span></div><div class='btn btn-outline-danger btn-sm btn-del' data-id='{$branch_id}'><span class='feather icon-trash-2'></span></div>	</td></tr>";
+					$table .= "<tr><td class='text-center align-middle'>{$n}</td><td class='align-middle' data-column='Branch: '>{$branch_name}</td><td class='align-middle' data-column='Code: '>{$branch_code}</td><td class='align-middle' data-column='Location: '>{$location}</td><td class='text-center align-middle' data-column='Action: '><div class='btn btn-outline-info btn-sm btn-edit' data-id='{$branch_id}'><span class='feather icon-edit'></span></div><div class='btn btn-outline-danger btn-sm btn-del' data-id='{$branch_id}'><span class='feather icon-trash-2'></span></div>	</td></tr>";
 					$n++;
 				}
 				$result->free();

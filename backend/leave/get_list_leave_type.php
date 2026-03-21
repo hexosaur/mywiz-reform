@@ -40,7 +40,7 @@ if ($result = $conn->query($sql)) {
 			$is_active = ((int)$row['is_active'] === 1);
 			$status_badge = $is_active ? "<span class='badge badge-pill badge-success'>Active</span>" : "<span class='badge badge-pill badge-danger'>Inactive</span>";
 
-			$table .= "<tr><td class='text-center'>{$n}</td><td data-column='Code: '>{$code}</td><td data-column='Name: '>{$name}</td><td data-column='Description: '>{$merged_desc}</td><td data-column='Days: '>{$days}</td><td data-column='Type: '>{$type_label}</td><td class='text-center' data-column='Action: '><div class='btn btn-outline-info btn-sm btn-edit' data-id='{$type_id}'><span class='feather icon-edit'></span></div><div class='btn btn-outline-danger btn-sm btn-del' data-id='{$type_id}'><span class='feather icon-trash-2'></span></div></td></tr>";
+			$table .= "<tr><td class='text-center align-middle'>{$n}</td><td class='align-middle' data-column='Code: '>{$code}</td><td class='align-middle' data-column='Name: '>{$name}</td><td class='align-middle' data-column='Description: '>{$merged_desc}</td><td class='align-middle' data-column='Days: '>{$days}</td><td class='align-middle' data-column='Type: '>{$type_label}</td><td class='text-center align-middle' data-column='Action: '><div class='btn btn-outline-info btn-sm btn-edit' data-id='{$type_id}'><span class='feather icon-edit'></span></div><div class='btn btn-outline-danger btn-sm btn-del' data-id='{$type_id}'><span class='feather icon-trash-2'></span></div></td></tr>";
 			$n++;
 		}
 		$result->free();

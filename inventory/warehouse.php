@@ -60,24 +60,13 @@
 														<thead>
 															<tr>
 																<th class="text-center">#</th>
-																<th class="text-center">Warehouse</th>
-																<th class="text-center">Location</th>
+																<th>Warehouse</th>
+																<th>Location</th>
 																<th class="text-center">Status</th>
 																<th class="text-center">Action</th>
 															</tr>
 														</thead>
 														<tbody>
-															<tr>
-																<td class="text-center">2</td>
-																<td class="text-center">Test</td>
-																<td class="text-center">Test</td>
-																<td class="text-center"><span class="badge badge-pill badge-success">Active</span></td>
-																<td class="text-center">
-																	<div class="btn btn-outline-info btn-sm btn-edit"><span class="feather icon-edit"></span></div>
-																	<div class="btn btn-outline-danger btn-sm btn-del"><span class="feather icon-trash-2"></div>
-																</td>
-															</tr>
-															
 														</tbody>
 													</table>
 												</div>
@@ -95,10 +84,46 @@
 												<h3 class="text-center"><span class="text-btn"></span> <span class="page-title"></span></h3>
 												<hr>
 												<form>
+													<div class="row mt-3 mb-3 d-none is-edit">
+														<div class="col text-center">
+															<div class="btn-group btn-group-toggle " data-toggle="buttons">
+																<label for="is-active" class="btn btn-sm btn-secondary">
+																<input type="radio" name="options" id="is-active" value="1"> Active</label>
+																<label for="is-inactive" class="btn btn-sm btn-secondary">
+																<input type="radio" name="options" id="is-inactive" value="0"> Inactive</label>
+															</div>
+														</div>
+													</div>
 													<div class="row justify-content-center">
 														<div class="form-group col-md-6">
-															<label for="">Category Name <span class="text-danger">*</span></label>
-															<input id="" class=" form-control form-control-sm" placeholder="Category Name" required/>
+															<label for="inv_warehouse">Category Name <span class="text-danger">*</span></label>
+															<input id="inv_warehouse" class=" form-control form-control-sm" placeholder="Category Name" required/>
+														</div>
+														<div class="form-group col-md-6">
+															<label for="inv_warehouse_code">Category Name <span class="text-danger">*</span></label>
+															<input id="inv_warehouse_code" class=" form-control form-control-sm" placeholder="Category Name" required/>
+														</div>
+														<div class="form-group col-md-6">
+															<label>Province <span class="text-danger">*</span></label>
+															<select id="inv_province" class="dd_prov form-control" required>
+																<option disabled selected>Select Province</option>
+															</select>
+														</div>
+														<div class="form-group col-md-6">
+															<label>City <span class="text-danger">*</span></label>
+															<select id="inv_city" class="dd_city form-control" required disabled>
+																<option disabled selected>Select City</option>
+															</select>
+														</div>
+														<div class="form-group col-md-6">
+															<label>Barangay <span class="text-danger">*</span></label>
+															<select id="inv_brgy" class="dd_brgy form-control" disabled required>
+																<option disabled selected>Select Barangay</option>
+															</select>
+														</div>
+														<div class="form-group col-md-6">
+															<label for="inv_address">Address Line <span class="text-danger">*</span></label>
+															<input id="inv_address" class=" form-control form-control-sm" placeholder="Address Line" required/>
 														</div>
 													</div>
 												</form>
@@ -148,9 +173,10 @@
 			// Convert id to a number (if needed)
 			var notif = parseInt(id, 10);
 			let message = notif === 0 ? 'New '+pagetitle+' Saved!' : pagetitle+' Details Updated!';
-			var data = { brand_name : $('#inv_brand').val() , description : $('#inv_description').val() , pkid: id};
+			// status: $('#inv_status').val(),
+			var data = { warehouse_name: $('#inv_warehouse').val(), warehouse_code: $('#inv_warehouse_code').val(), prov_id: $('#inv_province').val(), city_id: $('#inv_city').val(), brgy_id: $('#inv_brgy').val(), address_line: $('#inv_address').val(), pkid: id};
 			var json = JSON.stringify(data)
-			$.post("../backend/inventory/post_inv_brands.php", {data: json}, function (data, a) {
+			$.post("../backend/inventory/post_inv_warehouse.php", {data: json}, function (data, a) {
 				data = data.trim();
 				if(data == 'exist'){
 					Swal.fire({icon: 'error', title: pagetitle+' already exists! Please modify or delete the existing entry.', showConfirmButton: false, timer: 2500});
@@ -173,12 +199,21 @@
 		$('.is-edit').fadeIn().removeClass('d-none');
 		$('.view-default').hide();
 		pkid = $(this).data('id');
-		$.get("../backend/inventory/get_det_inv_brands.php?security=123465&id=" + pkid, function(data, status) {
+		$.get("../backend/inventory/get_det_inv_warehouse.php?security=123465&id=" + pkid, function(data, status) {
 			var array = jQuery.parseJSON(data);
 			console.log(array)
 			$('.btn-save').attr('data-id', pkid);
-			$('#inv_brand').val(array.brand_name);
-			$('#inv_description').val(array.description);
+			$('#inv_warehouse').val(array.warehouse_name);
+			$('#inv_warehouse_code').val(array.warehouse_code);
+			$('#inv_province').val(array.prov_id);
+			$('#inv_city').val(array.city_id);
+			$('#inv_brgy').val(array.brgy_id);
+			$('#inv_address').val(array.address_line);
+			isActiveToggle(array.status);
+			dd_prov(true, array.prov_id);
+			dd_city(true,array.prov_id, array.city_id);
+			dd_brgy(true,array.city_id, array.brgy_id);
+			
 		});
 	});
 
@@ -186,7 +221,7 @@
 	$('.table').on('click', '.btn-del', function () {
 		const id = $(this).data('id');
 		confirmTypedDelete({
-			url: "../backend/inventory/del_inv_brands.php?security=123465&id=" + id,
+			url: "../backend/inventory/del_inv_warehouse.php?security=123465&id=" + id,
 			pageTitle: pagetitle,
 			onSuccess: function () {
 				tableload();
@@ -204,7 +239,7 @@
 	// script for body functions default
 	function tableload(){
 		resetDataTable('.table');
-		$.get("../backend/inventory/get_list_inv_brands.php?security=123465", function(data,status){
+		$.get("../backend/inventory/get_list_inv_warehouse.php?security=123465", function(data,status){
 			$(".table tbody").html(data);
 			// SET TABLE EDITABLE OR NOT DYNAMICALLTY SOON
 			setDataTable(".table", {dtOptions:{ lengthChange: false, ordering: false, searching: false, info: false, paging: false, }});

@@ -20,10 +20,11 @@ if (isset($_GET['security']) && $_GET['security'] == '123465') {
 			$status_badge   = (isset($row['status']) && (int)$row['status'] === 1)
 				? "<span class='badge badge-success'>Active</span>"
 				: "<span class='badge badge-danger'>Inactive</span>";
-			$table .= "<tr><td class='text-center'>{$n}</td><td data-column='Supplier: '>{$supplier_name}</td><td data-column='Contact Person: '>{$contact_person}</td><td data-column='Contact Number: '>{$contact_number}</td><td data-column='Email: '>{$email}</td><td class='text-center' data-column='Status: '>{$status_badge}</td><td class='text-center' data-column='Action: '><div class='btn btn-outline-info btn-sm btn-edit' data-id='{$supplier_id}'><span class='feather icon-edit'></span></div><div class='btn btn-outline-danger btn-sm btn-del' data-id='{$supplier_id}'><span class='feather icon-trash-2'></span></div></td></tr>";
+			$table .= "<tr><td class='text-center align-middle'>{$n}</td><td class='align-middle' data-column='Supplier: '>{$supplier_name}</td><td class='align-middle' data-column='Contact Person: '>{$contact_person}</td><td class='align-middle' data-column='Contact Number: '>{$contact_number}</td><td class='align-middle' data-column='Email: '>{$email}</td><td class='text-center align-middle' data-column='Status: '>{$status_badge}</td><td class='align-middle text-center' data-column='Action: '><div class='btn btn-outline-info btn-sm btn-edit' data-id='{$supplier_id}'><span class='feather icon-edit'></span></div><div class='btn btn-outline-danger btn-sm btn-del' data-id='{$supplier_id}'><span class='feather icon-trash-2'></span></div></td></tr>";
 			$n++;
 		}
 		$result->free();
+		
 	}
 
 	echo $table;
