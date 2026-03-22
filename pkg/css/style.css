@@ -40,6 +40,7 @@ html.theme-light {
 	--color-darker: #111212;
 	--color-black: #000000;
 	--color-white: #ffffff;
+
 	--overlay-surface-80: rgba(255, 255, 255, 0.80);
 	--overlay-surface-70: rgba(255, 255, 255, 0.70);
 	--overlay-surface-25: rgba(255, 255, 255, 0.25);
@@ -87,8 +88,6 @@ html.theme-dark {
 	--color-icon-muted: #a7b2c0;
 	--color-dark: #0b1118;
 	--color-darker: #060b11;
-	--color-black: #000000;
-	--color-white: #ffffff;
 	--overlay-surface-80: rgba(24, 34, 45, 0.80);
 	--overlay-surface-70: rgba(24, 34, 45, 0.70);
 	--overlay-surface-25: rgba(255, 255, 255, 0.18);
@@ -138,8 +137,6 @@ html.theme-dark {
 		--color-icon-muted: #a7b2c0;
 		--color-dark: #0b1118;
 		--color-darker: #060b11;
-		--color-black: #000000;
-		--color-white: #ffffff;
 		--overlay-surface-80: rgba(24, 34, 45, 0.80);
 		--overlay-surface-70: rgba(24, 34, 45, 0.70);
 		--overlay-surface-25: rgba(255, 255, 255, 0.18);
@@ -1159,7 +1156,7 @@ pre[class*=language-]:before {
 }
 
 .bg-c-red {
-	background: linear-gradient(45deg, var(--color-danger), #b31217) !important;
+	background: linear-gradient(45deg, var(--bg-c-red-start), var(--bg-c-red-end)) !important;
 }
 
 .text-c-red {
@@ -1183,7 +1180,7 @@ pre[class*=language-]:before {
 }
 
 .bg-c-yellow {
-	background: linear-gradient(45deg, var(--color-warning), #FFB64D) !important;
+	background: linear-gradient(45deg, var(--bg-c-yellow-start), var(--bg-c-yellow-end)) !important;
 }
 
 .text-c-yellow {
@@ -1233,7 +1230,7 @@ pre[class*=language-]:before {
 }
 
 .bg-danger {
-	background: linear-gradient(45deg, var(--color-danger), #b31217) !important;
+	background: linear-gradient(45deg, var(--bg-c-red-start), var(--bg-c-red-end)) !important;
 }
 
 .text-danger {
@@ -1257,7 +1254,7 @@ pre[class*=language-]:before {
 }
 
 .bg-warning {
-	background: linear-gradient(45deg, var(--color-warning), #FFB64D) !important;
+	background: linear-gradient(45deg, var(--bg-c-yellow-start), var(--bg-c-yellow-end)) !important;
 }
 
 .text-warning {
@@ -1294,20 +1291,12 @@ pre[class*=language-]:before {
 
 /*====== [ overrides bootstrap color ]text-color, background & border css ends ======*/
 /*====== border color css starts ======*/
-.b-primary {
-	border: 1px solid var(--color-primary);
-}
-
 .border-bottom-primary td {
 	border-bottom: 1px solid var(--color-primary);
 }
 
 .border-bottom-primary th {
 	border-bottom: 1px solid var(--color-primary) !important;
-}
-
-.b-danger {
-	border: 1px solid var(--color-danger);
 }
 
 .border-bottom-danger td {
@@ -1318,20 +1307,12 @@ pre[class*=language-]:before {
 	border-bottom: 1px solid var(--color-danger) !important;
 }
 
-.b-success {
-	border: 1px solid var(--color-success);
-}
-
 .border-bottom-success td {
 	border-bottom: 1px solid var(--color-success);
 }
 
 .border-bottom-success th {
 	border-bottom: 1px solid var(--color-success) !important;
-}
-
-.b-warning {
-	border: 1px solid var(--color-warning);
 }
 
 .border-bottom-warning td {
@@ -1342,20 +1323,12 @@ pre[class*=language-]:before {
 	border-bottom: 1px solid var(--color-warning) !important;
 }
 
-.b-purple {
-	border: 1px solid var(--color-secondary);
-}
-
 .border-bottom-purple td {
 	border-bottom: 1px solid var(--color-secondary);
 }
 
 .border-bottom-purple th {
 	border-bottom: 1px solid var(--color-secondary) !important;
-}
-
-.b-info {
-	border: 1px solid var(--color-info);
 }
 
 .border-bottom-info td {
@@ -1975,6 +1948,36 @@ pre[class*=language-]:before {
 	opacity: 1;
 }
 
+.dashboard-head-left {
+	min-width: 0;
+	flex: 1 1 auto;
+}
+
+.dashboard-head-right {
+	flex: 0 0 auto;
+	white-space: nowrap;
+}
+
+@media (max-width: 575.98px) {
+	.dashboard-head .page-header-title h5 {
+		font-size: 1rem;
+	}
+
+	.dashboard-head .breadcrumb {
+		font-size: 0.75rem;
+		margin-bottom: 0;
+	}
+
+	.dashboard-head .now_time {
+		font-size: 1.1rem;
+		line-height: 1.1;
+	}
+
+	.dashboard-head .now_date {
+		font-size: 0.75rem;
+		line-height: 1.1;
+	}
+}
 /* new logo End  */
 /* Pre-loader css start */
 /* .loader-bg {
@@ -3173,7 +3176,29 @@ pre[class*=language-]:before {
 }
 
 /* ====== [ light menu style end ] ======== */
+/* =========================
+   TOM SELECT - LIGHT POLISH
+========================= */
+.ts-wrapper.single .ts-control,
+.ts-wrapper.multi .ts-control,
+.ts-control {
+	min-height: calc(1.5em + .75rem + 2px);
+	border-radius: .25rem;
+	box-shadow: none;
+}
 
+.ts-wrapper .ts-dropdown,
+.ts-dropdown {
+	border-radius: .25rem;
+	overflow: hidden;
+}
+.ts-wrapper.form-control-sm .ts-control,
+.form-control-sm + .ts-wrapper .ts-control,
+.form-group .ts-wrapper .ts-control {
+	min-height: calc(1.5em + .5rem + 2px);
+	padding: .25rem .5rem;
+	font-size: .875rem;
+}
 
 /* ====== [ Menu icon end ] ======== */
 /* ====== [ Header color start ] ======== */
@@ -7359,7 +7384,7 @@ and disabled options for all buttons */
 
 .btn-gradient-warning {
 	color: var(--color-surface);
-	background: linear-gradient(45deg, var(--color-warning), #FFB64D);
+	background: linear-gradient(45deg, var(--bg-c-yellow-start), var(--bg-c-yellow-end));
 	border-color: #e67400;
 }
 
@@ -7384,7 +7409,7 @@ and disabled options for all buttons */
 
 .btn-gradient-danger {
 	color: var(--color-surface);
-	background: linear-gradient(45deg, var(--color-danger), #b31217);
+	background: linear-gradient(45deg, var(--bg-c-red-start), var(--bg-c-red-end));
 	border-color: #e2211b;
 }
 
@@ -7817,7 +7842,7 @@ Generate contextual modifier classes for colorizing the alert. */
 }
 
 .progress-bar.progress-c-red {
-	background: linear-gradient(45deg, var(--color-danger), #b31217);
+	background: linear-gradient(45deg, var(--bg-c-red-start), var(--bg-c-red-end));
 }
 
 .progress-bar.progress-c-green {
@@ -7825,7 +7850,7 @@ Generate contextual modifier classes for colorizing the alert. */
 }
 
 .progress-bar.progress-c-yellow {
-	background: linear-gradient(45deg, var(--color-warning), #FFB64D);
+	background: linear-gradient(45deg, var(--bg-c-yellow-start), var(--bg-c-yellow-end));
 }
 
 .progress-bar.progress-c-purple {
@@ -8842,7 +8867,115 @@ html.theme-dark .mobile-menu span:after {
 }
 
 
+/* =========================
+   TOM SELECT - DARK MODE
+   ADDED: follows html.theme-dark
+========================= */
+html.theme-dark .ts-wrapper.single .ts-control,
+html.theme-dark .ts-wrapper.multi .ts-control,
+html.theme-dark .ts-control {
+	background: var(--color-surface-elevated) !important;
+	border: 1px solid rgba(255,255,255,.08) !important;
+	color: var(--color-text) !important;
+	box-shadow: none !important;
+}
 
+html.theme-dark .ts-wrapper.single .ts-control input,
+html.theme-dark .ts-wrapper.multi .ts-control input,
+html.theme-dark .ts-control input {
+	color: var(--color-text) !important;
+}
+
+html.theme-dark .ts-wrapper.single .ts-control input::placeholder,
+html.theme-dark .ts-wrapper.multi .ts-control input::placeholder,
+html.theme-dark .ts-control input::placeholder {
+	color: #9aa4b2 !important;
+}
+
+html.theme-dark .ts-wrapper.single .ts-control .item,
+html.theme-dark .ts-wrapper.multi .ts-control .item {
+	color: var(--color-text) !important;
+}
+
+html.theme-dark .ts-wrapper.focus .ts-control,
+html.theme-dark .ts-control.focus,
+html.theme-dark .ts-control:focus {
+	border-color: rgba(13, 110, 253, .45) !important;
+	box-shadow: 0 0 0 .2rem rgba(13, 110, 253, .12) !important;
+}
+
+html.theme-dark .ts-wrapper.disabled .ts-control,
+html.theme-dark .ts-control.disabled {
+	background: #101a2b !important;
+	opacity: .75;
+	cursor: not-allowed;
+}
+
+html.theme-dark .ts-wrapper .ts-dropdown,
+html.theme-dark .ts-dropdown {
+	background: var(--color-surface-elevated) !important;
+	border: 1px solid rgba(255,255,255,.08) !important;
+	color: var(--color-text) !important;
+	box-shadow: 0 10px 25px rgba(0,0,0,.28) !important;
+}
+
+html.theme-dark .ts-dropdown .dropdown-header {
+	background: var(--color-surface-elevated) !important;
+	border-bottom: 1px solid rgba(255,255,255,.06) !important;
+	color: var(--color-text) !important;
+}
+
+html.theme-dark .ts-dropdown .option,
+html.theme-dark .ts-dropdown .create,
+html.theme-dark .ts-dropdown .no-results,
+html.theme-dark .ts-dropdown .optgroup-header {
+	background: transparent !important;
+	color: var(--color-text) !important;
+}
+
+html.theme-dark .ts-dropdown .option:hover,
+html.theme-dark .ts-dropdown .active {
+	background: rgba(255,255,255,.06) !important;
+	color: #ffffff !important;
+}
+
+html.theme-dark .ts-dropdown .selected {
+	background: rgba(13, 110, 253, .16) !important;
+	color: #ffffff !important;
+}
+
+html.theme-dark .ts-dropdown .optgroup {
+	border-top: 1px solid rgba(255,255,255,.06) !important;
+}
+
+html.theme-dark .ts-dropdown .optgroup-header {
+	color: #9aa4b2 !important;
+}
+
+html.theme-dark .ts-wrapper.multi .ts-control > div {
+	background: rgba(13, 110, 253, .16) !important;
+	border: 1px solid rgba(13, 110, 253, .22) !important;
+	color: var(--color-text) !important;
+}
+
+html.theme-dark .ts-wrapper.multi .ts-control > div .remove {
+	border-left: 1px solid rgba(255,255,255,.08) !important;
+	color: #cfd6df !important;
+}
+
+html.theme-dark .ts-wrapper.multi .ts-control > div .remove:hover {
+	background: rgba(255,255,255,.08) !important;
+	color: #fff !important;
+}
+
+/* arrow */
+html.theme-dark .ts-wrapper.single .ts-control:after {
+	border-color: #aeb7c2 transparent transparent transparent !important;
+}
+
+html.theme-dark .ts-wrapper.single.dropdown-active .ts-control:after {
+	border-color: transparent transparent #aeb7c2 transparent !important;
+}
 
 
 

@@ -222,7 +222,17 @@
 	function tableload(){
 		resetDataTable('.table');
 		$.get("../backend/management/get_list_branch.php?security=123465", function(data,status){
-			$("#table_branch tbody").html(data);			
+			$("#table_branch tbody").html(data);	
+			setDataTable('.table', {
+				showActions: true,
+				useResponsive: true,
+				extraColumnDefs: [
+					{ targets: 1, responsivePriority: 1 },
+					{ targets: 2, responsivePriority: 2, width: '90px' },
+					{ targets: 3, responsivePriority: 3 },
+					{ targets: -1, responsivePriority: 1, width: '120px', className: 'text-center text-nowrap' }
+				]
+			});		
 		});
 	}
 </script>

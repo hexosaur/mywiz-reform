@@ -1,0 +1,395 @@
+/* =========================================
+   DASHBOARD KIT
+   Reusable dashboard styles
+   Built on project variables
+========================================= */
+
+/* ---------- spacing ---------- */
+.db-section-gap{
+	margin-bottom:24px;
+}
+
+.db-card-gap{
+	margin-bottom:24px;
+}
+
+/* ---------- 5-column metric grid ---------- */
+.db-grid-5{
+	display:-ms-flexbox;
+	display:flex;
+	-ms-flex-wrap:wrap;
+	flex-wrap:wrap;
+	margin-right:-10px;
+	margin-left:-10px;
+}
+
+.db-grid-5 > .db-grid-col{
+	position:relative;
+	width:100%;
+	padding-right:10px;
+	padding-left:10px;
+	-ms-flex:0 0 20%;
+	flex:0 0 20%;
+	max-width:20%;
+}
+
+@media (max-width:1199.98px){
+	.db-grid-5 > .db-grid-col{
+		-ms-flex:0 0 33.333333%;
+		flex:0 0 33.333333%;
+		max-width:33.333333%;
+	}
+}
+
+@media (max-width:991.98px){
+	.db-grid-5 > .db-grid-col{
+		-ms-flex:0 0 50%;
+		flex:0 0 50%;
+		max-width:50%;
+	}
+}
+
+@media (max-width:767.98px){
+	.db-grid-5 > .db-grid-col{
+		-ms-flex:0 0 100%;
+		flex:0 0 100%;
+		max-width:100%;
+	}
+}
+
+/* ---------- common card helpers ---------- */
+.db-equal-card{
+	height:100%;
+}
+
+.db-chart-card .card-body{
+	padding-top:14px;
+	padding-bottom:14px;
+}
+
+/* ---------- metric cards ---------- */
+.db-metric-card{
+	background:var(--color-surface);
+	border:1px solid var(--color-border);
+	border-radius:12px;
+	box-shadow:0 8px 24px rgba(0,0,0,.04);
+	transition:all .25s ease-in-out;
+	height:100%;
+	overflow:hidden;
+}
+
+html.theme-dark .db-metric-card{
+	box-shadow:0 10px 28px rgba(0,0,0,.22);
+}
+
+.db-metric-card:hover{
+	transform:translateY(-2px);
+	box-shadow:0 14px 32px rgba(0,0,0,.08);
+}
+
+html.theme-dark .db-metric-card:hover{
+	box-shadow:0 16px 36px rgba(0,0,0,.30);
+}
+
+.db-metric-card .card-body{
+	padding:18px;
+}
+
+.db-metric-wrap{
+	display:-ms-flexbox;
+	display:flex;
+	-ms-flex-align:start;
+	align-items:flex-start;
+}
+
+.db-metric-icon{
+	width:52px;
+	height:52px;
+	border-radius:14px;
+	display:-ms-flexbox;
+	display:flex;
+	-ms-flex-align:center;
+	align-items:center;
+	-ms-flex-pack:center;
+	justify-content:center;
+	font-size:20px;
+	margin-right:14px;
+	flex-shrink:0;
+	background:var(--color-primary-soft);
+	color:var(--color-primary);
+}
+
+.db-metric-icon.text-c-blue{ background:rgba(57,73,171,.12); }
+.db-metric-icon.text-c-red{ background:rgba(229,45,39,.12); }
+.db-metric-icon.text-c-green{ background:rgba(44,169,97,.12); }
+.db-metric-icon.text-c-yellow{ background:rgba(245,124,0,.12); }
+.db-metric-icon.text-c-info{ background:rgba(2,136,209,.12); }
+
+html.theme-dark .db-metric-icon.text-c-blue{ background:rgba(127,140,255,.16); }
+html.theme-dark .db-metric-icon.text-c-red{ background:rgba(255,107,99,.16); }
+html.theme-dark .db-metric-icon.text-c-green{ background:rgba(57,193,125,.16); }
+html.theme-dark .db-metric-icon.text-c-yellow{ background:rgba(255,172,77,.16); }
+html.theme-dark .db-metric-icon.text-c-info{ background:rgba(54,168,224,.16); }
+
+.db-metric-content{
+	min-width:0;
+	flex:1 1 auto;
+}
+
+.db-metric-label{
+	font-size:12px;
+	font-weight:600;
+	color:var(--color-text-2);
+	margin-bottom:5px;
+	line-height:1.2;
+}
+
+.db-metric-value{
+	font-size:34px;
+	font-weight:700;
+	line-height:1;
+	color:var(--color-heading);
+	margin-bottom:6px;
+}
+
+.db-metric-sub{
+	font-size:12px;
+	color:var(--color-text-2);
+	line-height:1.2;
+	margin-bottom:10px;
+}
+
+.db-metric-action{
+	margin-top:2px;
+}
+
+.db-metric-action .btn{
+	min-width:110px;
+}
+
+/* ---------- charts ---------- */
+.db-chart-sm{
+	position:relative;
+	height:205px;
+}
+
+.db-chart-donut{
+	position:relative;
+	height:190px;
+}
+
+/* ---------- top movers ---------- */
+.db-top-item{
+	margin-bottom:18px;
+}
+
+.db-top-item:last-child{
+	margin-bottom:0;
+}
+
+.db-top-row{
+	display:-ms-flexbox;
+	display:flex;
+	-ms-flex-pack:justify;
+	justify-content:space-between;
+	-ms-flex-align:center;
+	align-items:center;
+	margin-bottom:8px;
+	font-size:14px;
+	font-weight:600;
+	color:var(--color-heading);
+}
+
+.db-top-row small{
+	color:var(--color-text-2);
+	font-weight:500;
+}
+
+.db-progress{
+	height:8px;
+	border-radius:999px;
+	background:var(--color-surface-soft);
+	overflow:hidden;
+}
+
+html.theme-dark .db-progress{
+	background:var(--color-surface-muted);
+}
+
+.db-progress .progress-bar{
+	border-radius:999px;
+}
+
+/* ---------- legend ---------- */
+.db-legend-list{
+	display:-ms-flexbox;
+	display:flex;
+	-ms-flex-direction:column;
+	flex-direction:column;
+	row-gap:8px;
+}
+
+.db-legend-item{
+	display:-ms-flexbox;
+	display:flex;
+	-ms-flex-pack:justify;
+	justify-content:space-between;
+	-ms-flex-align:center;
+	align-items:center;
+	font-size:13px;
+	color:var(--color-text);
+}
+
+.db-legend-left{
+	display:-ms-flexbox;
+	display:flex;
+	-ms-flex-align:center;
+	align-items:center;
+	min-width:0;
+}
+
+.db-dot{
+	width:10px;
+	height:10px;
+	border-radius:50%;
+	display:inline-block;
+	margin-right:8px;
+	flex-shrink:0;
+}
+
+.db-dot-blue{ background:var(--color-primary); }
+.db-dot-green{ background:var(--color-success); }
+.db-dot-yellow{ background:var(--color-warning); }
+.db-dot-red{ background:var(--color-danger); }
+.db-dot-info{ background:var(--color-info); }
+
+/* ---------- summary ---------- */
+.db-summary-item{
+	display:-ms-flexbox;
+	display:flex;
+	-ms-flex-pack:justify;
+	justify-content:space-between;
+	-ms-flex-align:center;
+	align-items:center;
+	padding:15px 0;
+	border-bottom:1px solid var(--color-border);
+}
+
+.db-summary-item:last-child{
+	border-bottom:0;
+	padding-bottom:0;
+}
+
+.db-summary-title{
+	font-size:16px;
+	font-weight:600;
+	color:var(--color-heading);
+	margin-bottom:2px;
+}
+
+.db-summary-sub{
+	font-size:12px;
+	color:var(--color-text-2);
+	margin-bottom:0;
+}
+
+.db-summary-value{
+	font-size:18px;
+	font-weight:700;
+	color:var(--color-heading);
+	margin-bottom:0;
+}
+
+/* ---------- activity ---------- */
+.db-activity-item{
+	display:-ms-flexbox;
+	display:flex;
+	-ms-flex-align:start;
+	align-items:flex-start;
+	margin-bottom:18px;
+}
+
+.db-activity-item:last-child{
+	margin-bottom:0;
+}
+
+.db-activity-icon{
+	width:38px;
+	height:38px;
+	border-radius:10px;
+	display:-ms-flexbox;
+	display:flex;
+	-ms-flex-align:center;
+	align-items:center;
+	-ms-flex-pack:center;
+	justify-content:center;
+	color:var(--color-white);
+	font-size:14px;
+	margin-right:12px;
+	flex-shrink:0;
+}
+
+.db-activity-title{
+	font-size:15px;
+	font-weight:600;
+	color:var(--color-heading);
+	margin-bottom:3px;
+}
+
+.db-activity-sub{
+	font-size:13px;
+	color:var(--color-text-2);
+	margin-bottom:0;
+}
+
+/* ---------- table ---------- */
+.db-table-card .card-body{
+	padding-top:0;
+	padding-bottom:0;
+}
+
+.db-table-card .table{
+	margin-bottom:0;
+}
+
+.db-table-card .table td,
+.db-table-card .table th{
+	vertical-align:middle;
+}
+
+/* ---------- header action button ---------- */
+.db-card-action{
+	min-width:auto;
+	padding:4px 10px;
+	margin-right:0;
+}
+
+/* ---------- mobile ---------- */
+@media (max-width:767.98px){
+	.db-chart-sm{
+		height:190px;
+	}
+
+	.db-chart-donut{
+		height:180px;
+	}
+
+	.db-metric-card .card-body{
+		padding:16px;
+	}
+
+	.db-metric-icon{
+		width:46px;
+		height:46px;
+		font-size:18px;
+		margin-right:12px;
+	}
+
+	.db-metric-value{
+		font-size:28px;
+	}
+
+	.db-metric-action .btn{
+		width:100%;
+	}
+}

@@ -56,7 +56,7 @@
 													</div>
 												<hr>
 												<div class="table-responsive">
-													<table class="table  table-hover">
+													<table class="table table-hover">
 														<thead>
 															<tr>
 																<th class="text-center">#</th>
@@ -184,26 +184,21 @@
 			}
 		});
 	});
-	$('.btn-cancel').click(function(){	
-		const id = $(this).data('id');
-		confirmTypedDelete({
-			url: "../backend/inventory/del_inv_brands.php?security=123465&id=" + id,
-			pageTitle: pagetitle,
-			onSuccess: function () {
-				tableload();
-				showMainPage();
-			}
-		});
-	});
-
-
 	// script for body functions default
 	function tableload(){
 		resetDataTable('.table');
 		$.get("../backend/inventory/get_list_inv_brands.php?security=123465", function(data,status){
 			$(".table tbody").html(data);
-			// SET TABLE EDITABLE OR NOT DYNAMICALLTY SOON
-			setDataTable(".table", {dtOptions:{ lengthChange: false, ordering: false, searching: false, info: false, paging: false, }});
+			setDataTable('.table', {
+				showActions: true,
+				useResponsive: true,
+
+				extraColumnDefs: [
+					{ targets: 1, className: 'all', responsivePriority: 1 },
+					{ targets: 2, responsivePriority: 3 },
+					{ targets: -1, className: 'all text-center text-nowrap', width: '120px' }
+				]
+			});
 		});
 	}
 </script>

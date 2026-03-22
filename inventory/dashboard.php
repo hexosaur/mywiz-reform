@@ -2,9 +2,8 @@
 
 <!DOCTYPE html>
 <html lang="en">
-	<?php include('../pkg/assets/page/head.php')?>
-
-<body class="">
+<?php include('../pkg/assets/page/head.php')?>
+<body>
 	<?php include('../pkg/assets/page/sidebar.php')?>
 	<?php include('../pkg/assets/page/navbar.php')?>
 
@@ -18,17 +17,22 @@
 							<!-- [ breadcrumb ] start -->
 							<div class="page-header">
 								<div class="page-block">
-									<div class="row align-items-center">
-										<div class="col-md-8">
+									<div class="d-flex justify-content-between align-items-start flex-nowrap dashboard-head">
+										<div class="dashboard-head-left pr-2">
 											<div class="page-header-title">
-												<h5>Summary</h5>
+												<h5 class="mb-1">Summary</h5>
 											</div>
-											<ul class="breadcrumb">
-												<li class="breadcrumb-item"><a href="../inventory/dashboard"><i class="feather icon-home"></i></a></li>
-												<li class="breadcrumb-item"><a href="#!"><span class="page-title"></span></a></li>
+											<ul class="breadcrumb mb-0">
+												<li class="breadcrumb-item">
+													<a href="../inventory/dashboard"><i class="feather icon-home"></i></a>
+												</li>
+												<li class="breadcrumb-item">
+													<a href="#"><span class="page-title"></span></a>
+												</li>
 											</ul>
 										</div>
-										<div class="col-md-4 text-right">
+
+										<div class="dashboard-head-right text-right pl-2">
 											<h4 class="now_time mb-0">
 												<span class="hour_part"></span><span class="blink_colon">:</span><span class="minute_part"></span>
 												<span class="ampm_part"></span>
@@ -41,558 +45,383 @@
 							<!-- [ breadcrumb ] end -->
 							<!-- [ Main Content ] start -->
 							<div class="row">
-								<!-- product profit start -->
-								<div class="col-xl-3 col-md-6">
-									<div class="card prod-p-card bg-c-red">
-										<div class="card-body">
-											<div class="row align-items-center m-b-25">
-												<div class="col">
-													<h6 class="m-b-5 text-white">Total Profit</h6>
-													<h3 class="m-b-0 text-white">$1,783</h3>
-												</div>
-												<div class="col-auto">
-													<i class="fas fa-money-bill-alt text-c-red f-18"></i>
-												</div>
+
+								<!-- MINI KPI CARDS -->
+								<div class="col-12 db-section-gap">
+									<div class="db-grid-5">
+										<div class="db-grid-col">
+											<div class="card db-metric-card db-equal-card">
+												<div class="card-body">
+									<div class="db-metric-wrap">
+										<div class="db-metric-icon text-c-blue">
+											<i class="fas fa-boxes"></i>
+										</div>
+										<div class="db-metric-content">
+											<div class="db-metric-label">Total Products</div>
+											<div class="db-metric-value">1,250</div>
+											<p class="db-metric-sub">Active inventory items</p>
+											<div class="db-metric-action">
+												<a href="../inventory/products" class="btn btn-sm btn-outline-primary">View Products</a>
 											</div>
-											<p class="m-b-0 text-white"><span class="label label-danger m-r-10">+11%</span>From Previous Month</p>
 										</div>
 									</div>
-								</div>
-								<div class="col-xl-3 col-md-6">
-									<div class="card prod-p-card bg-c-blue">
-										<div class="card-body">
-											<div class="row align-items-center m-b-25">
-												<div class="col">
-													<h6 class="m-b-5 text-white">Total Ordersssss</h6>
-													<h3 class="m-b-0 text-white">15,830</h3>
-												</div>
-												<div class="col-auto">
-													<i class="fas fa-database text-c-blue f-18"></i>
-												</div>
-											</div>
-											<p class="m-b-0 text-white"><span class="label label-primary m-r-10">+12%</span>From Previous Month</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-xl-3 col-md-6">
-									<div class="card prod-p-card bg-c-green">
-										<div class="card-body">
-											<div class="row align-items-center m-b-25">
-												<div class="col">
-													<h6 class="m-b-5 text-white">Average Price</h6>
-													<h3 class="m-b-0 text-white">$6,780</h3>
-												</div>
-												<div class="col-auto">
-													<i class="fas fa-dollar-sign text-c-green f-18"></i>
-												</div>
-											</div>
-											<p class="m-b-0 text-white"><span class="label label-success m-r-10">+52%</span>From Previous Month</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-xl-3 col-md-6">
-									<div class="card prod-p-card bg-c-yellow">
-										<div class="card-body">
-											<div class="row align-items-center m-b-25">
-												<div class="col">
-													<h6 class="m-b-5 text-white">Product Sold</h6>
-													<h3 class="m-b-0 text-white">6,784</h3>
-												</div>
-												<div class="col-auto">
-													<i class="fas fa-tags text-c-yellow f-18"></i>
-												</div>
-											</div>
-											<p class="m-b-0 text-white"><span class="label label-warning m-r-10">+52%</span>From Previous Month</p>
-										</div>
-									</div>
-								</div>
-								<!-- product profit end -->
-								<div class="col-md-12 col-xl-4">
-									<div class="card card-social">
-										<div class="card-block border-bottom">
-											<div class="row align-items-center justify-content-center">
-												<div class="col-auto">
-													<i class="fab fa-facebook-f text-primary f-36"></i>
-												</div>
-												<div class="col text-right">
-													<h3>12,281</h3>
-													<h5 class="text-c-blue mb-0">+7.2% <span class="text-muted">Total Likes</span></h5>
 												</div>
 											</div>
 										</div>
-										<div class="card-block">
-											<div class="row align-items-center justify-content-center card-active">
-												<div class="col-6">
-													<h6 class="text-center m-b-10"><span class="text-muted m-r-5">Target:</span>35,098</h6>
-													<div class="progress">
-														<div class="progress-bar progress-c-blue" role="progressbar" style="width:60%;height:6px;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-													</div>
-												</div>
-												<div class="col-6">
-													<h6 class="text-center  m-b-10"><span class="text-muted m-r-5">Duration:</span>350</h6>
-													<div class="progress">
-														<div class="progress-bar progress-c-green" role="progressbar" style="width:45%;height:6px;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+
+										<div class="db-grid-col">
+											<div class="card db-metric-card db-equal-card">
+												<div class="card-body">
+													<div class="db-metric-wrap">
+														<div class="db-metric-icon text-c-red">
+															<i class="fas fa-exclamation-triangle"></i>
+														</div>
+														<div class="db-metric-content">
+															<div class="db-metric-label">Low Stock</div>
+															<div class="db-metric-value">32</div>
+															<p class="db-metric-sub">Needs reorder soon</p>
+															<div class="db-metric-action">
+																<a href="../inventory/products" class="btn btn-sm btn-outline-danger">Review Items</a>
+															</div>
+														</div>
 													</div>
 												</div>
 											</div>
 										</div>
+
+										<div class="db-grid-col">
+											<div class="card db-metric-card db-equal-card">
+												<div class="card-body">
+													<div class="db-metric-wrap">
+														<div class="db-metric-icon text-c-yellow">
+															<i class="fas fa-times-circle"></i>
+														</div>
+														<div class="db-metric-content">
+															<div class="db-metric-label">Out of Stock</div>
+															<div class="db-metric-value">8</div>
+															<p class="db-metric-sub">Unavailable products</p>
+															<div class="db-metric-action">
+																<a href="../inventory/products" class="btn btn-sm btn-outline-warning">Restock Now</a>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="db-grid-col">
+											<div class="card db-metric-card db-equal-card">
+												<div class="card-body">
+													<div class="db-metric-wrap">
+														<div class="db-metric-icon text-c-green">
+															<i class="fas fa-truck-loading"></i>
+														</div>
+														<div class="db-metric-content">
+															<div class="db-metric-label">Total Suppliers</div>
+															<div class="db-metric-value">58</div>
+															<p class="db-metric-sub">Registered suppliers</p>
+															<div class="db-metric-action">
+																<a href="../inventory/suppliers" class="btn btn-sm btn-outline-success">Open Suppliers</a>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="db-grid-col">
+											<div class="card db-metric-card db-equal-card">
+												<div class="card-body">
+													<div class="db-metric-wrap">
+														<div class="db-metric-icon text-c-info">
+															<i class="fas fa-warehouse"></i>
+														</div>
+														<div class="db-metric-content">
+															<div class="db-metric-label">Warehouses</div>
+															<div class="db-metric-value">9</div>
+															<p class="db-metric-sub">Active locations</p>
+															<div class="db-metric-action">
+																<a href="../inventory/warehouse" class="btn btn-sm btn-outline-info">Manage Sites</a>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
 									</div>
 								</div>
-								<div class="col-md-6 col-xl-4">
-									<div class="card card-social">
-										<div class="card-block border-bottom">
-											<div class="row align-items-center justify-content-center">
-												<div class="col-auto">
-													<i class="fab fa-twitter text-c-info f-36"></i>
-												</div>
-												<div class="col text-right">
-													<h3>11,200</h3>
-													<h5 class="text-c-info mb-0">+6.2% <span class="text-muted">Total Likes</span></h5>
-												</div>
-											</div>
-										</div>
-										<div class="card-block">
-											<div class="row align-items-center justify-content-center card-active">
-												<div class="col-6">
-													<h6 class="text-center m-b-10"><span class="text-muted m-r-5">Target:</span>34,185</h6>
-													<div class="progress">
-														<div class="progress-bar progress-c-blue" role="progressbar" style="width:40%;height:6px;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-													</div>
-												</div>
-												<div class="col-6">
-													<h6 class="text-center  m-b-10"><span class="text-muted m-r-5">Duration:</span>800</h6>
-													<div class="progress">
-														<div class="progress-bar progress-c-green" role="progressbar" style="width:70%;height:6px;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6 col-xl-4">
-									<div class="card card-social">
-										<div class="card-block border-bottom">
-											<div class="row align-items-center justify-content-center">
-												<div class="col-auto">
-													<i class="fab fa-google-plus-g text-c-red f-36"></i>
-												</div>
-												<div class="col text-right">
-													<h3>10,500</h3>
-													<h5 class="text-c-red mb-0">+5.9% <span class="text-muted">Total Likes</span></h5>
-												</div>
-											</div>
-										</div>
-										<div class="card-block">
-											<div class="row align-items-center justify-content-center card-active">
-												<div class="col-6">
-													<h6 class="text-center m-b-10"><span class="text-muted m-r-5">Target:</span>25,998</h6>
-													<div class="progress">
-														<div class="progress-bar progress-c-blue" role="progressbar" style="width:80%;height:6px;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-													</div>
-												</div>
-												<div class="col-6">
-													<h6 class="text-center  m-b-10"><span class="text-muted m-r-5">Duration:</span>900</h6>
-													<div class="progress">
-														<div class="progress-bar progress-c-green" role="progressbar" style="width:50%;height:6px;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!-- sessions-section start -->
-								<div class="col-xl-8 col-md-6">
-									<div class="card table-card">
+
+								<!-- TOP DASHBOARD ROW -->
+								<div class="col-xl-5 col-lg-12 db-card-gap">
+									<div class="card db-equal-card db-chart-card">
 										<div class="card-header">
-											<h5>Site visitors session log</h5>
+											<h5>Stock Movement Overview</h5>
+										</div>
+										<div class="card-body">
+											<div class="db-chart-sm">
+												<canvas id="stockMovementChart"></canvas>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-xl-4 col-lg-6 db-card-gap">
+									<div class="card db-equal-card">
+										<div class="card-header d-flex justify-content-between align-items-center">
+											<h5 class="mb-0">Top Moving Products</h5>
+											<a href="../inventory/products" class="btn btn-sm btn-outline-primary db-card-action">View All</a>
+										</div>
+										<div class="card-body">
+
+											<div class="db-top-item">
+												<div class="db-top-row">
+													<span>Wireless Mouse</span>
+													<small>32.9%</small>
+												</div>
+												<div class="progress db-progress">
+													<div class="progress-bar bg-c-blue" style="width:32.9%"></div>
+												</div>
+											</div>
+
+											<div class="db-top-item">
+												<div class="db-top-row">
+													<span>Office Desk</span>
+													<small>31.4%</small>
+												</div>
+												<div class="progress db-progress">
+													<div class="progress-bar bg-c-green" style="width:31.4%"></div>
+												</div>
+											</div>
+
+											<div class="db-top-item">
+												<div class="db-top-row">
+													<span>Keyboard</span>
+													<small>23.4%</small>
+												</div>
+												<div class="progress db-progress">
+													<div class="progress-bar bg-c-yellow" style="width:23.4%"></div>
+												</div>
+											</div>
+
+											<div class="db-top-item">
+												<div class="db-top-row">
+													<span>Desk Organizer</span>
+													<small>16.9%</small>
+												</div>
+												<div class="progress db-progress">
+													<div class="progress-bar bg-c-red" style="width:16.9%"></div>
+												</div>
+											</div>
+
+											<div class="db-top-item">
+												<div class="db-top-row">
+													<span>Laptop</span>
+													<small>10.4%</small>
+												</div>
+												<div class="progress db-progress">
+													<div class="progress-bar bg-c-info" style="width:10.4%"></div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="col-xl-3 col-lg-6 db-card-gap">
+									<div class="card db-equal-card">
+										<div class="card-header d-flex justify-content-between align-items-center">
+											<h5 class="mb-0">Stock by Category</h5>
+											<a href="../inventory/categories" class="btn btn-sm btn-outline-primary db-card-action">View All</a>
+										</div>
+										<div class="card-body">
+											<div class="db-chart-donut">
+												<canvas id="stockCategoryChart"></canvas>
+											</div>
+
+											<div class="db-legend-list mt-3">
+												<div class="db-legend-item">
+													<div class="db-legend-left">
+														<span class="db-dot db-dot-blue"></span> Electronics
+													</div>
+													<span>33.5%</span>
+												</div>
+												<div class="db-legend-item">
+													<div class="db-legend-left">
+														<span class="db-dot db-dot-green"></span> Office Supplies
+													</div>
+													<span>24.2%</span>
+												</div>
+												<div class="db-legend-item">
+													<div class="db-legend-left">
+														<span class="db-dot db-dot-yellow"></span> Furniture
+													</div>
+													<span>18.7%</span>
+												</div>
+												<div class="db-legend-item">
+													<div class="db-legend-left">
+														<span class="db-dot db-dot-red"></span> Cleaning
+													</div>
+													<span>12.1%</span>
+												</div>
+												<div class="db-legend-item">
+													<div class="db-legend-left">
+														<span class="db-dot db-dot-info"></span> Miscellaneous
+													</div>
+													<span>11.5%</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- BOTTOM DASHBOARD ROW -->
+								<div class="col-xl-6 col-lg-12 db-card-gap">
+									<div class="card db-table-card">
+										<div class="card-header d-flex justify-content-between align-items-center">
+											<h5 class="mb-0">Low Stock Alerts</h5>
+											<a href="../inventory/products" class="btn btn-sm btn-outline-primary db-card-action">View All</a>
 										</div>
 										<div class="card-body px-0 py-0">
 											<div class="table-responsive">
-												<div class="session-scroll" style="height:478px;position:relative;">
-													<table class="table table-hover m-b-0">
-														<thead>
-															<tr>
-																<th><span>CAMPAIGN DATE</span></th>
-																<th><span>CLICK <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"><i
-																				class="feather icon-help-circle f-16"></i></a></span></th>
-																<th><span>COST <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"><i
-																				class="feather icon-help-circle f-16"></i></a></span></th>
-																<th><span>CTR <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"><i
-																				class="feather icon-help-circle f-16"></i></a></span></th>
-																<th><span>ARPU <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"><i
-																				class="feather icon-help-circle f-16"></i></a></span></th>
-																<th><span>ECPI <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"><i
-																				class="feather icon-help-circle f-16"></i></a></span></th>
-																<th><span>ROI <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"><i
-																				class="feather icon-help-circle f-16"></i></a></span></th>
-																<th><span>REVENUE <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"><i
-																				class="feather icon-help-circle f-16"></i></a></span></th>
-																<th><span>CONVERSIONS <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"><i
-																				class="feather icon-help-circle f-16"></i></a></span></th>
-															</tr>
-														</thead>
-														<tbody>
-															<tr>
-																<td>Total and average</td>
-																<td>1300</td>
-																<td>1025</td>
-																<td>14005</td>
-																<td>95,3%</td>
-																<td>29,7%</td>
-																<td>3,25</td>
-																<td>2:30</td>
-																<td>45.5%</td>
-															</tr>
-															<tr>
-																<td>8-11-2016</td>
-																<td>786
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-danger rounded" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>485
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-primary rounded" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>769
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-warning rounded" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>45,3%
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-success rounded" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>6,7%
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-info rounded" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>8,56
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-danger rounded" role="progressbar" style="width: 40%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>10:55
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-warning rounded" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>33.8%
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-success rounded" role="progressbar" style="width: 40%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-															</tr>
-															<tr>
-																<td>15-10-2016</td>
-																<td>786
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-danger rounded" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>523
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-primary rounded" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>736
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-warning rounded" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>78,3%
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-success rounded" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>6,6%
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-info rounded" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>7,56
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-danger rounded" role="progressbar" style="width: 44%;" aria-valuenow="44" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>4:30
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-warning rounded" role="progressbar" style="width: 68%;" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>76.8%
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-success rounded" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-															</tr>
-															<tr>
-																<td>8-8-2017</td>
-																<td>624
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-danger rounded" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>436
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-primary rounded" role="progressbar" style="width: 55%;" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>756
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-warning rounded" role="progressbar" style="width: 95%;" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>78,3%
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-success rounded" role="progressbar" style="width: 38%;" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>6,4%
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-info rounded" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>9,45
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-danger rounded" role="progressbar" style="width: 41%;" aria-valuenow="41" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>9:05
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-warning rounded" role="progressbar" style="width: 67%;" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>8.63%
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-success rounded" role="progressbar" style="width: 41%;" aria-valuenow="41" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-															</tr>
-															<tr>
-																<td>11-12-2017</td>
-																<td>423
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-danger rounded" role="progressbar" style="width: 54%;" aria-valuenow="54" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>123
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-primary rounded" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>756
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-warning rounded" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>78,6%
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-success rounded" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>45,6%
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-info rounded" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>6,85
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-danger rounded" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>7:45
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-warning rounded" role="progressbar" style="width: 40%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>33.8%
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-success rounded" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-															</tr>
-															<tr>
-																<td>8-11-2016</td>
-																<td>786
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-danger rounded" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>485
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-primary rounded" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>769
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-warning rounded" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>45,3%
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-success rounded" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>6,7%
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-info rounded" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>8,56
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-danger rounded" role="progressbar" style="width: 40%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>10:55
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-warning rounded" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>33.8%
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-success rounded" role="progressbar" style="width: 40%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-															</tr>
-															<tr>
-																<td>15-10-2016</td>
-																<td>786
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-danger rounded" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>523
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-primary rounded" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>736
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-warning rounded" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>78,3%
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-success rounded" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>6,6%
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-info rounded" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>7,56
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-danger rounded" role="progressbar" style="width: 44%;" aria-valuenow="44" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>4:30
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-warning rounded" role="progressbar" style="width: 68%;" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>76.8%
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-success rounded" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-															</tr>
-															<tr>
-																<td>8-8-2017</td>
-																<td>624
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-danger rounded" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>436
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-primary rounded" role="progressbar" style="width: 55%;" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>756
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-warning rounded" role="progressbar" style="width: 95%;" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>78,3%
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-success rounded" role="progressbar" style="width: 38%;" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>6,4%
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-info rounded" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>9,45
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-danger rounded" role="progressbar" style="width: 41%;" aria-valuenow="41" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>9:05
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-warning rounded" role="progressbar" style="width: 67%;" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-																<td>8.63%
-																	<div class="progress mt-1" style="height:4px;">
-																		<div class="progress-bar bg-success rounded" role="progressbar" style="width: 41%;" aria-valuenow="41" aria-valuemin="0" aria-valuemax="100"></div>
-																	</div>
-																</td>
-															</tr>
-														</tbody>
-													</table>
-												</div>
+												<table class="table table-hover mb-0">
+													<thead>
+														<tr>
+															<th class="text-center">#</th>
+															<th>Product</th>
+															<th>Supplier</th>
+															<th class="text-center">Stock</th>
+															<th class="text-center">Status</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td class="text-center">1</td>
+															<td>Wireless Keyboard</td>
+															<td>Super Electronics</td>
+															<td class="text-center">5</td>
+															<td class="text-center"><span class="badge badge-danger">Low Stock</span></td>
+														</tr>
+														<tr>
+															<td class="text-center">2</td>
+															<td>Office Desk</td>
+															<td>Desu Furniture</td>
+															<td class="text-center">6</td>
+															<td class="text-center"><span class="badge badge-danger">Low Stock</span></td>
+														</tr>
+														<tr>
+															<td class="text-center">3</td>
+															<td>Packing Tape</td>
+															<td>Supply Hub</td>
+															<td class="text-center">6</td>
+															<td class="text-center"><span class="badge badge-warning">Reorder Soon</span></td>
+														</tr>
+														<tr>
+															<td class="text-center">4</td>
+															<td>Whiteboard Marker</td>
+															<td>Stationery World</td>
+															<td class="text-center">5</td>
+															<td class="text-center"><span class="badge badge-danger">Low Stock</span></td>
+														</tr>
+														<tr>
+															<td class="text-center">5</td>
+															<td>Bond Paper A4</td>
+															<td>Office Central</td>
+															<td class="text-center">0</td>
+															<td class="text-center"><span class="badge badge-danger">Out of Stock</span></td>
+														</tr>
+													</tbody>
+												</table>
 											</div>
 										</div>
 									</div>
 								</div>
-								<!-- sessions-section end -->
-								<div class="col-md-6 col-xl-4">
-									<div class="card user-card">
-										<div class="card-header">
-											<h5>Profile</h5>
-										</div>
-										<div class="card-body  text-center">
-											<div class="usre-image">
-												<img src="../pkg/assets/media/widget/img-round1.jpg" class="img-radius wid-100 m-auto" alt="User-Profile-Image">
-											</div>
-											<h6 class="f-w-600 m-t-25 m-b-10">Alessa Robert</h6>
-											<p>Active | Male | Born 23.05.1992</p>
-											<hr>
-											<p class="m-t-15">Activity Level: 87%</p>
-											<div class="bg-c-blue counter-block m-t-10 p-20">
-												<div class="row">
-													<div class="col-4">
-														<i class="fas fa-calendar-check text-white f-20"></i>
-														<h6 class="text-white mt-2 mb-0">1256</h6>
-													</div>
-													<div class="col-4">
-														<i class="fas fa-user text-white f-20"></i>
-														<h6 class="text-white mt-2 mb-0">8562</h6>
-													</div>
-													<div class="col-4">
-														<i class="fas fa-folder-open text-white f-20"></i>
-														<h6 class="text-white mt-2 mb-0">189</h6>
-													</div>
-												</div>
-											</div>
-											<p class="m-t-15">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-											<hr>
-											<div class="row justify-content-center user-social-link">
-												<div class="col-auto"><a href="#!"><i class="fab fa-facebook-f text-primary f-22"></i></a></div>
-												<div class="col-auto"><a href="#!"><i class="fab fa-twitter text-c-info f-22"></i></a></div>
-												<div class="col-auto"><a href="#!"><i class="fab fa-dribbble text-c-red f-22"></i></a></div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
 
+								<div class="col-xl-3 col-lg-6 db-card-gap">
+									<div class="card db-equal-card">
+										<div class="card-header">
+											<h5 class="mb-0">Inventory Summary</h5>
+										</div>
+										<div class="card-body">
+											<div class="db-summary-item">
+												<div>
+													<div class="db-summary-title">Main Warehouse</div>
+													<p class="db-summary-sub">Current stored items</p>
+												</div>
+												<h4 class="db-summary-value">12,340</h4>
+											</div>
+
+											<div class="db-summary-item">
+												<div>
+													<div class="db-summary-title">West Side</div>
+													<p class="db-summary-sub">Current stored items</p>
+												</div>
+												<h4 class="db-summary-value">8,215</h4>
+											</div>
+
+											<div class="db-summary-item">
+												<div>
+													<div class="db-summary-title">North Office</div>
+													<p class="db-summary-sub">Current stored items</p>
+												</div>
+												<h4 class="db-summary-value">4,107</h4>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-xl-3 col-lg-6 db-card-gap">
+									<div class="card db-equal-card">
+										<div class="card-header d-flex justify-content-between align-items-center">
+											<h5 class="mb-0">Recent Activity</h5>
+											<a href="#" class="btn btn-sm btn-outline-primary db-card-action">View All</a>
+										</div>
+										<div class="card-body">
+
+											<div class="db-activity-item">
+												<div class="db-activity-icon bg-success">
+													<i class="fas fa-arrow-down"></i>
+												</div>
+												<div>
+													<div class="db-activity-title">Stock In</div>
+													<p class="db-activity-sub">10 units of Office Chair added</p>
+												</div>
+											</div>
+
+											<div class="db-activity-item">
+												<div class="db-activity-icon bg-warning">
+													<i class="fas fa-arrow-up"></i>
+												</div>
+												<div>
+													<div class="db-activity-title">Stock Out</div>
+													<p class="db-activity-sub">5 units of Mouse released to IT Dept.</p>
+												</div>
+											</div>
+
+											<div class="db-activity-item">
+												<div class="db-activity-icon bg-info">
+													<i class="fas fa-user-plus"></i>
+												</div>
+												<div>
+													<div class="db-activity-title">New Supplier</div>
+													<p class="db-activity-sub">ABC Trading was added</p>
+												</div>
+											</div>
+
+											<div class="db-activity-item">
+												<div class="db-activity-icon bg-danger">
+													<i class="fas fa-exclamation-circle"></i>
+												</div>
+												<div>
+													<div class="db-activity-title">Critical Stock</div>
+													<p class="db-activity-sub">Bond Paper is now out of stock</p>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+							</div>
 							<!-- [ Main Content ] end -->
 						</div>
 					</div>
@@ -602,56 +431,109 @@
 	</div>
 	<!-- [ Main Content ] end -->
 
-	<!-- Warning Section start -->
-	<!-- Older IE warning message -->
-	<!--[if lt IE 11]>
-        <div class="ie-warning">
-            <h1>Warning!!</h1>
-            <p>You are using an outdated version of Internet Explorer, please upgrade
-               <br/>to any of the following web browsers to access this website.
-            </p>
-            <div class="iew-container">
-                <ul class="iew-download">
-                    <li>
-                        <a href="http://www.google.com/chrome/">
-                            <img src="../assets/images/browser/chrome.png" alt="Chrome">
-                            <div>Chrome</div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.mozilla.org/en-US/firefox/new/">
-                            <img src="../assets/images/browser/firefox.png" alt="Firefox">
-                            <div>Firefox</div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://www.opera.com">
-                            <img src="../assets/images/browser/opera.png" alt="Opera">
-                            <div>Opera</div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.apple.com/safari/">
-                            <img src="../assets/images/browser/safari.png" alt="Safari">
-                            <div>Safari</div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-                            <img src="../assets/images/browser/ie.png" alt="">
-                            <div>IE (11 & above)</div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <p>Sorry for the inconvenience!</p>
-        </div>
-    <![endif]-->
-	<!-- Warning Section Ends -->
 
 	<?php include('../pkg/assets/page/footer.php')?>
 
 	
 </body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+	(function () {
+		var isDark = document.documentElement.classList.contains('theme-dark');
+		var gridColor = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)';
+		var textColor = isDark ? '#94a3b8' : '#748892';
 
+		var stockMovementCanvas = document.getElementById('stockMovementChart');
+		if (stockMovementCanvas) {
+			new Chart(stockMovementCanvas, {
+				type: 'line',
+				data: {
+					labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+					datasets: [
+						{
+							label: 'Stock In',
+							data: [10, 18, 15, 17, 20, 19, 23],
+							borderColor: '#4c6ef5',
+							backgroundColor: 'rgba(76,110,245,0.10)',
+							borderWidth: 3,
+							pointRadius: 3,
+							fill: true,
+							tension: 0.4
+						},
+						{
+							label: 'Stock Out',
+							data: [6, 12, 9, 14, 15, 13, 17],
+							borderColor: '#f59f00',
+							backgroundColor: 'rgba(245,159,0,0.08)',
+							borderWidth: 3,
+							pointRadius: 3,
+							fill: true,
+							tension: 0.4
+						}
+					]
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					legend: {
+						position: 'top',
+						labels: {
+							fontColor: textColor
+						}
+					},
+					scales: {
+						xAxes: [{
+							gridLines: {
+								color: gridColor,
+								drawBorder: false
+							},
+							ticks: {
+								fontColor: textColor
+							}
+						}],
+						yAxes: [{
+							ticks: {
+								beginAtZero: true,
+								fontColor: textColor
+							},
+							gridLines: {
+								color: gridColor,
+								drawBorder: false
+							}
+						}]
+					}
+				}
+			});
+		}
+
+		var stockCategoryCanvas = document.getElementById('stockCategoryChart');
+		if (stockCategoryCanvas) {
+			new Chart(stockCategoryCanvas, {
+				type: 'doughnut',
+				data: {
+					labels: ['Electronics', 'Office Supplies', 'Furniture', 'Cleaning', 'Miscellaneous'],
+					datasets: [{
+						data: [33.5, 24.2, 18.7, 12.1, 11.5],
+						backgroundColor: [
+							'#4c6ef5',
+							'#2ca961',
+							'#f59f00',
+							'#e52d27',
+							'#0288d1'
+						],
+						borderWidth: 0
+					}]
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					cutoutPercentage: 62,
+					legend: {
+						display: false
+					}
+				}
+			});
+		}
+	})();
+</script>
 </html>

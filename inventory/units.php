@@ -200,8 +200,16 @@
 		resetDataTable('.table');
 		$.get("../backend/inventory/get_list_inv_units.php?security=123465", function(data,status){
 			$(".table tbody").html(data);
-			// SET TABLE EDITABLE OR NOT DYNAMICALLTY SOON
-			setDataTable(".table", {dtOptions:{ lengthChange: false, ordering: false, searching: false, info: false, paging: false, }});
+			setDataTable('.table', {
+				showActions: true,
+				useResponsive: true,
+
+				extraColumnDefs: [
+					{ targets: 1, className: 'all', responsivePriority: 1 },
+					{ targets: 2, responsivePriority: 2, width: '90px' },
+					{ targets: -1, className: 'all text-center text-nowrap', width: '120px' }
+				]
+			});
 		});
 	}
 </script>

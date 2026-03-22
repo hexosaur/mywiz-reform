@@ -339,7 +339,9 @@ function setDataTable(selector = '.table', opts = {}) {
 		rowHide = null,              // e.g. 3 if you still want to hide a specific column
 		showActions = true,          // permissions flag: true=show last col, false=hide last col
 		extraColumnDefs = [],        // allow per-table additional defs
-		dtOptions = {}               // allow passing other DataTables options
+		dtOptions = {},              // allow passing other DataTables options
+
+		useResponsive = false        // ADDED: enable DataTables responsive mode only for selected tables
 	} = opts;
 
 	// 🔧 Helper: truncate text
@@ -353,29 +355,48 @@ function setDataTable(selector = '.table', opts = {}) {
 	$tbl.each(function () {
 		const $t = $(this);
 
-		// if already initialized, destroy safely (common for dynamic reloads)
+		// MODIFIED: destroy safely and remove leftover inline widths/styles from previous DataTable init
 		if ($.fn.DataTable.isDataTable($t)) {
-		$t.DataTable().destroy();
-		}
-		const columnDefs = [];
-		if (rowHide !== null && rowHide !== undefined) {
-			columnDefs.push({ targets: rowHide, visible: false, searchable: true });
-			// example: next column not orderable/searchable
-			columnDefs.push({ targets: rowHide + 1, orderable: false, searchable: false });
+			$t.DataTable().destroy();
+			$t.removeAttr('style');
+			$t.find('thead th, tbody td').removeAttr('style');
 		}
 
+		const columnDefs = [];
+
+		if (rowHide !== null && rowHide !== undefined) {
+			columnDefs.push({ targets: rowHide, visible: false, searchable: true });
+			columnDefs.push({ targets: rowHide + 1, orderable: false, searchable: false });
+		}
+		columnDefs.push({
+			targets: 0,
+			className: 'text-center',
+			width: '50px',
+			responsivePriority: 1
+		});
 		columnDefs.push({
 			targets: -1,
 			visible: showActions,
 			orderable: false,
-			searchable: false
+			searchable: false,
+			className: 'text-center',
+			width: showActions ? '90px' : undefined,
+			responsivePriority: 1
 		});
 
 		columnDefs.push(...extraColumnDefs);
-		$t.DataTable({
-			autoWidth: false,
-			columnDefs,
 
+		const dt = $t.DataTable({
+			autoWidth: false,
+			responsive: useResponsive ? {
+				details: {
+					type: 'inline',
+					target: 'tr'
+				}
+			} : false,
+			scrollX: useResponsive ? false : (dtOptions.scrollX ?? false),
+
+			columnDefs,
 			createdRow: function (row, data) {
 				if (rowHide !== null && rowHide !== undefined) {
 					const location = (data[rowHide] || '').toString().trim();
@@ -395,13 +416,34 @@ function setDataTable(selector = '.table', opts = {}) {
 					});
 					$rows.tooltip({ container: 'body', trigger: 'hover focus', placement: 'top' });
 				}
+				this.api().columns.adjust();
+				if (useResponsive && this.api().responsive) {
+					this.api().responsive.recalc();
+				}
 			},
 
 			...dtOptions
 		});
+		setTimeout(function () {
+			dt.columns.adjust();
+
+			if (useResponsive && dt.responsive) {
+				dt.responsive.recalc();
+			}
+		}, 100);
+		const tableId = $t.attr('id') || Math.random().toString(36).slice(2);
+
+		$(window)
+			.off('resize.dt_' + tableId)
+			.on('resize.dt_' + tableId, function () {
+				dt.columns.adjust();
+
+				if (useResponsive && dt.responsive) {
+					dt.responsive.recalc();
+				}
+			});
 	});
 }
-
 
 
 
@@ -737,7 +779,28 @@ function checkFormValidity(scope = document) {
 
 	return isValid;
 }
-
+// FORM FILE ATTACHED LIMIT NOTIFICATION
+function appendFileWithLimit(formData, inputSelector, maxSizeMB = 4) {
+	const $input = $(inputSelector);
+	if ($input.length === 0 || !$input[0].files || $input[0].files.length === 0) {
+		return { ok: true, hasFile: false };
+	}
+	const file = $input[0].files[0];
+	const maxBytes = maxSizeMB * 1024 * 1024;
+	if (file.size > maxBytes) {
+		return {
+			ok: false,
+			hasFile: true,
+			message: `File exceeded size limit! Maximum is ${maxSizeMB}MB.`
+		};
+	}
+	formData.append('fileupload', file);
+	return {
+		ok: true,
+		hasFile: true,
+		file: file
+	};
+}
 
 /**  ===========================
 	SWEET ALERT / SWAL SECTION

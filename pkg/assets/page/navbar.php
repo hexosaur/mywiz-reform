@@ -33,7 +33,7 @@
 			</li>
 		</ul> -->
 		<ul class="navbar-nav ml-auto">
-			<li>
+			<!-- <li>
 				<div class="dropdown">
 					<a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="icon feather icon-bell"></i></a>
 					<div class="dropdown-menu dropdown-menu-right notification">
@@ -111,7 +111,7 @@
 						</div>
 					</div>
 				</div>
-			</li>
+			</li> -->
 			<li>
 				<div class="dropdown drp-theme">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="themeDropdownToggle" title="Theme">
@@ -149,7 +149,7 @@
 					</a>
 					<div class="dropdown-menu dropdown-menu-right profile-notification">
 						<div class="pro-head">
-							<img id="pfp" src="../pkg/assets/media/user/avatar-1.jpg" style="width:40px;height:40px;border-radius: 50%; object-fit: cover; object-position: center;" alt="User-Profile-Image"> Hi! 
+							<img id="pfp" src="../pkg/assets/media/logo-wiz.png" style="width:40px;height:40px;border-radius: 50%; object-fit: cover; object-position: center;" alt="User-Profile-Image"> Hi! 
 							<span id="user_name"></span>
 						</div>
 

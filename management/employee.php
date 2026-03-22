@@ -287,8 +287,7 @@
 									</div>
 								</div>
 								<!-- [ Modify View ] end -->
-                               
-								
+								 
 							</div>
 							<!-- [ Main Content ] end -->
 						</div>
@@ -302,9 +301,22 @@
 	<?php include('../pkg/assets/page/footer.php')?>
 </body>
 <script>
-	$(document).on('click', '.clickable-row', function (e) {
+	// script for body functions default
+	// Initialize
+	var is_active = 1;
+	const pagetitle = $('.page-title').html();
+	dd_dept();
+	dd_branch();
+	tableload();
 
-		// 🚫 Prevent redirect if clicking inside action column/buttons
+
+
+	
+	
+
+	// script for interactions
+	// ACTION LISTENERS
+	$(document).on('click', '.clickable-row', function (e) {
 		if ($(e.target).closest('.btn, a, button').length) {
 			return;
 		}
@@ -319,16 +331,9 @@
 		let name = $(this).data('name') || 'employee';
 		$(this).attr('title', `Click to View ${name}'s profile`);
 	});
-	// script for body functions default
-	// Initialize
-	var is_active = 1;
-	const pagetitle = $('.page-title').html();
-	dd_dept();
-	dd_branch();
-	tableload();
 
-	// script for interactions
-	// ACTION LISTENERS
+
+
 	$('.btn-save').click(function(){
 		var chk = checkFormValidity();
 		var id = $(this).attr('data-id');
@@ -440,6 +445,7 @@
 	$('.btn-group-toggle .btn').click(function() {
 		let val = parseInt($(this).find('input').val());
 		isActiveToggle(val);
+		is_active = val;
 	});
 
 
@@ -449,7 +455,24 @@
 		resetDataTable('.table');
 		$.get("../backend/management/get_list_emp.php?security=123465", function(data,status){
 			$("#table_emp tbody").html(data);
-			setDataTable(".table", { showActions : true});	
+			setDataTable('.table', {
+				showActions: true,
+				useResponsive: true,
+				extraColumnDefs: [
+					{ targets: 1, responsivePriority: 100, width: '90px' },
+					{ targets: 2, className: 'all', responsivePriority: 1 },
+					{ targets: 3, visible: false, searchable: false },
+					{ targets: 4, responsivePriority: 3 },
+					{ targets: 5, responsivePriority: 4 },
+					{ targets: 6, responsivePriority: 2, width: '90px', className: 'text-center' },
+					{ targets: -1, className: 'all text-center text-nowrap', width: '120px' }
+				],
+				dtOptions: {
+					responsive: {
+						details: false
+					}
+				}
+			});
 		});
 	}
 	

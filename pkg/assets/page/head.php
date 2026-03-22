@@ -10,6 +10,7 @@
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker3.min.css"/>
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap4.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tom-select@2.4.6/dist/css/tom-select.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
@@ -18,6 +19,7 @@
 	
 	
 	<link rel="stylesheet" href="../pkg/css/style.css">
+	<link rel="stylesheet" href="../pkg/css/dashboard.css">
 	<link rel="stylesheet" href="../pkg/assets/plugins/datatables/datatables.css">
 	<link rel="stylesheet" href="../pkg/assets/plugins/sweetalert/swal.css">
 	<link rel="stylesheet" href="../pkg/assets/plugins/animation/css/animate.min.css">

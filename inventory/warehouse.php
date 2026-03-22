@@ -165,6 +165,7 @@
 	$('.btn-group-toggle .btn').click(function() {
 		let val = parseInt($(this).find('input').val());
 		isActiveToggle(val);
+		is_active = val;
 	});
 	$('.btn-save').click(function(){
 		var chk = checkFormValidity();
@@ -174,7 +175,7 @@
 			var notif = parseInt(id, 10);
 			let message = notif === 0 ? 'New '+pagetitle+' Saved!' : pagetitle+' Details Updated!';
 			// status: $('#inv_status').val(),
-			var data = { warehouse_name: $('#inv_warehouse').val(), warehouse_code: $('#inv_warehouse_code').val(), prov_id: $('#inv_province').val(), city_id: $('#inv_city').val(), brgy_id: $('#inv_brgy').val(), address_line: $('#inv_address').val(), pkid: id};
+			var data = { warehouse_name: $('#inv_warehouse').val(), warehouse_code: $('#inv_warehouse_code').val(), prov_id: $('#inv_province').val(), city_id: $('#inv_city').val(), brgy_id: $('#inv_brgy').val(), address_line: $('#inv_address').val(), status : is_active, pkid: id};
 			var json = JSON.stringify(data)
 			$.post("../backend/inventory/post_inv_warehouse.php", {data: json}, function (data, a) {
 				data = data.trim();
@@ -195,8 +196,8 @@
 	// EDIT
 	$('.table').on('click', '.btn-edit', function () {
 		$('.text-btn').text("Edit");
-		$('.view-modify').fadeIn().removeClass('d-none');
-		$('.is-edit').fadeIn().removeClass('d-none');
+		$('.view-modify').fadeIn(750).removeClass('d-none');
+		$('.is-edit').fadeIn(750).removeClass('d-none');
 		$('.view-default').hide();
 		pkid = $(this).data('id');
 		$.get("../backend/inventory/get_det_inv_warehouse.php?security=123465&id=" + pkid, function(data, status) {
@@ -211,8 +212,13 @@
 			$('#inv_address').val(array.address_line);
 			isActiveToggle(array.status);
 			dd_prov(true, array.prov_id);
-			dd_city(true,array.prov_id, array.city_id);
-			dd_brgy(true,array.city_id, array.brgy_id);
+			setTimeout(function() {
+				dd_city(true,array.prov_id, array.city_id);
+			}, 5); 
+			setTimeout(function() {
+				dd_brgy(true,array.city_id, array.brgy_id);
+			}, 10); 
+			
 			
 		});
 	});
@@ -241,8 +247,17 @@
 		resetDataTable('.table');
 		$.get("../backend/inventory/get_list_inv_warehouse.php?security=123465", function(data,status){
 			$(".table tbody").html(data);
-			// SET TABLE EDITABLE OR NOT DYNAMICALLTY SOON
-			setDataTable(".table", {dtOptions:{ lengthChange: false, ordering: false, searching: false, info: false, paging: false, }});
+			setDataTable('.table', {
+				showActions: true,
+				useResponsive: true,
+
+				extraColumnDefs: [
+					{ targets: 1, className: 'all', responsivePriority: 1 },
+					{ targets: 2, responsivePriority: 3 },
+					{ targets: 3, responsivePriority: 2, width: '90px' },
+					{ targets: -1, className: 'all text-center text-nowrap', width: '120px' }
+				]
+			});
 		});
 	}
 </script>

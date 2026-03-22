@@ -60,7 +60,8 @@
 														<thead>
 															<tr>
 																<th class="text-center">#</th>
-																<th class="text-center">Category</th>
+																<th>Category</th>
+																<th>Code</th>
 																<th class="text-center">Action</th>
 															</tr>
 														</thead>
@@ -83,9 +84,13 @@
 												<hr>
 												<form>
 													<div class="row justify-content-center">
-														<div class="form-group col-md-6">
+														<div class="form-group col-md-8">
 															<label for="inv_category">Category Name <span class="text-danger">*</span></label>
 															<input id="inv_category" class=" form-control form-control-sm" placeholder="Category Name" required/>
+														</div>
+														<div class="form-group col-md-4">
+															<label for="inv_cat_code">Category Code <span class="text-danger">*</span></label>
+															<input id="inv_cat_code" class=" form-control form-control-sm" placeholder="Category Code" required/>
 														</div>
 													</div>
 												</form>
@@ -131,9 +136,9 @@
 			// Convert id to a number (if needed)
 			var notif = parseInt(id, 10);
 			let message = notif === 0 ? 'New '+pagetitle+' Saved!' : pagetitle+' Details Updated!';
-			var data = { category: $('#inv_category').val(), pkid : id}
+			var data = { category: $('#inv_category').val(), category_code: $('#inv_cat_code').val(), pkid : id};
 			var json = JSON.stringify(data)
-			console.log(data);
+			console.log(data)
 			$.post("../backend/inventory/post_inv_category.php", {data: json}, function (data, a) {
 				data = data.trim();
 				console.log(data);
@@ -159,9 +164,9 @@
 		pkid = $(this).data('id');
 		$.get("../backend/inventory/get_det_inv_category.php?security=123465&id=" + pkid, function(data, status) {
 			var array = jQuery.parseJSON(data);
-			console.log(array)
 			$('.btn-save').attr('data-id', pkid);
 			$('#inv_category').val(array.category_name);
+			$('#inv_cat_code').val(array.category_code);
 		});
 	});
 
@@ -184,8 +189,15 @@
 		resetDataTable('.table');
 		$.get("../backend/inventory/get_list_inv_category.php?security=123465", function(data,status){
 			$(".table tbody").html(data);
-			// SET TABLE EDITABLE OR NOT DYNAMICALLTY SOON
-			setDataTable(".table", {dtOptions:{ lengthChange: false, ordering: false, searching: false, info: false, paging: false, }});
+			setDataTable('.table', {
+				showActions: true,
+				useResponsive: true,
+
+				extraColumnDefs: [
+					{ targets: 1, className: 'all', responsivePriority: 1 },
+					{ targets: -1, className: 'all text-center text-nowrap', width: '120px' }
+				]
+			});
 		});
 	}
 </script>
