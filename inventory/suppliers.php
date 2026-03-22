@@ -161,6 +161,7 @@
 	$('.btn-group-toggle .btn').click(function() {
 		let val = parseInt($(this).find('input').val());
 		isActiveToggle(val);
+		is_active = val;
 	});
 	$('.btn-save').click(function(){
 		var chk = checkFormValidity();
@@ -232,8 +233,19 @@
 		resetDataTable('.table');
 		$.get("../backend/inventory/get_list_inv_suppliers.php?security=123465", function(data,status){
 			$(".table tbody").html(data);
-			// SET TABLE EDITABLE OR NOT DYNAMICALLTY SOON
-			setDataTable(".table", {dtOptions:{ lengthChange: false, ordering: false, searching: false, info: false, paging: false, }});
+			setDataTable('.table', {
+				showActions: true,
+				useResponsive: true,
+
+				extraColumnDefs: [
+					{ targets: 1, className: 'all', responsivePriority: 1 },
+					{ targets: 2, responsivePriority: 2 },
+					{ targets: 3, responsivePriority: 3, width: '110px' },
+					{ targets: 4, responsivePriority: 4 },
+					{ targets: 5, responsivePriority: 2, width: '90px' },
+					{ targets: -1, className: 'all text-center text-nowrap', width: '120px' }
+				]
+			});
 		});
 	}
 </script>

@@ -2,6 +2,7 @@
 CREATE TABLE inv_categories (
 	category_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	category_name VARCHAR(100) NOT NULL UNIQUE,
+	category_code VARCHAR(100) NOT NULL UNIQUE,
 	description TEXT NULL,
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -86,6 +87,20 @@ CREATE TABLE inv_product_serials (
 	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	CONSTRAINT fk_serial_product FOREIGN KEY (product_id) REFERENCES inv_products(product_id),
 	CONSTRAINT fk_serial_warehouse FOREIGN KEY (warehouse_id) REFERENCES inv_warehouses(warehouse_id)
+);
+
+CREATE TABLE inv_product_suppliers (
+	product_supplier_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	product_id INT UNSIGNED NOT NULL,
+	supplier_id INT UNSIGNED NOT NULL,
+	is_default TINYINT(1) NOT NULL DEFAULT 1,
+	supplier_sku VARCHAR(100) NULL,
+	remarks VARCHAR(255) NULL,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	UNIQUE KEY uq_product_supplier (product_id, supplier_id),
+	CONSTRAINT fk_prod_sup_product FOREIGN KEY (product_id) REFERENCES inv_products(product_id) ON DELETE CASCADE,
+	CONSTRAINT fk_prod_sup_supplier FOREIGN KEY (supplier_id) REFERENCES inv_suppliers(supplier_id)
 );
 
 -- ADDED: product unit conversions

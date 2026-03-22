@@ -1,0 +1,6 @@
+If you want, I can make you a global PHP upload helper next, where you just pass:
+
+folder
+allowed extensions
+max MB
+filename prefix

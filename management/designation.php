@@ -214,7 +214,7 @@
 		resetDataTable('.table');
 		$.get("../backend/management/get_list_roles.php?security=123465", function(data,status){
 			$("#table_role tbody").html(data);
-			setDataTable(".table", {rowHide : 4, showActions : true});	
+			setDataTable('.table', { rowHide: 4, showActions: true, useResponsive: true, extraColumnDefs: [ { targets: 1, responsivePriority: 1 }, { targets: 2, responsivePriority: 2 }, { targets: 3, responsivePriority: 3 }, { targets: 5, responsivePriority: 100 } ], dtOptions: { autoWidth: false } });
 		});
 	}
 	
