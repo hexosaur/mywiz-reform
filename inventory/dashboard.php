@@ -1,9 +1,15 @@
 <?php include('../config/postcheck.php') ?>
 
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html lang="en">
 <?php include('../pkg/assets/page/head.php')?>
 <body>
+=======
+<html lang="en">`
+<?php include('../pkg/assets/page/head.php')?>
+<body class="">
+>>>>>>> 58032dd011639852ee5af109168b61c6e2bcc140
 	<?php include('../pkg/assets/page/sidebar.php')?>
 	<?php include('../pkg/assets/page/navbar.php')?>
 
@@ -52,6 +58,7 @@
 										<div class="db-grid-col">
 											<div class="card db-metric-card db-equal-card">
 												<div class="card-body">
+<<<<<<< HEAD
 									<div class="db-metric-wrap">
 										<div class="db-metric-icon text-c-blue">
 											<i class="fas fa-boxes"></i>
@@ -65,6 +72,23 @@
 											</div>
 										</div>
 									</div>
+=======
+													<div class="row">
+														<div class="col db-metric-icon text-c-blue">
+															<i class="fas fa-boxes"></i>
+														</div>
+														<div class="coldb-metric-content">
+															<div class="db-metric-label">Total Products</div>
+															<div class="db-metric-value">1,250</div>
+															<p class="db-metric-sub">Active inventory items</p>
+															
+														</div>
+														
+													</div>
+													<div class="row db-metric-action">
+																<a href="../inventory/products" class="btn btn-sm btn-outline-primary">View Products</a>
+															</div>
+>>>>>>> 58032dd011639852ee5af109168b61c6e2bcc140
 												</div>
 											</div>
 										</div>
