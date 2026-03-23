@@ -19,11 +19,11 @@
 	
 	
 	<link rel="stylesheet" href="../pkg/css/style.css">
-	<link rel="stylesheet" href="../pkg/css/dashboard.css">
 	<link rel="stylesheet" href="../pkg/assets/plugins/datatables/datatables.css">
 	<link rel="stylesheet" href="../pkg/assets/plugins/sweetalert/swal.css">
 	<link rel="stylesheet" href="../pkg/assets/plugins/animation/css/animate.min.css">
 	<link rel="stylesheet" href="../pkg/assets/fonts/fontawesome/css/fontawesome-all.min.css">
+	<link rel="stylesheet" href="../pkg/css/dashboard.css">
 </head>
 <script>
 	(function () {

@@ -102,8 +102,6 @@ CREATE TABLE inv_product_suppliers (
 	CONSTRAINT fk_prod_sup_product FOREIGN KEY (product_id) REFERENCES inv_products(product_id) ON DELETE CASCADE,
 	CONSTRAINT fk_prod_sup_supplier FOREIGN KEY (supplier_id) REFERENCES inv_suppliers(supplier_id)
 );
-
--- ADDED: product unit conversions
 CREATE TABLE inv_product_units (
 	product_unit_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	product_id INT UNSIGNED NOT NULL,

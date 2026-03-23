@@ -50,6 +50,7 @@
 							</div>
 							<!-- [ breadcrumb ] end -->
 							<!-- [ Main Content ] start -->
+<<<<<<< Updated upstream
 							<div class="row">
 
 								<!-- MINI KPI CARDS -->
@@ -91,95 +92,195 @@
 >>>>>>> 58032dd011639852ee5af109168b61c6e2bcc140
 												</div>
 											</div>
-										</div>
-
-										<div class="db-grid-col">
-											<div class="card db-metric-card db-equal-card">
-												<div class="card-body">
-													<div class="db-metric-wrap">
-														<div class="db-metric-icon text-c-red">
-															<i class="fas fa-exclamation-triangle"></i>
-														</div>
-														<div class="db-metric-content">
-															<div class="db-metric-label">Low Stock</div>
-															<div class="db-metric-value">32</div>
-															<p class="db-metric-sub">Needs reorder soon</p>
-															<div class="db-metric-action">
-																<a href="../inventory/products" class="btn btn-sm btn-outline-danger">Review Items</a>
-															</div>
-														</div>
-													</div>
-												</div>
+=======
+							 <div class="row">
+								<div class="col mb-4">
+									<div class="db-mini-card">
+										<div class="db-mini-body">
+											<div class="db-mini-icon bg-blue"><i class="fas fa-boxes"></i></div>
+											<div class="db-mini-content">
+												<div class="db-mini-label">Total Products</div>
+												<div class="db-mini-value">1,250</div>
+												<p class="db-mini-sub">Active inventory items</p>
 											</div>
 										</div>
-
-										<div class="db-grid-col">
-											<div class="card db-metric-card db-equal-card">
-												<div class="card-body">
-													<div class="db-metric-wrap">
-														<div class="db-metric-icon text-c-yellow">
-															<i class="fas fa-times-circle"></i>
-														</div>
-														<div class="db-metric-content">
-															<div class="db-metric-label">Out of Stock</div>
-															<div class="db-metric-value">8</div>
-															<p class="db-metric-sub">Unavailable products</p>
-															<div class="db-metric-action">
-																<a href="../inventory/products" class="btn btn-sm btn-outline-warning">Restock Now</a>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
+										<div class="db-mini-footer">
+											<a href="../inventory/products" class="db-mini-link">View Products</a>
+>>>>>>> Stashed changes
 										</div>
-
-										<div class="db-grid-col">
-											<div class="card db-metric-card db-equal-card">
-												<div class="card-body">
-													<div class="db-metric-wrap">
-														<div class="db-metric-icon text-c-green">
-															<i class="fas fa-truck-loading"></i>
-														</div>
-														<div class="db-metric-content">
-															<div class="db-metric-label">Total Suppliers</div>
-															<div class="db-metric-value">58</div>
-															<p class="db-metric-sub">Registered suppliers</p>
-															<div class="db-metric-action">
-																<a href="../inventory/suppliers" class="btn btn-sm btn-outline-success">Open Suppliers</a>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="db-grid-col">
-											<div class="card db-metric-card db-equal-card">
-												<div class="card-body">
-													<div class="db-metric-wrap">
-														<div class="db-metric-icon text-c-info">
-															<i class="fas fa-warehouse"></i>
-														</div>
-														<div class="db-metric-content">
-															<div class="db-metric-label">Warehouses</div>
-															<div class="db-metric-value">9</div>
-															<p class="db-metric-sub">Active locations</p>
-															<div class="db-metric-action">
-																<a href="../inventory/warehouse" class="btn btn-sm btn-outline-info">Manage Sites</a>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-
 									</div>
 								</div>
+								<div class="col mb-4">
+									<div class="db-mini-card">
+										<div class="db-mini-body">
+											<div class="db-mini-icon bg-red"><i class="fas fa-exclamation-triangle"></i></div>
+											<div class="db-mini-content">
+												<div class="db-mini-label">Low Stock</div>
+												<div class="db-mini-value">32</div>
+												<p class="db-mini-sub">Needs reorder soon</p>
+											</div>
+										</div>
+										<div class="db-mini-footer">
+											<a href="../inventory/products" class="db-mini-link">Review Items </a>
+										</div>
+									</div>
+								</div>
+								<div class="col mb-4">
+									<div class="db-mini-card">
+										<div class="db-mini-body">
+											<div class="db-mini-icon bg-yellow"><i class="fas fa-times-circle"></i></div>
+											<div class="db-mini-content">
+												<div class="db-mini-label">Out of Stock</div>
+												<div class="db-mini-value">8</div>
+												<p class="db-mini-sub">Unavailable products</p>
+											</div>
+										</div>
+										<div class="db-mini-footer">
+											<a href="../inventory/products" class="db-mini-link">Restock Now </a>
+										</div>
+									</div>
+								</div>
+								<div class="col mb-4">
+									<div class="db-mini-card">
+										<div class="db-mini-body">
+											<div class="db-mini-icon bg-green"><i class="fas fa-truck-loading"></i></div>
+											<div class="db-mini-content">
+												<div class="db-mini-label">Total Suppliers</div>
+												<div class="db-mini-value">58</div>
+												<p class="db-mini-sub">Registered suppliers</p>
+											</div>
+										</div>
+										<div class="db-mini-footer">
+											<a href="../inventory/suppliers" class="db-mini-link">Open Suppliers </a>
+										</div>
+									</div>
+								</div>
+								<div class="col mb-4">
+									<div class="db-mini-card">
+										<div class="db-mini-body">
+											<div class="db-mini-icon bg-info"><i class="fas fa-archive"></i></div>
+											<div class="db-mini-content">
+												<div class="db-mini-label">Warehouses</div>
+												<div class="db-mini-value">9</div>
+												<p class="db-mini-sub">Active locations</p>
+											</div>
+										</div>
+										<div class="db-mini-footer">
+											<a href="../inventory/warehouse" class="db-mini-link">Manage Sites </a>
+										</div>
+									</div>
+								</div>								
+							 </div>
 
-								<!-- TOP DASHBOARD ROW -->
-								<div class="col-xl-5 col-lg-12 db-card-gap">
-									<div class="card db-equal-card db-chart-card">
+							<div class="row">
+								<!-- STOCK BY CATEGORY -->
+								<div class="col-xl-4">
+									<div class="card">
+										<div class="card-header d-flex justify-content-between align-items-center">
+											<h5 class="mb-0">Stock by Category</h5>
+											<a href="../inventory/categories" class="db-view-all">View All</a>
+										</div>
+										<div class="card-body">
+											<div class="db-donut-wrap">
+												<div class="db-donut-chart">
+													<canvas id="stockCategoryChart"></canvas>
+												</div>
+												<div class="db-donut-legend">
+													<div class="db-donut-legend-item">
+														<span><span class="db-donut-legend-dot" style="background:#4c6ef5"></span>Electronics</span>
+														<span>33.5%</span>
+													</div>
+													<div class="db-donut-legend-item">
+														<span><span class="db-donut-legend-dot" style="background:#2ca961"></span>Office</span>
+														<span>24.2%</span>
+													</div>
+													<div class="db-donut-legend-item">
+														<span><span class="db-donut-legend-dot" style="background:#f59f00"></span>Furniture</span>
+														<span>18.7%</span>
+													</div>
+													<div class="db-donut-legend-item">
+														<span><span class="db-donut-legend-dot" style="background:#e52d27"></span>Cleaning</span>
+														<span>12.1%</span>
+													</div>
+													<div class="db-donut-legend-item">
+														<span><span class="db-donut-legend-dot" style="background:#0288d1"></span>Misc</span>
+														<span>11.5%</span>
+													</div>
+													<div class="db-donut-legend-item">
+														<span><span class="db-donut-legend-dot" style="background:#0288d1"></span>Misc</span>
+														<span>11.5%</span>
+													</div>
+													<div class="db-donut-legend-item">
+														<span><span class="db-donut-legend-dot" style="background:#0288d1"></span>Misc</span>
+														<span>11.5%</span>
+													</div>
+													
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- TOP MOVING PRODUCTS -->
+								<div class="col-xl-4">
+									<div class="card">
+										<div class="card-header d-flex justify-content-between align-items-center">
+											<h5 class="mb-0">Top Moving Products</h5>
+											<a href="../inventory/products" class="db-view-all">View All</a>
+										</div>
+										<div class="card-body">
+											<div class="db-progress-item">
+												<div class="db-progress-label">
+													<span>Wireless Mouse</span>
+													<small>32.9%</small>
+												</div>
+												<div class="progress db-progress">
+													<div class="progress-bar bg-primary" style="width:32.9%"></div>
+												</div>
+											</div>
+											<div class="db-progress-item">
+												<div class="db-progress-label">
+													<span>Office Desk</span>
+													<small>31.4%</small>
+												</div>
+												<div class="progress db-progress">
+													<div class="progress-bar bg-success" style="width:31.4%"></div>
+												</div>
+											</div>
+											<div class="db-progress-item">
+												<div class="db-progress-label">
+													<span>Keyboard</span>
+													<small>23.4%</small>
+												</div>
+												<div class="progress db-progress">
+													<div class="progress-bar bg-warning" style="width:23.4%"></div>
+												</div>
+											</div>
+											<div class="db-progress-item">
+												<div class="db-progress-label">
+													<span>Desk Organizer</span>
+													<small>16.9%</small>
+												</div>
+												<div class="progress db-progress">
+													<div class="progress-bar bg-danger" style="width:16.9%"></div>
+												</div>
+											</div>
+											<div class="db-progress-item">
+												<div class="db-progress-label">
+													<span>Laptop</span>
+													<small>10.4%</small>
+												</div>
+												<div class="progress db-progress">
+													<div class="progress-bar bg-info" style="width:10.4%"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- STOCK MOVEMENT CHART -->
+								<div class="col-xl-6">
+									<div class="card db-chart-card">
 										<div class="card-header">
-											<h5>Stock Movement Overview</h5>
+											<h5 class="mb-0">Stock Movement Overview</h5>
 										</div>
 										<div class="card-body">
 											<div class="db-chart-sm">
@@ -188,122 +289,12 @@
 										</div>
 									</div>
 								</div>
-
-								<div class="col-xl-4 col-lg-6 db-card-gap">
-									<div class="card db-equal-card">
-										<div class="card-header d-flex justify-content-between align-items-center">
-											<h5 class="mb-0">Top Moving Products</h5>
-											<a href="../inventory/products" class="btn btn-sm btn-outline-primary db-card-action">View All</a>
-										</div>
-										<div class="card-body">
-
-											<div class="db-top-item">
-												<div class="db-top-row">
-													<span>Wireless Mouse</span>
-													<small>32.9%</small>
-												</div>
-												<div class="progress db-progress">
-													<div class="progress-bar bg-c-blue" style="width:32.9%"></div>
-												</div>
-											</div>
-
-											<div class="db-top-item">
-												<div class="db-top-row">
-													<span>Office Desk</span>
-													<small>31.4%</small>
-												</div>
-												<div class="progress db-progress">
-													<div class="progress-bar bg-c-green" style="width:31.4%"></div>
-												</div>
-											</div>
-
-											<div class="db-top-item">
-												<div class="db-top-row">
-													<span>Keyboard</span>
-													<small>23.4%</small>
-												</div>
-												<div class="progress db-progress">
-													<div class="progress-bar bg-c-yellow" style="width:23.4%"></div>
-												</div>
-											</div>
-
-											<div class="db-top-item">
-												<div class="db-top-row">
-													<span>Desk Organizer</span>
-													<small>16.9%</small>
-												</div>
-												<div class="progress db-progress">
-													<div class="progress-bar bg-c-red" style="width:16.9%"></div>
-												</div>
-											</div>
-
-											<div class="db-top-item">
-												<div class="db-top-row">
-													<span>Laptop</span>
-													<small>10.4%</small>
-												</div>
-												<div class="progress db-progress">
-													<div class="progress-bar bg-c-info" style="width:10.4%"></div>
-												</div>
-											</div>
-
-										</div>
-									</div>
-								</div>
-
-								<div class="col-xl-3 col-lg-6 db-card-gap">
-									<div class="card db-equal-card">
-										<div class="card-header d-flex justify-content-between align-items-center">
-											<h5 class="mb-0">Stock by Category</h5>
-											<a href="../inventory/categories" class="btn btn-sm btn-outline-primary db-card-action">View All</a>
-										</div>
-										<div class="card-body">
-											<div class="db-chart-donut">
-												<canvas id="stockCategoryChart"></canvas>
-											</div>
-
-											<div class="db-legend-list mt-3">
-												<div class="db-legend-item">
-													<div class="db-legend-left">
-														<span class="db-dot db-dot-blue"></span> Electronics
-													</div>
-													<span>33.5%</span>
-												</div>
-												<div class="db-legend-item">
-													<div class="db-legend-left">
-														<span class="db-dot db-dot-green"></span> Office Supplies
-													</div>
-													<span>24.2%</span>
-												</div>
-												<div class="db-legend-item">
-													<div class="db-legend-left">
-														<span class="db-dot db-dot-yellow"></span> Furniture
-													</div>
-													<span>18.7%</span>
-												</div>
-												<div class="db-legend-item">
-													<div class="db-legend-left">
-														<span class="db-dot db-dot-red"></span> Cleaning
-													</div>
-													<span>12.1%</span>
-												</div>
-												<div class="db-legend-item">
-													<div class="db-legend-left">
-														<span class="db-dot db-dot-info"></span> Miscellaneous
-													</div>
-													<span>11.5%</span>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<!-- BOTTOM DASHBOARD ROW -->
-								<div class="col-xl-6 col-lg-12 db-card-gap">
-									<div class="card db-table-card">
+								<!-- LOW STOCK TABLE -->
+								<div class="col-xl-6">
+									<div class="card ">
 										<div class="card-header d-flex justify-content-between align-items-center">
 											<h5 class="mb-0">Low Stock Alerts</h5>
-											<a href="../inventory/products" class="btn btn-sm btn-outline-primary db-card-action">View All</a>
+											<a href="../inventory/products" class="db-view-all">View All</a>
 										</div>
 										<div class="card-body px-0 py-0">
 											<div class="table-responsive">
@@ -353,97 +344,68 @@
 															<td class="text-center">0</td>
 															<td class="text-center"><span class="badge badge-danger">Out of Stock</span></td>
 														</tr>
+														
 													</tbody>
 												</table>
 											</div>
 										</div>
 									</div>
 								</div>
-
-								<div class="col-xl-3 col-lg-6 db-card-gap">
-									<div class="card db-equal-card">
-										<div class="card-header">
-											<h5 class="mb-0">Inventory Summary</h5>
-										</div>
-										<div class="card-body">
-											<div class="db-summary-item">
-												<div>
-													<div class="db-summary-title">Main Warehouse</div>
-													<p class="db-summary-sub">Current stored items</p>
-												</div>
-												<h4 class="db-summary-value">12,340</h4>
-											</div>
-
-											<div class="db-summary-item">
-												<div>
-													<div class="db-summary-title">West Side</div>
-													<p class="db-summary-sub">Current stored items</p>
-												</div>
-												<h4 class="db-summary-value">8,215</h4>
-											</div>
-
-											<div class="db-summary-item">
-												<div>
-													<div class="db-summary-title">North Office</div>
-													<p class="db-summary-sub">Current stored items</p>
-												</div>
-												<h4 class="db-summary-value">4,107</h4>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-xl-3 col-lg-6 db-card-gap">
-									<div class="card db-equal-card">
+								<!-- RECENT ACTIVITY -->
+								<div class="col-xl-4">
+									<div class="card">
 										<div class="card-header d-flex justify-content-between align-items-center">
 											<h5 class="mb-0">Recent Activity</h5>
-											<a href="#" class="btn btn-sm btn-outline-primary db-card-action">View All</a>
+											<a href="#" class="db-view-all">View All</a>
 										</div>
 										<div class="card-body">
-
 											<div class="db-activity-item">
-												<div class="db-activity-icon bg-success">
-													<i class="fas fa-arrow-down"></i>
-												</div>
-												<div>
-													<div class="db-activity-title">Stock In</div>
-													<p class="db-activity-sub">10 units of Office Chair added</p>
+												<div class="db-activity-icon bg-success"><i class="fas fa-arrow-down"></i></div>
+												<div class="db-activity-content">
+													<h6>Stock In</h6>
+													<small>10 units of Office Chair added</small>
 												</div>
 											</div>
-
 											<div class="db-activity-item">
-												<div class="db-activity-icon bg-warning">
-													<i class="fas fa-arrow-up"></i>
-												</div>
-												<div>
-													<div class="db-activity-title">Stock Out</div>
-													<p class="db-activity-sub">5 units of Mouse released to IT Dept.</p>
+												<div class="db-activity-icon bg-warning"><i class="fas fa-arrow-up"></i></div>
+												<div class="db-activity-content">
+													<h6>Stock Out</h6>
+													<small>5 units of Mouse released</small>
 												</div>
 											</div>
-
 											<div class="db-activity-item">
-												<div class="db-activity-icon bg-info">
-													<i class="fas fa-user-plus"></i>
-												</div>
-												<div>
-													<div class="db-activity-title">New Supplier</div>
-													<p class="db-activity-sub">ABC Trading was added</p>
+												<div class="db-activity-icon bg-info"><i class="fas fa-user-plus"></i></div>
+												<div class="db-activity-content">
+													<h6>New Supplier</h6>
+													<small>ABC Trading was added</small>
 												</div>
 											</div>
-
 											<div class="db-activity-item">
-												<div class="db-activity-icon bg-danger">
-													<i class="fas fa-exclamation-circle"></i>
-												</div>
-												<div>
-													<div class="db-activity-title">Critical Stock</div>
-													<p class="db-activity-sub">Bond Paper is now out of stock</p>
+												<div class="db-activity-icon bg-danger"><i class="fas fa-exclamation-circle"></i></div>
+												<div class="db-activity-content">
+													<h6>Critical Stock</h6>
+													<small>Bond Paper is out of stock</small>
 												</div>
 											</div>
-
+											<div class="db-activity-item">
+												<div class="db-activity-icon bg-danger"><i class="fas fa-exclamation-circle"></i></div>
+												<div class="db-activity-content">
+													<h6>Critical Stock</h6>
+													<small>Bond Paper is out of stock</small>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
+
+								
+								
+
+								
+
+								
+
+								
 
 							</div>
 							<!-- [ Main Content ] end -->
@@ -455,11 +417,12 @@
 	</div>
 	<!-- [ Main Content ] end -->
 
-
 	<?php include('../pkg/assets/page/footer.php')?>
 
-	
 </body>
+<script>
+	// setDataTable('.table');
+</script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 	(function () {
@@ -479,8 +442,8 @@
 							data: [10, 18, 15, 17, 20, 19, 23],
 							borderColor: '#4c6ef5',
 							backgroundColor: 'rgba(76,110,245,0.10)',
-							borderWidth: 3,
-							pointRadius: 3,
+							borderWidth: 2,
+							pointRadius: 2,
 							fill: true,
 							tension: 0.4
 						},
@@ -489,8 +452,8 @@
 							data: [6, 12, 9, 14, 15, 13, 17],
 							borderColor: '#f59f00',
 							backgroundColor: 'rgba(245,159,0,0.08)',
-							borderWidth: 3,
-							pointRadius: 3,
+							borderWidth: 2,
+							pointRadius: 2,
 							fill: true,
 							tension: 0.4
 						}
@@ -499,32 +462,15 @@
 				options: {
 					responsive: true,
 					maintainAspectRatio: false,
-					legend: {
-						position: 'top',
-						labels: {
-							fontColor: textColor
+					plugins: {
+						legend: {
+							position: 'top',
+							labels: { fontColor: textColor, boxWidth: 12, padding: 8, fontSize: 11 }
 						}
 					},
 					scales: {
-						xAxes: [{
-							gridLines: {
-								color: gridColor,
-								drawBorder: false
-							},
-							ticks: {
-								fontColor: textColor
-							}
-						}],
-						yAxes: [{
-							ticks: {
-								beginAtZero: true,
-								fontColor: textColor
-							},
-							gridLines: {
-								color: gridColor,
-								drawBorder: false
-							}
-						}]
+						x: { grid: { color: gridColor, drawBorder: false }, ticks: { fontColor: textColor, fontSize: 10 } },
+						y: { beginAtZero: true, grid: { color: gridColor, drawBorder: false }, ticks: { fontColor: textColor, fontSize: 10 } }
 					}
 				}
 			});
@@ -535,26 +481,17 @@
 			new Chart(stockCategoryCanvas, {
 				type: 'doughnut',
 				data: {
-					labels: ['Electronics', 'Office Supplies', 'Furniture', 'Cleaning', 'Miscellaneous'],
 					datasets: [{
 						data: [33.5, 24.2, 18.7, 12.1, 11.5],
-						backgroundColor: [
-							'#4c6ef5',
-							'#2ca961',
-							'#f59f00',
-							'#e52d27',
-							'#0288d1'
-						],
+						backgroundColor: ['#4c6ef5', '#2ca961', '#f59f00', '#e52d27', '#0288d1'],
 						borderWidth: 0
 					}]
 				},
 				options: {
 					responsive: true,
 					maintainAspectRatio: false,
-					cutoutPercentage: 62,
-					legend: {
-						display: false
-					}
+					cutoutPercentage: 65,
+					plugins: { legend: { display: false }, tooltip: { enabled: false } }
 				}
 			});
 		}
