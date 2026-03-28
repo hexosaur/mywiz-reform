@@ -17,7 +17,7 @@ if (isset($_GET['security']) && $_GET['security'] == '123465') {
 				$employee_code	= htmlspecialchars($row['employee_code'] ?? '', ENT_QUOTES, 'UTF-8');
 				$dept_name		= htmlspecialchars($row['department_name'] ?? '', ENT_QUOTES, 'UTF-8');
 				$role_name		= htmlspecialchars($row['role_name'] ?? '', ENT_QUOTES, 'UTF-8');
-				$profilelink    = "../profile/".htmlspecialchars($row['username'] ?? '', ENT_QUOTES, 'UTF-8');
+				$profilelink    = "../profile/".htmlspecialchars($erow['username'] ?? '', ENT_QUOTES, 'UTF-8');
 				$is_active = ((int)$row['is_active'] === 1);
 				$status_badge = $is_active ? "<span class='badge badge-pill badge-success'>Active</span>" : "<span class='badge badge-pill badge-danger'>Inactive</span>";
 

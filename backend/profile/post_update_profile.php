@@ -82,7 +82,7 @@ IMAGE UPLOAD
 $profile_photo = null;
 
 if(isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] == 0){
-	$target_dir = "../uploads/profile/";
+	$target_dir = "../../uploads/profile/";
 	$ext = pathinfo($_FILES['profile_image']['name'], PATHINFO_EXTENSION);
 	$filename = "emp_".$employee_id."_".time().".".$ext;
 	if(move_uploaded_file($_FILES['profile_image']['tmp_name'], $target_dir.$filename)){

@@ -160,7 +160,7 @@ CREATE TABLE IF NOT EXISTS mgmt_employees (
 	branch_id         INT UNSIGNED NOT NULL,
 	department_id     INT UNSIGNED NOT NULL,
 	role_id           INT UNSIGNED NOT NULL,
-	daily_rate        DECIMAL(12,2) NULL,
+	daily_rate        DECIMAL(12,2) NOT NULL DEFAULT 0.00,
 	sss_no            VARCHAR(30)  NULL,
 	pagibig_no        VARCHAR(30)  NULL,
 	tin_no            VARCHAR(30)  NULL,
@@ -221,6 +221,81 @@ CREATE TABLE IF NOT EXISTS mgmt_users (
 		FOREIGN KEY (employee_id) REFERENCES mgmt_employees(employee_id)
 		ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `ref_attachment_types` (
+	`attachment_type_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`type_name` VARCHAR(100) NOT NULL,
+	`description` VARCHAR(255) DEFAULT NULL,
+	`is_required` TINYINT UNSIGNED NOT NULL DEFAULT 0,
+	`is_expirable` TINYINT UNSIGNED NOT NULL DEFAULT 0,
+	`sort_order` INT UNSIGNED NOT NULL DEFAULT 0,
+	`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`attachment_type_id`),
+	UNIQUE KEY `uk_attachment_type_name` (`type_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `ref_attachment_types`
+(`type_name`, `description`, `is_required`, `is_expirable`, `sort_order`)
+VALUES
+('Employment Contract', 'Signed employment contract or appointment paper', 1, 1, 1),
+('Resume/CV', 'Resume or curriculum vitae', 1, 0, 2),
+('Application Letter', 'Job application letter', 0, 0, 3),
+('Diploma', 'School diploma', 0, 0, 4),
+('Transcript of Records', 'Official academic transcript', 0, 0, 5),
+('Board/License Certificate', 'Professional license or board certificate', 0, 1, 6),
+('Training Certificate', 'Seminars, workshops, and training certificates', 0, 1, 7),
+('Eligibility Certificate', 'Civil service or other eligibility document', 0, 0, 8),
+('Government ID', 'Valid government-issued ID', 1, 1, 9),
+('Birth Certificate', 'Birth certificate', 1, 0, 10),
+('Marriage Certificate', 'Marriage certificate if applicable', 0, 0, 11),
+('Medical Certificate', 'Medical certificate or fit-to-work', 0, 1, 12),
+('NBI Clearance', 'NBI clearance', 0, 1, 13),
+('Police Clearance', 'Police clearance', 0, 1, 14),
+('SSS Document', 'SSS-related document', 0, 0, 15),
+('PhilHealth Document', 'PhilHealth-related document', 0, 0, 16),
+('Pag-IBIG Document', 'Pag-IBIG-related document', 0, 0, 17),
+('TIN Document', 'TIN-related document', 0, 0, 18),
+('Performance Evaluation', 'Performance-related attachment', 0, 0, 19),
+('Memorandum', 'Memos, notices, or disciplinary documents', 0, 0, 20),
+('Awards/Recognition', 'Awards and recognition certificates', 0, 0, 21),
+('Other', 'Miscellaneous attachment', 0, 0, 99);
+
+
+CREATE TABLE `mgmt_employee_attachments` (
+	`employee_attachment_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`employee_id` INT UNSIGNED NOT NULL,
+	`attachment_type_id` INT UNSIGNED NOT NULL,
+
+	`attachment_title` VARCHAR(150) NOT NULL,
+	`file_name` VARCHAR(255) NOT NULL,
+
+	`reference_no` VARCHAR(100) DEFAULT NULL,
+	`issued_by` VARCHAR(150) DEFAULT NULL,
+	`issue_date` DATE DEFAULT NULL,
+	`expiry_date` DATE DEFAULT NULL,
+
+	`remarks` TEXT DEFAULT NULL,
+	`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+	PRIMARY KEY (`employee_attachment_id`),
+	KEY `idx_emp_attach_employee` (`employee_id`),
+	KEY `idx_emp_attach_type` (`attachment_type_id`),
+	KEY `idx_emp_attach_expiry` (`expiry_date`),
+
+	CONSTRAINT `fk_emp_attach_employee`
+		FOREIGN KEY (`employee_id`) REFERENCES `mgmt_employees` (`employee_id`)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+
+	CONSTRAINT `fk_emp_attach_type`
+		FOREIGN KEY (`attachment_type_id`) REFERENCES `ref_attachment_types` (`attachment_type_id`)
+		ON DELETE RESTRICT
+		ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
 
 -- SUPERADMIN TABLE
 CREATE TABLE IF NOT EXISTS admin_superadmin (

@@ -18,7 +18,7 @@
 					$permission_title = htmlspecialchars($row['permission_title'] ?? '', ENT_QUOTES, 'UTF-8');
 					$permission_description = htmlspecialchars($row['permission_description'] ?? '', ENT_QUOTES, 'UTF-8');
 					$permission_class = htmlspecialchars($row['permission_class'] ?? '', ENT_QUOTES, 'UTF-8');
-					$table .= "<tr><td class='text-center'>{$n}</td><td class='text-center' data-column='Permission Name: '>{$permission_name}</td><td class='text-center' data-column='Title: '>{$permission_title}</td><td class='text-center' data-column='Description: '>{$permission_description}</td><td class='text-center' data-column='Class: '>{$permission_class}</td><td class='text-center' data-column='Action: '><div class='btn btn-outline-info btn-sm btn-edit' data-id='{$permission_id}'><span class='feather icon-edit'></span></div><div class='btn btn-outline-danger btn-sm btn-del' data-id='{$permission_id}'><span class='feather icon-trash-2'></span></div></td></tr>";
+					$table .= "<tr><td class='text-center'>{$n}</td><td data-column='Permission Name: '>{$permission_name}</td><td data-column='Title: '>{$permission_title}</td><td data-column='Description: '>{$permission_description}</td><td class='text-center' data-column='Class: '>{$permission_class}</td><td class='text-center' data-column='Action: '><div class='btn btn-outline-info btn-sm btn-edit' data-id='{$permission_id}'><span class='feather icon-edit'></span></div><div class='btn btn-outline-danger btn-sm btn-del' data-id='{$permission_id}'><span class='feather icon-trash-2'></span></div></td></tr>";
 					$n++;
 				}
 				$result->free();

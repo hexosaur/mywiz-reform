@@ -1,0 +1,25 @@
+<?php
+    session_start();
+	error_reporting(0);
+	include('../../config/cfg.php');
+	if(true){
+		if (isset($_GET['security']) && $_GET['security'] == '123465' && isset($_GET['id'])) {
+			$pkid = (int)$_GET['id'];
+
+			$chk = "SELECT 1 FROM mgmt_employee_attachments WHERE attachment_type_id = '$pkid' LIMIT 1";
+			$res = $conn->query($chk);
+			if($res && $res->num_rows > 0){
+				echo "in_use";
+				exit;
+			}
+
+			$sql = "DELETE FROM ref_attachment_types WHERE attachment_type_id = '$pkid'";
+			if ($conn->query($sql) === TRUE) {
+				echo "true";
+				exit;
+			}else{
+				echo $conn->error;
+			}
+		}
+	}
+?>

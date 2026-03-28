@@ -155,7 +155,7 @@
 
 						<ul class="pro-body">
 							<!-- <li><a href="#!" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a></li> -->
-							<li><a href="../profile/customize" class="dropdown-item" id="nav-profile-link"><i class="feather icon-user"></i> Profile</a></li>
+							<li><a href="../profile/" class="dropdown-item" id="nav-profile-link"><i class="feather icon-user"></i> Profile</a></li>
 							<!-- <li><a href="message.html" class="dropdown-item"><i class="feather icon-mail"></i> My Messages</a></li>
 							<li><a href="auth-signin.html" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li> -->
 							<hr>

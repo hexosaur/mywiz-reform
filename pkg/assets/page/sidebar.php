@@ -57,17 +57,18 @@
 							<li class=""><a href="../management/employee" class="">Employee</a></li>
 						</ul>
 					</li>
-					<!-- <li class="superadmin d-none nav-item pcoded-hasmenu">
+					<li class="superadmin admin-permission d-none nav-item pcoded-hasmenu">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-archive"></i></span><span class="pcoded-mtext">Archives</span></a>
 						<ul class="pcoded-submenu">
-							<li class=""><a href="#" class="">Forms Categories</a></li>
-							<li class=""><a href="#" class="">Evaluation Archives</a></li>
+							<li class="d-none"><a href="#" class="">Forms Categories</a></li>
+							<li class="d-none"><a href="#" class="">Evaluation Archives</a></li>
 							<li class=""><a href="../leave/archive" class="">Leave Archives</a></li>
-							<li class=""><a href="#" class="">Overtime Archives</a></li>
-							<li class=""><a href="#" class="">Travel Order Archives</a></li>
+							<li class=""><a href="../management/archive" class="">Employee Attachments</a></li>
+							<li class="d-none"><a href="#" class="">Overtime Archives</a></li>
+							<li class="d-none"><a href="#" class="">Travel Order Archives</a></li>
 						</ul>
 					</li>
-					<li class="superadmin d-none nav-item">
+					<!-- <li class="superadmin d-none nav-item">
 						<a href="../home/dashboard" class="nav-link"><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Post an Announcement</span></a>
 					</li> -->
 					<!-- HUMAN RESOURCE SECTION -->
@@ -77,7 +78,7 @@
 					<li class="hr-permission superadmin d-none nav-item pcoded-hasmenu">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-calendar2-event"></i></i></span><span class="pcoded-mtext">Leave Management</span></a>
 						<ul class="pcoded-submenu">
-							<li class=""><a href="../leave/archive" class="">Leave Archives</a></li>
+							<!-- <li class=""><a href="../leave/archive" class="">Leave Archives</a></li> -->
 							<li class=""><a href="../leave/type" class="">Leave Types</a></li>
 							<li class=""><a href="../leave/entitlement" class="">Leave Entitlements</a></li>
 						</ul>
@@ -86,13 +87,13 @@
 					<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-luggage"></i></span><span class="pcoded-mtext">Travel Orders</span></a>
 					<ul class="pcoded-submenu">
 						<li class=""><a href="#" class="">Format to be Updated</a></li>
-					</ul>
+					</ul> -->
 					<li class="superadmin d-none nav-item pcoded-hasmenu">
 					<a href="#" class="nav-link"><span class="pcoded-micon"><i class="bi bi-cash-coin"></i></span><span class="pcoded-mtext">Payroll</span></a>
 					<ul class="pcoded-submenu">
 						<li class=""><a href="#" class="">Format to be Updated</a></li>
 					</ul>
-					<li class="superadmin d-none nav-item pcoded-hasmenu">
+					<!-- <li class="superadmin d-none nav-item pcoded-hasmenu">
 						<a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-book"></i></span><span class="pcoded-mtext">Evaluation Management</span></a>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="#" class="">Evaluation Categories</a></li>
@@ -193,6 +194,7 @@
 						<ul class="pcoded-submenu">
 							<li class=""><a href="../admin/access" class="">Access Level</a></li>
 							<li class=""><a href="../admin/permissions" class="">Permissions</a></li>
+							<li><a href="../admin/attachment_type">Attachment Types</a></li>
 							<li class=""><a href="../admin/enroll" class="">Superadmin Enroll</a></li>
 						</ul>
 					</li>

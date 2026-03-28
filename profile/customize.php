@@ -562,6 +562,7 @@
 						contentType: false,
 						success: function(res){
 							res = res.trim();
+							console.log(res);
 							if(res === "success"){
 								let newUsername = $("#username").val().trim();
 								Swal.fire({

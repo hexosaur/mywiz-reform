@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS mgmt_employees (
     branch_id         INT UNSIGNED NOT NULL,
     department_id     INT UNSIGNED NOT NULL,
     role_id           INT UNSIGNED NOT NULL,
-    daily_rate        DECIMAL(12,2) NULL,
+    daily_rate        DECIMAL(12,2) NOT NULL DEFAULT 0.00,
     sss_no            VARCHAR(30)  NULL,
     pagibig_no        VARCHAR(30)  NULL,
     tin_no            VARCHAR(30)  NULL,

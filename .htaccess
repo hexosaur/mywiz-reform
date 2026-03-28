@@ -21,6 +21,6 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} !^/mywiz/profile/?$
-RewriteRule ^profile/([A-Za-z0-9_-]+)/?$ profile/customize.php?user=$1 [L,QSA]
+RewriteRule ^profile/([A-Za-z0-9_-]+)/?$ profile/index.php?user=$1 [L,QSA]
 
 

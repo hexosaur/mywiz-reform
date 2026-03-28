@@ -79,15 +79,15 @@
 
 	.leave-info {
 		display: flex;
-		justify-content: space-between; /* Ensures equal spacing between name and days */
-		align-items: center;  /* Vertically centers the content */
-		margin: 5px 0; /* Optional: Adds margin between the items */
+		justify-content: space-between;
+		align-items: center;
+		margin: 5px 0;
 	}
 	.leave-name {
-		flex: 1; /* Makes the name span take up available space */
+		flex: 1;
 	}
 	.leave-days {
-		text-align: right; /* Optional: aligns the days to the right */
+		text-align: right;
 	}
 
 

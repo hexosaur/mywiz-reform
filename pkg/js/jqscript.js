@@ -207,7 +207,20 @@ function dd_role(dept_id) {
 			}
 		});
 	});
-}	
+}
+function dd_attachment_type() {
+	$.get("../backend/management/get_dd_emp_attach_type.php", { security: '123465'}, function (data) {
+	$('.dd_attachment_type').each(function () {
+			if ($(this).hasClass('tomsel')) {
+				$(this).html(data);
+				tomselDropdowns(this);
+			} else {
+				$(this).html(data);
+				$(this).prop('selectedIndex', 0);
+			}
+		});
+	});
+}
 
 // LEAVE DROPDOWNS HERE 
 function dd_leave_type(employee_id) {
@@ -609,8 +622,8 @@ function getDayLimitMinDate($el) {
 function showMainPage(){
 	// $('.btn_save').attr('data-id', 0);
 	$('.btn-save').attr('data-id', 0);
-	$('.view-default').fadeIn().removeClass('d-none');
-	$('.view-modify').hide();	
+	$('.view-default').removeClass('d-none').hide().fadeIn();
+	$('.view-modify').addClass('d-none');	
 	$('.dd_city, .dd_brgy').prop('disabled', true).prop('selectedIndex', 0);
 	clearForms('.view-modify');	
 }
@@ -865,6 +878,159 @@ function setupFilePreview(fileInputId, previewImgId) {
 		}
 	});
 }
+// GENERAL FILE ATTACH FUNCTION
+function setupAttachmentPreview({
+	fileInputId,
+	previewImgSelector,
+	displayInputId = '#attach_file_display',
+	modalContentId = '#filePreviewContent',
+	defaultImg = '../pkg/assets/media/img/attach.png',
+	pdfIcon = '../pkg/assets/media/img/pdf.png',
+	docIcon = '../pkg/assets/media/img/doc.png',
+	xlsIcon = '../pkg/assets/media/img/xls.png',
+	savedFileName = '',
+	savedBaseUrl = ''
+}) {
+	const fileInput = $(fileInputId);
+	const previewImg = $(previewImgSelector);
+	const modalContent = $(modalContentId);
+	const displayInput = $(displayInputId);
+
+	function getIcon(fileName) {
+		const ext = (fileName || '').split('.').pop().toLowerCase();
+
+		if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext)) return null;
+		if (ext === 'pdf') return pdfIcon;
+		if (['doc', 'docx'].includes(ext)) return docIcon;
+		if (['xls', 'xlsx'].includes(ext)) return xlsIcon;
+		return defaultImg;
+	}
+
+	function renderSavedFile(fileName) {
+		if (!fileName) {
+			previewImg.attr('src', defaultImg);
+			modalContent.html('<img class="img-fluid" src="' + defaultImg + '" alt="Preview">');
+			if (displayInput.length) displayInput.val('');
+			return;
+		}
+
+		const ext = fileName.split('.').pop().toLowerCase();
+		const fileUrl = savedBaseUrl
+			? savedBaseUrl.replace(/\/$/, '') + '/' + encodeURIComponent(fileName)
+			: '';
+		const icon = getIcon(fileName);
+
+		if (displayInput.length) displayInput.val(fileName);
+
+		if (fileUrl && ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext)) {
+			previewImg.attr('src', fileUrl);
+			modalContent.html('<img class="img-fluid" src="' + fileUrl + '" alt="Preview">');
+			return;
+		}
+
+		previewImg.attr('src', icon || defaultImg);
+
+		if (fileUrl && ext === 'pdf') {
+			modalContent.html('<iframe src="' + fileUrl + '" style="width:100%; height:70vh; border:0;"></iframe>');
+			return;
+		}
+
+		if (fileUrl) {
+			modalContent.html(
+				'<div class="p-4 text-center">' +
+					'<img src="' + (icon || defaultImg) + '" style="max-width:90px;" class="mb-3">' +
+					'<p class="mb-2 font-weight-bold">' + fileName + '</p>' +
+					'<a href="' + fileUrl + '" target="_blank" class="btn btn-primary btn-sm">Open File</a>' +
+				'</div>'
+			);
+			return;
+		}
+
+		modalContent.html('<img class="img-fluid" src="' + (icon || defaultImg) + '" alt="Preview">');
+	}
+
+	fileInput.off('change.attachmentPreview').on('change.attachmentPreview', function (event) {
+		if (!event.target.files || event.target.files.length === 0) {
+			renderSavedFile(savedFileName);
+			return;
+		}
+
+		const file = event.target.files[0];
+		const ext = file.name.split('.').pop().toLowerCase();
+		const icon = getIcon(file.name);
+
+		if (displayInput.length) displayInput.val(file.name);
+
+		if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext)) {
+			const reader = new FileReader();
+			reader.onload = function (e) {
+				previewImg.attr('src', e.target.result);
+				modalContent.html('<img class="img-fluid" src="' + e.target.result + '" alt="Preview">');
+			};
+			reader.readAsDataURL(file);
+			return;
+		}
+
+		previewImg.attr('src', icon || defaultImg);
+
+		if (ext === 'pdf') {
+			const objUrl = URL.createObjectURL(file);
+			modalContent.html('<iframe src="' + objUrl + '" style="width:100%; height:70vh; border:0;"></iframe>');
+			return;
+		}
+
+		modalContent.html(
+			'<div class="p-4 text-center">' +
+				'<img src="' + (icon || defaultImg) + '" style="max-width:90px;" class="mb-3">' +
+				'<p class="mb-2 font-weight-bold">' + file.name + '</p>' +
+			'</div>'
+		);
+	});
+
+	renderSavedFile(savedFileName);
+}
+function loadSavedFilePreview({
+	fileName = '',
+	baseUrl = '',
+	previewImgId = '#attachmentPreviewImage',
+	modalContentId = '#filePreviewContent',
+	defaultImg = '../pkg/assets/media/img/attach.png'
+}) {
+	const previewImg = $(previewImgId);
+	const modalContent = $(modalContentId);
+
+	if (!fileName) {
+		previewImg.attr('src', defaultImg);
+		modalContent.html('<img class="img-fluid" src="' + defaultImg + '" alt="Preview">');
+		return;
+	}
+
+	const fileUrl = baseUrl.replace(/\/$/, '') + '/' + encodeURIComponent(fileName);
+	const ext = fileName.split('.').pop().toLowerCase();
+
+	if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext)) {
+		previewImg.attr('src', fileUrl);
+		modalContent.html('<img class="img-fluid" src="' + fileUrl + '" alt="Preview">');
+		return;
+	}
+
+	if (ext === 'pdf') {
+		previewImg.attr('src', defaultImg);
+		modalContent.html(
+			'<iframe src="' + fileUrl + '" style="width:100%; height:70vh; border:0;"></iframe>'
+		);
+		return;
+	}
+
+	previewImg.attr('src', defaultImg);
+	modalContent.html(
+		'<div class="p-4 text-center">' +
+			'<p class="mb-2 font-weight-bold">' + fileName + '</p>' +
+			'<a href="' + fileUrl + '" target="_blank" class="btn btn-primary btn-sm">Open File</a>' +
+		'</div>'
+	);
+}
+
 
 
 
@@ -1024,7 +1190,7 @@ $(function () {
 	// BASIC BUTTON LISTENERS
 	$('.btn-add').click(function(){
 		$('.text-btn').text("Add");
-		$('.view-modify').fadeIn().removeClass('d-none');
+		$('.view-modify').removeClass('d-none').hide().fadeIn();
 		$('.view-default').hide();
 	});
 	$('.btn-cancel').click(function(){	
